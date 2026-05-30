@@ -9,6 +9,11 @@ This diagram outlines the high-level architecture for the Sellpoint application,
 
 ```mermaid
 graph TD
+    %% External Entities
+    Suppliers[Suppliers / Vendors]
+    PaymentGateway[Payment Gateways e.g., Fonepay]
+    IRD[Nepal IRD API]
+
     %% Frontend Dashboards
     subgraph Custom Frontend [React / Next.js Web App]
         Admin[Admin Dashboard]
@@ -37,6 +42,11 @@ graph TD
     Accountant -->|REST API| API
     
     API -->|ERPNext REST API| ERP
+
+    %% External Connections
+    Owner -.->|Purchase Orders| Suppliers
+    Billing -.->|Process Payments| PaymentGateway
+    NepalApp -.->|Tax Compliance| IRD
 ```
 
 ## Key Decisions

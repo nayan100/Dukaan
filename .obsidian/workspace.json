@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conductor/product.md",
+                "file": "Documentation/Flows/Billing-Flow.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "product"
+              "title": "Billing-Flow"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "conductor/product.md",
+                "file": "Documentation/Flows/Billing-Flow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for product"
+              "title": "Backlinks for Billing-Flow"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "conductor/product.md",
+                "file": "Documentation/Flows/Billing-Flow.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from product"
+              "title": "Outgoing links from Billing-Flow"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "conductor/product.md",
+                "file": "Documentation/Flows/Billing-Flow.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of product"
+              "title": "Outline of Billing-Flow"
             }
           }
         ]
@@ -185,16 +185,22 @@
   },
   "active": "7f76c68c0a755e7f",
   "lastOpenFiles": [
-    "conductor/tracks.md",
-    "conductor/tech-stack.md",
-    "conductor/product-guidelines.md",
-    "conductor/product.md",
-    "conductor/index.md",
-    "conductor/tracks/001-research-and-architecture.md",
-    "Documentation/Architecture/System-Context.md",
+    "Documentation/Flows/Seller-Flow.md",
+    "Documentation/Flows/Shop-Owner-Flow.md",
+    "Documentation/Flows/Overall-System-Flow.md",
     "Documentation/Flows/Billing-Flow.md",
-    "GEMINI.md",
+    "Documentation/Flows/Admin-Flow.md",
+    "Documentation/Flows/Accountant-Flow.md",
+    "Documentation/Architecture/System-Context.md",
+    "conductor/tracks/002-research-roles.md",
+    "conductor/tracks/001-research-and-architecture.md",
     "conductor/workflow.md",
+    "conductor/index.md",
+    "conductor/product.md",
+    "conductor/product-guidelines.md",
+    "conductor/tech-stack.md",
+    "GEMINI.md",
+    "conductor/tracks.md",
     "conductor/tracks",
     "conductor"
   ]

@@ -6,6 +6,8 @@ created: 2026-05-29
 # Sellpoint Billing Flow
 
 This flowchart maps the process of a cashier checking out a customer at the Sellpoint POS dashboard, emphasizing how it interacts with the headless ERPNext backend.
+> [NOTE]
+ This checkout logic is part of the high-level [Seller-Flow.md](./Seller-Flow.md).
 
 ```mermaid
 graph TD
@@ -32,4 +34,6 @@ graph TD
     
     ReturnSuccess --> Print[Print Receipt / Digital Receipt]
     Print --> End([Ready for Next Customer])
+
+
 ```
