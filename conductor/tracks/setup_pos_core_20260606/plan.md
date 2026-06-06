@@ -35,7 +35,7 @@ Ensure the system remains functional during outages and provides strategic visib
     - [ ] Add Lucide React for modern iconography.
     - [ ] Implement keyboard shortcuts (Enter to finish, F1 to search).
     - [ ] Replace alerts with a custom Toast/Modal notification system.
-- [ ] Task: Analytics - Develop KPI Dashboards (Owner & Chain Owner)
+- [x] Task: Analytics - Develop KPI Dashboards (Owner & Chain Owner) 7add7f3
     - [ ] Implement Executive Scorecard and Operational Heatmap.
     - [ ] Create Comparative Analysis and Compliance Monitor views.
 - [ ] Task: Onboarding - Implement Lifecycle Wizards
