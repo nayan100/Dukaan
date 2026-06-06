@@ -10,7 +10,7 @@
 - [x] Task: Scripted Phase 0: Create a verifiable snapshot with a `MANIFEST.json` containing SHA-256 hashes of all source files. e7c5f91
 - [x] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review. b701d5e
 - [x] Task: Execute migration using non-destructive copy logic to preserve metadata. 1fcbcff
-- [ ] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure.
+- [x] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure. a8bf619
 - [ ] Task: Create `cold-storage/` for legacy source directories.
 - [ ] Task: Conductor - User Manual Verification 'Data Integrity Audit' (Protocol in workflow.md)
 
