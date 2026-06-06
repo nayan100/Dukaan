@@ -1,6 +1,11 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 import POSHUD from './POSHUD';
+
+// Mock DB
+vi.mock('../../lib/db', () => ({
+  saveInvoiceOffline: vi.fn().mockResolvedValue(undefined),
+}));
 
 const mockItems = [
   { id: '1', name: 'Apple', price: 100 },
@@ -81,5 +86,27 @@ describe('POSHUD Component', () => {
     
     expect(screen.getByText('Payment')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Cash Amount')).toBeInTheDocument();
+  });
+
+  it('completes the sale and clears the cart', async () => {
+    window.alert = vi.fn();
+    render(<POSHUD availableItems={mockItems} />);
+    
+    // Add item
+    fireEvent.click(screen.getByText('Apple'));
+    
+    // Open payment modal
+    fireEvent.click(screen.getByText('Finish Sale'));
+    
+    // Enter payment
+    fireEvent.change(screen.getByPlaceholderText('Cash Amount'), { target: { value: '100' } });
+    
+    // Complete sale
+    fireEvent.click(screen.getByText('Complete Sale'));
+    
+    await waitFor(() => {
+      expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('Sale Completed'));
+    });
+    expect(screen.getByTestId('cart-total')).toHaveTextContent('NPR 0');
   });
 });

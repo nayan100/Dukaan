@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';
+import { saveInvoiceOffline } from '../../lib/db';
 
 interface Item {
   id: string;
@@ -55,7 +56,27 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handlePaymentComplete = (details: any) => {
+  const handlePaymentComplete = async (details: any) => {
+    const invoice = {
+      invoice_id: `INV-${Date.now()}`,
+      items: cart,
+      total: details.total,
+      payment_details: details,
+      created_at: Date.now(),
+    };
+
+    try {
+      await saveInvoiceOffline(invoice);
+      
+      // Request Background Sync
+      if ('serviceWorker' in navigator && 'SyncManager' in window) {
+        const reg = await navigator.serviceWorker.ready;
+        await (reg as any).sync.register('sync-invoices');
+      }
+    } catch (err) {
+      console.error('Failed to save offline:', err);
+    }
+
     alert(`Sale Completed! Total: NPR ${details.total}`);
     setCart([]);
     setIsPaymentModalOpen(false);
