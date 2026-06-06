@@ -8,7 +8,7 @@
 
 ## Phase 2: The "Vault of Truth" (Zero-Loss Migration)
 - [x] Task: Scripted Phase 0: Create a verifiable snapshot with a `MANIFEST.json` containing SHA-256 hashes of all source files. e7c5f91
-- [ ] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review.
+- [x] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review. b701d5e
 - [ ] Task: Execute migration using non-destructive copy logic to preserve metadata.
 - [ ] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure.
 - [ ] Task: Create `cold-storage/` for legacy source directories.
