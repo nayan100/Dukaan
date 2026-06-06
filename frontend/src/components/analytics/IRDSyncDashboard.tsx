@@ -1,28 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap } from 'lucide-react';
+import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap, Laptop } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { getUnsyncedInvoices } from '../../lib/db';
 
 interface SyncStats {
   synced: number;
   pending: number;
   failed: number;
+  local: number;
 }
 
 const IRDSyncDashboard: React.FC = () => {
-  const [stats, setStats] = useState<SyncStats>({ synced: 0, pending: 0, failed: 0 });
+  const [stats, setStats] = useState<SyncStats>({ synced: 0, pending: 0, failed: 0, local: 0 });
   const [loading, setLoading] = useState(true);
 
   const fetchStats = async () => {
+    // 1. Fetch Local Stats First (Always works)
+    let localCount = 0;
+    try {
+      const localInvoices = await getUnsyncedInvoices();
+      localCount = localInvoices.length;
+      console.log(`[Dashboard] Local sync queue: ${localCount}`);
+      
+      // UPDATE STATE IMMEDIATELY for local count
+      setStats(prev => ({ ...prev, local: localCount }));
+    } catch (e) {
+      console.error('Failed to fetch local stats:', e);
+    }
+
     setLoading(true);
+    // 2. Fetch Backend Stats (Might fail offline or 404)
     try {
       const response = await fetch('/api/method/dukaan.compliance.get_sync_status');
-      const data = await response.json();
-      if (data.message) {
-        setStats(data.message);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.message) {
+          setStats({
+            ...data.message,
+            local: localCount // Ensure we keep the latest local count
+          });
+        }
+      } else {
+        console.warn(`Backend responded with ${response.status}. Keeping local counts.`);
       }
     } catch (error) {
-      console.error('Failed to fetch sync stats:', error);
+      console.warn('Backend unreachable. Using local data only.');
     } finally {
       setLoading(false);
     }
@@ -47,14 +70,15 @@ const IRDSyncDashboard: React.FC = () => {
 
   useEffect(() => {
     fetchStats();
-    const interval = setInterval(fetchStats, 60000); // Refresh every minute
+    const interval = setInterval(fetchStats, 5000); // Refresh every 5 seconds for responsive monitoring
     return () => clearInterval(interval);
   }, []);
 
   const cards = [
-    { label: 'Synced', value: stats.synced, icon: CheckCircle2, color: 'text-pos-primary', bg: 'bg-pos-primary/10' },
-    { label: 'Pending', value: stats.pending, icon: Clock, color: 'text-pos-warning', bg: 'bg-pos-warning/10' },
-    { label: 'Failed', value: stats.failed, icon: AlertCircle, color: 'text-pos-danger', bg: 'bg-pos-danger/10' },
+    { label: 'Local Offline', value: stats.local, icon: Laptop, color: stats.local > 0 ? 'text-pos-warning' : 'text-pos-primary', bg: stats.local > 0 ? 'bg-pos-warning/20' : 'bg-pos-primary/10' },
+    { label: 'Synced (Backend)', value: stats.synced, icon: CheckCircle2, color: 'text-pos-primary', bg: 'bg-pos-primary/10' },
+    { label: 'Pending Transmit', value: stats.pending, icon: Clock, color: 'text-pos-warning', bg: 'bg-pos-warning/10' },
+    { label: 'Failed Sync', value: stats.failed, icon: AlertCircle, color: 'text-pos-danger', bg: 'bg-pos-danger/10' },
   ];
 
   return (
@@ -85,7 +109,7 @@ const IRDSyncDashboard: React.FC = () => {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card, idx) => (
           <motion.div
             key={card.label}
