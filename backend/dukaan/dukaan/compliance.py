@@ -116,6 +116,64 @@ def verify_vat_registers_integrity():
         
     return discrepancies
 
+@frappe.whitelist()
+def get_vat_annex_13(filters=None):
+    """
+    API endpoint to fetch Sales Register records with filtering.
+    """
+    if isinstance(filters, str):
+        filters = json.loads(filters)
+    
+    frappe_filters = {}
+    if filters:
+        if filters.get("from_date"):
+            frappe_filters["posting_date"] = [">=", filters.get("from_date")]
+        if filters.get("to_date"):
+            # If both from and to date are provided, we need to handle it carefully in Frappe
+            # But for simplicity in this mock, we just overwrite or use list
+            if "posting_date" in frappe_filters:
+                # Use list of lists for multiple conditions on same field
+                frappe_filters["posting_date"] = [
+                    [">=", filters.get("from_date")],
+                    ["<=", filters.get("to_date")]
+                ]
+            else:
+                frappe_filters["posting_date"] = ["<=", filters.get("to_date")]
+        
+        # Add other filters
+        for key, value in filters.items():
+            if key not in ["from_date", "to_date"]:
+                frappe_filters[key] = value
+
+    return frappe.get_all("VAT Annex 13", filters=frappe_filters, fields=["*"])
+
+@frappe.whitelist()
+def get_vat_annex_14(filters=None):
+    """
+    API endpoint to fetch Purchase Register records with filtering.
+    """
+    if isinstance(filters, str):
+        filters = json.loads(filters)
+        
+    frappe_filters = {}
+    if filters:
+        if filters.get("from_date"):
+            frappe_filters["posting_date"] = [">=", filters.get("from_date")]
+        if filters.get("to_date"):
+            if "posting_date" in frappe_filters:
+                frappe_filters["posting_date"] = [
+                    [">=", filters.get("from_date")],
+                    ["<=", filters.get("to_date")]
+                ]
+            else:
+                frappe_filters["posting_date"] = ["<=", filters.get("to_date")]
+        
+        for key, value in filters.items():
+            if key not in ["from_date", "to_date"]:
+                frappe_filters[key] = value
+
+    return frappe.get_all("VAT Annex 14", filters=frappe_filters, fields=["*"])
+
 def process_offline_queue():
     """
     Finds all invoices marked as offline and unsynced, and pushes them to IRD.

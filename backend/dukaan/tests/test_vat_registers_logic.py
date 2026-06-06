@@ -134,3 +134,44 @@ def test_verify_vat_registers_integrity_mismatch():
     assert discrepancies["VAT Annex 13"]["ledger_total"] == 5000
     assert discrepancies["VAT Annex 13"]["register_total"] == 4500
     assert "VAT Annex 14" not in discrepancies
+
+def test_get_vat_annex_13_api():
+    """
+    Test the API endpoint for fetching Annex 13 records.
+    """
+    from dukaan.compliance import get_vat_annex_13
+    
+    mock_frappe.get_all.return_value = [{"invoice_number": "SINV-001"}]
+    
+    filters = {"from_date": "2026-06-01", "to_date": "2026-06-30"}
+    result = get_vat_annex_13(filters)
+    
+    mock_frappe.get_all.assert_called_with(
+        "VAT Annex 13",
+        filters={
+            "posting_date": [
+                [">=", "2026-06-01"],
+                ["<=", "2026-06-30"]
+            ]
+        },
+        fields=["*"]
+    )
+    assert result == [{"invoice_number": "SINV-001"}]
+
+def test_get_vat_annex_14_api():
+    """
+    Test the API endpoint for fetching Annex 14 records.
+    """
+    from dukaan.compliance import get_vat_annex_14
+    
+    mock_frappe.get_all.return_value = [{"invoice_number": "PINV-001"}]
+    
+    filters = {"supplier_name": "Test Supplier"}
+    result = get_vat_annex_14(filters)
+    
+    mock_frappe.get_all.assert_called_with(
+        "VAT Annex 14",
+        filters={"supplier_name": "Test Supplier"},
+        fields=["*"]
+    )
+    assert result == [{"invoice_number": "PINV-001"}]

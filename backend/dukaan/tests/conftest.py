@@ -6,6 +6,14 @@ import sys
 shared_mock_frappe = MagicMock()
 sys.modules["frappe"] = shared_mock_frappe
 
+# Make whitelist a transparent decorator
+def whitelist_decorator():
+    def decorator(fn):
+        return fn
+    return decorator
+
+shared_mock_frappe.whitelist.side_effect = whitelist_decorator
+
 @pytest.fixture(autouse=True)
 def reset_frappe_mock():
     """Reset the shared mock before each test."""
