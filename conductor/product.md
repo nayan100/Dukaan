@@ -170,7 +170,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Zero-Downtime CD:** Automated CI/CD with staging environments and Blue-Green deployments.
 
 ## 7. Design & Engineering Principles
-*   **High-Speed POS UX:** Zero-latency feel with high-contrast accessibility for fast-paced retail environments.
+*   **Visual Sovereignty (High-Speed UX):** Zero-latency feel with a premium Slate-950 depth palette, optimized for professional retail environments.
 *   **Type-Safe Modular Code:** Strict TypeScript and 'Screaming Architecture' for long-term maintainability.
 *   **TDD-First Approach:** Mandatory test coverage for all financial, sync, and compliance logic.
 

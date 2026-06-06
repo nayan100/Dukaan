@@ -12,7 +12,9 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 ## 3. Frontend (POS & Dashboards)
 *   **Framework:** React (TypeScript).
 *   **State Management:** Redux Toolkit or TanStack Query for efficient data fetching and caching.
-*   **UI Components:** Custom design system built with Tailwind CSS, optimized for high-contrast POS HUDs and dense data-centric dashboards.
+*   **UI Components:** Custom design system built with Tailwind CSS, optimized for Visual Sovereignty (Slate-950 palette).
+*   **Animations:** `framer-motion` for premium micro-interactions and layout transitions.
+*   **Data Visualization:** `recharts` for high-performance KPI dashboards and sales trends.
 *   **Offline Support:** 
     *   **PWA:** Service Workers for application caching and offline access.
     *   **IndexedDB:** Local storage for item catalogs, prices, and unsynced sales invoices.

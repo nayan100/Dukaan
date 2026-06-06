@@ -4,19 +4,20 @@
 The language used in Dukaan adapts to the user's role and urgency:
 *   **Cashier:** **Concise & Direct.** Use action-oriented verbs (e.g., 'Submit Sale', 'Void Item'). Avoid preambles.
 *   **Branch/Chain Owner:** **Instructional & Strategic.** Provide context for KPIs and 'Rebalance' suggestions. Focus on clarity for decision-making.
-*   **Accountant/Admin:** **Precise & Professional.** Use strict technical and financial terminology (e.g., 'Materialized VAT Register', 'Tenant Lifecycle').
+*   **Accountant/Admin:** **Precise & Sovereign.** Use strict technical terminology. The tone should feel like an 'Enterprise Intelligence Layer'.
 
 ## 2. Contextual Visual Aesthetic
-The UI style shifts based on the environment:
-*   **POS HUD:** **Clean High-Contrast.** Large tap targets, high-legibility fonts, and a 'clean' aesthetic optimized for speed and varied retail lighting.
-*   **Owner Dashboards:** **Data-Centric Professional.** High-density layouts using TanStack-style grids and area charts to maximize information visibility.
-*   **Admin Console:** **Industrial High-Contrast.** Focus on system 'liveness', health statuses, and infrastructure logs with sharp visual differentiation.
+Dukaan follows the **Visual Sovereignty** specification:
+*   **Palette:** Deep `Slate-950` backgrounds with `Slate-900` surfaces. High-sophistication `Emerald-500` accents for primary actions.
+*   **Glassmorphism:** Use `backdrop-blur-xl` and `bg-surface/50` for modals and sidebars to create depth and hierarchy.
+*   **Typography:** Strict adherence to the `Inter` font family with optimized weights (SemiBold/Black) for high legibility in retail environments.
+*   **Components:** Refined `12px` border radius (Standard) and `24px` (Premium containers). Shadow-lifts and scale-interactions for all clickable elements.
 
 ## 3. UX Feedback & Liveness
-Maintain user confidence through multi-layered feedback:
+Every action must feel 'alive' and responsive:
 *   **Subtle Toasts:** Use for non-critical successes (e.g., 'Invoice Cached', 'Price Updated').
-*   **Proactive Progress Bars:** Display during long-running tasks like Inter-Branch Transfers or global price syncs.
-*   **Interactive Liveness:** Use subtle UI animations (pulsing sync icons) to show the system is actively processing background tasks.
+*   **Micro-interactions:** Use `framer-motion` for all layout transitions, tab switching, and modal entries.
+*   **Animated States:** Pulsing icons for sync and 'Growth' progress bars to communicate active background orchestration.
 
 ## 4. AI Interaction Model: 'The Invisible Assistant'
 The AI layer should feel like a native part of the UI:
