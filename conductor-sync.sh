@@ -37,7 +37,8 @@ else
 fi
 
 # 2. Sanitize Task Name for Filename
-SAFE_TASK_NAME=$(echo "$TASK_NAME" | sed 's/[`*]//g' | sed 's/ /_/g')
+# Strip markdown formatting and replace problematic characters (space, slash, backslash, etc.)
+SAFE_TASK_NAME=$(echo "$TASK_NAME" | sed 's/[`*]//g' | sed 's/[ /\\:?\"&]/ /g' | xargs | sed 's/ /_/g')
 NOTE_PATH="$TARGET_FOLDER/$SAFE_TASK_NAME.md"
 
 # 3. Fetch Status and SHA from plan.md
@@ -67,6 +68,9 @@ if [ -f "$PLAN_PATH" ]; then
     done < "$PLAN_PATH"
 fi
 
+# Escape ampersands for sed replacement
+ESC_TASK_NAME=$(echo "$TASK_NAME" | sed 's/&/\\\&/g')
+
 # 4. Atlas Lookup
 MOC_LINK=""
 MATCHING_MOC=$(grep -l "\[\[.*$TRACK_ID/index" _Systems/*.md _Components/*.md 2>/dev/null | head -n 1)
@@ -76,14 +80,14 @@ if [ -n "$MATCHING_MOC" ]; then
     MOC_LINK="[[$MOC_DIR/$MOC_NAME|$MOC_NAME]]"
 fi
 
-# 5. Create or Update Note
+# 5. Create Note if not exists
 if [ ! -f "$NOTE_PATH" ]; then
     if [ -f "$TEMPLATE_PATH" ]; then
         cp "$TEMPLATE_PATH" "$NOTE_PATH"
         sed -i "s|track_id: |track_id: $TRACK_ID|" "$NOTE_PATH"
         sed -i "s|^status: .*|status: $TASK_STATUS|" "$NOTE_PATH"
         sed -i "s|<% tp.file.creation_date() %>|$DATE|g" "$NOTE_PATH"
-        sed -i "s|<% tp.file.title %>|$TASK_NAME|g" "$NOTE_PATH"
+        sed -i "s|<% tp.file.title %>|$ESC_TASK_NAME|g" "$NOTE_PATH"
         sed -i "s|<% tp.file.folder() %>|$TRACK_ID/index\|Track Index|g" "$NOTE_PATH"
         sed -i "s|<% tp.cursor() %>|Placeholder created by conductor-sync.sh|g" "$NOTE_PATH"
         if [ -n "$MOC_LINK" ]; then
@@ -117,14 +121,16 @@ EOF
 else
     echo "Info: Updating existing note at $NOTE_PATH..."
     sed -i "s|^status: .*|status: $TASK_STATUS|" "$NOTE_PATH"
-    if [ -n "$TASK_SHA" ]; then
-        if ! grep -q "$TASK_SHA" "$NOTE_PATH"; then
-            if grep -q "## Outcomes & SHAs" "$NOTE_PATH"; then
-                sed -i "/## Outcomes & SHAs/a - Commit: $TASK_SHA (Synced on $DATE)" "$NOTE_PATH"
-            else
-                echo -e "\n## Outcomes & SHAs\n- Commit: $TASK_SHA (Synced on $DATE)" >> "$NOTE_PATH"
-            fi
-            sed -i "s|- \[ \] Automated Tests Pass|- [x] Automated Tests Pass|" "$NOTE_PATH"
+fi
+
+# 6. Inject SHA and Update Checkbox if available
+if [ -n "$TASK_SHA" ]; then
+    if ! grep -q "$TASK_SHA" "$NOTE_PATH"; then
+        if grep -q "## Outcomes & SHAs" "$NOTE_PATH"; then
+            sed -i "/## Outcomes & SHAs/a - Commit: $TASK_SHA (Synced on $DATE)" "$NOTE_PATH"
+        else
+            echo -e "\n## Outcomes & SHAs\n- Commit: $TASK_SHA (Synced on $DATE)" >> "$NOTE_PATH"
         fi
+        sed -i "s|- \[ \] Automated Tests Pass|- [x] Automated Tests Pass|" "$NOTE_PATH"
     fi
 fi
