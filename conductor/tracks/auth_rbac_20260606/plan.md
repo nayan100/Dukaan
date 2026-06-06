@@ -14,7 +14,7 @@ Build the multi-tenant login foundation.
 ## Phase 2: Hierarchical RBAC & Shadowing
 Implement the "Smart" UI that adapts to user roles.
 
-- [ ] Task: Frontend - Implement Permission Shadowing Service
+- [x] Task: Frontend - Implement Permission Shadowing Service c3c7fc1
     - [ ] Create an `AuthProvider` and `usePermissions` hook.
     - [ ] Implement logic to fetch and "shadow" Frappe Role Profiles in `sessionStorage`.
 - [ ] Task: Frontend - Implement Guarded Routing & UI Components
