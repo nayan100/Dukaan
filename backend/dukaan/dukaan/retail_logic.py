@@ -45,3 +45,50 @@ def validate_pos_entry(doc):
             f"Unauthorized Access: You are assigned to {user.branch}, but attempted to write to {doc.branch}.",
             title="Permission Denied"
         )
+
+def process_transfer_dispatch(transfer_name):
+    """
+    Handles the dispatch of an inter-branch transfer.
+    Moves stock from Local to Transit.
+    """
+    transfer = frappe.get_doc("Inter-Branch Transfer", transfer_name)
+    
+    create_stock_entry(
+        from_warehouse=f"{transfer.from_branch} - Local",
+        to_warehouse=f"{transfer.from_branch} - Transit",
+        items=transfer.items,
+        purpose="Material Transfer"
+    )
+    
+    transfer.db_set("status", "Dispatched")
+
+def process_transfer_receipt(transfer_name):
+    """
+    Handles the receipt of an inter-branch transfer.
+    Moves stock from Transit to Local.
+    """
+    transfer = frappe.get_doc("Inter-Branch Transfer", transfer_name)
+    
+    create_stock_entry(
+        from_warehouse=f"{transfer.from_branch} - Transit",
+        to_warehouse=f"{transfer.to_branch} - Local",
+        items=transfer.items,
+        purpose="Material Transfer"
+    )
+    
+    transfer.db_set("status", "Received")
+
+def create_stock_entry(from_warehouse, to_warehouse, items, purpose="Material Transfer"):
+    """
+    Helper to create a Stock Entry in Frappe.
+    """
+    se = frappe.get_doc({
+        "doctype": "Stock Entry",
+        "purpose": purpose,
+        "from_warehouse": from_warehouse,
+        "to_warehouse": to_warehouse,
+        "items": items
+    })
+    se.insert(ignore_permissions=True)
+    se.submit()
+    return se
