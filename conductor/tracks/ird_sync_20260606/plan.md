@@ -11,7 +11,7 @@
 - [x] Task: Extend `Sales Invoice`, `Credit Note`, and `Purchase Invoice` with IRD-specific fields (Sync Token, Status, Idempotency Key). f4b3e83
 - [x] Task: Implement Two-Stage Status Flow (Draft -> Submitted Pending -> Submitted Synced). 4edfde3
 - [x] Task: Build the IRD API Client with mandatory idempotency key handling and 409 Conflict resolution. 8673b68
-- [ ] Task: Implement background workers for automated retry with exponential backoff.
+- [x] Task: Implement background workers for automated retry with exponential backoff. 313c5bf
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: IRD Sync Engine' (Protocol in workflow.md)
 
 **Phase 3: Offline Resilience & Sync Queue (Frontend/PWA)**
