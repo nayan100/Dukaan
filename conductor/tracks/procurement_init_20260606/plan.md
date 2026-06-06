@@ -22,5 +22,5 @@
 - [x] Task: Build the Procurement Management Suite (PO Tracker, Receipt Entry, Supplier Portal). baf6e06
 - [x] Task: Implement 'Verify Spot Check' UI for Opening Stock Entry. 6d0b74c
 - [x] Task: Implement the "Soft Warning" UI for budget-exceeding Purchase Orders. 50a0a5c
-- [ ] Task: Create the Procurement Analytics Hub (Budget utilization, Supplier reliability).
+- [x] Task: Create the Procurement Analytics Hub (Budget utilization, Supplier reliability). 6f28d13
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: UI & Dashboards' (Protocol in workflow.md)
