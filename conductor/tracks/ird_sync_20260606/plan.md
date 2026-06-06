@@ -18,7 +18,7 @@
 - [x] Task: Implement IndexedDB schema for persistent offline invoice storage. 04d6d52
 - [x] Task: Implement "Secondary Backup" logic using `localStorage` for redundancy. bac5f66
 - [x] Task: Build the Background Sync worker to detect connectivity and push queued invoices. 2866afc
-- [ ] Task: Implement Persistent Sync Warning UI to prevent data loss on logout/session expiry.
+- [x] Task: Implement Persistent Sync Warning UI to prevent data loss on logout/session expiry. 189c2bd
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience' (Protocol in workflow.md)
 
 **Phase 4: Auditor Dashboard & Final Integration**
