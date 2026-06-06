@@ -9,6 +9,7 @@ import {
   DollarSign, Activity, ArrowUpRight, ShieldCheck 
 } from 'lucide-react';
 import Button from '../ui/Button';
+import BudgetWidget from '../ui/BudgetWidget';
 
 const mockData = [
   { name: '09:00', sales: 4000, margin: 2400 },
@@ -56,14 +57,19 @@ const KPIDashboard: React.FC = () => {
             <h1 className="text-4xl font-black tracking-tighter uppercase italic">Chain Strategy Hub</h1>
             <p className="text-pos-muted font-medium mt-2">Real-time performance metrics across the retail network</p>
         </div>
-        <div className="flex gap-4">
-          <div className="flex items-center gap-3 bg-pos-surface/50 border border-pos-border px-6 py-3 rounded-xl font-bold backdrop-blur-md">
-            <div className="w-2 h-2 bg-pos-primary rounded-full animate-pulse" />
-            <span className="text-sm uppercase tracking-wider">IRD Sync: 99.8%</span>
+        <div className="flex items-start gap-6">
+          <div className="w-80">
+            <BudgetWidget limit={120000} spent={98500} branchName="KTM Main" />
           </div>
-          <div className="flex items-center gap-3 bg-pos-surface/50 border border-pos-border px-6 py-3 rounded-xl font-bold backdrop-blur-md">
-            <Activity size={18} className="text-pos-primary" />
-            <span className="text-sm uppercase tracking-wider">System Live</span>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3 bg-pos-surface/50 border border-pos-border px-6 py-3 rounded-xl font-bold backdrop-blur-md">
+                <div className="w-2 h-2 bg-pos-primary rounded-full animate-pulse" />
+                <span className="text-sm uppercase tracking-wider">IRD Sync: 99.8%</span>
+            </div>
+            <div className="flex items-center gap-3 bg-pos-surface/50 border border-pos-border px-6 py-3 rounded-xl font-bold backdrop-blur-md">
+                <Activity size={18} className="text-pos-primary" />
+                <span className="text-sm uppercase tracking-wider">System Live</span>
+            </div>
           </div>
         </div>
       </header>
