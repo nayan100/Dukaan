@@ -23,6 +23,8 @@ The `Templates/` folder contains predefined templates for the project. To enable
 1.  **Install Calendar Plugin:** Enable the "Calendar" community plugin.
 2.  **Daily Notes:** Configure Daily Notes to be stored in a `Journal/` folder (create this folder if needed).
 3.  **Task Tracking:** Use the calendar to link to Conductor track milestones.
+4.  **Event Creation:** For every "Phase Completion Verification" task in `plan.md`, create a corresponding event in the Obsidian Calendar on the planned completion date.
+5.  **Review Checkpoints:** Link these calendar events to the track's `index.md` for rapid access during review sessions.
 
 ## 3. Advanced Canvas Visualization
 
