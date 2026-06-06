@@ -16,14 +16,14 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Template & MOC Traceability' (Protocol in workflow.md) 9f3303c
 
 **Phase 3: The Advanced Sync Engine (Update Mode)**
-- [ ] Task: Implement the `--update` flag and state management.
-    - [ ] Refactor argument parsing to handle flags and positional arguments.
-    - [ ] Add logic to detect if a note already exists when `--update` is passed.
-- [ ] Task: Implement Frontmatter & Section Injection.
-    - [ ] [TDD] Write shell tests for regex-based frontmatter replacement (status/date).
-    - [ ] Implement robust logic to append commit SHAs to the `## Outcomes & SHAs` section without duplicate entries.
-    - [ ] Implement checkbox synchronization for the `## Verification Outcome` section.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Advanced Sync Engine' (Protocol in workflow.md)
+- [x] Task: Implement the `--update` flag and state management.
+    - [x] Refactor argument parsing to handle flags and positional arguments.
+    - [x] Add logic to detect if a note already exists when `--update` is passed.
+- [x] Task: Implement Frontmatter & Section Injection. fae4944
+    - [x] [TDD] Write shell tests for regex-based frontmatter replacement (status/date).
+    - [x] Implement robust logic to append commit SHAs to the `## Outcomes & SHAs` section without duplicate entries.
+    - [x] Implement checkbox synchronization for the `## Verification Outcome` section.
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Advanced Sync Engine' (Protocol in workflow.md)
 
 **Phase 4: Final Integration & Workflow Polish**
 - [ ] Task: Update `conductor/workflow.md` to reflect the new `--update` capabilities.
