@@ -6,7 +6,7 @@ Establish the multi-tenant architecture and core data models.
 - [x] Task: Backend - Initialize Frappe Tenant Provisioning Logic b9fcf9f
     - [ ] Define custom DocTypes for Tenant and Subscription metadata.
     - [ ] Implement site creation and database setup hooks.
-- [ ] Task: Backend - Implement Core Retail DocTypes (Branch, Warehouse, Price List)
+- [x] Task: Backend - Implement Core Retail DocTypes (Branch, Warehouse, Price List) 7afb631
     - [ ] Setup warehouse hierarchy for multi-branch mapping.
     - [ ] Configure naming series for IRD-compliant invoicing.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: SaaS & Backend Foundation' (Protocol in workflow.md)
