@@ -17,7 +17,7 @@ Implement timers, rejection logic, and rebalancing alerts.
 - [x] Task: Backend - Implement Business-Hour Aware Timers 7ce90d1
     - [ ] Develop logic to pause the 5-hour timer during non-operational hours.
     - [ ] Implement automated stock reversal on auto-rejection.
-- [ ] Task: Analytics - Develop Dead Stock Rebalancer HUD
+- [~] Task: Analytics - Develop Dead Stock Rebalancer HUD
     - [ ] Create a view for Chain Owners showing stagnant items (>30 days).
     - [ ] Implement 'Quick-Transfer' triggers from the rebalance list.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Intelligence & SLA Enforcement' (Protocol in workflow.md)
