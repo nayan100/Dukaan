@@ -20,8 +20,8 @@
 - [x] Task: Implement "Live Links": Embed markdown blocks from `spec.md` into Advanced Canvas. 5a0469c
 - [x] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md) 2576c4f
 
-## Phase 4: Workflow Enshrinement (Conductor Sync)
+## Phase 4: Workflow Enshrinement (Conductor Sync) [checkpoint: a9c7bd6]
 - [x] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule. ab612d7
 - [x] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation. 9fc4ed3
 - [x] Task: Configure `Obsidian Calendar` to track "Review Checkpoints" as events. dc7056d
-- [ ] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md) a9c7bd6
