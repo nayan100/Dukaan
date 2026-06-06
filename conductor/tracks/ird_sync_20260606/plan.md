@@ -16,7 +16,7 @@
 
 **Phase 3: Offline Resilience & Sync Queue (Frontend/PWA)**
 - [x] Task: Implement IndexedDB schema for persistent offline invoice storage. 04d6d52
-- [ ] Task: Implement "Secondary Backup" logic using `localStorage` for redundancy.
+- [x] Task: Implement "Secondary Backup" logic using `localStorage` for redundancy. bac5f66
 - [ ] Task: Build the Background Sync worker to detect connectivity and push queued invoices.
 - [ ] Task: Implement Persistent Sync Warning UI to prevent data loss on logout/session expiry.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience' (Protocol in workflow.md)
