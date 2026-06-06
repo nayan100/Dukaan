@@ -146,3 +146,36 @@ def reject_transfer(transfer):
     )
     
     transfer.db_set("status", "Rejected")
+
+def validate_po_budget(doc):
+    """
+    Enforces monthly budget limits on Purchase Orders.
+    """
+    budget_limit = frappe.db.get_value("Branch", doc.branch, "monthly_budget") or 0
+    if not budget_limit:
+        return # No budget set, no enforcement
+
+    current_spent = get_monthly_spent(doc.branch)
+    
+    if (current_spent + doc.grand_total) > budget_limit:
+        frappe.throw(
+            f"Budget Exceeded: Monthly limit is NPR {budget_limit:,}. "
+            f"Already spent NPR {current_spent:,}. This order of NPR {doc.grand_total:,} "
+            f"would exceed the threshold.",
+            title="Fiscal Guardrail"
+        )
+
+def get_monthly_spent(branch):
+    """
+    Calculates the total value of submitted Purchase Orders for the current month.
+    """
+    today = datetime.now()
+    first_day = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    
+    # Query for submitted POs in the current month for the branch
+    # Mocking total for now
+    return frappe.db.get_value("Purchase Order", filters={
+        "branch": branch,
+        "docstatus": 1,
+        "transaction_date": [">=", first_day]
+    }, fieldname="sum(grand_total)") or 0
