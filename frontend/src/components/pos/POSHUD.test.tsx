@@ -7,7 +7,7 @@ vi.mock('../../lib/db', () => ({
   saveInvoiceOffline: vi.fn().mockResolvedValue(undefined),
 }));
 
-// Mock framer-motion to avoid animation issues in tests
+// Mock framer-motion
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
@@ -69,10 +69,10 @@ describe('POSHUD Component', () => {
     dateSpy.mockRestore();
   });
 
-  it('opens the payment modal when finish sale is clicked', () => {
+  it('opens the payment modal when checkout is clicked', () => {
     render(<POSHUD availableItems={mockItems} />);
     fireEvent.click(screen.getByText('Apple'));
-    fireEvent.click(screen.getByText('Checkout Order'));
+    fireEvent.click(screen.getByText('Checkout'));
     
     expect(screen.getByText('Complete Payment')).toBeInTheDocument();
   });
@@ -84,9 +84,9 @@ describe('POSHUD Component', () => {
     fireEvent.click(screen.getByText('Apple'));
     
     // Open payment modal
-    fireEvent.click(screen.getByText('Checkout Order'));
+    fireEvent.click(screen.getByText('Checkout'));
     
-    // Enter payment - Multiple 0.00 inputs
+    // Enter payment
     const inputs = screen.getAllByPlaceholderText('0.00');
     fireEvent.change(inputs[0], { target: { value: '100' } });
     

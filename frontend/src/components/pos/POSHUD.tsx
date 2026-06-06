@@ -107,28 +107,28 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   );
 
   return (
-    <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden font-sans selection:bg-pos-primary/30">
+    <div className="h-full flex bg-pos-black text-pos-white overflow-hidden font-sans selection:bg-pos-primary/30">
       <Toaster position="top-center" />
       
       {/* Items Section */}
-      <div className="flex-1 flex flex-col bg-pos-black">
-        <header className="p-6 bg-pos-surface/50 border-b border-pos-border flex items-center justify-between backdrop-blur-md">
+      <div className="flex-1 flex flex-col min-w-0 bg-pos-black">
+        <header className="p-4 bg-pos-surface/50 border-b border-pos-border flex items-center justify-between backdrop-blur-md flex-shrink-0">
             <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-pos-primary/20 rounded-xl flex items-center justify-center border border-pos-primary/30 shadow-inner">
                     <LayoutGrid size={22} className="text-pos-primary" />
                 </div>
                 <div>
-                    <h1 className="text-lg font-extrabold tracking-tight">Product Catalog</h1>
-                    <p className="text-xs text-pos-muted font-medium">Quick tap to add items</p>
+                    <h1 className="text-lg font-extrabold tracking-tight">Catalog</h1>
+                    <p className="text-[10px] text-pos-muted font-medium">Quick tap to add</p>
                 </div>
             </div>
             
-            <div className="w-96 relative group">
+            <div className="w-1/2 max-w-md relative group">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-pos-muted group-focus-within:text-pos-primary transition-colors" size={18} />
                 <input 
                     type="text" 
                     placeholder="Search products... (F1)" 
-                    className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl py-3 pl-12 pr-4 text-sm font-semibold transition-all outline-none placeholder:text-pos-muted/50"
+                    className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl py-2 pl-12 pr-4 text-sm font-semibold transition-all outline-none placeholder:text-pos-muted/50"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     autoFocus
@@ -136,23 +136,23 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
             </div>
         </header>
         
-        <main className="flex-1 p-6 grid grid-cols-3 xl:grid-cols-4 gap-5 overflow-y-auto custom-scrollbar">
+        <main className="flex-1 p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto custom-scrollbar content-start">
           {filteredItems.map((item) => (
             <motion.div
                 key={item.id}
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
             >
                 <Button
                 variant="muted"
                 size="xl"
                 onClick={() => addToCart(item)}
-                className="w-full h-44 flex-col gap-3 group relative overflow-hidden"
+                className="w-full h-32 flex-col gap-2 group relative overflow-hidden"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-pos-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-lg font-bold text-pos-white group-hover:text-pos-primary transition-colors text-center px-2">{item.name}</span>
-                    <div className="bg-pos-black/40 px-4 py-1.5 rounded-full border border-pos-border group-hover:border-pos-primary/30 transition-colors">
-                        <span className="text-sm font-black text-pos-primary">NPR {item.price.toLocaleString()}</span>
+                    <span className="text-sm font-bold text-pos-white group-hover:text-pos-primary transition-colors text-center px-2 line-clamp-2">{item.name}</span>
+                    <div className="bg-pos-black/40 px-3 py-1 rounded-full border border-pos-border group-hover:border-pos-primary/30 transition-colors">
+                        <span className="text-xs font-black text-pos-primary">NPR {item.price.toLocaleString()}</span>
                     </div>
                 </Button>
             </motion.div>
@@ -161,20 +161,20 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
       </div>
 
       {/* Cart Sidebar */}
-      <aside className="w-[420px] border-l border-pos-border flex flex-col bg-pos-surface/30 backdrop-blur-xl relative">
-        <header className="p-6 border-b border-pos-border flex items-center justify-between">
+      <aside className="w-[380px] flex-shrink-0 border-l border-pos-border flex flex-col bg-pos-surface/30 backdrop-blur-xl relative">
+        <header className="p-4 border-b border-pos-border flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-pos-secondary/20 rounded-xl flex items-center justify-center border border-pos-secondary/30">
-                    <ShoppingCart size={20} className="text-pos-secondary" />
+                <div className="w-8 h-8 bg-pos-secondary/20 rounded-lg flex items-center justify-center border border-pos-secondary/30">
+                    <ShoppingCart size={18} className="text-pos-secondary" />
                 </div>
-                <h2 className="text-lg font-extrabold tracking-tight uppercase italic">Active Order</h2>
+                <h2 className="text-sm font-extrabold tracking-tight uppercase italic">Active Order</h2>
             </div>
-            <div className="bg-pos-black/50 px-3 py-1 rounded-lg border border-pos-border text-xs font-bold text-pos-muted">
+            <div className="bg-pos-black/50 px-2 py-0.5 rounded-md border border-pos-border text-[10px] font-bold text-pos-muted">
                 {cart.length} ITEMS
             </div>
         </header>
         
-        <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
           <AnimatePresence initial={false}>
             {cart.map((item) => (
                 <motion.div 
@@ -183,17 +183,17 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
-                    className="group bg-pos-black/40 border border-pos-border hover:border-pos-primary/30 p-4 rounded-2xl transition-all"
+                    className="group bg-pos-black/40 border border-pos-border hover:border-pos-primary/30 p-3 rounded-xl transition-all"
                 >
-                    <div className="flex justify-between items-start mb-4">
+                    <div className="flex justify-between items-start mb-3">
                         <div className="flex-1">
-                            <div className="font-bold text-pos-white leading-tight">{item.name}</div>
-                            <div className="text-xs text-pos-muted font-bold mt-1 uppercase tracking-tighter">
+                            <div className="text-xs font-bold text-pos-white leading-tight line-clamp-2">{item.name}</div>
+                            <div className="text-[10px] text-pos-muted font-bold mt-1 uppercase tracking-tighter">
                                 NPR {item.price} × <span data-testid={`cart-item-${item.id}-qty`}>{item.quantity}</span>
                             </div>
                         </div>
                         <div className="text-right">
-                            <div className="font-black text-pos-primary tracking-tight">
+                            <div className="text-sm font-black text-pos-primary tracking-tight">
                                 NPR {(item.price * item.quantity).toLocaleString()}
                             </div>
                         </div>
@@ -204,9 +204,9 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
                             size="sm" 
                             onClick={() => removeFromCart(item.id)}
                             data-testid={`void-item-${item.id}`}
-                            className="flex-1 gap-2 h-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="flex-1 gap-2 h-7 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                         >
-                            <Trash2 size={14} /> <span className="text-[10px] uppercase font-black">Void Item</span>
+                            <Trash2 size={12} /> <span className="text-[9px] uppercase font-black">Void Item</span>
                         </Button>
                     </div>
                 </motion.div>
@@ -214,18 +214,18 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
           </AnimatePresence>
 
           {cart.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center opacity-10 py-20 grayscale">
-              <ReceiptText size={120} strokeWidth={1} />
-              <div className="mt-6 font-black uppercase tracking-[0.2em] text-xl">Order Pending</div>
+            <div className="h-full flex flex-col items-center justify-center opacity-10 py-10 grayscale">
+              <ReceiptText size={100} strokeWidth={1} />
+              <div className="mt-4 font-black uppercase tracking-[0.2em] text-sm">Order Pending</div>
             </div>
           )}
         </div>
 
-        <footer className="p-8 bg-pos-black/40 border-t border-pos-border backdrop-blur-2xl">
-          <div className="flex justify-between items-end mb-8">
-            <span className="text-sm font-black text-pos-muted uppercase tracking-widest">Total Amount</span>
-            <span className="text-4xl font-black text-pos-primary tracking-tighter">
-                <span className="text-lg mr-2 font-bold opacity-50 italic">NPR</span>
+        <footer className="p-6 bg-pos-black/40 border-t border-pos-border backdrop-blur-2xl flex-shrink-0">
+          <div className="flex justify-between items-end mb-6">
+            <span className="text-[10px] font-black text-pos-muted uppercase tracking-widest">Total Amount</span>
+            <span className="text-3xl font-black text-pos-primary tracking-tighter">
+                <span className="text-sm mr-1.5 font-bold opacity-50 italic">NPR</span>
                 <span data-testid="cart-total">{total.toLocaleString()}</span>
             </span>
           </div>
@@ -233,13 +233,13 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
           <Button 
             variant="primary" 
             size="xl" 
-            className="w-full h-24 text-xl uppercase font-black tracking-tight rounded-2xl relative overflow-hidden shadow-2xl shadow-pos-primary/20 group"
+            className="w-full h-16 text-lg uppercase font-black tracking-tight rounded-xl relative overflow-hidden shadow-xl shadow-pos-primary/10 group"
             onClick={() => cart.length > 0 && setIsPaymentModalOpen(true)}
             disabled={cart.length === 0}
           >
             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative z-10">Checkout Order</span>
-            <span className="absolute bottom-4 right-6 text-[10px] opacity-40 font-black tracking-widest">[ENTER]</span>
+            <span className="relative z-10">Checkout</span>
+            <span className="absolute bottom-2 right-4 text-[8px] opacity-40 font-black tracking-widest">[ENTER]</span>
           </Button>
         </footer>
       </aside>
