@@ -27,3 +27,7 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 *   **Containerization:** Docker for consistent development and production environments.
 *   **CI/CD:** Automated pipelines for testing (Cypress/Playwright) and zero-downtime deployment (Blue-Green).
 *   **Monitoring:** Integrated Frappe logging and Prometheus/Grafana for infrastructure health.
+
+## 6. Tooling & Documentation
+*   **Knowledge Management:** Obsidian with Advanced Canvas, Templater, and Calendar plugins.
+*   **Verification:** Custom SHA-256 manifest system for zero-loss documentation migration.
