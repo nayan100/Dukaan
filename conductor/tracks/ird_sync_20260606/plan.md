@@ -15,7 +15,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: IRD Sync Engine' (Protocol in workflow.md) 285beb9
 
 **Phase 3: Offline Resilience & Sync Queue (Frontend/PWA)**
-- [ ] Task: Implement IndexedDB schema for persistent offline invoice storage.
+- [x] Task: Implement IndexedDB schema for persistent offline invoice storage. 04d6d52
 - [ ] Task: Implement "Secondary Backup" logic using `localStorage` for redundancy.
 - [ ] Task: Build the Background Sync worker to detect connectivity and push queued invoices.
 - [ ] Task: Implement Persistent Sync Warning UI to prevent data loss on logout/session expiry.
