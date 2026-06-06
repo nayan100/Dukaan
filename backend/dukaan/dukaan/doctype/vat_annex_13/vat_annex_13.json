@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_import": 0,
+ "autoname": "hash",
+ "creation": "2026-06-06 12:00:00",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_number",
+   "fieldtype": "Data",
+   "label": "Invoice Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "customer_pan",
+   "fieldtype": "Data",
+   "label": "Customer PAN"
+  },
+  {
+   "fieldname": "taxable_amount",
+   "fieldtype": "Currency",
+   "label": "Taxable Amount",
+   "default": "0"
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "label": "VAT Amount",
+   "default": "0"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "default": "0"
+  },
+  {
+   "fieldname": "is_synced",
+   "fieldtype": "Check",
+   "label": "Is Synced",
+   "default": "0"
+  },
+  {
+   "fieldname": "sync_token",
+   "fieldtype": "Data",
+   "label": "Sync Token",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_doctype",
+   "fieldtype": "Link",
+   "label": "Source DocType",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "source_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Source Name",
+   "options": "source_doctype"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-06 12:00:00",
+ "modified_by": "Administrator",
+ "module": "Dukaan",
+ "name": "VAT Annex 13",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 0
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 0
+  }
+ ],
+ "read_only": 1,
+ "sort_field": "posting_date",
+ "sort_order": "DESC",
+ "states": []
+}
