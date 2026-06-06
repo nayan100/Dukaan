@@ -8,7 +8,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Materialized Registers' (Protocol in workflow.md) 2b6472d
 
 **Phase 2: IRD Sync Engine & Compliance Logic (Backend)**
-- [ ] Task: Extend `Sales Invoice`, `Credit Note`, and `Purchase Invoice` with IRD-specific fields (Sync Token, Status, Idempotency Key).
+- [x] Task: Extend `Sales Invoice`, `Credit Note`, and `Purchase Invoice` with IRD-specific fields (Sync Token, Status, Idempotency Key). f4b3e83
 - [ ] Task: Implement Two-Stage Status Flow (Draft -> Submitted Pending -> Submitted Synced).
 - [ ] Task: Build the IRD API Client with mandatory idempotency key handling and 409 Conflict resolution.
 - [ ] Task: Implement background workers for automated retry with exponential backoff.
