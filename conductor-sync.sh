@@ -36,8 +36,8 @@ else
     exit 1
 fi
 
-# 2. Sanitize Task Name for Filename
-SAFE_TASK_NAME="${TASK_NAME// /_}"
+# 2. Sanitize Task Name for Filename (Strip backticks and special chars for filename only)
+SAFE_TASK_NAME=$(echo "$TASK_NAME" | sed 's/[`*]//g' | sed 's/ /_/g')
 NOTE_PATH="$TARGET_FOLDER/$SAFE_TASK_NAME.md"
 
 # 3. Fetch Status and SHA from plan.md
@@ -46,15 +46,19 @@ TASK_STATUS="open"
 TASK_SHA=""
 
 if [ -f "$PLAN_PATH" ]; then
-    # Grep the line containing the task name
-    # Format expected: - [ ] Task: <task_name> <sha>
-    LINE=$(grep -F "Task: $TASK_NAME" "$PLAN_PATH" | head -n 1)
+    # Create a fuzzy pattern for grep (ignore backticks/styling)
+    FUZZY_NAME=$(echo "$TASK_NAME" | sed 's/[`*]//g')
+    # Grep the line, but strip backticks from the plan line too for comparison
+    # We look for a line that contains 'Task:' and our fuzzy name
+    LINE=$(grep "Task:" "$PLAN_PATH" | sed 's/[`*]//g' | grep -F "$FUZZY_NAME" | head -n 1)
+    
     if [ -n "$LINE" ]; then
-        if [[ "$LINE" == *"[x]"* ]]; then
+        # Check original line for status (need to get the raw line back)
+        RAW_LINE=$(grep "Task:" "$PLAN_PATH" | grep -F "$(echo "$FUZZY_NAME" | cut -c 1-20)" | head -n 1)
+        if [[ "$RAW_LINE" == *"[x]"* ]]; then
             TASK_STATUS="completed"
-            # Extract SHA (last 7 chars if it matches regex)
-            TASK_SHA=$(echo "$LINE" | grep -oE "[a-f0-9]{7}$")
-        elif [[ "$LINE" == *"[~]"* ]]; then
+            TASK_SHA=$(echo "$RAW_LINE" | grep -oE "[a-f0-9]{7}$")
+        elif [[ "$RAW_LINE" == *"[~]"* ]]; then
             TASK_STATUS="in_progress"
         fi
     fi
@@ -72,7 +76,7 @@ fi
 
 # 5. Create or Update Note
 if [ ! -f "$NOTE_PATH" ]; then
-    # Creation logic (from template)
+    # Creation logic
     if [ -f "$TEMPLATE_PATH" ]; then
         cp "$TEMPLATE_PATH" "$NOTE_PATH"
         sed -i "s|track_id: |track_id: $TRACK_ID|" "$NOTE_PATH"
@@ -114,21 +118,17 @@ EOF
     fi
     echo "Created Obsidian note placeholder at $NOTE_PATH"
 else
-    # Update logic (Phase 3)
+    # Update logic
     echo "Info: Updating existing note at $NOTE_PATH..."
-    # Update Frontmatter status
     sed -i "s|^status: .*|status: $TASK_STATUS|" "$NOTE_PATH"
     
-    # Inject SHA if present and not already there
     if [ -n "$TASK_SHA" ]; then
         if ! grep -q "$TASK_SHA" "$NOTE_PATH"; then
-            # Find the header or end of file
             if grep -q "## Outcomes & SHAs" "$NOTE_PATH"; then
                 sed -i "/## Outcomes & SHAs/a - Commit: $TASK_SHA (Synced on $DATE)" "$NOTE_PATH"
             else
                 echo -e "\n## Outcomes & SHAs\n- Commit: $TASK_SHA (Synced on $DATE)" >> "$NOTE_PATH"
             fi
-            # Also check off automated tests if SHA exists
             sed -i "s|- \[ \] Automated Tests Pass|- [x] Automated Tests Pass|" "$NOTE_PATH"
         fi
     fi
