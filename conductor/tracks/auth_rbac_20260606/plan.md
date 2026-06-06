@@ -22,13 +22,13 @@ Implement the "Smart" UI that adapts to user roles.
     - [x] Setup protected routes based on the Persona Matrix.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Hierarchical RBAC & Shadowing' (Protocol in workflow.md) 5a26aef
 
-## Phase 3: Operations & UI Polish
+## Phase 3: Operations & UI Polish [checkpoint: a916be9]
 Finalize the persona-based experience and fix POS layout.
 
 - [x] Task: UI - Fix POS HUD Layout (Fit-to-Page) 964c98e
-    - [ ] Refactor `POSHUD.tsx` to use flex-box/grid with 100vh/100vw constraints.
-    - [ ] Ensure all components (Catalog, Cart, Payment) are responsive without overflow.
+    - [x] Refactor `POSHUD.tsx` to use flex-box/grid with 100vh/100vw constraints.
+    - [x] Ensure all components (Catalog, Cart, Payment) are responsive without overflow.
 - [x] Task: Backend - Implement Strict Write Validation 3e7c812
-    - [ ] [TDD] Write tests for unauthorized branch write attempts.
-    - [ ] Implement Frappe `validate` hooks to enforce branch-scoping for POS entries.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Operations & UI Polish' (Protocol in workflow.md)
+    - [x] [TDD] Write tests for unauthorized branch write attempts.
+    - [x] Implement Frappe `validate` hooks to enforce branch-scoping for POS entries.
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Operations & UI Polish' (Protocol in workflow.md) a916be9
