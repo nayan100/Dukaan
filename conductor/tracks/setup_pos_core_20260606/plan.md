@@ -25,28 +25,31 @@ Build the high-speed billing interface for cashiers.
     - [x] Implement the payment modal with Fonepay QR placeholder.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Core POS HUD Development' (Protocol in workflow.md) c7f6ee2
 
-## Phase 3: Offline Resilience & Dashboards
+## Phase 3: Offline Resilience & Dashboards [checkpoint: b6bba9d]
 Ensure the system remains functional during outages and provides strategic visibility.
 
 - [x] Task: Offline - Implement IndexedDB and Service Worker Sync fb48706
-    - [ ] Define IndexedDB schema for Item Catalog and Offline Invoices.
-    - [ ] Implement Background Sync API for automated reconnection logic.
 - [x] Task: Frontend - Implement POS HUD Enhancements (Shortcuts, Lucide Icons, Toasts) 12a793e
-    - [ ] Add Lucide React for modern iconography.
-    - [ ] Implement keyboard shortcuts (Enter to finish, F1 to search).
-    - [ ] Replace alerts with a custom Toast/Modal notification system.
 - [x] Task: Analytics - Develop KPI Dashboards (Owner & Chain Owner) 7add7f3
-    - [ ] Implement Executive Scorecard and Operational Heatmap.
-    - [ ] Create Comparative Analysis and Compliance Monitor views.
 - [x] Task: Onboarding - Implement Lifecycle Wizards fdf8ba4
-    - [ ] Develop the Single-to-Chain Transition Wizard.
-    - [ ] Develop the IRD Onboarding Wizard.
 - [x] Task: Compliance - Implement Mock IRD (CBMS) Sync Bridge 386528a
-    - [ ] [TDD] Write tests for IRD sync payload structure (Annex 13).
-    - [ ] Implement the 'is_offline' flag logic and sync queue.
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience & Dashboards' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience & Dashboards' (Protocol in workflow.md) b6bba9d
 
-## Phase 4: Finalization & Documentation
+## Phase 4: Visual Sovereignty & Aesthetic Polish
+Transform the functional UI into a premium SaaS experience.
+
+- [ ] Task: Design - Refine Color Palette & Typography
+    - [ ] Transition from pure black to Slate-900 depth palette.
+    - [ ] Configure Inter/Geist font family and refined scale.
+- [ ] Task: UI - Implement Shadcn-inspired Component Polish
+    - [ ] Update Buttons and Inputs with consistent radius and subtle borders.
+    - [ ] Implement Glassmorphism effects for Modals and Sidebars.
+- [ ] Task: UX - Add Premium Micro-interactions & Transitions
+    - [ ] Add Framer Motion for smooth layout transitions.
+    - [ ] Enhance POS grid with hover-lift animations and polished feedback.
+- [ ] Task: Conductor - User Manual Verification 'Phase 4: Visual Sovereignty & Aesthetic Polish' (Protocol in workflow.md)
+
+## Phase 5: Finalization & Documentation
 Wrap up the project with comprehensive documentation and production-ready builds.
 
 - [ ] Task: Documentation - Create Comprehensive Repository Wiki & README
@@ -57,4 +60,4 @@ Wrap up the project with comprehensive documentation and production-ready builds
 - [ ] Task: Build - Finalize Production Build & Verification
     - [ ] Perform full E2E verification of the integrated system.
     - [ ] Generate production-ready assets for frontend and backend.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Finalization & Documentation' (Protocol in workflow.md)
+- [ ] Task: Conductor - User Manual Verification 'Phase 5: Finalization & Documentation' (Protocol in workflow.md)
