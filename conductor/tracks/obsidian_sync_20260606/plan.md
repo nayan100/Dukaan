@@ -21,7 +21,7 @@
 - [x] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md) 2576c4f
 
 ## Phase 4: Workflow Enshrinement (Conductor Sync)
-- [ ] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule.
+- [x] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule. ab612d7
 - [ ] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation.
 - [ ] Task: Configure `Obsidian Calendar` to track "Review Checkpoints" as events.
 - [ ] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md)
