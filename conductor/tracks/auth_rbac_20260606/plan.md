@@ -28,7 +28,7 @@ Finalize the persona-based experience and fix POS layout.
 - [x] Task: UI - Fix POS HUD Layout (Fit-to-Page) 964c98e
     - [ ] Refactor `POSHUD.tsx` to use flex-box/grid with 100vh/100vw constraints.
     - [ ] Ensure all components (Catalog, Cart, Payment) are responsive without overflow.
-- [ ] Task: Backend - Implement Strict Write Validation
+- [x] Task: Backend - Implement Strict Write Validation 3e7c812
     - [ ] [TDD] Write tests for unauthorized branch write attempts.
     - [ ] Implement Frappe `validate` hooks to enforce branch-scoping for POS entries.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Operations & UI Polish' (Protocol in workflow.md)
