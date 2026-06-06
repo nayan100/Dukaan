@@ -23,7 +23,7 @@
     - [x] [TDD] Write shell tests for regex-based frontmatter replacement (status/date).
     - [x] Implement robust logic to append commit SHAs to the `## Outcomes & SHAs` section without duplicate entries.
     - [x] Implement checkbox synchronization for the `## Verification Outcome` section.
-- [~] Task: Conductor - User Manual Verification 'Phase 3: Advanced Sync Engine' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Advanced Sync Engine' (Protocol in workflow.md) 692f3fb
 
 **Phase 4: Final Integration & Workflow Polish**
 - [ ] Task: Update `conductor/workflow.md` to reflect the new `--update` capabilities.
