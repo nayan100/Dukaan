@@ -34,6 +34,24 @@ def sync_to_ird(invoice_name):
     
     return receipt_no
 
+def on_invoice_submit(doc, method):
+    """
+    Hook to set IRD status to Pending upon submission.
+    """
+    if doc.doctype in ["Sales Invoice", "Credit Note", "Purchase Invoice"]:
+        doc.db_set("ird_sync_status", "Pending")
+
+def validate_ird_lock(doc, method):
+    """
+    Prevents editing or cancellation of documents that are already Pending or Synced with IRD.
+    """
+    if doc.get("ird_sync_status") in ["Pending", "Synced"]:
+        # Allow cancelling only if it's explicitly handled via Credit Note (not implemented here)
+        frappe.throw(
+            "Document is locked for IRD Sync. Status: {}".format(doc.ird_sync_status),
+            title="Compliance Lock"
+        )
+
 def update_vat_annex_13(doc, method):
     """
     Hook to update VAT Annex 13 (Sales Register) when a Sales Invoice is submitted or cancelled.
