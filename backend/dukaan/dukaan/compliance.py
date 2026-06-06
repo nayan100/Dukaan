@@ -1,11 +1,11 @@
 import frappe
 import json
 import datetime
+import requests
 
 def sync_to_ird(invoice_name):
     """
-    Mock service to sync an invoice to the IRD Central Billing Monitoring System.
-    Returns the IRD receipt number on success.
+    Syncs an invoice to the IRD Central Billing Monitoring System.
     """
     invoice = frappe.get_doc("Sales Invoice", invoice_name)
     
@@ -17,22 +17,43 @@ def sync_to_ird(invoice_name):
         "invoice_number": invoice.name,
         "invoice_date": invoice.posting_date,
         "total_amount": invoice.grand_total,
-        "taxable_amount": invoice.total_taxes_and_charges,
+        "taxable_amount": invoice.total,
         "tax_amount": invoice.total_taxes_and_charges,
         "is_offline": invoice.get("is_offline", 0),
         "synced_at": datetime.datetime.now().isoformat()
     }
     
-    # Mock IRD endpoint call
-    print(f"Mock IRD Syncing Payload: {json.dumps(payload, indent=2)}")
+    try:
+        receipt_no = call_ird_api(invoice.name, payload)
+        
+        invoice.db_set("ird_receipt_no", receipt_no)
+        invoice.db_set("ird_sync_status", "Synced")
+        return receipt_no
+    except Exception as e:
+        invoice.db_set("ird_sync_status", "Failed")
+        frappe.log_error(message=str(e), title="IRD Sync Failed")
+        raise e
+
+def call_ird_api(idempotency_key, payload):
+    """
+    Makes the actual POST request to IRD API with idempotency handling.
+    """
+    # In a real scenario, the URL would be in Site Config
+    ird_url = "https://api.ird.gov.np/v1/sync"
+    headers = {
+        "Content-Type": "application/json",
+        "X-Idempotency-Key": idempotency_key
+    }
     
-    # Simulate successful response
-    receipt_no = f"IRD-{datetime.datetime.now().strftime('%Y%m%d')}-{invoice.name}"
+    response = requests.post(ird_url, json=payload, headers=headers, timeout=10)
     
-    invoice.db_set("ird_receipt_no", receipt_no)
-    invoice.db_set("ird_sync_status", "Synced")
-    
-    return receipt_no
+    if response.status_code == 200:
+        return response.json().get("receipt_no")
+    elif response.status_code == 409:
+        # Conflict: Document already exists at IRD. Treat as success.
+        return response.json().get("receipt_no")
+    else:
+        raise Exception(f"IRD API Error ({response.status_code}): {response.text}")
 
 def on_invoice_submit(doc, method):
     """
