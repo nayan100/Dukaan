@@ -82,6 +82,40 @@ def update_vat_annex_14(doc, method):
             "source_name": doc.name
         })
 
+def verify_vat_registers_integrity():
+    """
+    Compares the grand totals between source ledger DocTypes and materialized VAT registers.
+    Returns a dictionary of discrepancies found.
+    """
+    discrepancies = {}
+    
+    # Check Annex 13 (Sales)
+    sales_ledger_total = frappe.db.sql("SELECT SUM(grand_total) as total FROM `tabSales Invoice` WHERE docstatus=1", as_dict=True)[0].get("total") or 0
+    sales_register_total = frappe.db.sql("SELECT SUM(total_amount) as total FROM `tabVAT Annex 13` ", as_dict=True)[0].get("total") or 0
+    
+    if sales_ledger_total != sales_register_total:
+        discrepancies["VAT Annex 13"] = {
+            "ledger_total": sales_ledger_total,
+            "register_total": sales_register_total,
+            "diff": sales_ledger_total - sales_register_total
+        }
+        
+    # Check Annex 14 (Purchase)
+    purchase_ledger_total = frappe.db.sql("SELECT SUM(grand_total) as total FROM `tabPurchase Invoice` WHERE docstatus=1", as_dict=True)[0].get("total") or 0
+    purchase_register_total = frappe.db.sql("SELECT SUM(total_amount) as total FROM `tabVAT Annex 14` ", as_dict=True)[0].get("total") or 0
+    
+    if purchase_ledger_total != purchase_register_total:
+        discrepancies["VAT Annex 14"] = {
+            "ledger_total": purchase_ledger_total,
+            "register_total": purchase_register_total,
+            "diff": purchase_ledger_total - purchase_register_total
+        }
+        
+    if discrepancies:
+        frappe.log_error(message=json.dumps(discrepancies, indent=2), title="VAT Register Discrepancy Detected")
+        
+    return discrepancies
+
 def process_offline_queue():
     """
     Finds all invoices marked as offline and unsynced, and pushes them to IRD.

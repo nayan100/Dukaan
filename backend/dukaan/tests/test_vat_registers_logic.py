@@ -113,3 +113,24 @@ def test_update_vat_annex_14_on_cancel():
         "source_doctype": "Purchase Invoice",
         "source_name": "PINV-001"
     })
+
+def test_verify_vat_registers_integrity_mismatch():
+    """
+    Test that verify_vat_registers_integrity detects discrepancies between ledger and registers.
+    """
+    from dukaan.compliance import verify_vat_registers_integrity
+    
+    # Mock totals from Sales Invoice ledger
+    mock_frappe.db.sql.side_effect = [
+        [{"total": 5000}], # Sales Invoice total
+        [{"total": 4500}], # VAT Annex 13 total (Mismatch!)
+        [{"total": 3000}], # Purchase Invoice total
+        [{"total": 3000}]  # VAT Annex 14 total (Match)
+    ]
+    
+    discrepancies = verify_vat_registers_integrity()
+    
+    assert "VAT Annex 13" in discrepancies
+    assert discrepancies["VAT Annex 13"]["ledger_total"] == 5000
+    assert discrepancies["VAT Annex 13"]["register_total"] == 4500
+    assert "VAT Annex 14" not in discrepancies
