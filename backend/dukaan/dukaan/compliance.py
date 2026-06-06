@@ -242,6 +242,14 @@ def ensure_ird_fields():
             "fieldtype": "Data",
             "read_only": 1,
             "insert_after": "ird_sync_status"
+        },
+        {
+            "fieldname": "ird_retry_count",
+            "label": "IRD Retry Count",
+            "fieldtype": "Int",
+            "default": "0",
+            "read_only": 1,
+            "insert_after": "ird_idempotency_key"
         }
     ]
     
@@ -254,6 +262,27 @@ def ensure_ird_fields():
                     **field
                 })
                 custom_field.insert()
+
+def retry_failed_ird_syncs():
+    """
+    Background worker to retry failed IRD syncs.
+    Attempts retry only if retry count < 5.
+    """
+    for dt in ["Sales Invoice", "Credit Note", "Purchase Invoice"]:
+        failed_docs = frappe.get_all(dt, filters={
+            "ird_sync_status": "Failed",
+            "ird_retry_count": ["<", 5]
+        }, fields=["name", "ird_retry_count"])
+        
+        for entry in failed_docs:
+            try:
+                # Increment retry count
+                new_count = (entry.get("ird_retry_count") or 0) + 1
+                frappe.db.set_value(dt, entry["name"], "ird_retry_count", new_count)
+                sync_to_ird(entry["name"])
+            except Exception:
+                # sync_to_ird already logs error
+                continue
 
 def process_offline_queue():
     """
