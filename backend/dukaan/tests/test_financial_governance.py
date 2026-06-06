@@ -47,3 +47,32 @@ def test_budget_guard_exceeded():
         
         with pytest.raises(Exception, match="Budget Exceeded"):
             validate_po_budget(mock_po)
+
+def test_inter_branch_adjustment_generation():
+    """
+    Test that a return in Branch B for an item bought in Branch A 
+    generates correct financial adjustments.
+    """
+    from dukaan.retail_logic import process_cross_branch_return
+    
+    # Item bought in Branch A
+    # Return processed in Branch B
+    return_details = {
+        "original_branch": "Branch A",
+        "return_branch": "Branch B",
+        "amount": 1200.0,
+        "item_code": "Item 1"
+    }
+    
+    with patch("dukaan.retail_logic.create_journal_entry") as mock_je:
+        process_cross_branch_return(return_details)
+        
+        # Should generate Inter-Branch Adjustment
+        # Debit Branch A (they lose the revenue)
+        # Credit Branch B (they issued the refund)
+        mock_je.assert_called_once_with(
+            debit_account="Branch A - Sales Return",
+            credit_account="Branch B - Cash",
+            amount=1200.0,
+            remarks="Cross-Branch Return: Item 1 from Branch A"
+        )

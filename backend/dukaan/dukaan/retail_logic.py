@@ -179,3 +179,43 @@ def get_monthly_spent(branch):
         "docstatus": 1,
         "transaction_date": [">=", first_day]
     }, fieldname="sum(grand_total)") or 0
+
+def process_cross_branch_return(details):
+    """
+    Generates financial adjustments when an item bought in Branch A
+    is returned in Branch B.
+    """
+    original = details.get("original_branch")
+    returned = details.get("return_branch")
+    amount = details.get("amount")
+    item = details.get("item_code")
+
+    create_journal_entry(
+        debit_account=f"{original} - Sales Return",
+        credit_account=f"{returned} - Cash",
+        amount=amount,
+        remarks=f"Cross-Branch Return: {item} from {original}"
+    )
+
+def create_journal_entry(debit_account, credit_account, amount, remarks):
+    """
+    Helper to create a Journal Entry in Frappe.
+    """
+    je = frappe.get_doc({
+        "doctype": "Journal Entry",
+        "voucher_type": "Journal Entry",
+        "accounts": [
+            {
+                "account": debit_account,
+                "debit_in_account_currency": amount
+            },
+            {
+                "account": credit_account,
+                "credit_in_account_currency": amount
+            }
+        ],
+        "user_remark": remarks
+    })
+    je.insert(ignore_permissions=True)
+    je.submit()
+    return je
