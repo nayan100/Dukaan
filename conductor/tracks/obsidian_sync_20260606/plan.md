@@ -25,3 +25,6 @@
 - [x] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation. 9fc4ed3
 - [x] Task: Configure `Obsidian Calendar` to track "Review Checkpoints" as events. dc7056d
 - [x] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md) a9c7bd6
+
+## Phase: Review Fixes
+- [x] Task: Merge documentation logic in workflow.md 8fcb2f7
