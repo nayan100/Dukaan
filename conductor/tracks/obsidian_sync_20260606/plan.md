@@ -7,7 +7,7 @@
 - [x] Task: Conductor - User Manual Verification 'Infrastructure Readiness' (Protocol in workflow.md) fca4521
 
 ## Phase 2: The "Vault of Truth" (Zero-Loss Migration)
-- [ ] Task: Scripted Phase 0: Create a verifiable snapshot with a `MANIFEST.json` containing SHA-256 hashes of all source files.
+- [x] Task: Scripted Phase 0: Create a verifiable snapshot with a `MANIFEST.json` containing SHA-256 hashes of all source files. e7c5f91
 - [ ] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review.
 - [ ] Task: Execute migration using non-destructive copy logic to preserve metadata.
 - [ ] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure.
