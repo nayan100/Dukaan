@@ -185,6 +185,8 @@
   },
   "active": "d9fef286ab137224",
   "lastOpenFiles": [
+    "frontend/src/components/analytics/FinanceAuditHUD.test.tsx",
+    "frontend/src/components/analytics/FinanceAuditHUD.tsx",
     "verify_budget.py",
     "frontend/src/components/ui/BudgetWidget.test.tsx",
     "frontend/src/components/ui/BudgetWidget.tsx",
@@ -203,8 +205,6 @@
     "conductor/tracks/inter_branch_20260606/spec.md",
     "frontend/coverage/coverage-final.json",
     "frontend/coverage/clover.xml",
-    "frontend/coverage/ui/index.html",
-    "frontend/coverage/ui/Button.tsx.html",
     "frontend/coverage/sort-arrow-sprite.png",
     "frontend/coverage/favicon.png",
     "conductor/tracks/inter_branch_20260606/plan.md",
