@@ -15,7 +15,7 @@
     - [x] Extract the parent MOC (Infrastructure or UI category) and inject it as a metadata link.
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Template & MOC Traceability' (Protocol in workflow.md) 9f3303c
 
-**Phase 3: The Advanced Sync Engine (Update Mode)**
+**Phase 3: The Advanced Sync Engine (Update Mode) [checkpoint: a57a26a]**
 - [x] Task: Implement the `--update` flag and state management.
     - [x] Refactor argument parsing to handle flags and positional arguments.
     - [x] Add logic to detect if a note already exists when `--update` is passed.
