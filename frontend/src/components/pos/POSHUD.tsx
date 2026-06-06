@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingCart, Trash2, CheckCircle, Search, AlertTriangle } from 'lucide-react';
+import { ShoppingCart, Trash2, CheckCircle, Search, AlertTriangle, LayoutGrid, ReceiptText } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';
 import { saveInvoiceOffline } from '../../lib/db';
@@ -25,7 +26,6 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && cart.length > 0 && !isPaymentModalOpen) {
@@ -49,7 +49,9 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
       }
       return [...prevCart, { ...item, quantity: 1, addedAt: Date.now() }];
     });
-    toast.success(`Added ${item.name}`, { position: 'bottom-left' });
+    toast.success(`+1 ${item.name}`, { 
+        style: { background: '#0f172a', color: '#10b981', border: '1px solid #1e293b' }
+    });
   };
 
   const removeFromCart = (itemId: string) => {
@@ -59,7 +61,6 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
       const isWithinWindow = Date.now() - item.addedAt < 60000;
       if (isWithinWindow) {
-        toast.error(`Voided ${item.name}`, { position: 'bottom-left' });
         if (item.quantity > 1) {
           return prevCart.map((i) =>
             i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
@@ -67,9 +68,9 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
         }
         return prevCart.filter((i) => i.id !== itemId);
       }
-      
-      toast.error('Void window expired. Manager approval required.', {
+      toast.error('Void window expired. Manager OTP required.', {
         icon: <AlertTriangle className="text-pos-danger" />,
+        style: { background: '#0f172a', color: '#ef4444', border: '1px solid #1e293b' }
       });
       return prevCart;
     });
@@ -88,17 +89,14 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
     try {
       await saveInvoiceOffline(invoice);
-      if ('serviceWorker' in navigator && 'SyncManager' in window) {
-        const reg = await navigator.serviceWorker.ready;
-        await (reg as any).sync.register('sync-invoices');
-      }
     } catch (err) {
       console.error('Failed to save offline:', err);
     }
 
-    toast.success('Sale Completed Successfully!', {
-      duration: 4000,
+    toast.success('Transaction Finalized!', {
+      duration: 3000,
       icon: <CheckCircle className="text-pos-primary" />,
+      style: { background: '#0f172a', color: '#10b981', border: '1px solid #10b981' }
     });
     setCart([]);
     setIsPaymentModalOpen(false);
@@ -109,98 +107,140 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   );
 
   return (
-    <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden">
-      <Toaster />
+    <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden font-sans selection:bg-pos-primary/30">
+      <Toaster position="top-center" />
       
-      {/* Items Grid */}
-      <div className="flex-1 flex flex-col">
-        <div className="p-4 bg-pos-surface border-b-4 border-pos-primary flex items-center gap-4">
-          <Search className="text-pos-primary" />
-          <input 
-            type="text" 
-            placeholder="Search Items (F1)..." 
-            className="flex-1 bg-pos-black border-2 border-pos-primary p-2 text-pos-xl font-bold text-pos-primary focus:outline-none"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            autoFocus
-          />
-        </div>
+      {/* Items Section */}
+      <div className="flex-1 flex flex-col bg-pos-black">
+        <header className="p-6 bg-pos-surface/50 border-b border-pos-border flex items-center justify-between backdrop-blur-md">
+            <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-pos-primary/20 rounded-xl flex items-center justify-center border border-pos-primary/30 shadow-inner">
+                    <LayoutGrid size={22} className="text-pos-primary" />
+                </div>
+                <div>
+                    <h1 className="text-lg font-extrabold tracking-tight">Product Catalog</h1>
+                    <p className="text-xs text-pos-muted font-medium">Quick tap to add items</p>
+                </div>
+            </div>
+            
+            <div className="w-96 relative group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-pos-muted group-focus-within:text-pos-primary transition-colors" size={18} />
+                <input 
+                    type="text" 
+                    placeholder="Search products... (F1)" 
+                    className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl py-3 pl-12 pr-4 text-sm font-semibold transition-all outline-none placeholder:text-pos-muted/50"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    autoFocus
+                />
+            </div>
+        </header>
         
-        <div className="flex-1 p-4 grid grid-cols-3 gap-4 overflow-y-auto">
+        <main className="flex-1 p-6 grid grid-cols-3 xl:grid-cols-4 gap-5 overflow-y-auto custom-scrollbar">
           {filteredItems.map((item) => (
-            <Button
-              key={item.id}
-              variant="ghost"
-              size="xl"
-              onClick={() => addToCart(item)}
-              className="h-40 text-pos-2xl border-pos-primary hover:bg-pos-primary"
+            <motion.div
+                key={item.id}
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.98 }}
             >
-              <div className="flex flex-col items-center">
-                <span className="text-center">{item.name}</span>
-                <span className="text-sm opacity-80 mt-2">NPR {item.price}</span>
-              </div>
-            </Button>
+                <Button
+                variant="muted"
+                size="xl"
+                onClick={() => addToCart(item)}
+                className="w-full h-44 flex-col gap-3 group relative overflow-hidden"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-br from-pos-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <span className="text-lg font-bold text-pos-white group-hover:text-pos-primary transition-colors text-center px-2">{item.name}</span>
+                    <div className="bg-pos-black/40 px-4 py-1.5 rounded-full border border-pos-border group-hover:border-pos-primary/30 transition-colors">
+                        <span className="text-sm font-black text-pos-primary">NPR {item.price.toLocaleString()}</span>
+                    </div>
+                </Button>
+            </motion.div>
           ))}
-        </div>
+        </main>
       </div>
 
-      {/* Cart Strip */}
-      <div className="w-96 border-l-4 border-pos-primary flex flex-col p-4 bg-pos-surface">
-        <div className="flex items-center gap-2 mb-4 border-b-2 border-pos-primary pb-2">
-          <ShoppingCart className="text-pos-primary" />
-          <h2 className="text-pos-xl font-bold uppercase">Cart</h2>
-        </div>
-        
-        <div className="flex-1 overflow-y-auto space-y-4">
-          {cart.map((item) => (
-            <div 
-              key={item.id} 
-              data-testid={`cart-item-${item.id}`}
-              className="flex justify-between items-center p-3 border border-pos-primary rounded bg-pos-black"
-            >
-              <div className="flex-1">
-                <div className="font-bold">{item.name}</div>
-                <div className="text-sm">NPR {item.price} x <span data-testid={`cart-item-${item.id}-qty`}>{item.quantity}</span></div>
-              </div>
-              <div className="flex flex-col items-end gap-2">
-                <div className="font-bold">NPR {item.price * item.quantity}</div>
-                <Button 
-                  variant="danger" 
-                  size="sm" 
-                  onClick={() => removeFromCart(item.id)}
-                  data-testid={`void-item-${item.id}`}
-                  className="flex items-center gap-1"
-                >
-                  <Trash2 size={14} /> Void
-                </Button>
-              </div>
+      {/* Cart Sidebar */}
+      <aside className="w-[420px] border-l border-pos-border flex flex-col bg-pos-surface/30 backdrop-blur-xl relative">
+        <header className="p-6 border-b border-pos-border flex items-center justify-between">
+            <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-pos-secondary/20 rounded-xl flex items-center justify-center border border-pos-secondary/30">
+                    <ShoppingCart size={20} className="text-pos-secondary" />
+                </div>
+                <h2 className="text-lg font-extrabold tracking-tight uppercase italic">Active Order</h2>
             </div>
-          ))}
+            <div className="bg-pos-black/50 px-3 py-1 rounded-lg border border-pos-border text-xs font-bold text-pos-muted">
+                {cart.length} ITEMS
+            </div>
+        </header>
+        
+        <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+          <AnimatePresence initial={false}>
+            {cart.map((item) => (
+                <motion.div 
+                    key={item.id} 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="group bg-pos-black/40 border border-pos-border hover:border-pos-primary/30 p-4 rounded-2xl transition-all"
+                >
+                    <div className="flex justify-between items-start mb-4">
+                        <div className="flex-1">
+                            <div className="font-bold text-pos-white leading-tight">{item.name}</div>
+                            <div className="text-xs text-pos-muted font-bold mt-1 uppercase tracking-tighter">
+                                NPR {item.price} × {item.quantity}
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <div className="font-black text-pos-primary tracking-tight">
+                                NPR {(item.price * item.quantity).toLocaleString()}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-2">
+                        <Button 
+                            variant="danger" 
+                            size="sm" 
+                            onClick={() => removeFromCart(item.id)}
+                            className="flex-1 gap-2 h-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                            <Trash2 size={14} /> <span className="text-[10px] uppercase font-black">Void Item</span>
+                        </Button>
+                    </div>
+                </motion.div>
+            ))}
+          </AnimatePresence>
+
           {cart.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center opacity-20 mt-20">
-              <ShoppingCart size={80} />
-              <div className="mt-4 font-bold uppercase">Cart is Empty</div>
+            <div className="h-full flex flex-col items-center justify-center opacity-10 py-20 grayscale">
+              <ReceiptText size={120} strokeWidth={1} />
+              <div className="mt-6 font-black uppercase tracking-[0.2em] text-xl">Order Pending</div>
             </div>
           )}
         </div>
 
-        <div className="mt-4 border-t-4 border-pos-primary pt-4">
-          <div className="text-pos-2xl font-bold flex justify-between">
-            <span>Total:</span>
-            <span data-testid="cart-total">NPR {total}</span>
+        <footer className="p-8 bg-pos-black/40 border-t border-pos-border backdrop-blur-2xl">
+          <div className="flex justify-between items-end mb-8">
+            <span className="text-sm font-black text-pos-muted uppercase tracking-widest">Total Amount</span>
+            <span className="text-4xl font-black text-pos-primary tracking-tighter">
+                <span className="text-lg mr-2 font-bold opacity-50 italic">NPR</span>
+                {total.toLocaleString()}
+            </span>
           </div>
+          
           <Button 
             variant="primary" 
             size="xl" 
-            className="w-full mt-4 h-24 text-pos-xl uppercase tracking-widest flex flex-col"
+            className="w-full h-24 text-xl uppercase font-black tracking-tight rounded-2xl relative overflow-hidden shadow-2xl shadow-pos-primary/20 group"
             onClick={() => cart.length > 0 && setIsPaymentModalOpen(true)}
             disabled={cart.length === 0}
           >
-            <span>Finish Sale</span>
-            <span className="text-xs opacity-60 mt-1">[Enter]</span>
+            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            <span className="relative z-10">Checkout Order</span>
+            <span className="absolute bottom-4 right-6 text-[10px] opacity-40 font-black tracking-widest">[ENTER]</span>
           </Button>
-        </div>
-      </div>
+        </footer>
+      </aside>
 
       {isPaymentModalOpen && (
         <PaymentModal 
