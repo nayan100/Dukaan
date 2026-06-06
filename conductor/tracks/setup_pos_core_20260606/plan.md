@@ -31,7 +31,7 @@ Ensure the system remains functional during outages and provides strategic visib
 - [x] Task: Offline - Implement IndexedDB and Service Worker Sync fb48706
     - [ ] Define IndexedDB schema for Item Catalog and Offline Invoices.
     - [ ] Implement Background Sync API for automated reconnection logic.
-- [ ] Task: Frontend - Implement POS HUD Enhancements (Shortcuts, Lucide Icons, Toasts)
+- [x] Task: Frontend - Implement POS HUD Enhancements (Shortcuts, Lucide Icons, Toasts) 12a793e
     - [ ] Add Lucide React for modern iconography.
     - [ ] Implement keyboard shortcuts (Enter to finish, F1 to search).
     - [ ] Replace alerts with a custom Toast/Modal notification system.
