@@ -22,6 +22,6 @@
 
 ## Phase 4: Workflow Enshrinement (Conductor Sync)
 - [x] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule. ab612d7
-- [ ] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation.
+- [x] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation. 9fc4ed3
 - [ ] Task: Configure `Obsidian Calendar` to track "Review Checkpoints" as events.
 - [ ] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md)
