@@ -34,6 +34,54 @@ def sync_to_ird(invoice_name):
     
     return receipt_no
 
+def update_vat_annex_13(doc, method):
+    """
+    Hook to update VAT Annex 13 (Sales Register) when a Sales Invoice is submitted or cancelled.
+    """
+    if method == "on_submit":
+        annex_doc = frappe.get_doc({
+            "doctype": "VAT Annex 13",
+            "posting_date": doc.posting_date,
+            "invoice_number": doc.name,
+            "customer_name": doc.customer_name,
+            "customer_pan": doc.get("customer_pan"),
+            "taxable_amount": doc.total,
+            "vat_amount": doc.total_taxes_and_charges,
+            "total_amount": doc.grand_total,
+            "source_doctype": doc.doctype,
+            "source_name": doc.name
+        })
+        annex_doc.insert()
+    elif method == "on_cancel":
+        frappe.db.delete("VAT Annex 13", {
+            "source_doctype": doc.doctype,
+            "source_name": doc.name
+        })
+
+def update_vat_annex_14(doc, method):
+    """
+    Hook to update VAT Annex 14 (Purchase Register) when a Purchase Invoice is submitted or cancelled.
+    """
+    if method == "on_submit":
+        annex_doc = frappe.get_doc({
+            "doctype": "VAT Annex 14",
+            "posting_date": doc.posting_date,
+            "invoice_number": doc.name,
+            "supplier_name": doc.supplier_name,
+            "supplier_pan": doc.get("supplier_pan"),
+            "taxable_amount": doc.total,
+            "vat_amount": doc.total_taxes_and_charges,
+            "total_amount": doc.grand_total,
+            "source_doctype": doc.doctype,
+            "source_name": doc.name
+        })
+        annex_doc.insert()
+    elif method == "on_cancel":
+        frappe.db.delete("VAT Annex 14", {
+            "source_doctype": doc.doctype,
+            "source_name": doc.name
+        })
+
 def process_offline_queue():
     """
     Finds all invoices marked as offline and unsynced, and pushes them to IRD.
