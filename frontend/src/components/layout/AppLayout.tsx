@@ -4,23 +4,30 @@ import {
   LayoutDashboard, ShoppingCart, Rocket, 
   Settings, LogOut, Menu, X, Bell 
 } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import PermissionGuard from '../auth/PermissionGuard';
 import POSHUD from '../pos/POSHUD';
 import KPIDashboard from '../analytics/KPIDashboard';
 import OnboardingWizard from '../wizards/OnboardingWizard';
+import LoginPage from '../auth/LoginPage';
 
 const AppLayout: React.FC = () => {
+  const { user, login, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard'>('pos');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
+  if (!user) {
+    return <LoginPage onLogin={login} />;
+  }
+
   const navItems = [
-    { id: 'pos', label: 'Point of Sale', icon: ShoppingCart },
-    { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard },
-    { id: 'wizard', label: 'Growth Wizard', icon: Rocket },
+    { id: 'pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
+    { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { id: 'wizard', label: 'Growth Wizard', icon: Rocket, permission: 'access_growth_wizard' },
   ];
 
   return (
     <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden font-sans">
-      {/* Sidebar */}
       <motion.aside 
         initial={false}
         animate={{ width: isSidebarOpen ? 280 : 80 }}
@@ -46,32 +53,33 @@ const AppLayout: React.FC = () => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id as any)}
-                className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all relative group ${
-                  isActive 
-                    ? 'bg-pos-primary/10 text-pos-primary' 
-                    : 'text-pos-muted hover:bg-pos-surface hover:text-pos-white'
-                }`}
-              >
-                {isActive && (
-                  <motion.div 
-                    layoutId="active-nav"
-                    className="absolute inset-0 bg-pos-primary/5 border border-pos-primary/20 rounded-xl"
-                  />
-                )}
-                <Icon size={22} className={isActive ? 'text-pos-primary' : 'group-hover:text-pos-white transition-colors'} />
-                {isSidebarOpen && (
-                  <motion.span 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="font-bold text-sm tracking-tight relative z-10"
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </button>
+              <PermissionGuard key={item.id} permission={item.permission}>
+                <button
+                  onClick={() => setActiveTab(item.id as any)}
+                  className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all relative group ${
+                    isActive 
+                      ? 'bg-pos-primary/10 text-pos-primary' 
+                      : 'text-pos-muted hover:bg-pos-surface hover:text-pos-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div 
+                      layoutId="active-nav"
+                      className="absolute inset-0 bg-pos-primary/5 border border-pos-primary/20 rounded-xl"
+                    />
+                  )}
+                  <Icon size={22} className={isActive ? 'text-pos-primary' : 'group-hover:text-pos-white transition-colors'} />
+                  {isSidebarOpen && (
+                    <motion.span 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="font-bold text-sm tracking-tight relative z-10"
+                    >
+                      {item.label}
+                    </motion.span>
+                  )}
+                </button>
+              </PermissionGuard>
             );
           })}
         </nav>
@@ -81,7 +89,10 @@ const AppLayout: React.FC = () => {
             <Settings size={22} className="group-hover:text-pos-white" />
             {isSidebarOpen && <span className="font-bold text-sm">Settings</span>}
           </button>
-          <button className="w-full flex items-center gap-4 p-4 rounded-xl text-pos-danger hover:bg-pos-danger/10 transition-all group">
+          <button 
+            onClick={logout}
+            className="w-full flex items-center gap-4 p-4 rounded-xl text-pos-danger hover:bg-pos-danger/10 transition-all group"
+          >
             <LogOut size={22} />
             {isSidebarOpen && <span className="font-bold text-sm">Log Out</span>}
           </button>
@@ -95,9 +106,7 @@ const AppLayout: React.FC = () => {
         </button>
       </motion.aside>
 
-      {/* Main Content */}
       <main className="flex-1 relative overflow-hidden flex flex-col">
-        {/* Top Header */}
         <header className="h-20 border-b border-pos-border bg-pos-surface/30 backdrop-blur-xl flex items-center justify-end px-10 gap-6 z-10">
             <button className="p-2 text-pos-muted hover:text-pos-white relative">
                 <Bell size={20} />
@@ -105,11 +114,11 @@ const AppLayout: React.FC = () => {
             </button>
             <div className="flex items-center gap-3 pl-6 border-l border-pos-border">
                 <div className="text-right">
-                    <div className="text-xs font-black uppercase tracking-widest text-pos-primary">Premium Admin</div>
-                    <div className="text-sm font-bold">Rajesh Hamal</div>
+                    <div className="text-xs font-black uppercase tracking-widest text-pos-primary">{user.role}</div>
+                    <div className="text-sm font-bold">{user.username}</div>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pos-primary to-pos-secondary flex items-center justify-center font-black text-pos-black">
-                    RH
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pos-primary to-pos-secondary flex items-center justify-center font-black text-pos-black uppercase">
+                    {user.username.substring(0, 2)}
                 </div>
             </div>
         </header>
@@ -125,20 +134,30 @@ const AppLayout: React.FC = () => {
                     className="absolute inset-0 overflow-auto"
                 >
                     {activeTab === 'pos' && (
-                        <POSHUD availableItems={[
-                            { id: '1', name: 'Wai Wai Noodles', price: 20 },
-                            { id: '2', name: 'Real Juice 1L', price: 250 },
-                            { id: '3', name: 'Amul Butter 500g', price: 600 },
-                            { id: '4', name: 'Dairy Milk Silk', price: 180 },
-                            { id: '5', name: 'Coca Cola 2.25L', price: 270 },
-                            { id: '6', name: 'Lays Chips', price: 50 },
-                            { id: '7', name: 'Current Noodles', price: 50 },
-                            { id: '8', name: 'Aashirvaad Atta 5kg', price: 550 },
-                            { id: '9', name: 'Fortune Oil 1L', price: 240 },
-                        ]} />
+                        <PermissionGuard permission="access_pos" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                            <POSHUD availableItems={[
+                                { id: '1', name: 'Wai Wai Noodles', price: 20 },
+                                { id: '2', name: 'Real Juice 1L', price: 250 },
+                                { id: '3', name: 'Amul Butter 500g', price: 600 },
+                                { id: '4', name: 'Dairy Milk Silk', price: 180 },
+                                { id: '5', name: 'Coca Cola 2.25L', price: 270 },
+                                { id: '6', name: 'Lays Chips', price: 50 },
+                                { id: '7', name: 'Current Noodles', price: 50 },
+                                { id: '8', name: 'Aashirvaad Atta 5kg', price: 550 },
+                                { id: '9', name: 'Fortune Oil 1L', price: 240 },
+                            ]} />
+                        </PermissionGuard>
                     )}
-                    {activeTab === 'dashboard' && <KPIDashboard />}
-                    {activeTab === 'wizard' && <OnboardingWizard />}
+                    {activeTab === 'dashboard' && (
+                        <PermissionGuard permission="access_strategy_hub" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                            <KPIDashboard />
+                        </PermissionGuard>
+                    )}
+                    {activeTab === 'wizard' && (
+                        <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                            <OnboardingWizard />
+                        </PermissionGuard>
+                    )}
                 </motion.div>
             </AnimatePresence>
         </div>

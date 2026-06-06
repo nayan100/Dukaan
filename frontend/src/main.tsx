@@ -16,8 +16,12 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+import { AuthProvider } from './context/AuthContext'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </StrictMode>,
 )
