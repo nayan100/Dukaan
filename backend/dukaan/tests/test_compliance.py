@@ -26,7 +26,9 @@ def test_ird_sync_payload_structure():
     mock_frappe.get_doc.return_value = mock_invoice
     mock_frappe.db.get_single_value.return_value = "987654321" # Seller PAN
     
-    receipt = sync_to_ird(invoice_name)
+    with patch("dukaan.compliance.call_ird_api") as mock_api:
+        mock_api.return_value = f"IRD-20260606-{invoice_name}"
+        receipt = sync_to_ird(invoice_name)
     
     assert receipt.startswith("IRD-")
     assert invoice_name in receipt
