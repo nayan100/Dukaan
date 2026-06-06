@@ -66,6 +66,11 @@ All tasks follow a strict lifecycle:
     - **Action:** Stage the modified `plan.md` file.
     - **Action:** Commit this change with a descriptive message (e.g., `conductor(plan): Mark task 'Create user model' as complete`).
 
+12. **Synchronize Obsidian Vault (MANDATORY):**
+    - **Rule:** Every completed task or phase update MUST be reflected in the Obsidian Vault.
+    - **Action:** Update the corresponding task note in Obsidian (linked to `plan.md`) with the outcome, verification details, and commit SHA.
+    - **Action:** If the task impacts the system architecture, update the relevant `Advanced Canvas` or logical MOC.
+
 ### Phase Completion Verification and Checkpointing Protocol
 
 **Trigger:** This protocol is executed immediately after a task is completed that also concludes a phase in `plan.md`.
