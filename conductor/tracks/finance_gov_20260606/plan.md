@@ -3,7 +3,7 @@
 ## Phase 1: Budgetary Control
 Prevent over-spending at the branch level.
 
-- [ ] Task: Backend - Implement Monthly Budget Guard
+- [x] Task: Backend - Implement Monthly Budget Guard b87994b
     - [ ] [TDD] Write tests for PO budget enforcement limits.
     - [ ] Implement `Before Submit` hook on Purchase Order DocType.
 - [ ] Task: UI - Develop Budget Monitoring Widget
