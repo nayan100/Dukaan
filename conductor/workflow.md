@@ -54,7 +54,7 @@ All tasks follow a strict lifecycle:
    - **Step 9.2: Draft Note Content:** Create a detailed summary for the completed task. This should include the task name, a summary of changes, a list of all created/modified files, and the core "why" for the change.
    - **Step 9.3: Attach Note:** Use the `git notes` command to attach the summary to the commit.
      ```bash
-     # The note content from the previous step is passed via the -m flag.
+     # The note content fro./conductor-sync.sh obsidian_sync_20260606 "Test Task"m the previous step is passed via the -m flag.
      git notes add -m "<note content>" <commit_hash>
      ```
 
@@ -66,10 +66,11 @@ All tasks follow a strict lifecycle:
     - **Action:** Stage the modified `plan.md` file.
     - **Action:** Commit this change with a descriptive message (e.g., `conductor(plan): Mark task 'Create user model' as complete`).
 
-12. **Synchronize Obsidian Vault (MANDATORY):**
-    - **Rule:** Every completed task or phase update MUST be reflected in the Obsidian Vault.
-    - **Action:** Update the corresponding task note in Obsidian (linked to `plan.md`) with the outcome, verification details, and commit SHA.
-    - **Action:** If the task impacts the system architecture, update the relevant `Advanced Canvas` or logical MOC.
+12. **Living Documentation Sync (Obsidian Priority):**
+    - **Rule:** Obsidian is the primary visualization and context layer. Any change to codebase logic MUST be reflected in the Vault.
+    - **Action (Task Trace):** Use `./conductor-sync.sh` to update the task note with outcomes and commit SHAs.
+    - **Action (Visuals):** Update `Advanced Canvas` or logical MOCs if architecture was modified.
+    - **Action (Core Alignment):** Only update `conductor/*.md` files for high-level strategic shifts. For technical details, link to the corresponding Obsidian note to avoid duplicate content.
 
 ### Phase Completion Verification and Checkpointing Protocol
 
