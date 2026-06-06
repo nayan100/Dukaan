@@ -4,7 +4,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [~] **Track: Inter-Branch Inventory Protocol**
+- [x] **Track: Inter-Branch Inventory Protocol**
   *Link: [./tracks/inter_branch_20260606/](./tracks/inter_branch_20260606/)*
 
 ---
