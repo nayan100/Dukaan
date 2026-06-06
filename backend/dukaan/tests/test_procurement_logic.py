@@ -54,24 +54,56 @@ def test_detect_split_order_clean():
     
     assert is_suspicious is False
 
-def test_validate_po_split_order_warning():
+def test_purchase_order_validation_triggers_budget_check():
     """
-    Test that PO validation throws a warning (not a hard error) if split order detected.
-    Actually, spec says: "escalation to Chain Owner for overrides".
-    For now, let's just test it calls frappe.msgprint or similar if we want a soft warning,
-    or frappe.throw if we want to block it.
-    Spec says: "Soft Budget Enforcement: Warnings on PO creation".
+    Test that PurchaseOrder.validate() triggers the budget and split-order checks.
     """
-    from dukaan.retail_logic import validate_po_split_order
+    from dukaan.doctype.purchase_order.purchase_order import PurchaseOrder
+    
+    doc = PurchaseOrder({
+        "doctype": "Purchase Order",
+        "supplier": "Test Supplier",
+        "branch": "Main Branch",
+        "grand_total": 50000
+    })
+    
+    with patch("dukaan.doctype.purchase_order.purchase_order.validate_po_budget") as mock_budget:
+        with patch("dukaan.doctype.purchase_order.purchase_order.validate_po_split_order") as mock_split:
+            doc.validate()
+            mock_budget.assert_called_once_with(doc)
+            mock_split.assert_called_once_with(doc)
+
+def test_validate_po_budget_exceeded():
+    """
+    Test that validate_po_budget throws FrappeException if budget exceeded.
+    """
+    from dukaan.retail_logic import validate_po_budget
     
     mock_po = MagicMock()
-    mock_po.supplier = "Test Supplier"
+    mock_po.branch = "Main Branch"
+    mock_po.grand_total = 200000
     
-    with patch("dukaan.retail_logic.detect_split_order", return_value=True):
-        with patch("frappe.msgprint") as mock_msgprint:
-            validate_po_split_order(mock_po)
-            mock_msgprint.assert_called()
-            # Check if it was called with msg keyword or as first positional
-            args, kwargs = mock_msgprint.call_args
-            msg = kwargs.get("msg") or args[0]
-            assert "Suspicious Split-Order Pattern Detected" in msg
+    # Mock budget limit
+    mock_frappe.db.get_value.return_value = 100000 # Limit
+    
+    # Mock current spent
+    with patch("dukaan.retail_logic.get_monthly_spent", return_value=50000):
+        with pytest.raises(FrappeException) as excinfo:
+            validate_po_budget(mock_po)
+        assert "Budget Exceeded" in str(excinfo.value)
+
+def test_validate_po_budget_ok():
+    """
+    Test that validate_po_budget passes if within budget.
+    """
+    from dukaan.retail_logic import validate_po_budget
+    
+    mock_po = MagicMock()
+    mock_po.branch = "Main Branch"
+    mock_po.grand_total = 30000
+    
+    mock_frappe.db.get_value.return_value = 100000 # Limit
+    
+    with patch("dukaan.retail_logic.get_monthly_spent", return_value=50000):
+        validate_po_budget(mock_po)
+        # Should not raise
