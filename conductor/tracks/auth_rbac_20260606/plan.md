@@ -17,7 +17,7 @@ Implement the "Smart" UI that adapts to user roles.
 - [x] Task: Frontend - Implement Permission Shadowing Service c3c7fc1
     - [ ] Create an `AuthProvider` and `usePermissions` hook.
     - [ ] Implement logic to fetch and "shadow" Frappe Role Profiles in `sessionStorage`.
-- [ ] Task: Frontend - Implement Guarded Routing & UI Components
+- [x] Task: Frontend - Implement Guarded Routing & UI Components 19dc609
     - [ ] Create `<PermissionGuard />` component for fine-grained UI control.
     - [ ] Setup protected routes based on the Persona Matrix.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Hierarchical RBAC & Shadowing' (Protocol in workflow.md)
