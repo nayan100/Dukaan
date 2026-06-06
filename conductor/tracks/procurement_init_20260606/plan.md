@@ -6,11 +6,11 @@
 - [x] Task: Create the `Monthly Budget` check hook on the `Purchase Order` doctype. d9daf24
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md) baca32a
 
-**Phase 2: Core Procurement Workflows (Backend)**
+**Phase 2: Core Procurement Workflows (Backend)** [checkpoint: 0273ee0]
 - [x] Task: Implement the Standard PO Lifecycle (Draft -> Pending -> Approved -> Received). 3a42e4c
 - [x] Task: Build the multi-persona approval handshake (Branch Owner -> Accountant -> Chain Owner). 37e0203
 - [x] Task: Implement `Purchase Receipt` logic that updates the materialized Annex 14 register. c633955
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md) 0273ee0
 
 **Phase 3: Stock Initialization & Valuation (Backend)**
 - [ ] Task: Create the `Opening Stock Entry` tool with Moving Average calculation logic.
