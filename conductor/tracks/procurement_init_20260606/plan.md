@@ -9,7 +9,7 @@
 **Phase 2: Core Procurement Workflows (Backend)**
 - [x] Task: Implement the Standard PO Lifecycle (Draft -> Pending -> Approved -> Received). 3a42e4c
 - [x] Task: Build the multi-persona approval handshake (Branch Owner -> Accountant -> Chain Owner). 37e0203
-- [ ] Task: Implement `Purchase Receipt` logic that updates the materialized Annex 14 register.
+- [x] Task: Implement `Purchase Receipt` logic that updates the materialized Annex 14 register. c633955
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md)
 
 **Phase 3: Stock Initialization & Valuation (Backend)**
