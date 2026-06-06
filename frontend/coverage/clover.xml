@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780742787134" clover="3.2.0">
-  <project timestamp="1780742787134" name="All files">
-    <metrics statements="9" coveredstatements="9" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3" elements="15" coveredelements="15" complexity="0" loc="9" ncloc="9" packages="2" files="2" classes="2"/>
-    <package name="analytics">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="DeadStockHUD.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/analytics/DeadStockHUD.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="48" count="3" type="stmt"/>
-      </file>
-    </package>
-    <package name="ui">
-      <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <file name="Button.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/ui/Button.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="16" count="4" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-      </file>
-    </package>
+<coverage generated="1780743644555" clover="3.2.0">
+  <project timestamp="1780743644556" name="All files">
+    <metrics statements="6" coveredstatements="6" conditionals="20" coveredconditionals="16" methods="1" coveredmethods="1" elements="27" coveredelements="23" complexity="0" loc="6" ncloc="6" packages="1" files="1" classes="1"/>
+    <file name="BudgetWidget.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/ui/BudgetWidget.tsx">
+      <metrics statements="6" coveredstatements="6" conditionals="20" coveredconditionals="16" methods="1" coveredmethods="1"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="13" count="2" type="stmt"/>
+      <line num="15" count="2" type="stmt"/>
+      <line num="16" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="18" count="2" type="stmt"/>
+    </file>
   </project>
 </coverage>
