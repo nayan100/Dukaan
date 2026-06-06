@@ -48,25 +48,22 @@ fi
 
 # 5. Use Template (Unification)
 if [ -f "$TEMPLATE_PATH" ]; then
-    CONTENT=$(cat "$TEMPLATE_PATH")
+    # Use a temporary file to perform replacements to avoid echo/newline issues
+    cp "$TEMPLATE_PATH" "$NOTE_PATH"
     
-    # Perform variable replacement
-    CONTENT="${CONTENT/track_id: /track_id: $TRACK_ID}"
-    CONTENT="${CONTENT//<% tp.file.creation_date() %>/$DATE}"
-    CONTENT="${CONTENT//<% tp.file.title %>/$TASK_NAME}"
-    CONTENT="${CONTENT//<% tp.file.folder() %>/$TRACK_ID\/index|Track Index}"
-    CONTENT="${CONTENT//<% tp.cursor() %>/Placeholder created by conductor-sync.sh}"
+    # Perform variable replacement using sed with | as delimiter
+    # Use -i for in-place edit
+    sed -i "s|track_id: |track_id: $TRACK_ID|" "$NOTE_PATH"
+    sed -i "s|<% tp.file.creation_date() %>|$DATE|g" "$NOTE_PATH"
+    sed -i "s|<% tp.file.title %>|$TASK_NAME|g" "$NOTE_PATH"
+    sed -i "s|<% tp.file.folder() %>|$TRACK_ID/index\|Track Index|g" "$NOTE_PATH"
+    sed -i "s|<% tp.cursor() %>|Placeholder created by conductor-sync.sh|g" "$NOTE_PATH"
     
     # Inject MOC Link if found
     if [ -n "$MOC_LINK" ]; then
-        # Use a different delimiter for sed (| instead of /) or use bash replacement
-        # Bash replacement for the entire line
-        LINE_TO_MATCH="- **Track:** [[$TRACK_ID/index|Track Index]]"
-        NEW_LINE="$LINE_TO_MATCH\n- **System:** $MOC_LINK"
-        CONTENT="${CONTENT/$LINE_TO_MATCH/$NEW_LINE}"
+        # Find the line starting with - **Track:** and append the System link after it
+        sed -i "/- \*\*Track:\*\*/a - **System:** $MOC_LINK" "$NOTE_PATH"
     fi
-    
-    echo -e "$CONTENT" > "$NOTE_PATH"
 else
     echo "Warning: Template not found at $TEMPLATE_PATH. Falling back to hardcoded structure."
     # Hardcoded fallback
