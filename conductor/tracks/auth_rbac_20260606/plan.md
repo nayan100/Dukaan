@@ -25,7 +25,7 @@ Implement the "Smart" UI that adapts to user roles.
 ## Phase 3: Operations & UI Polish
 Finalize the persona-based experience and fix POS layout.
 
-- [ ] Task: UI - Fix POS HUD Layout (Fit-to-Page)
+- [x] Task: UI - Fix POS HUD Layout (Fit-to-Page) 964c98e
     - [ ] Refactor `POSHUD.tsx` to use flex-box/grid with 100vh/100vw constraints.
     - [ ] Ensure all components (Catalog, Cart, Payment) are responsive without overflow.
 - [ ] Task: Backend - Implement Strict Write Validation
