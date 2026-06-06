@@ -7,13 +7,13 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Vault Optimization' (Protocol in workflow.md) 1d9a2a7
 
 **Phase 2: Template & MOC Traceability**
-- [ ] Task: Implement Template Discovery in `conductor-sync.sh`.
-    - [ ] Update script to locate and read `Templates/Conductor-Task-Template.md`.
-    - [ ] Replace hardcoded `cat <<EOF` logic with a dynamic parser.
-- [ ] Task: Implement \"Atlas Lookup\" for bidirectional linking.
-    - [ ] Create a helper function to grep `_ProjectAtlas.md` for the `TRACK_ID`.
-    - [ ] Extract the parent MOC (Infrastructure or UI category) and inject it as a metadata link.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Template & MOC Traceability' (Protocol in workflow.md)
+- [x] Task: Implement Template Discovery in `conductor-sync.sh`.
+    - [x] Update script to locate and read `Templates/Conductor-Task-Template.md`.
+    - [x] Replace hardcoded `cat <<EOF` logic with a dynamic parser.
+- [x] Task: Implement \"Atlas Lookup\" for bidirectional linking.
+    - [x] Create a helper function to grep `_ProjectAtlas.md` for the `TRACK_ID`.
+    - [x] Extract the parent MOC (Infrastructure or UI category) and inject it as a metadata link.
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Template & MOC Traceability' (Protocol in workflow.md) 9f3303c
 
 **Phase 3: The Advanced Sync Engine (Update Mode)**
 - [ ] Task: Implement the `--update` flag and state management.
