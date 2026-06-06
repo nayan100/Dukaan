@@ -7,17 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        // High-contrast accessibility tokens
-        'pos-black': '#000000',
-        'pos-white': '#FFFFFF',
-        'pos-primary': '#00FF00', // Neon Green for high visibility
-        'pos-secondary': '#FFD700', // Gold for warnings/alerts
-        'pos-danger': '#FF0000', // Pure Red for errors/voids
-        'pos-surface': '#121212', // Dark surface
+        // Refined Premium Palette
+        'pos-black': '#020617', // Slate-950
+        'pos-white': '#f8fafc', // Slate-50
+        'pos-primary': '#10b981', // Emerald-500 (Sophisticated Green)
+        'pos-secondary': '#f59e0b', // Amber-500
+        'pos-danger': '#ef4444', // Red-500
+        'pos-surface': '#0f172a', // Slate-900
+        'pos-border': '#1e293b', // Slate-800
+        'pos-muted': '#64748b', // Slate-500
       },
-      fontSize: {
-        'pos-xl': ['1.5rem', '2rem'],
-        'pos-2xl': ['2rem', '2.5rem'],
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        'pos': '12px',
       }
     },
   },
