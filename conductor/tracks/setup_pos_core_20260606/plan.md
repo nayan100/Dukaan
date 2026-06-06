@@ -38,7 +38,7 @@ Ensure the system remains functional during outages and provides strategic visib
 - [x] Task: Analytics - Develop KPI Dashboards (Owner & Chain Owner) 7add7f3
     - [ ] Implement Executive Scorecard and Operational Heatmap.
     - [ ] Create Comparative Analysis and Compliance Monitor views.
-- [ ] Task: Onboarding - Implement Lifecycle Wizards
+- [x] Task: Onboarding - Implement Lifecycle Wizards fdf8ba4
     - [ ] Develop the Single-to-Chain Transition Wizard.
     - [ ] Develop the IRD Onboarding Wizard.
 - [ ] Task: Compliance - Implement Mock IRD (CBMS) Sync Bridge
