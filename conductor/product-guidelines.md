@@ -24,3 +24,11 @@ The AI layer should feel like a native part of the UI:
 *   **Non-Conversational:** Avoid 'I suggest' or 'I think'. Present AI insights as UI enhancements (e.g., highlighting a recommended stock transfer or pre-filling a search field).
 *   **High-Risk Alerts:** Only use assertive language for 'Security Sentinel' alerts (e.g., 'Fraud Risk Detected: High Discount Velocity').
 *   **Edge-AI Performance:** AI features must not block the main UI thread, ensuring the 'Zero-Latency' feel of the POS.
+
+## 5. Persona Matrix (Operational Capabilities)
+| Persona | Scoped Capabilities |
+| :--- | :--- |
+| **SaaS Admin** | Global Platform Control, Tenant Provisioning, All Analytics |
+| **Chain Owner** | Strategy Hub, Growth Wizards, Multi-branch Visibility |
+| **Branch Owner** | Local Dashboard, Scoped Inventory, Local Approvals |
+| **Cashier** | POS HUD, Sale Processing, 60s Autonomous Void |
