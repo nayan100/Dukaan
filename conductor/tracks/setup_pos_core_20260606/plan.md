@@ -3,7 +3,7 @@
 ## Phase 1: SaaS & Backend Foundation
 Establish the multi-tenant architecture and core data models.
 
-- [ ] Task: Backend - Initialize Frappe Tenant Provisioning Logic
+- [x] Task: Backend - Initialize Frappe Tenant Provisioning Logic b9fcf9f
     - [ ] Define custom DocTypes for Tenant and Subscription metadata.
     - [ ] Implement site creation and database setup hooks.
 - [ ] Task: Backend - Implement Core Retail DocTypes (Branch, Warehouse, Price List)
