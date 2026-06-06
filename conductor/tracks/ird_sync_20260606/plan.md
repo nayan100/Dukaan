@@ -1,11 +1,11 @@
 # Implementation Plan: Production IRD Sync & Materialized VAT Registers
 
-**Phase 1: Materialized Registers & Integrity (Backend)**
+**Phase 1: Materialized Registers & Integrity (Backend) [checkpoint: 2b6472d]**
 - [x] Task: Define MariaDB schema for materialized Annex 13 (Sales) and Annex 14 (Purchase) tables. be99446
 - [x] Task: Implement Frappe `on_submit` and `on_cancel` hooks to update materialized tables in real-time. 12d9d01
 - [x] Task: Implement the Daily Checksum Verification Job to detect discrepancies between ledger and registers. 1f7f2b3
 - [x] Task: Create Accountant API endpoints to fetch registers with high-performance filtering. a0def2b
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Materialized Registers' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Materialized Registers' (Protocol in workflow.md) 2b6472d
 
 **Phase 2: IRD Sync Engine & Compliance Logic (Backend)**
 - [ ] Task: Extend `Sales Invoice`, `Credit Note`, and `Purchase Invoice` with IRD-specific fields (Sync Token, Status, Idempotency Key).
