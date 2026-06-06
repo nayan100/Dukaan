@@ -1,7 +1,7 @@
 # Implementation Plan: Obsidian Sync Integration (Deep Edition)
 
 ## Phase 1: The "Digital Twin" Infrastructure (Standardization)
-- [ ] Task: Create `_Systems/` folder for backend logic and `_Components/` for frontend UI.
+- [x] Task: Create `_Systems/` folder for backend logic and `_Components/` for frontend UI. 80b6877
 - [ ] Task: Configure `Templater` for "Auto-Pathing": New notes created via MOCs must automatically be filed in the correct project sub-directory.
 - [ ] Task: Initialize `_ProjectAtlas.md` with "Dynamic Queries" or fixed MOCs representing logical layers (Auth, Inventory, Compliance).
 - [ ] Task: Conductor - User Manual Verification 'Infrastructure Readiness' (Protocol in workflow.md)
