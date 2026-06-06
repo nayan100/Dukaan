@@ -1,0 +1,8 @@
+{
+  "track_id": "workflow_bulletproof_20260607",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-07T01:30:00Z",
+  "updated_at": "2026-06-07T01:30:00Z",
+  "description": "Bulletproof the workflow for future developments: Fix the 'Living Documentation' disconnect, unify Obsidian templates, inject bidirectional system links, and exclude noise directories."
+}
