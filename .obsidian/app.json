@@ -1,1 +1,10 @@
-{}
+{
+  "userIgnoreFilters": [
+    "node_modules/",
+    "**/__pycache__/",
+    ".git/",
+    "dist/",
+    "build/",
+    ".pytest_cache/"
+  ]
+}
