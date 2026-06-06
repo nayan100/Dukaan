@@ -6,6 +6,40 @@ import sys
 shared_mock_frappe = MagicMock()
 sys.modules["frappe"] = shared_mock_frappe
 
+class FrappeException(Exception):
+    pass
+
+def mock_throw(msg, title=None):
+    raise FrappeException(msg)
+
+shared_mock_frappe.throw.side_effect = mock_throw
+
+# Mock submodules
+mock_model = MagicMock()
+sys.modules["frappe.model"] = mock_model
+mock_document = MagicMock()
+sys.modules["frappe.model.document"] = mock_document
+
+class MockDocument:
+    def __init__(self, dictionary=None):
+        if dictionary:
+            for key, value in dictionary.items():
+                setattr(self, key, value)
+    
+    def get(self, key, default=None):
+        return getattr(self, key, default)
+
+    def db_set(self, fieldname, value):
+        setattr(self, fieldname, value)
+        
+    def insert(self):
+        pass
+        
+    def validate(self):
+        pass
+
+mock_document.Document = MockDocument
+
 # Make whitelist a transparent decorator
 def whitelist_decorator():
     def decorator(fn):
