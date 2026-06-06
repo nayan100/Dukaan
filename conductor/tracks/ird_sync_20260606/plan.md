@@ -14,12 +14,12 @@
 - [x] Task: Implement background workers for automated retry with exponential backoff. 313c5bf
 - [x] Task: Conductor - User Manual Verification 'Phase 2: IRD Sync Engine' (Protocol in workflow.md) 285beb9
 
-**Phase 3: Offline Resilience & Sync Queue (Frontend/PWA)**
+**Phase 3: Offline Resilience & Sync Queue (Frontend/PWA) [checkpoint: ff89b98]**
 - [x] Task: Implement IndexedDB schema for persistent offline invoice storage. 04d6d52
 - [x] Task: Implement "Secondary Backup" logic using `localStorage` for redundancy. bac5f66
 - [x] Task: Build the Background Sync worker to detect connectivity and push queued invoices. 2866afc
 - [x] Task: Implement Persistent Sync Warning UI to prevent data loss on logout/session expiry. 189c2bd
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience' (Protocol in workflow.md) ff89b98
 
 **Phase 4: Auditor Dashboard & Final Integration**
 - [ ] Task: Build the Sync Status Dashboard for Accountants (Synced vs. Pending vs. Failed).
