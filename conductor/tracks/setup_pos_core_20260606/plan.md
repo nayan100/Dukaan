@@ -28,7 +28,7 @@ Build the high-speed billing interface for cashiers.
 ## Phase 3: Offline Resilience & Dashboards
 Ensure the system remains functional during outages and provides strategic visibility.
 
-- [ ] Task: Offline - Implement IndexedDB and Service Worker Sync
+- [x] Task: Offline - Implement IndexedDB and Service Worker Sync fb48706
     - [ ] Define IndexedDB schema for Item Catalog and Offline Invoices.
     - [ ] Implement Background Sync API for automated reconnection logic.
 - [ ] Task: Frontend - Implement POS HUD Enhancements (Shortcuts, Lucide Icons, Toasts)
