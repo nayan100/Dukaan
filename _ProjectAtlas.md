@@ -39,4 +39,5 @@
 ## Maintenance
 - [[Templates/Project-Module-Template|Module Template]]
 - [[Templates/Conductor-Task-Template|Task Template]]
+- [[Templates/Emergency-Incident-Template|Emergency Incident Template]]
 - [[_Systems/OBSIDIAN_SETUP|Obsidian Setup Guide]]
