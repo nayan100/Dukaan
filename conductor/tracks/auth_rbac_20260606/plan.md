@@ -1,15 +1,15 @@
 # Implementation Plan: Advanced Auth & Hierarchical RBAC
 
-## Phase 1: Authentication Engine
+## Phase 1: Authentication Engine [checkpoint: eec2410]
 Build the multi-tenant login foundation.
 
 - [x] Task: Backend - Implement Tenant-Aware Auth Hooks 4cad937
-    - [ ] [TDD] Write tests for cross-tenant login isolation.
-    - [ ] Create custom Frappe API for unified multi-tenant authentication.
+    - [x] [TDD] Write tests for cross-tenant login isolation.
+    - [x] Create custom Frappe API for unified multi-tenant authentication.
 - [x] Task: Frontend - Develop Login Interface 11c4de4
-    - [ ] Build the premium 'Sovereign' login page with Tenant ID selection.
-    - [ ] Implement secure session storage and token management.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Authentication Engine' (Protocol in workflow.md)
+    - [x] Build the premium 'Sovereign' login page with Tenant ID selection.
+    - [x] Implement secure session storage and token management.
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Authentication Engine' (Protocol in workflow.md) eec2410
 
 ## Phase 2: Hierarchical RBAC & Shadowing
 Implement the "Smart" UI that adapts to user roles.
