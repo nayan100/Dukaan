@@ -68,7 +68,9 @@ All tasks follow a strict lifecycle:
 
 12. **Living Documentation Sync (Obsidian Priority):**
     - **Rule:** Obsidian is the primary visualization and context layer. Any change to codebase logic MUST be reflected in the Vault.
-    - **Action (Task Trace):** Use `./conductor-sync.sh` to update the task note with outcomes and commit SHAs.
+    - **Action (Task Trace):** Use `./conductor-sync.sh` to create or update the task note.
+      - **New Task:** `./conductor-sync.sh <track_id> "<task_name>"` (Creates a placeholder note with Atlas MOC linking).
+      - **Existing Task:** `./conductor-sync.sh --update <track_id> "<task_name>"` (Updates status, injects commit SHAs, and marks automated tests as passed if a SHA is found).
     - **Action (Visuals):** Update `Advanced Canvas` or logical MOCs if architecture was modified.
     - **Action (Core Alignment):** Only update `conductor/*.md` files for high-level strategic shifts. For technical details, link to the corresponding Obsidian note to avoid duplicate content.
 
