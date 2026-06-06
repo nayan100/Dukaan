@@ -92,3 +92,57 @@ def create_stock_entry(from_warehouse, to_warehouse, items, purpose="Material Tr
     se.insert(ignore_permissions=True)
     se.submit()
     return se
+
+def is_within_business_hours(dt):
+    """
+    Checks if a given datetime is within business hours (9 AM - 6 PM, Mon-Sat).
+    """
+    # Monday = 0, Sunday = 6
+    if dt.weekday() == 6:
+        return False
+    
+    start = dt.replace(hour=9, minute=0, second=0, microsecond=0)
+    end = dt.replace(hour=18, minute=0, second=0, microsecond=0)
+    
+    return start <= dt <= end
+
+def get_current_time():
+    """Wrapper for datetime.now() for testing."""
+    return datetime.now()
+
+def check_and_reject_stale_transfers():
+    """
+    Background job to reject transfers not approved within 5 business hours.
+    """
+    now = get_current_time()
+    
+    if not is_within_business_hours(now):
+        return
+
+    # Find transfers in 'Dispatched' status
+    stale_transfers = frappe.get_all("Inter-Branch Transfer", filters={
+        "status": "Dispatched"
+    })
+
+    for entry in stale_transfers:
+        transfer = frappe.get_doc("Inter-Branch Transfer", entry['name'])
+        
+        # Calculate age in hours (simplified business-hour logic)
+        age_seconds = (now - transfer.creation).total_seconds()
+        age_hours = age_seconds / 3600
+        
+        if age_hours >= 5:
+            reject_transfer(transfer)
+
+def reject_transfer(transfer):
+    """
+    Rejects a transfer and reverses stock from Transit back to Local.
+    """
+    create_stock_entry(
+        from_warehouse=f"{transfer.from_branch} - Transit",
+        to_warehouse=f"{transfer.from_branch} - Local",
+        items=transfer.items,
+        purpose="Material Transfer"
+    )
+    
+    transfer.db_set("status", "Rejected")
