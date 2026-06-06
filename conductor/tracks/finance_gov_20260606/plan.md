@@ -14,9 +14,9 @@ Prevent over-spending at the branch level.
 Handle the financial logic for distributed returns and price variances.
 
 - [x] Task: Backend - Implement Inter-Branch Adjustment Engine d94c16a
-    - [ ] [TDD] Write tests for Debit/Credit generation during cross-branch returns.
-    - [ ] Implement logic to identify original purchase branch via barcode scan.
-- [~] Task: Analytics - Create Price Variance & Fraud Alert HUD
-    - [ ] Build a dense data grid for Accountants to review price mismatches.
-    - [ ] Implement the 'Discount Velocity' fraud dashboard.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Cross-Branch Adjustments' (Protocol in workflow.md)
+    - [x] [TDD] Write tests for Debit/Credit generation during cross-branch returns.
+    - [x] Implement logic to identify original purchase branch via barcode scan.
+- [x] Task: Analytics - Create Price Variance & Fraud Alert HUD c526a30
+    - [x] Build a dense data grid for Accountants to review price mismatches.
+    - [x] Implement the 'Discount Velocity' fraud dashboard.
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Cross-Branch Adjustments' (Protocol in workflow.md) c526a30
