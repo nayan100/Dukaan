@@ -2,7 +2,7 @@
 
 **Phase 1: Materialized Registers & Integrity (Backend)**
 - [x] Task: Define MariaDB schema for materialized Annex 13 (Sales) and Annex 14 (Purchase) tables. be99446
-- [ ] Task: Implement Frappe `on_submit` and `on_cancel` hooks to update materialized tables in real-time.
+- [x] Task: Implement Frappe `on_submit` and `on_cancel` hooks to update materialized tables in real-time. 12d9d01
 - [ ] Task: Implement the Daily Checksum Verification Job to detect discrepancies between ledger and registers.
 - [ ] Task: Create Accountant API endpoints to fetch registers with high-performance filtering.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Materialized Registers' (Protocol in workflow.md)
