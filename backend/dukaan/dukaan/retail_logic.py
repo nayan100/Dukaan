@@ -1,4 +1,38 @@
 import frappe
+from datetime import datetime, timedelta
+
+def detect_split_order(doc):
+    """
+    Heuristic to detect if multiple POs are being created for the same supplier
+    within a short window to potentially bypass budget limits.
+    Returns True if a suspicious pattern is detected.
+    """
+    # Look for POs from the same supplier in the last 24 hours
+    time_threshold = datetime.now() - timedelta(hours=24)
+    
+    recent_pos = frappe.get_all("Purchase Order", filters={
+        "supplier": doc.supplier,
+        "docstatus": 1, # Submitted
+        "transaction_date": [">=", time_threshold]
+    }, fields=["name", "grand_total"])
+    
+    if len(recent_pos) >= 2:
+        return True
+    
+    return False
+
+def validate_po_split_order(doc):
+    """
+    Validation hook for Purchase Order to flag split orders.
+    """
+    if detect_split_order(doc):
+        frappe.msgprint(
+            msg="Suspicious Split-Order Pattern Detected: Multiple orders for this supplier "
+                "have been placed in the last 24 hours. Please ensure this is not an "
+                "attempt to bypass budget controls.",
+            title="Suspicious Activity",
+            indicator="orange"
+        )
 
 def setup_warehouse_hierarchy(branch_name):
     """
