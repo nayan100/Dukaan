@@ -11,6 +11,7 @@ import KPIDashboard from '../analytics/KPIDashboard';
 import OnboardingWizard from '../wizards/OnboardingWizard';
 import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
+import SyncWarning from './SyncWarning';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout } = useAuth();
@@ -123,6 +124,7 @@ const AppLayout: React.FC = () => {
       </motion.aside>
 
       <main className="flex-1 relative overflow-hidden flex flex-col">
+        <SyncWarning />
         <header className="h-20 border-b border-pos-border bg-pos-surface/30 backdrop-blur-xl flex items-center justify-end px-10 gap-6 z-10">
             <button className="p-2 text-pos-muted hover:text-pos-white relative">
                 <Bell size={20} />
