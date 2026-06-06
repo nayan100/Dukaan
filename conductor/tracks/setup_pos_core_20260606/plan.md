@@ -17,7 +17,7 @@ Build the high-speed billing interface for cashiers.
 - [x] Task: Frontend - Setup React Project with Tailwind and TypeScript 2b41cef
     - [ ] Configure design tokens for high-contrast accessibility.
     - [ ] Initialize the component library for the POS HUD.
-- [ ] Task: Frontend - Implement POS HUD 'Speed Grid' and Item Picker
+- [x] Task: Frontend - Implement POS HUD 'Speed Grid' and Item Picker 336c0f2
     - [ ] [TDD] Write tests for item selection and quantity calculation.
     - [ ] Implement the billing HUD with 60s autonomous void window.
 - [ ] Task: Frontend - Develop Split-Payment UI (Cash, Card, QR)
