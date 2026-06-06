@@ -20,7 +20,7 @@ Build the high-speed billing interface for cashiers.
 - [x] Task: Frontend - Implement POS HUD 'Speed Grid' and Item Picker 336c0f2
     - [ ] [TDD] Write tests for item selection and quantity calculation.
     - [ ] Implement the billing HUD with 60s autonomous void window.
-- [ ] Task: Frontend - Develop Split-Payment UI (Cash, Card, QR)
+- [x] Task: Frontend - Develop Split-Payment UI (Cash, Card, QR) bb8f53d
     - [ ] [TDD] Write tests for multi-payment total validation.
     - [ ] Implement the payment modal with Fonepay QR placeholder.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Core POS HUD Development' (Protocol in workflow.md)
