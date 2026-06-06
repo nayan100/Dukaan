@@ -54,4 +54,20 @@ describe('IndexedDB Logic', () => {
       ird_sync_status: 'Pending'
     }));
   });
+
+  it('mirrors invoice to localStorage for redundancy', async () => {
+    const invoice = { invoice_id: 'localStorage-test', total: 500 };
+    
+    // Mock localStorage
+    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
+    
+    await saveInvoiceOffline(invoice);
+    
+    expect(setItemSpy).toHaveBeenCalledWith(
+      expect.stringContaining('backup-invoice-localStorage-test'),
+      expect.stringContaining('localStorage-test')
+    );
+    
+    setItemSpy.mockRestore();
+  });
 });

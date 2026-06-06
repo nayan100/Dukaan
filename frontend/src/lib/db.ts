@@ -45,13 +45,23 @@ export const initDB = () => {
 
 export const saveInvoiceOffline = async (invoice: any) => {
   const db = await dbPromise;
-  await db.put('invoices', {
+  const invoiceData = {
     ...invoice,
     synced: false,
     is_offline: !navigator.onLine,
     ird_sync_status: 'Pending',
     created_at: Date.now(),
-  });
+  };
+  
+  // 1. Save to IndexedDB (Primary)
+  await db.put('invoices', invoiceData);
+  
+  // 2. Mirror to localStorage (Secondary Redundancy)
+  try {
+    localStorage.setItem(`backup-invoice-${invoiceData.invoice_id}`, JSON.stringify(invoiceData));
+  } catch (e) {
+    console.warn('Failed to save invoice to localStorage redundancy', e);
+  }
 };
 
 export const getUnsyncedInvoices = async () => {
