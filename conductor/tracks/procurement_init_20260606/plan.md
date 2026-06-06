@@ -7,7 +7,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md) baca32a
 
 **Phase 2: Core Procurement Workflows (Backend)**
-- [ ] Task: Implement the Standard PO Lifecycle (Draft -> Pending -> Approved -> Received).
+- [x] Task: Implement the Standard PO Lifecycle (Draft -> Pending -> Approved -> Received). 3a42e4c
 - [ ] Task: Build the multi-persona approval handshake (Branch Owner -> Accountant -> Chain Owner).
 - [ ] Task: Implement `Purchase Receipt` logic that updates the materialized Annex 14 register.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md)
