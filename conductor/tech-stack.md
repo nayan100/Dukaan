@@ -18,6 +18,7 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 *   **Offline Support:** 
     *   **PWA:** Service Workers for application caching and offline access.
     *   **IndexedDB:** Local storage for item catalogs, prices, and unsynced sales invoices.
+    *   **localStorage:** Secondary mirror for critical invoice data redundancy to prevent data loss.
 
 ## 4. AI & Intelligence Layer
 *   **Edge-AI:** TensorFlow.js for lightweight, browser-based predictive search and anomaly detection (Security Sentinel) while offline.

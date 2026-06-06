@@ -114,7 +114,9 @@ sequenceDiagram
 - **CBMS Sync:** Real-time transmission of every "Submit" event to the IRD Central Billing Monitoring System.
 - **Offline Buffer:** Invoices generated during internet outages are stored in a "Pending IRD Sync" queue. Upon reconnection, they are synced with the original `posting_date` and a `is_offline=1` flag.
 - **Materialized VAT Register:** A read-only, high-performance table in MariaDB that generates Annex 13 (Sales) and Annex 14 (Purchase) registers instantly for the Accountant.
+- **Integrity Check:** Daily automated checksum verification between source documents and materialized registers.
 - **Immutability:** Once an invoice is synced to IRD, the "Amend" feature is locked. Errors must be corrected via **Credit Notes** (Sales Return).
+- **Manual Force Sync:** Administrative trigger for Accountants to retry failed transmissions manually.
 
 ### 8.2 Payment Gateway & QR Logic
 - **Fonepay/QR Integration:** POS generates a dynamic QR code containing the `Invoice ID` and `Grand Total`.
