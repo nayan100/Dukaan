@@ -14,11 +14,11 @@
 - [x] Task: Create `cold-storage/` for legacy source directories. 224a475
 - [x] Task: Conductor - User Manual Verification 'Data Integrity Audit' (Protocol in workflow.md) fc2b1b9
 
-## Phase 3: High-Fidelity Visualization (The Advanced Canvas)
+## Phase 3: High-Fidelity Visualization (The Advanced Canvas) [checkpoint: 2576c4f]
 - [x] Task: Create a `Product Command Center` Canvas linking Product Definition, Tracks, and Plans. f986826
 - [x] Task: Create `The Data Flow` Canvas visualizing POS -> API -> IRD sequence. 3a83994
 - [x] Task: Implement "Live Links": Embed markdown blocks from `spec.md` into Advanced Canvas. 5a0469c
-- [ ] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md) 2576c4f
 
 ## Phase 4: Workflow Enshrinement (Conductor Sync)
 - [ ] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule.
