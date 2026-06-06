@@ -24,8 +24,12 @@
 - [[_Components/USER_GUIDE|User Operational Guide]]
 
 ## Project Tracks
-- [[conductor/archive/obsidian_sync_20260606/index|Obsidian Sync Integration]]
+
+### 🚀 Active & Pending
 - [[conductor/tracks/procurement_init_20260606/index|Procurement & Stock Initialization]]
+
+### 🏁 Completed & Archived
+- [[conductor/archive/obsidian_sync_20260606/index|Obsidian Sync Integration]]
 - [[conductor/archive/ird_sync_20260606/index|Production IRD Sync]]
 
 ## Maintenance
