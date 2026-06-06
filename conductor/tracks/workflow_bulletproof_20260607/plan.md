@@ -1,10 +1,10 @@
 # Implementation Plan: Workflow Bulletproofing & Obsidian Sync v2
 
 **Phase 1: Vault Optimization & Noise Reduction**
-- [ ] Task: Configure Obsidian `Excluded files` to suppress background noise.
-    - [ ] Identify or create `.obsidian/app.json`.
-    - [ ] Inject exclusion patterns for `node_modules`, `__pycache__`, `.git`, `dist`, `build`, and `.pytest_cache`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Vault Optimization' (Protocol in workflow.md)
+- [x] Task: Configure Obsidian `Excluded files` to suppress background noise. 598e888
+    - [x] Identify or create `.obsidian/app.json`.
+    - [x] Inject exclusion patterns for `node_modules`, `__pycache__`, `.git`, `dist`, `build`, and `.pytest_cache`.
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Vault Optimization' (Protocol in workflow.md) 1d9a2a7
 
 **Phase 2: Template & MOC Traceability**
 - [ ] Task: Implement Template Discovery in `conductor-sync.sh`.
