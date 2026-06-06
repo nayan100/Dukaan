@@ -64,7 +64,6 @@ describe('POSHUD Component', () => {
   it('prevents voiding an item after the 60s window', () => {
     const now = Date.now();
     const dateSpy = vi.spyOn(Date, 'now').mockReturnValue(now);
-    window.alert = vi.fn(); // Mock alert
     
     render(<POSHUD availableItems={mockItems} />);
     fireEvent.click(screen.getByText('Apple'));
@@ -74,7 +73,6 @@ describe('POSHUD Component', () => {
     fireEvent.click(screen.getByTestId('void-item-1'));
     
     expect(screen.getByTestId('cart-item-1')).toBeInTheDocument();
-    expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('Manager approval required'));
     
     dateSpy.mockRestore();
   });
@@ -89,7 +87,6 @@ describe('POSHUD Component', () => {
   });
 
   it('completes the sale and clears the cart', async () => {
-    window.alert = vi.fn();
     render(<POSHUD availableItems={mockItems} />);
     
     // Add item
@@ -105,8 +102,17 @@ describe('POSHUD Component', () => {
     fireEvent.click(screen.getByText('Complete Sale'));
     
     await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('Sale Completed'));
+      expect(screen.getByTestId('cart-total')).toHaveTextContent('NPR 0');
     });
-    expect(screen.getByTestId('cart-total')).toHaveTextContent('NPR 0');
+  });
+
+  it('filters items based on search term', () => {
+    render(<POSHUD availableItems={mockItems} />);
+    
+    const searchInput = screen.getByPlaceholderText('Search Items (F1)...');
+    fireEvent.change(searchInput, { target: { value: 'Apple' } });
+    
+    expect(screen.getByText('Apple')).toBeInTheDocument();
+    expect(screen.queryByText('Banana')).not.toBeInTheDocument();
   });
 });

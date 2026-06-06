@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ShoppingCart, Trash2, CheckCircle, Search, AlertTriangle, X } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
 import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';
 import { saveInvoiceOffline } from '../../lib/db';
@@ -11,7 +13,7 @@ interface Item {
 
 interface CartItem extends Item {
   quantity: number;
-  addedAt: number; // timestamp
+  addedAt: number;
 }
 
 interface POSHUDProps {
@@ -21,6 +23,21 @@ interface POSHUDProps {
 const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Keyboard Shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && cart.length > 0 && !isPaymentModalOpen) {
+        setIsPaymentModalOpen(true);
+      }
+      if (e.key === 'Escape' && isPaymentModalOpen) {
+        setIsPaymentModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [cart, isPaymentModalOpen]);
 
   const addToCart = (item: Item) => {
     setCart((prevCart) => {
@@ -32,6 +49,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
       }
       return [...prevCart, { ...item, quantity: 1, addedAt: Date.now() }];
     });
+    toast.success(`Added ${item.name}`, { position: 'bottom-left' });
   };
 
   const removeFromCart = (itemId: string) => {
@@ -41,6 +59,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
       const isWithinWindow = Date.now() - item.addedAt < 60000;
       if (isWithinWindow) {
+        toast.error(`Voided ${item.name}`, { position: 'bottom-left' });
         if (item.quantity > 1) {
           return prevCart.map((i) =>
             i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
@@ -49,7 +68,9 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
         return prevCart.filter((i) => i.id !== itemId);
       }
       
-      alert('Void window expired. Manager approval required.');
+      toast.error('Void window expired. Manager approval required.', {
+        icon: <AlertTriangle className="text-pos-danger" />,
+      });
       return prevCart;
     });
   };
@@ -67,8 +88,6 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
     try {
       await saveInvoiceOffline(invoice);
-      
-      // Request Background Sync
       if ('serviceWorker' in navigator && 'SyncManager' in window) {
         const reg = await navigator.serviceWorker.ready;
         await (reg as any).sync.register('sync-invoices');
@@ -77,41 +96,67 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
       console.error('Failed to save offline:', err);
     }
 
-    alert(`Sale Completed! Total: NPR ${details.total}`);
+    toast.success('Sale Completed Successfully!', {
+      duration: 4000,
+      icon: <CheckCircle className="text-pos-primary" />,
+    });
     setCart([]);
     setIsPaymentModalOpen(false);
   };
 
+  const filteredItems = availableItems.filter(item => 
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden">
-      {/* Items Grid (70% width) */}
-      <div className="w-0.7 flex-1 p-4 grid grid-cols-3 gap-4 overflow-y-auto">
-        {availableItems.map((item) => (
-          <Button
-            key={item.id}
-            variant="ghost"
-            size="xl"
-            onClick={() => addToCart(item)}
-            className="h-40 text-pos-2xl border-pos-primary hover:bg-pos-primary"
-          >
-            <div className="flex flex-col items-center">
-              <span>{item.name}</span>
-              <span className="text-sm opacity-80">NPR {item.price}</span>
-            </div>
-          </Button>
-        ))}
+      <Toaster />
+      
+      {/* Items Grid */}
+      <div className="flex-1 flex flex-col">
+        <div className="p-4 bg-pos-surface border-b-4 border-pos-primary flex items-center gap-4">
+          <Search className="text-pos-primary" />
+          <input 
+            type="text" 
+            placeholder="Search Items (F1)..." 
+            className="flex-1 bg-pos-black border-2 border-pos-primary p-2 text-pos-xl font-bold text-pos-primary focus:outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            autoFocus
+          />
+        </div>
+        
+        <div className="flex-1 p-4 grid grid-cols-3 gap-4 overflow-y-auto">
+          {filteredItems.map((item) => (
+            <Button
+              key={item.id}
+              variant="ghost"
+              size="xl"
+              onClick={() => addToCart(item)}
+              className="h-40 text-pos-2xl border-pos-primary hover:bg-pos-primary"
+            >
+              <div className="flex flex-col items-center">
+                <span className="text-center">{item.name}</span>
+                <span className="text-sm opacity-80 mt-2">NPR {item.price}</span>
+              </div>
+            </Button>
+          ))}
+        </div>
       </div>
 
-      {/* Cart/Billing Strip (30% width) */}
-      <div className="w-80 border-l-4 border-pos-primary flex flex-col p-4 bg-pos-surface">
-        <h2 className="text-pos-xl font-bold mb-4 border-b-2 border-pos-primary pb-2">Cart</h2>
+      {/* Cart Strip */}
+      <div className="w-96 border-l-4 border-pos-primary flex flex-col p-4 bg-pos-surface">
+        <div className="flex items-center gap-2 mb-4 border-b-2 border-pos-primary pb-2">
+          <ShoppingCart className="text-pos-primary" />
+          <h2 className="text-pos-xl font-bold uppercase">Cart</h2>
+        </div>
         
         <div className="flex-1 overflow-y-auto space-y-4">
           {cart.map((item) => (
             <div 
               key={item.id} 
               data-testid={`cart-item-${item.id}`}
-              className="flex justify-between items-center p-2 border border-pos-primary rounded bg-pos-black"
+              className="flex justify-between items-center p-3 border border-pos-primary rounded bg-pos-black"
             >
               <div className="flex-1">
                 <div className="font-bold">{item.name}</div>
@@ -124,12 +169,19 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
                   size="sm" 
                   onClick={() => removeFromCart(item.id)}
                   data-testid={`void-item-${item.id}`}
+                  className="flex items-center gap-1"
                 >
-                  Void
+                  <Trash2 size={14} /> Void
                 </Button>
               </div>
             </div>
           ))}
+          {cart.length === 0 && (
+            <div className="h-full flex flex-col items-center justify-center opacity-20 mt-20">
+              <ShoppingCart size={80} />
+              <div className="mt-4 font-bold uppercase">Cart is Empty</div>
+            </div>
+          )}
         </div>
 
         <div className="mt-4 border-t-4 border-pos-primary pt-4">
@@ -140,10 +192,12 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
           <Button 
             variant="primary" 
             size="xl" 
-            className="w-full mt-4 h-20 text-pos-xl uppercase tracking-widest"
+            className="w-full mt-4 h-24 text-pos-xl uppercase tracking-widest flex flex-col"
             onClick={() => cart.length > 0 && setIsPaymentModalOpen(true)}
+            disabled={cart.length === 0}
           >
-            Finish Sale
+            <span>Finish Sale</span>
+            <span className="text-xs opacity-60 mt-1">[Enter]</span>
           </Button>
         </div>
       </div>
