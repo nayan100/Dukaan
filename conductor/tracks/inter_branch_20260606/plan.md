@@ -3,7 +3,7 @@
 ## Phase 1: Core Transfer Logic
 Build the 4-step state machine and warehouse movements.
 
-- [ ] Task: Backend - Implement Inter-Branch Transfer DocType
+- [x] Task: Backend - Implement Inter-Branch Transfer DocType 9dfbb49
     - [ ] [TDD] Write tests for Stock Entry movements (Local -> Transit).
     - [ ] Create the state machine for the 4-step protocol.
 - [ ] Task: Frontend - Build Transfer Request & Dispatch UI
