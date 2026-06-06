@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, ShoppingCart, Rocket, 
-  Settings, LogOut, Menu, X, Bell, Package 
+  Settings, LogOut, Menu, X, Bell, Package, Activity
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import PermissionGuard from '../auth/PermissionGuard';
@@ -12,12 +12,13 @@ import OnboardingWizard from '../wizards/OnboardingWizard';
 import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
 import SyncWarning from './SyncWarning';
+import IRDSyncDashboard from '../analytics/IRDSyncDashboard';
 import { initDB } from '../../lib/db';
 import { startSyncWorker } from '../../lib/syncWorker';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard' | 'logistics'>('pos');
+  const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard' | 'logistics' | 'audit'>('pos');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   // Initialize Sync Worker
@@ -31,7 +32,8 @@ const AppLayout: React.FC = () => {
 
   const navItems = [
     { id: 'pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
-    { id: 'dashboard', label: 'Strategy Hub', icon: 'access_strategy_hub' }, // Fix: was using string
+    { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { id: 'audit', label: 'IRD Monitor', icon: Activity, permission: 'access_strategy_hub' }, // Accountant access
     { id: 'logistics', label: 'Logistics', icon: Package, permission: 'access_branch_dashboard' },
     { id: 'wizard', label: 'Growth Wizard', icon: Rocket, permission: 'access_growth_wizard' },
   ];
@@ -41,6 +43,7 @@ const AppLayout: React.FC = () => {
     switch(id) {
         case 'pos': return ShoppingCart;
         case 'dashboard': return LayoutDashboard;
+        case 'audit': return Activity;
         case 'wizard': return Rocket;
         case 'logistics': return Package;
         default: return Package;
@@ -196,6 +199,11 @@ const AppLayout: React.FC = () => {
                     {activeTab === 'wizard' && (
                         <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Enterprise Group</div>}>
                             <OnboardingWizard />
+                        </PermissionGuard>
+                    )}
+                    {activeTab === 'audit' && (
+                        <PermissionGuard permission="access_strategy_hub" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Audit Group</div>}>
+                            <IRDSyncDashboard />
                         </PermissionGuard>
                     )}
                 </motion.div>

@@ -284,6 +284,35 @@ def retry_failed_ird_syncs():
                 # sync_to_ird already logs error
                 continue
 
+@frappe.whitelist()
+def get_sync_status():
+    """
+    Returns counts of invoices by IRD sync status.
+    """
+    stats = {
+        "synced": 0,
+        "pending": 0,
+        "failed": 0
+    }
+    
+    # We sum across all relevant DocTypes
+    for dt in ["Sales Invoice", "Credit Note", "Purchase Invoice"]:
+        results = frappe.db.sql(f"""
+            SELECT ird_sync_status, COUNT(*) as count 
+            FROM `tab{dt}` 
+            GROUP BY ird_sync_status
+        """, as_dict=True)
+        
+        for row in results:
+            status = (row.get("ird_sync_status") or "Pending").lower()
+            if status in stats:
+                stats[status] += row.get("count")
+            else:
+                # Map other/null to pending for conservative reporting
+                stats["pending"] += row.get("count")
+                
+    return stats
+
 def process_offline_queue():
     """
     Finds all invoices marked as offline and unsynced, and pushes them to IRD.
