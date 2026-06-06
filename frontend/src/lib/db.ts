@@ -32,6 +32,7 @@ interface DukaanDB extends DBSchema {
 let dbPromise: Promise<IDBPDatabase<DukaanDB>>;
 
 export const initDB = () => {
+  if (dbPromise) return; // Prevent multiple initializations
   dbPromise = openDB<DukaanDB>('dukaan-offline-db', 2, {
     upgrade(db, oldVersion) {
       if (oldVersion < 1) {

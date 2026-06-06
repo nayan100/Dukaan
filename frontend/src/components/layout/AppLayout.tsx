@@ -12,11 +12,18 @@ import OnboardingWizard from '../wizards/OnboardingWizard';
 import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
 import SyncWarning from './SyncWarning';
+import { initDB } from '../../lib/db';
+import { startSyncWorker } from '../../lib/syncWorker';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard' | 'logistics'>('pos');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  // Initialize Sync Worker
+  React.useEffect(() => {
+    startSyncWorker();
+  }, []);
 
   if (!user) {
     return <LoginPage onLogin={login} />;

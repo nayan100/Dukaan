@@ -37,7 +37,7 @@ export const triggerSync = async () => {
   isSyncing = false;
 };
 
-export const startSyncWorker = (intervalMs = 30000) => {
+export const startSyncWorker = (intervalMs = 5000) => {
   // 1. Listen for online event
   window.addEventListener('online', () => {
     console.log('Online detected, triggering sync...');
