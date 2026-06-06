@@ -23,6 +23,6 @@
 
 **Phase 4: Auditor Dashboard & Final Integration**
 - [x] Task: Build the Sync Status Dashboard for Accountants (Synced vs. Pending vs. Failed). 168c186
-- [ ] Task: Implement manual "Force Sync" trigger for high-level users.
+- [x] Task: Implement manual "Force Sync" trigger for high-level users. ecbd6cc
 - [ ] Task: End-to-end integration tests for the full "Offline -> Sync -> Register" lifecycle.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Final Integration' (Protocol in workflow.md)
