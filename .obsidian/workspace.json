@@ -185,6 +185,9 @@
   },
   "active": "d9fef286ab137224",
   "lastOpenFiles": [
+    "backend/dukaan/tests/__pycache__/test_write_validation.cpython-38-PYTEST.pyc",
+    "backend/dukaan/tests/__pycache__/tmpwenj39uf",
+    "backend/dukaan/tests/test_write_validation.py",
     "conductor/tracks/auth_rbac_20260606/spec.md",
     "frontend/src/components/auth/PermissionGuard.tsx",
     "frontend/src/components/auth/PermissionGuard.test.tsx",
@@ -200,8 +203,6 @@
     "frontend/src/components/auth/LoginPage.test.tsx",
     "frontend/src/components/auth",
     "docs/API.md",
-    "backend/dukaan/dukaan/__pycache__/auth.cpython-38.pyc",
-    "backend/dukaan/tests/__pycache__/tmp8k3qffwz",
     "conductor/tracks.md",
     "conductor/product.md",
     "conductor/archive/setup_pos_core_20260606/spec.md",
