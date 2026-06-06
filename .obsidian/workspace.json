@@ -4,39 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "5ee20ed00b951545",
+        "id": "1adabd1f32f9ef50",
         "type": "tabs",
         "children": [
           {
-            "id": "d9fef286ab137224",
+            "id": "99bdfe2e17c37782",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_ProjectAtlas.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "_ProjectAtlas"
-            }
-          },
-          {
-            "id": "f652849a8668527a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_ProjectAtlas.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "_ProjectAtlas"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -210,13 +191,31 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "f652849a8668527a",
+  "active": "99bdfe2e17c37782",
   "lastOpenFiles": [
+    "_ProjectAtlas.md",
+    "conductor/archive/auth_rbac_20260606/index.md",
+    "conductor/archive/setup_pos_core_20260606/index.md",
+    "_Components/Wizards.md",
+    "_Components/POS.md",
+    "_Systems/Provisioning.md",
+    "_Systems/Compliance.md",
+    "_Systems/Inventory.md",
+    "_Components/USER_GUIDE.md",
+    "_Components/DESIGN_SYSTEM.md",
+    "_Components/GROWTH_WIZARD.md",
+    "_Components/Dashboards.md",
+    "_Systems/API.md",
+    "_Systems/Auth.md",
+    "_Systems/OBSIDIAN_SETUP.md",
+    "The Data Flow.canvas",
+    "Product Command Center.canvas",
+    "GAP_ANALYSIS.md",
     "conductor/archive/ird_sync_20260606/index.md",
+    "frontend/node_modules/ms/license.md",
     "conductor/archive/setup_pos_core_20260606/spec.md",
     "conductor/archive/setup_pos_core_20260606/plan.md",
     "conductor/archive/setup_pos_core_20260606/metadata.json",
-    "conductor/archive/setup_pos_core_20260606/index.md",
     "conductor/archive/setup_pos_core_20260606",
     "conductor/archive/inter_branch_20260606/spec.md",
     "conductor/archive/inter_branch_20260606/plan.md",
@@ -227,29 +226,11 @@
     "conductor/archive/auth_rbac_20260606/spec.md",
     "conductor/archive/auth_rbac_20260606/plan.md",
     "conductor/archive/auth_rbac_20260606/metadata.json",
-    "conductor/archive/auth_rbac_20260606/index.md",
     "conductor/archive/auth_rbac_20260606",
-    "conductor/archive/ird_sync_20260606/Verify_Offline_Resilience.md",
-    "conductor/archive/ird_sync_20260606/Verify_Materialized_Registers.md",
-    "conductor/archive/ird_sync_20260606/Verify_IRD_Sync_Engine.md",
-    "conductor/archive/ird_sync_20260606/Verify_Final_Integration.md",
-    "conductor/tracks/ird_sync_20260606/Verify_Final_Integration.md",
-    "conductor/tracks/ird_sync_20260606/Verify_Offline_Resilience.md",
-    "conductor/tracks/ird_sync_20260606/Verify_IRD_Sync_Engine.md",
-    "conductor/tracks/ird_sync_20260606/Verify_Materialized_Registers.md",
-    "conductor/archive/obsidian_sync_20260606/Merge_documentation_logic_in_workflow.md.md",
-    "conductor/archive/obsidian_sync_20260606/Verify_Workflow_Automation.md",
-    "conductor/archive/obsidian_sync_20260606/Create_conductor-sync.sh_helper_script.md",
-    "conductor/archive/obsidian_sync_20260606/Update_workflow.md_with_Sync_Check_rule.md",
-    "conductor/archive/obsidian_sync_20260606/Verify_Visualization_Fidelity.md",
-    "conductor/archive/obsidian_sync_20260606/Verify_Data_Integrity_Audit.md",
-    "conductor/archive/obsidian_sync_20260606/Execute_migration_using_non-destructive_copy.md",
     "backend/dukaan/tests/__pycache__/tmppiz0ux1x",
     "backend/dukaan/dukaan/__pycache__/tenant_provisioning.cpython-38.pyc",
     "backend/dukaan/dukaan/__pycache__/retail_logic.cpython-38.pyc",
     "backend/dukaan/dukaan/__pycache__/auth.cpython-38.pyc",
-    "The Data Flow.canvas",
-    "Product Command Center.canvas",
     "frontend/coverage/sort-arrow-sprite.png",
     "frontend/coverage/favicon.png",
     "frontend/dist/icons.svg",
