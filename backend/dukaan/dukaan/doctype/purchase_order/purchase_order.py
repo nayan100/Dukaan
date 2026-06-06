@@ -9,3 +9,18 @@ class PurchaseOrder(Document):
         
         # Check for split orders
         validate_po_split_order(self)
+
+    def submit(self):
+        if self.status != "Draft":
+            frappe.throw("Purchase Order can only be submitted when in Draft status.")
+        self.status = "Pending"
+
+    def approve(self):
+        if self.status != "Pending":
+            frappe.throw("Purchase Order can only be approved when Pending.")
+        self.status = "Approved"
+
+    def receive(self):
+        if self.status != "Approved":
+            frappe.throw("Purchase Order can only be received when Approved.")
+        self.status = "Received"
