@@ -29,3 +29,19 @@ def get_ird_naming_series(branch_code, year):
     Format: BRANCH-YEAR-.#####
     """
     return f"{branch_code}-{year}-.#####"
+
+def validate_pos_entry(doc):
+    """
+    Strictly enforces that a POS entry belongs to the user's assigned branch.
+    """
+    # 1. Skip check for SaaS Admins
+    user = frappe.get_doc("User", frappe.session.user)
+    if user.role == "SaaS Admin":
+        return
+
+    # 2. Verify Branch Scoping
+    if doc.branch != user.branch:
+        frappe.throw(
+            f"Unauthorized Access: You are assigned to {user.branch}, but attempted to write to {doc.branch}.",
+            title="Permission Denied"
+        )
