@@ -11,6 +11,8 @@ fi
 TRACK_ID=$1
 TASK_NAME=$2
 DATE=$(date +"%Y-%m-%d")
+TEMPLATE_PATH="Templates/Conductor-Task-Template.md"
+ATLAS_PATH="_ProjectAtlas.md"
 
 # 1. Resolve Target Folder (Search Tracks Registry and Archive)
 if [ -d "conductor/tracks/$TRACK_ID" ]; then
@@ -29,12 +31,46 @@ NOTE_PATH="$TARGET_FOLDER/$SAFE_TASK_NAME.md"
 # 3. Handle Existing Notes (Do not overwrite)
 if [ -f "$NOTE_PATH" ]; then
     echo "Info: Note already exists at $NOTE_PATH. Skipping creation."
-    # Future enhancement: Update status or append outcomes here
     exit 0
 fi
 
-# 4. Create Note Placeholder
-cat <<EOF > "$NOTE_PATH"
+# 4. Atlas Lookup (Bidirectional Linking)
+MOC_LINK=""
+# Search in _Systems and _Components for the track link
+MATCHING_MOC=$(grep -l "\[\[.*$TRACK_ID/index" _Systems/*.md _Components/*.md 2>/dev/null | head -n 1)
+if [ -n "$MATCHING_MOC" ]; then
+    # Extract filename without extension and path
+    MOC_NAME=$(basename "$MATCHING_MOC" .md)
+    MOC_DIR=$(dirname "$MATCHING_MOC")
+    MOC_LINK="[[$MOC_DIR/$MOC_NAME|$MOC_NAME]]"
+    echo "Info: Found matching MOC: $MOC_LINK"
+fi
+
+# 5. Use Template (Unification)
+if [ -f "$TEMPLATE_PATH" ]; then
+    CONTENT=$(cat "$TEMPLATE_PATH")
+    
+    # Perform variable replacement
+    CONTENT="${CONTENT/track_id: /track_id: $TRACK_ID}"
+    CONTENT="${CONTENT//<% tp.file.creation_date() %>/$DATE}"
+    CONTENT="${CONTENT//<% tp.file.title %>/$TASK_NAME}"
+    CONTENT="${CONTENT//<% tp.file.folder() %>/$TRACK_ID\/index|Track Index}"
+    CONTENT="${CONTENT//<% tp.cursor() %>/Placeholder created by conductor-sync.sh}"
+    
+    # Inject MOC Link if found
+    if [ -n "$MOC_LINK" ]; then
+        # Use a different delimiter for sed (| instead of /) or use bash replacement
+        # Bash replacement for the entire line
+        LINE_TO_MATCH="- **Track:** [[$TRACK_ID/index|Track Index]]"
+        NEW_LINE="$LINE_TO_MATCH\n- **System:** $MOC_LINK"
+        CONTENT="${CONTENT/$LINE_TO_MATCH/$NEW_LINE}"
+    fi
+    
+    echo -e "$CONTENT" > "$NOTE_PATH"
+else
+    echo "Warning: Template not found at $TEMPLATE_PATH. Falling back to hardcoded structure."
+    # Hardcoded fallback
+    cat <<EOF > "$NOTE_PATH"
 ---
 type: task
 track_id: $TRACK_ID
@@ -46,16 +82,19 @@ tags: [conductor/task]
 
 ## Context
 - **Track:** [[$TRACK_ID/index|Track Index]]
+EOF
+    if [ -n "$MOC_LINK" ]; then
+        echo "- **System:** $MOC_LINK" >> "$NOTE_PATH"
+    fi
+    cat <<EOF >> "$NOTE_PATH"
 
 ## Summary
-Placeholder created by conductor-sync.sh
+Placeholder created by conductor-sync.sh (Fallback)
 
 ## Verification Outcome
 - [ ] Automated Tests Pass
 - [ ] Manual Verification Confirmed
-
-## Outcomes & SHAs
-- (Pending implementation)
 EOF
+fi
 
 echo "Created Obsidian note placeholder at $NOTE_PATH"
