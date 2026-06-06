@@ -73,4 +73,13 @@ describe('POSHUD Component', () => {
     
     dateSpy.mockRestore();
   });
+
+  it('opens the payment modal when finish sale is clicked', () => {
+    render(<POSHUD availableItems={mockItems} />);
+    fireEvent.click(screen.getByText('Apple'));
+    fireEvent.click(screen.getByText('Finish Sale'));
+    
+    expect(screen.getByText('Payment')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Cash Amount')).toBeInTheDocument();
+  });
 });

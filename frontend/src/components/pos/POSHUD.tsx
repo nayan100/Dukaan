@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../ui/Button';
+import PaymentModal from './PaymentModal';
 
 interface Item {
   id: string;
@@ -18,6 +19,7 @@ interface POSHUDProps {
 
 const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const addToCart = (item: Item) => {
     setCart((prevCart) => {
@@ -46,13 +48,18 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
         return prevCart.filter((i) => i.id !== itemId);
       }
       
-      // In a real app, this would trigger an OTP/Manager request
       alert('Void window expired. Manager approval required.');
       return prevCart;
     });
   };
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handlePaymentComplete = (details: any) => {
+    alert(`Sale Completed! Total: NPR ${details.total}`);
+    setCart([]);
+    setIsPaymentModalOpen(false);
+  };
 
   return (
     <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden">
@@ -109,11 +116,24 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
             <span>Total:</span>
             <span data-testid="cart-total">NPR {total}</span>
           </div>
-          <Button variant="primary" size="xl" className="w-full mt-4 h-20 text-pos-xl uppercase tracking-widest">
+          <Button 
+            variant="primary" 
+            size="xl" 
+            className="w-full mt-4 h-20 text-pos-xl uppercase tracking-widest"
+            onClick={() => cart.length > 0 && setIsPaymentModalOpen(true)}
+          >
             Finish Sale
           </Button>
         </div>
       </div>
+
+      {isPaymentModalOpen && (
+        <PaymentModal 
+          total={total} 
+          onComplete={handlePaymentComplete} 
+          onClose={() => setIsPaymentModalOpen(false)} 
+        />
+      )}
     </div>
   );
 };
