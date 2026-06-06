@@ -29,7 +29,9 @@ def test_ird_sync_status_flow():
     mock_frappe.get_doc.return_value = mock_invoice
     mock_frappe.db.get_single_value.return_value = "PAN-123"
     
-    sync_to_ird("SINV-001")
+    with patch("dukaan.compliance.call_ird_api") as mock_api:
+        mock_api.return_value = "IRD-SUCCESS-001"
+        sync_to_ird("SINV-001")
     
     # Verify status update to Synced
     mock_invoice.db_set.assert_any_call("ird_sync_status", "Synced")
