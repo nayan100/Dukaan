@@ -22,6 +22,9 @@ interface DukaanDB extends DBSchema {
       created_at: number;
       synced: boolean;
       is_offline: boolean;
+      posting_date?: string;
+      ird_sync_status?: 'Pending' | 'Synced' | 'Failed';
+      ird_receipt_no?: string;
     };
   };
 }
@@ -29,10 +32,13 @@ interface DukaanDB extends DBSchema {
 let dbPromise: Promise<IDBPDatabase<DukaanDB>>;
 
 export const initDB = () => {
-  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 1, {
-    upgrade(db) {
-      db.createObjectStore('catalog', { keyPath: 'id' });
-      db.createObjectStore('invoices', { keyPath: 'invoice_id' });
+  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 2, {
+    upgrade(db, oldVersion) {
+      if (oldVersion < 1) {
+        db.createObjectStore('catalog', { keyPath: 'id' });
+        db.createObjectStore('invoices', { keyPath: 'invoice_id' });
+      }
+      // Future migrations can go here
     },
   });
 };
@@ -43,6 +49,8 @@ export const saveInvoiceOffline = async (invoice: any) => {
     ...invoice,
     synced: false,
     is_offline: !navigator.onLine,
+    ird_sync_status: 'Pending',
+    created_at: Date.now(),
   });
 };
 

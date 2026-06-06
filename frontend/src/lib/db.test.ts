@@ -44,4 +44,14 @@ describe('IndexedDB Logic', () => {
       synced: true
     }));
   });
+
+  it('saves an invoice offline with IRD compliance fields', async () => {
+    const invoice = { invoice_id: '123', total: 1000, posting_date: '2026-06-06' };
+    await saveInvoiceOffline(invoice);
+    expect(mockPut).toHaveBeenCalledWith('invoices', expect.objectContaining({
+      invoice_id: '123',
+      posting_date: '2026-06-06',
+      ird_sync_status: 'Pending'
+    }));
+  });
 });
