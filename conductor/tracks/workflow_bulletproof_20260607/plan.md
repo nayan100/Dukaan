@@ -25,7 +25,7 @@
     - [x] Implement checkbox synchronization for the `## Verification Outcome` section.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Advanced Sync Engine' (Protocol in workflow.md) 692f3fb
 
-**Phase 4: Final Integration & Workflow Polish**
+**Phase 4: Final Integration & Workflow Polish [checkpoint: dc95b6f]**
 - [x] Task: Update `conductor/workflow.md` to reflect the new `--update` capabilities. 920b31f
 - [x] Task: End-to-end integration test of the full loop (Draft -> Sync -> Update -> Verify). 3fe415c
-- [~] Task: Conductor - User Manual Verification 'Phase 4: Final Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Final Integration' (Protocol in workflow.md) dc95b6f
