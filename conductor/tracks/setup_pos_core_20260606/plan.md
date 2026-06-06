@@ -57,7 +57,7 @@ Wrap up the project with comprehensive documentation and production-ready builds
     - [x] Write 'Developer Setup Guide' (Dev vs. Production modes).
     - [x] Create 'Extensibility Guide' (Adding items, logic, and APIs).
     - [x] Create 'Testing & QA Guide'.
-- [ ] Task: Build - Finalize Production Build & Verification
+- [~] Task: Build - Finalize Production Build & Verification
     - [ ] Perform full E2E verification of the integrated system.
     - [ ] Generate production-ready assets for frontend and backend.
 - [ ] Task: Conductor - User Manual Verification 'Phase 5: Finalization & Documentation' (Protocol in workflow.md)

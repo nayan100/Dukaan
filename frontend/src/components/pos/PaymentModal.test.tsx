@@ -7,15 +7,12 @@ describe('PaymentModal Component', () => {
     const onComplete = vi.fn();
     render(<PaymentModal total={1000} onComplete={onComplete} onClose={vi.fn()} />);
     
-    // Add 500 cash
-    const cashInput = screen.getByPlaceholderText('Cash Amount');
-    fireEvent.change(cashInput, { target: { value: '500' } });
+    // Inputs use "0.00" as placeholder now
+    const inputs = screen.getAllByPlaceholderText('0.00');
+    fireEvent.change(inputs[0], { target: { value: '500' } }); // Cash
+    fireEvent.change(inputs[1], { target: { value: '500' } }); // Digital
     
-    // Add 500 QR
-    const qrInput = screen.getByPlaceholderText('Digital Amount');
-    fireEvent.change(qrInput, { target: { value: '500' } });
-    
-    const finishButton = screen.getByText('Complete Sale');
+    const finishButton = screen.getByText('Finalize Transaction');
     fireEvent.click(finishButton);
     
     expect(onComplete).toHaveBeenCalled();
@@ -26,11 +23,14 @@ describe('PaymentModal Component', () => {
     window.alert = vi.fn();
     render(<PaymentModal total={1000} onComplete={onComplete} onClose={vi.fn()} />);
     
-    fireEvent.change(screen.getByPlaceholderText('Cash Amount'), { target: { value: '400' } });
+    const inputs = screen.getAllByPlaceholderText('0.00');
+    fireEvent.change(inputs[0], { target: { value: '400' } });
     
-    fireEvent.click(screen.getByText('Complete Sale'));
+    const finishButton = screen.getByText('Finalize Transaction');
+    expect(finishButton).toBeDisabled();
     
+    // Manual call to handleComplete logic test
+    fireEvent.click(finishButton);
     expect(onComplete).not.toHaveBeenCalled();
-    expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('Insufficient payment'));
   });
 });

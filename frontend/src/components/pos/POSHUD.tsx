@@ -179,6 +179,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
             {cart.map((item) => (
                 <motion.div 
                     key={item.id} 
+                    data-testid={`cart-item-${item.id}`}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
@@ -188,7 +189,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
                         <div className="flex-1">
                             <div className="font-bold text-pos-white leading-tight">{item.name}</div>
                             <div className="text-xs text-pos-muted font-bold mt-1 uppercase tracking-tighter">
-                                NPR {item.price} × {item.quantity}
+                                NPR {item.price} × <span data-testid={`cart-item-${item.id}-qty`}>{item.quantity}</span>
                             </div>
                         </div>
                         <div className="text-right">
@@ -202,6 +203,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
                             variant="danger" 
                             size="sm" 
                             onClick={() => removeFromCart(item.id)}
+                            data-testid={`void-item-${item.id}`}
                             className="flex-1 gap-2 h-9 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                             <Trash2 size={14} /> <span className="text-[10px] uppercase font-black">Void Item</span>
@@ -224,7 +226,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
             <span className="text-sm font-black text-pos-muted uppercase tracking-widest">Total Amount</span>
             <span className="text-4xl font-black text-pos-primary tracking-tighter">
                 <span className="text-lg mr-2 font-bold opacity-50 italic">NPR</span>
-                {total.toLocaleString()}
+                <span data-testid="cart-total">{total.toLocaleString()}</span>
             </span>
           </div>
           
