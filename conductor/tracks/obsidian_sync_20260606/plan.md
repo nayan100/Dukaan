@@ -16,7 +16,7 @@
 
 ## Phase 3: High-Fidelity Visualization (The Advanced Canvas)
 - [x] Task: Create a `Product Command Center` Canvas linking Product Definition, Tracks, and Plans. f986826
-- [ ] Task: Create `The Data Flow` Canvas visualizing POS -> API -> IRD sequence.
+- [x] Task: Create `The Data Flow` Canvas visualizing POS -> API -> IRD sequence. 3a83994
 - [ ] Task: Implement "Live Links": Embed markdown blocks from `spec.md` into Advanced Canvas.
 - [ ] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md)
 
