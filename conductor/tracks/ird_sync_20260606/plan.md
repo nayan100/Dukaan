@@ -22,7 +22,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience' (Protocol in workflow.md) ff89b98
 
 **Phase 4: Auditor Dashboard & Final Integration**
-- [ ] Task: Build the Sync Status Dashboard for Accountants (Synced vs. Pending vs. Failed).
+- [x] Task: Build the Sync Status Dashboard for Accountants (Synced vs. Pending vs. Failed). 168c186
 - [ ] Task: Implement manual "Force Sync" trigger for high-level users.
 - [ ] Task: End-to-end integration tests for the full "Offline -> Sync -> Register" lifecycle.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Final Integration' (Protocol in workflow.md)
