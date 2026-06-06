@@ -99,13 +99,13 @@ def update_vat_annex_13(doc, method):
 
 def update_vat_annex_14(doc, method):
     """
-    Hook to update VAT Annex 14 (Purchase Register) when a Purchase Invoice is submitted or cancelled.
+    Hook to update VAT Annex 14 (Purchase Register) when a Purchase Invoice or Receipt is submitted or cancelled.
     """
     if method == "on_submit":
         annex_doc = frappe.get_doc({
             "doctype": "VAT Annex 14",
             "posting_date": doc.posting_date,
-            "invoice_number": doc.name,
+            "invoice_number": doc.get("supplier_invoice_no") or doc.name,
             "supplier_name": doc.supplier_name,
             "supplier_pan": doc.get("supplier_pan"),
             "taxable_amount": doc.total,

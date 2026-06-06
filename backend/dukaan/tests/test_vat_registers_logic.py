@@ -69,7 +69,11 @@ def test_update_vat_annex_14_on_submit():
     mock_invoice.name = "PINV-001"
     mock_invoice.posting_date = "2026-06-06"
     mock_invoice.supplier_name = "Test Supplier"
-    mock_invoice.get.return_value = "987654321" # For doc.get("supplier_pan")
+    def mock_get(key, default=None):
+        if key == "supplier_pan":
+            return "987654321"
+        return default
+    mock_invoice.get.side_effect = mock_get
     mock_invoice.total = 2000
     mock_invoice.total_taxes_and_charges = 260
     mock_invoice.grand_total = 2260
