@@ -1,28 +1,20 @@
 import pytest
 from unittest.mock import MagicMock, patch, call
-
-# Mock frappe
 import sys
-mock_frappe = MagicMock()
-sys.modules["frappe"] = mock_frappe
 
-def setup_function():
-    """Reset the mock before each test."""
-    mock_frappe.reset_mock()
+# Import the shared mock from conftest (or just access it via sys.modules)
+import frappe as mock_frappe
 
 def test_warehouse_hierarchy_logic():
     """
     Test that the warehouse hierarchy is correctly established.
     """
-    from dukaan.retail_logic import setup_warehouse_hierarchy
+    from dukaan import retail_logic
     
     branch_name = "KTM Main"
-    mock_branch = MagicMock()
-    mock_branch.name = branch_name
-    mock_frappe.get_doc.return_value = mock_branch
     
     with patch("dukaan.retail_logic.create_warehouse") as mock_create_wh:
-        setup_warehouse_hierarchy(branch_name)
+        retail_logic.setup_warehouse_hierarchy(branch_name)
         
         # Should create a transit and a local warehouse
         expected_calls = [
@@ -75,5 +67,5 @@ def test_ird_naming_series():
     year = "2081" # BS year
     series = get_ird_naming_series(branch_code, year)
     
-    # Format: BRANCH-YEAR-.#####
+    # Format: BRANCH-YEAR-
     assert series == "KTM-2081-.#####"

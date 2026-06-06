@@ -1,10 +1,9 @@
 import pytest
 from unittest.mock import MagicMock, patch, call
-
-# Mock frappe before importing modules that use it
 import sys
-mock_frappe = MagicMock()
-sys.modules["frappe"] = mock_frappe
+
+# Import the shared mock
+import frappe as mock_frappe
 
 def test_create_tenant_triggers_site_provisioning():
     """

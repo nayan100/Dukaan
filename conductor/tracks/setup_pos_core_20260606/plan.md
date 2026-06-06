@@ -9,7 +9,7 @@ Establish the multi-tenant architecture and core data models.
 - [x] Task: Backend - Implement Core Retail DocTypes (Branch, Warehouse, Price List) 7afb631
     - [ ] Setup warehouse hierarchy for multi-branch mapping.
     - [ ] Configure naming series for IRD-compliant invoicing.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: SaaS & Backend Foundation' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 1: SaaS & Backend Foundation' (Protocol in workflow.md)
 
 ## Phase 2: Core POS HUD Development
 Build the high-speed billing interface for cashiers.
