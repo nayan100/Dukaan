@@ -13,7 +13,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md) 0273ee0
 
 **Phase 3: Stock Initialization & Valuation (Backend)**
-- [ ] Task: Create the `Opening Stock Entry` tool with Moving Average calculation logic.
+- [x] Task: Create the `Opening Stock Entry` tool with Moving Average calculation logic. 2df7e90
 - [ ] Task: Implement the Blind Spot-Check Protocol for high-value stock entries.
 - [ ] Task: Develop the Landed Cost Voucher system for retroactive valuation adjustments.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Initialization' (Protocol in workflow.md)
