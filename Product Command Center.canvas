@@ -35,6 +35,16 @@
       "y": 500,
       "width": 400,
       "height": 400
+    },
+    {
+      "id": "5",
+      "type": "file",
+      "file": "conductor/tracks/obsidian_sync_20260606/spec.md",
+      "subpath": "# Acceptance Criteria",
+      "x": 0,
+      "y": 500,
+      "width": 400,
+      "height": 400
     }
   ],
   "edges": [
@@ -57,6 +67,13 @@
       "fromNode": "3",
       "fromSide": "bottom",
       "toNode": "4",
+      "toSide": "top"
+    },
+    {
+      "id": "e4",
+      "fromNode": "2",
+      "fromSide": "bottom",
+      "toNode": "5",
       "toSide": "top"
     }
   ]
