@@ -1,8 +1,14 @@
-import AppLayout from './components/layout/AppLayout';
+import ProcurementSuite from './components/ProcurementSuite/ProcurementSuite';
+import VerifySpotCheckUI from './components/OpeningStockEntry/VerifySpotCheckUI';
+import BudgetWarningUI from './components/PurchaseOrder/BudgetWarningUI';
 
 function App() {
   return (
-    <AppLayout />
+    <>
+      <ProcurementSuite />
+      <VerifySpotCheckUI />
+      <BudgetWarningUI isBudgetExceeded={true} />
+    </>
   );
 }
 
