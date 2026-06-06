@@ -13,7 +13,7 @@ Prevent over-spending at the branch level.
 ## Phase 2: Cross-Branch Adjustments
 Handle the financial logic for distributed returns and price variances.
 
-- [ ] Task: Backend - Implement Inter-Branch Adjustment Engine
+- [x] Task: Backend - Implement Inter-Branch Adjustment Engine d94c16a
     - [ ] [TDD] Write tests for Debit/Credit generation during cross-branch returns.
     - [ ] Implement logic to identify original purchase branch via barcode scan.
 - [ ] Task: Analytics - Create Price Variance & Fraud Alert HUD
