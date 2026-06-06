@@ -35,4 +35,21 @@ describe('IRDSyncDashboard Component', () => {
     expect(screen.getByText(/Pending/i)).toBeDefined();
     expect(screen.getByText(/Failed/i)).toBeDefined();
   });
+
+  it('calls force sync API when button clicked', async () => {
+    (global.fetch as any).mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ message: "Success" }),
+    });
+
+    render(<IRDSyncDashboard />);
+    
+    const forceSyncBtn = screen.getByText(/Force Sync/i);
+    forceSyncBtn.click();
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      '/api/method/dukaan.compliance.retry_failed_ird_syncs',
+      expect.objectContaining({ method: 'POST' })
+    );
+  });
 });

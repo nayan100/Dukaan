@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw } from 'lucide-react';
+import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap } from 'lucide-react';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface SyncStats {
   synced: number;
@@ -27,6 +28,23 @@ const IRDSyncDashboard: React.FC = () => {
     }
   };
 
+  const handleForceSync = async () => {
+    toast.promise(
+      fetch('/api/method/dukaan.compliance.retry_failed_ird_syncs', { method: 'POST' }),
+      {
+        loading: 'Forcing sync...',
+        success: () => {
+          fetchStats();
+          return 'Sync process triggered!';
+        },
+        error: 'Failed to trigger sync.'
+      },
+      {
+        style: { background: '#0f172a', color: '#fff', border: '1px solid #1e293b' }
+      }
+    );
+  };
+
   useEffect(() => {
     fetchStats();
     const interval = setInterval(fetchStats, 60000); // Refresh every minute
@@ -41,6 +59,7 @@ const IRDSyncDashboard: React.FC = () => {
 
   return (
     <div className="p-8 space-y-8 bg-pos-black min-h-full">
+      <Toaster position="top-right" />
       <header className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-black tracking-tight uppercase italic flex items-center gap-3">
@@ -49,12 +68,21 @@ const IRDSyncDashboard: React.FC = () => {
           </h2>
           <p className="text-sm text-pos-muted font-bold uppercase tracking-widest mt-1">Real-time status of CBMS transmission</p>
         </div>
-        <button 
-          onClick={fetchStats}
-          className={`p-3 rounded-xl border border-pos-border hover:border-pos-primary transition-all ${loading ? 'animate-spin' : ''}`}
-        >
-          <RefreshCw size={20} className="text-pos-muted" />
-        </button>
+        <div className="flex gap-4">
+          <button 
+            onClick={handleForceSync}
+            className="flex items-center gap-2 px-6 py-3 bg-pos-primary text-pos-black font-black uppercase text-xs rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-pos-primary/20"
+          >
+            <Zap size={16} fill="currentColor" />
+            Force Sync
+          </button>
+          <button 
+            onClick={fetchStats}
+            className={`p-3 rounded-xl border border-pos-border hover:border-pos-primary transition-all ${loading ? 'animate-spin' : ''}`}
+          >
+            <RefreshCw size={20} className="text-pos-muted" />
+          </button>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
