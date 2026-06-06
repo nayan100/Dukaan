@@ -12,6 +12,20 @@ class OpeningStockEntry(Document):
             self.total_valuation += item.amount
 
     def on_submit(self):
+        if getattr(self, "total_valuation", 0) > 50000:
+            self.status = "Pending Spot-Check"
+        else:
+            self.update_moving_average_rates()
+            self.status = "Submitted"
+
+    def verify_spot_check(self):
+        if getattr(self, "status", None) != "Pending Spot-Check":
+            frappe.throw("Document is not pending spot-check")
+        
+        user = frappe.get_doc("User", frappe.session.user)
+        if not (user.has_role("Accountant") or user.has_role("Chain Owner")):
+            frappe.throw("You are not permitted to verify spot-checks.")
+            
         self.update_moving_average_rates()
         self.status = "Submitted"
 
