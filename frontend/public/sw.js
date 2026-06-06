@@ -1,16 +1,17 @@
 const SW_VERSION = '1.0.0';
 
-self.addEventListener('install', (event: any) => {
+self.addEventListener('install', (event) => {
   console.log(`Service Worker installing v${SW_VERSION}`);
-  event.waitUntil(self.skipWaiting());
+  // Use standard skipWaiting
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (event: any) => {
+self.addEventListener('activate', (event) => {
   console.log('Service Worker activating');
   event.waitUntil(self.clients.claim());
 });
 
-self.addEventListener('sync', (event: any) => {
+self.addEventListener('sync', (event) => {
   if (event.tag === 'sync-invoices') {
     event.waitUntil(syncInvoices());
   }
@@ -18,6 +19,5 @@ self.addEventListener('sync', (event: any) => {
 
 async function syncInvoices() {
   console.log('Background Sync: Syncing invoices...');
-  // In a real app, this would fetch from IndexedDB and POST to Frappe
-  // For this prototype, we log the intent
+  // Simulation logic
 }

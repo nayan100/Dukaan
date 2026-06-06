@@ -44,7 +44,7 @@ Ensure the system remains functional during outages and provides strategic visib
 - [x] Task: Compliance - Implement Mock IRD (CBMS) Sync Bridge 386528a
     - [ ] [TDD] Write tests for IRD sync payload structure (Annex 13).
     - [ ] Implement the 'is_offline' flag logic and sync queue.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience & Dashboards' (Protocol in workflow.md)
+- [~] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience & Dashboards' (Protocol in workflow.md)
 
 ## Phase 4: Finalization & Documentation
 Wrap up the project with comprehensive documentation and production-ready builds.

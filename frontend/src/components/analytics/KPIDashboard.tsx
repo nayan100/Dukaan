@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  LineChart, Line, AreaChart, Area 
+  AreaChart, Area 
 } from 'recharts';
 import { 
   TrendingUp, Users, AlertCircle, CheckCircle, MapPin, 

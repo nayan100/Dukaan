@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ShoppingCart, Trash2, CheckCircle, Search, AlertTriangle, X } from 'lucide-react';
+import { ShoppingCart, Trash2, CheckCircle, Search, AlertTriangle } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';

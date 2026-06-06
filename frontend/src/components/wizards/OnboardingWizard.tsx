@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowRight, Check, Rocket, Database, 
-  ShieldCheck, Globe, Building2 
+  ShieldCheck, Building2 
 } from 'lucide-react';
 import Button from '../ui/Button';
 

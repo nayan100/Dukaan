@@ -10,7 +10,7 @@ initDB();
 // Register Service Worker for Offline Sync
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.ts', { type: 'module' })
+    navigator.serviceWorker.register('/sw.js')
       .then(reg => console.log('SW Registered', reg))
       .catch(err => console.error('SW Registration Failed', err));
   });
