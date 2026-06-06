@@ -1,80 +1,19 @@
 {
-  "nodes": [
-    {
-      "id": "1",
-      "type": "text",
-      "text": "# Product Command Center\nMission control for Dukaan SaaS Platform.",
-      "x": 0,
-      "y": 0,
-      "width": 400,
-      "height": 100
-    },
-    {
-      "id": "2",
-      "type": "file",
-      "file": "conductor/product.md",
-      "x": 0,
-      "y": 150,
-      "width": 400,
-      "height": 300
-    },
-    {
-      "id": "3",
-      "type": "file",
-      "file": "conductor/tracks.md",
-      "x": 450,
-      "y": 150,
-      "width": 400,
-      "height": 300
-    },
-    {
-      "id": "4",
-      "type": "file",
-      "file": "conductor/tracks/obsidian_sync_20260606/plan.md",
-      "x": 450,
-      "y": 500,
-      "width": 400,
-      "height": 400
-    },
-    {
-      "id": "5",
-      "type": "file",
-      "file": "conductor/tracks/obsidian_sync_20260606/spec.md",
-      "subpath": "# Acceptance Criteria",
-      "x": 0,
-      "y": 500,
-      "width": 400,
-      "height": 400
-    }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "fromNode": "1",
-      "fromSide": "bottom",
-      "toNode": "2",
-      "toSide": "top"
-    },
-    {
-      "id": "e2",
-      "fromNode": "1",
-      "fromSide": "bottom",
-      "toNode": "3",
-      "toSide": "top"
-    },
-    {
-      "id": "e3",
-      "fromNode": "3",
-      "fromSide": "bottom",
-      "toNode": "4",
-      "toSide": "top"
-    },
-    {
-      "id": "e4",
-      "fromNode": "2",
-      "fromSide": "bottom",
-      "toNode": "5",
-      "toSide": "top"
-    }
-  ]
+	"nodes":[
+		{"id":"1","type":"text","text":"# Product Command Center\nMission control for Dukaan SaaS Platform.","x":0,"y":0,"width":400,"height":100},
+		{"id":"2","type":"file","file":"conductor/product.md","x":0,"y":150,"width":400,"height":300},
+		{"id":"3","type":"file","file":"conductor/tracks.md","x":450,"y":150,"width":400,"height":300},
+		{"id":"4","type":"file","file":"conductor/tracks/obsidian_sync_20260606/plan.md","x":450,"y":500,"width":400,"height":400},
+		{"id":"5","type":"file","file":"conductor/tracks/obsidian_sync_20260606/spec.md","subpath":"# Acceptance Criteria","x":0,"y":500,"width":400,"height":400}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"1","fromSide":"bottom","toNode":"2","toSide":"top"},
+		{"id":"e2","fromNode":"1","fromSide":"bottom","toNode":"3","toSide":"top"},
+		{"id":"e3","fromNode":"3","fromSide":"bottom","toNode":"4","toSide":"top"},
+		{"id":"e4","fromNode":"2","fromSide":"bottom","toNode":"5","toSide":"top"}
+	],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
 }

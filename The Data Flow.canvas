@@ -1,92 +1,20 @@
 {
-  "nodes": [
-    {
-      "id": "1",
-      "type": "text",
-      "text": "# The Data Flow\nEnd-to-end invoice lifecycle.",
-      "x": 0,
-      "y": 0,
-      "width": 300,
-      "height": 100
-    },
-    {
-      "id": "2",
-      "type": "file",
-      "file": "_Components/POS.md",
-      "x": 0,
-      "y": 150,
-      "width": 250,
-      "height": 200
-    },
-    {
-      "id": "3",
-      "type": "text",
-      "text": "**IndexedDB**\nLocal caching of unsynced invoices.",
-      "x": 300,
-      "y": 150,
-      "width": 200,
-      "height": 200
-    },
-    {
-      "id": "4",
-      "type": "file",
-      "file": "_Systems/API.md",
-      "x": 550,
-      "y": 150,
-      "width": 250,
-      "height": 200
-    },
-    {
-      "id": "5",
-      "type": "file",
-      "file": "_Systems/Compliance.md",
-      "x": 850,
-      "y": 150,
-      "width": 250,
-      "height": 200
-    },
-    {
-      "id": "6",
-      "type": "text",
-      "text": "**IRD CBMS**\nCentral Billing Monitoring System.",
-      "x": 1150,
-      "y": 150,
-      "width": 200,
-      "height": 200
-    }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "fromNode": "2",
-      "fromSide": "right",
-      "toNode": "3",
-      "toSide": "left",
-      "label": "Offline Save"
-    },
-    {
-      "id": "e2",
-      "fromNode": "3",
-      "fromSide": "right",
-      "toNode": "4",
-      "toSide": "left",
-      "label": "Background Sync"
-    },
-    {
-      "id": "e3",
-      "fromNode": "4",
-      "fromSide": "right",
-      "toNode": "5",
-      "toSide": "left",
-      "label": "Submit Hook"
-    },
-    {
-      "id": "e4",
-      "fromNode": "5",
-      "fromSide": "right",
-      "toNode": "6",
-      "toSide": "left",
-      "label": "Real-time Sync"
-    }
-  ]
+	"nodes":[
+		{"id":"1","type":"text","text":"# The Data Flow\nEnd-to-end invoice lifecycle.","x":0,"y":0,"width":300,"height":100},
+		{"id":"2","type":"file","file":"_Components/POS.md","x":0,"y":150,"width":250,"height":200},
+		{"id":"3","type":"text","text":"**IndexedDB**\nLocal caching of unsynced invoices.","x":300,"y":150,"width":200,"height":200},
+		{"id":"4","type":"file","file":"_Systems/API.md","x":550,"y":150,"width":250,"height":200},
+		{"id":"5","type":"file","file":"_Systems/Compliance.md","x":850,"y":150,"width":250,"height":200},
+		{"id":"6","type":"text","text":"**IRD CBMS**\nCentral Billing Monitoring System.","x":1150,"y":150,"width":200,"height":200}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"2","fromSide":"right","toNode":"3","toSide":"left","label":"Offline Save"},
+		{"id":"e2","fromNode":"3","fromSide":"right","toNode":"4","toSide":"left","label":"Background Sync"},
+		{"id":"e3","fromNode":"4","fromSide":"right","toNode":"5","toSide":"left","label":"Submit Hook"},
+		{"id":"e4","fromNode":"5","fromSide":"right","toNode":"6","toSide":"left","label":"Real-time Sync"}
+	],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
 }
