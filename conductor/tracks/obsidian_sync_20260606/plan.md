@@ -1,27 +1,27 @@
-# Implementation Plan: Obsidian Sync Integration
+# Implementation Plan: Obsidian Sync Integration (Deep Edition)
 
-## Phase 1: Standardization & Atlas Initialization
-- [ ] Task: Create `Templates/` folder and define templates in Obsidian.
-- [ ] Task: Initialize `_ProjectAtlas.md` with base MOCs (Product, Tech-Stack, Workflow).
-- [ ] Task: Map existing directory structure in `_ProjectAtlas.md`.
-- [ ] Task: Conductor - User Manual Verification 'Standardization & Atlas Initialization' (Protocol in workflow.md)
+## Phase 1: The "Digital Twin" Infrastructure (Standardization)
+- [ ] Task: Create `_Systems/` folder for backend logic and `_Components/` for frontend UI.
+- [ ] Task: Configure `Templater` for "Auto-Pathing": New notes created via MOCs must automatically be filed in the correct project sub-directory.
+- [ ] Task: Initialize `_ProjectAtlas.md` with "Dynamic Queries" or fixed MOCs representing logical layers (Auth, Inventory, Compliance).
+- [ ] Task: Conductor - User Manual Verification 'Infrastructure Readiness' (Protocol in workflow.md)
 
-## Phase 2: Zero-Loss Legacy Migration
-- [ ] Task: Execute Phase 0: Immutable Snapshot of current `conductor/` and wiki files.
-- [ ] Task: Perform Audit & Classification of `conductor/archive/` and legacy files.
-- [ ] Task: Execute Non-Destructive Migration (Copy) to Obsidian target structure.
-- [ ] Task: Run Checksum Verification Protocol on all copied assets.
+## Phase 2: The "Vault of Truth" (Zero-Loss Migration)
+- [ ] Task: Scripted Phase 0: Create a verifiable snapshot with a `MANIFEST.json` containing SHA-256 hashes of all source files.
+- [ ] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review.
+- [ ] Task: Execute migration using non-destructive copy logic to preserve metadata.
+- [ ] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure.
 - [ ] Task: Create `cold-storage/` for legacy source directories.
-- [ ] Task: Conductor - User Manual Verification 'Zero-Loss Legacy Migration' (Protocol in workflow.md)
+- [ ] Task: Conductor - User Manual Verification 'Data Integrity Audit' (Protocol in workflow.md)
 
-## Phase 3: Integration & Visualization
-- [ ] Task: Create root `Advanced Canvas` system map.
-- [ ] Task: Map module dependencies (Backend/Frontend) in Advanced Canvas.
-- [ ] Task: Implement bidirectional linking for Conductor tasks using `Conductor-Task-Template`.
-- [ ] Task: Conductor - User Manual Verification 'Integration & Visualization' (Protocol in workflow.md)
+## Phase 3: High-Fidelity Visualization (The Advanced Canvas)
+- [ ] Task: Create a `Product Command Center` Canvas linking Product Definition, Tracks, and Plans.
+- [ ] Task: Create `The Data Flow` Canvas visualizing POS -> API -> IRD sequence.
+- [ ] Task: Implement "Live Links": Embed markdown blocks from `spec.md` into Advanced Canvas.
+- [ ] Task: Conductor - User Manual Verification 'Visualization Fidelity' (Protocol in workflow.md)
 
-## Phase 4: Maintenance & Future-Proofing
-- [ ] Task: Configure Obsidian Calendar for weekly maintenance reviews.
-- [ ] Task: Establish "Documentation-as-Code" pipeline documentation.
-- [ ] Task: Define automated link-integrity check procedure.
-- [ ] Task: Conductor - User Manual Verification 'Maintenance & Future-Proofing' (Protocol in workflow.md)
+## Phase 4: Workflow Enshrinement (Conductor Sync)
+- [ ] Task: Update `conductor/workflow.md` with a mandatory "Sync Check" rule.
+- [ ] Task: Create a `conductor-sync.sh` helper script for automated note placeholder creation.
+- [ ] Task: Configure `Obsidian Calendar` to track "Review Checkpoints" as events.
+- [ ] Task: Conductor - User Manual Verification 'Workflow Automation' (Protocol in workflow.md)
