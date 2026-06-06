@@ -11,7 +11,7 @@
 - [x] Task: "Gap Analysis": Identify legacy wiki sections with NO corresponding code (Zombie Docs) and mark for review. b701d5e
 - [x] Task: Execute migration using non-destructive copy logic to preserve metadata. 1fcbcff
 - [x] Task: Post-Migration Audit: Automated script to compare `MANIFEST.json` against new Obsidian Vault structure. a8bf619
-- [ ] Task: Create `cold-storage/` for legacy source directories.
+- [x] Task: Create `cold-storage/` for legacy source directories. 224a475
 - [ ] Task: Conductor - User Manual Verification 'Data Integrity Audit' (Protocol in workflow.md)
 
 ## Phase 3: High-Fidelity Visualization (The Advanced Canvas)
