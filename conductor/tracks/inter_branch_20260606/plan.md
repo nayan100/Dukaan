@@ -14,7 +14,7 @@ Build the 4-step state machine and warehouse movements.
 ## Phase 2: Intelligence & SLA Enforcement
 Implement timers, rejection logic, and rebalancing alerts.
 
-- [ ] Task: Backend - Implement Business-Hour Aware Timers
+- [x] Task: Backend - Implement Business-Hour Aware Timers 7ce90d1
     - [ ] Develop logic to pause the 5-hour timer during non-operational hours.
     - [ ] Implement automated stock reversal on auto-rejection.
 - [ ] Task: Analytics - Develop Dead Stock Rebalancer HUD
