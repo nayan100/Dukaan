@@ -20,7 +20,7 @@
 
 **Phase 4: Procurement UI & Dashboard (Frontend)**
 - [x] Task: Build the Procurement Management Suite (PO Tracker, Receipt Entry, Supplier Portal). baf6e06
-- [ ] Task: Implement 'Verify Spot Check' UI for Opening Stock Entry.
+- [x] Task: Implement 'Verify Spot Check' UI for Opening Stock Entry. 6d0b74c
 - [ ] Task: Implement the "Soft Warning" UI for budget-exceeding Purchase Orders.
 - [ ] Task: Create the Procurement Analytics Hub (Budget utilization, Supplier reliability).
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: UI & Dashboards' (Protocol in workflow.md)
