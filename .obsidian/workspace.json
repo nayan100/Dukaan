@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "conductor/tracks/auth_rbac_20260606/plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "plan"
             }
           }
         ]
@@ -185,31 +185,31 @@
   },
   "active": "d9fef286ab137224",
   "lastOpenFiles": [
+    "conductor/tracks/auth_rbac_20260606/spec.md",
+    "frontend/src/components/auth/PermissionGuard.tsx",
+    "frontend/src/components/auth/PermissionGuard.test.tsx",
+    "conductor/tracks/auth_rbac_20260606/plan.md",
+    "conductor/tracks/auth_rbac_20260606/index.md",
+    "README.md",
+    "frontend/src/context/AuthContext.tsx",
+    "frontend/src/context/AuthContext.test.tsx",
+    "frontend/src/context",
     "docs/USER_GUIDE.md",
     "docs/DESIGN_SYSTEM.md",
-    "conductor/tracks/auth_rbac_20260606/spec.md",
     "frontend/src/components/auth/LoginPage.tsx",
     "frontend/src/components/auth/LoginPage.test.tsx",
     "frontend/src/components/auth",
-    "conductor/tracks/auth_rbac_20260606/plan.md",
     "docs/API.md",
     "backend/dukaan/dukaan/__pycache__/auth.cpython-38.pyc",
     "backend/dukaan/tests/__pycache__/tmp8k3qffwz",
-    "backend/dukaan/dukaan/auth.py",
-    "backend/dukaan/tests/__pycache__/test_auth.cpython-38-PYTEST.pyc",
-    "backend/dukaan/tests/__pycache__/tmpshpg8gty",
-    "backend/dukaan/tests/test_auth.py",
     "conductor/tracks.md",
     "conductor/product.md",
-    "conductor/tracks/auth_rbac_20260606/index.md",
-    "conductor/tracks/auth_rbac_20260606/metadata.json",
     "conductor/archive/setup_pos_core_20260606/spec.md",
     "conductor/archive/setup_pos_core_20260606/plan.md",
     "conductor/archive/setup_pos_core_20260606/index.md",
     "conductor/workflow.md",
     "docs/GROWTH_WIZARD.md",
     "conductor/tracks/setup_pos_core_20260606/plan.md",
-    "README.md",
     "frontend/node_modules/framer-motion/README.md",
     "frontend/node_modules/framer-motion/LICENSE.md",
     "frontend/node_modules/framer-motion/dom/README.md",

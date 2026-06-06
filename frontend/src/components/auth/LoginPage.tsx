@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, User, Lock, Hash } from 'lucide-react';
+import { ShieldCheck, User, Lock, Hash, Shield } from 'lucide-react';
 import Button from '../ui/Button';
 
 interface LoginPageProps {
@@ -10,10 +10,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [tenantId, setTenantId] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('Cashier');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin({ tenant_id: tenantId, username, password });
+    // Simulate login by mapping form data to the User interface
+    onLogin({ 
+      tenant: tenantId, 
+      username, 
+      role 
+    });
   };
 
   return (
@@ -33,18 +39,35 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="absolute top-0 right-0 w-32 h-32 bg-pos-primary/5 blur-3xl -mr-16 -mt-16 rounded-full" />
           
           <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-            <div>
-              <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-pos-muted mb-2">
-                <Hash size={12} /> Tenant Identifier
-              </label>
-              <input 
-                type="text" 
-                placeholder="Tenant ID"
-                className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl p-4 text-sm font-semibold transition-all outline-none text-pos-white"
-                value={tenantId}
-                onChange={(e) => setTenantId(e.target.value)}
-                required
-              />
+            <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-pos-muted mb-2">
+                        <Hash size={12} /> Tenant ID
+                    </label>
+                    <input 
+                        type="text" 
+                        placeholder="e.g. T1"
+                        className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl p-4 text-sm font-semibold transition-all outline-none text-pos-white"
+                        value={tenantId}
+                        onChange={(e) => setTenantId(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-pos-muted mb-2">
+                        <Shield size={12} /> Access Role
+                    </label>
+                    <select 
+                        className="w-full bg-pos-black/50 border border-pos-border focus:border-pos-primary rounded-xl p-4 text-sm font-semibold transition-all outline-none text-pos-white appearance-none"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                    >
+                        <option value="Cashier">Cashier</option>
+                        <option value="Branch Owner">Branch Owner</option>
+                        <option value="Chain Owner">Chain Owner</option>
+                        <option value="SaaS Admin">SaaS Admin</option>
+                    </select>
+                </div>
             </div>
 
             <div>
