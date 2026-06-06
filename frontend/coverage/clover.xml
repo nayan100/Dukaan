@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780718162941" clover="3.2.0">
-  <project timestamp="1780718162941" name="All files">
-    <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1" elements="9" coveredelements="9" complexity="0" loc="5" ncloc="5" packages="1" files="1" classes="1"/>
-    <file name="Button.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/ui/Button.tsx">
+<coverage generated="1780718310677" clover="3.2.0">
+  <project timestamp="1780718310677" name="All files">
+    <metrics statements="32" coveredstatements="30" conditionals="15" coveredconditionals="10" methods="16" coveredmethods="15" elements="63" coveredelements="55" complexity="0" loc="32" ncloc="32" packages="2" files="2" classes="2"/>
+    <package name="pos">
+      <metrics statements="27" coveredstatements="25" conditionals="12" coveredconditionals="7" methods="15" coveredmethods="14"/>
+      <file name="POSHUD.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/pos/POSHUD.tsx">
+        <metrics statements="27" coveredstatements="25" conditionals="12" coveredconditionals="7" methods="15" coveredmethods="14"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="14" type="stmt"/>
+        <line num="22" count="14" type="stmt"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="34" count="14" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="55" count="14" type="stmt"/>
+        <line num="57" count="14" type="stmt"/>
+        <line num="62" count="28" type="stmt"/>
+        <line num="66" count="7" type="stmt"/>
+        <line num="83" count="9" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="ui">
       <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <line num="8" count="1" type="stmt"/>
-      <line num="15" count="3" type="stmt"/>
-      <line num="17" count="3" type="stmt"/>
-      <line num="24" count="3" type="stmt"/>
-      <line num="31" count="3" type="stmt"/>
-    </file>
+      <file name="Button.tsx" path="/home/gunmetal/nayan/dukaan/frontend/src/components/ui/Button.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="15" count="50" type="stmt"/>
+        <line num="17" count="50" type="stmt"/>
+        <line num="24" count="50" type="stmt"/>
+        <line num="31" count="50" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
