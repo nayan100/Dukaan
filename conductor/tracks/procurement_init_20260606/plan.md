@@ -12,11 +12,11 @@
 - [x] Task: Implement `Purchase Receipt` logic that updates the materialized Annex 14 register. c633955
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Workflows' (Protocol in workflow.md) 0273ee0
 
-**Phase 3: Stock Initialization & Valuation (Backend)**
+**Phase 3: Stock Initialization & Valuation (Backend)** [checkpoint: dc9bcf8]
 - [x] Task: Create the `Opening Stock Entry` tool with Moving Average calculation logic. 2df7e90
-- [ ] Task: Implement the Blind Spot-Check Protocol for high-value stock entries.
-- [ ] Task: Develop the Landed Cost Voucher system for retroactive valuation adjustments.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Initialization' (Protocol in workflow.md)
+- [x] Task: Implement the Blind Spot-Check Protocol for high-value stock entries.
+- [x] Task: Develop the Landed Cost Voucher system for retroactive valuation adjustments.
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Initialization' (Protocol in workflow.md)
 
 **Phase 4: Procurement UI & Dashboard (Frontend)**
 - [ ] Task: Build the Procurement Management Suite (PO Tracker, Receipt Entry, Supplier Portal).
