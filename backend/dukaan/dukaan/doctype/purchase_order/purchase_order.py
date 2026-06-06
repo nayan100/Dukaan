@@ -11,11 +11,15 @@ class PurchaseOrder(Document):
         validate_po_split_order(self)
 
     def submit(self):
+        if not frappe.get_doc("User", frappe.session.user).has_role("Branch Owner"):
+            frappe.throw("You are not permitted to submit Purchase Orders.")
         if self.status != "Draft":
             frappe.throw("Purchase Order can only be submitted when in Draft status.")
         self.status = "Pending"
 
     def approve(self):
+        if not (frappe.get_doc("User", frappe.session.user).has_role("Accountant") or frappe.get_doc("User", frappe.session.user).has_role("Chain Owner")):
+            frappe.throw("You are not permitted to approve Purchase Orders.")
         if self.status != "Pending":
             frappe.throw("Purchase Order can only be approved when Pending.")
         self.status = "Approved"
