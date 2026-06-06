@@ -3,7 +3,7 @@
 ## Phase 1: The "Digital Twin" Infrastructure (Standardization)
 - [x] Task: Create `_Systems/` folder for backend logic and `_Components/` for frontend UI. 80b6877
 - [x] Task: Configure `Templater` for "Auto-Pathing": New notes created via MOCs must automatically be filed in the correct project sub-directory. ab0ff4b
-- [ ] Task: Initialize `_ProjectAtlas.md` with "Dynamic Queries" or fixed MOCs representing logical layers (Auth, Inventory, Compliance).
+- [x] Task: Initialize `_ProjectAtlas.md` with "Dynamic Queries" or fixed MOCs representing logical layers (Auth, Inventory, Compliance). e769e97
 - [ ] Task: Conductor - User Manual Verification 'Infrastructure Readiness' (Protocol in workflow.md)
 
 ## Phase 2: The "Vault of Truth" (Zero-Loss Migration)
