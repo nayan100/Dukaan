@@ -1,15 +1,15 @@
 # Implementation Plan: Inter-Branch Inventory Protocol
 
-## Phase 1: Core Transfer Logic
+## Phase 1: Core Transfer Logic [checkpoint: 1db0fbd]
 Build the 4-step state machine and warehouse movements.
 
 - [x] Task: Backend - Implement Inter-Branch Transfer DocType 9dfbb49
-    - [ ] [TDD] Write tests for Stock Entry movements (Local -> Transit).
-    - [ ] Create the state machine for the 4-step protocol.
+    - [x] [TDD] Write tests for Stock Entry movements (Local -> Transit).
+    - [x] Create the state machine for the 4-step protocol.
 - [x] Task: Frontend - Build Transfer Request & Dispatch UI e7cad4e
-    - [ ] Create a searchable item picker for branch-to-branch requests.
-    - [ ] Implement the 'Dispatch' interface for the sender branch.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Core Transfer Logic' (Protocol in workflow.md)
+    - [x] Create a searchable item picker for branch-to-branch requests.
+    - [x] Implement the 'Dispatch' interface for the sender branch.
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Core Transfer Logic' (Protocol in workflow.md) 1db0fbd
 
 ## Phase 2: Intelligence & SLA Enforcement
 Implement timers, rejection logic, and rebalancing alerts.
