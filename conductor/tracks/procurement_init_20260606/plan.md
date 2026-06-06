@@ -3,7 +3,7 @@
 **Phase 1: Supplier & Catalog Foundations (Backend)**
 - [x] Task: Extend Supplier doctype with validated Tax ID (PAN/VAT) fields and verification logic. 8cfd93b
 - [x] Task: Implement the Split-Order Heuristic engine to monitor procurement velocity per supplier. 9a3e49d
-- [ ] Task: Create the `Monthly Budget` check hook on the `Purchase Order` doctype.
+- [x] Task: Create the `Monthly Budget` check hook on the `Purchase Order` doctype. d9daf24
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundations' (Protocol in workflow.md)
 
 **Phase 2: Core Procurement Workflows (Backend)**
