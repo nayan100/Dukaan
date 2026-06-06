@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, ShoppingCart, Rocket, 
-  Settings, LogOut, Menu, X, Bell 
+  Settings, LogOut, Menu, X, Bell, Package 
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import PermissionGuard from '../auth/PermissionGuard';
 import POSHUD from '../pos/POSHUD';
 import KPIDashboard from '../analytics/KPIDashboard';
 import OnboardingWizard from '../wizards/OnboardingWizard';
+import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard'>('pos');
+  const [activeTab, setActiveTab] = useState<'pos' | 'dashboard' | 'wizard' | 'logistics'>('pos');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   if (!user) {
@@ -22,9 +23,21 @@ const AppLayout: React.FC = () => {
 
   const navItems = [
     { id: 'pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
-    { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { id: 'dashboard', label: 'Strategy Hub', icon: 'access_strategy_hub' }, // Fix: was using string
+    { id: 'logistics', label: 'Logistics', icon: Package, permission: 'access_branch_dashboard' },
     { id: 'wizard', label: 'Growth Wizard', icon: Rocket, permission: 'access_growth_wizard' },
   ];
+
+  // Manual fix for dashboard icon mapping since I noticed a small type error in my thought process
+  const getIcon = (id: string) => {
+    switch(id) {
+        case 'pos': return ShoppingCart;
+        case 'dashboard': return LayoutDashboard;
+        case 'wizard': return Rocket;
+        case 'logistics': return Package;
+        default: return Package;
+    }
+  }
 
   return (
     <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden font-sans">
@@ -50,10 +63,13 @@ const AppLayout: React.FC = () => {
 
         <nav className="flex-1 px-4 space-y-2">
           {navItems.map((item) => {
-            const Icon = item.icon;
+            const Icon = getIcon(item.id);
             const isActive = activeTab === item.id;
+            // For dashboard, we use access_strategy_hub permission
+            const perm = item.id === 'dashboard' ? 'access_strategy_hub' : item.permission;
+
             return (
-              <PermissionGuard key={item.id} permission={item.permission}>
+              <PermissionGuard key={item.id} permission={perm as string}>
                 <button
                   onClick={() => setActiveTab(item.id as any)}
                   className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all relative group ${
@@ -134,7 +150,7 @@ const AppLayout: React.FC = () => {
                     className="absolute inset-0 overflow-auto"
                 >
                     {activeTab === 'pos' && (
-                        <PermissionGuard permission="access_pos" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                        <PermissionGuard permission="access_pos" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Active Cashiers Only</div>}>
                             <POSHUD availableItems={[
                                 { id: '1', name: 'Wai Wai Noodles', price: 20 },
                                 { id: '2', name: 'Real Juice 1L', price: 250 },
@@ -149,12 +165,27 @@ const AppLayout: React.FC = () => {
                         </PermissionGuard>
                     )}
                     {activeTab === 'dashboard' && (
-                        <PermissionGuard permission="access_strategy_hub" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                        <PermissionGuard permission="access_strategy_hub" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Strategy Group</div>}>
                             <KPIDashboard />
                         </PermissionGuard>
                     )}
+                    {activeTab === 'logistics' && (
+                        <PermissionGuard permission="access_branch_dashboard" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Logistics Group</div>}>
+                            <TransferUI availableItems={[
+                                { id: '1', name: 'Wai Wai Noodles', price: 20 },
+                                { id: '2', name: 'Real Juice 1L', price: 250 },
+                                { id: '3', name: 'Amul Butter 500g', price: 600 },
+                                { id: '4', name: 'Dairy Milk Silk', price: 180 },
+                                { id: '5', name: 'Coca Cola 2.25L', price: 270 },
+                                { id: '6', name: 'Lays Chips', price: 50 },
+                                { id: '7', name: 'Current Noodles', price: 50 },
+                                { id: '8', name: 'Aashirvaad Atta 5kg', price: 550 },
+                                { id: '9', name: 'Fortune Oil 1L', price: 240 },
+                            ]} />
+                        </PermissionGuard>
+                    )}
                     {activeTab === 'wizard' && (
-                        <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger">ACCESS DENIED</div>}>
+                        <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Enterprise Group</div>}>
                             <OnboardingWizard />
                         </PermissionGuard>
                     )}
