@@ -13,11 +13,15 @@
 - [[_Systems/Inventory|Inventory Orchestration]]
 - [[_Systems/Compliance|IRD Compliance & Sync]]
 - [[_Systems/Provisioning|Tenant Provisioning]]
+- [[_Systems/API|API Reference]]
 
 ### 💻 UI & Frontend
 - [[_Components/POS|POS HUD]]
 - [[_Components/Dashboards|KPI Dashboards]]
 - [[_Components/Wizards|Growth Wizards]]
+- [[_Components/DESIGN_SYSTEM|Design System]]
+- [[_Components/GROWTH_WIZARD|Growth Wizard Protocol]]
+- [[_Components/USER_GUIDE|User Operational Guide]]
 
 ## Project Tracks
 - [[conductor/tracks/obsidian_sync_20260606/index|Obsidian Sync Integration]]
@@ -27,4 +31,4 @@
 ## Maintenance
 - [[Templates/Project-Module-Template|Module Template]]
 - [[Templates/Conductor-Task-Template|Task Template]]
-- [[docs/OBSIDIAN_SETUP|Obsidian Setup Guide]]
+- [[_Systems/OBSIDIAN_SETUP|Obsidian Setup Guide]]
