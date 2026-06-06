@@ -1,0 +1,63 @@
+# Implementation Plan: Setup SaaS Infrastructure and Core POS HUD with Offline Sync
+
+## Phase 1: SaaS & Backend Foundation [checkpoint: c5c8789]
+Establish the multi-tenant architecture and core data models.
+
+- [x] Task: Backend - Initialize Frappe Tenant Provisioning Logic b9fcf9f
+    - [x] Define custom DocTypes for Tenant and Subscription metadata.
+    - [x] Implement site creation and database setup hooks.
+- [x] Task: Backend - Implement Core Retail DocTypes (Branch, Warehouse, Price List) 7afb631
+    - [x] Setup warehouse hierarchy for multi-branch mapping.
+    - [x] Configure naming series for IRD-compliant invoicing.
+- [x] Task: Conductor - User Manual Verification 'Phase 1: SaaS & Backend Foundation' (Protocol in workflow.md) c5c8789
+
+## Phase 2: Core POS HUD Development [checkpoint: c7f6ee2]
+Build the high-speed billing interface for cashiers.
+
+- [x] Task: Frontend - Setup React Project with Tailwind and TypeScript 2b41cef
+    - [x] Configure design tokens for high-contrast accessibility.
+    - [x] Initialize the component library for the POS HUD.
+- [x] Task: Frontend - Implement POS HUD 'Speed Grid' and Item Picker 336c0f2
+    - [x] [TDD] Write tests for item selection and quantity calculation.
+    - [x] Implement the billing HUD with 60s autonomous void window.
+- [x] Task: Frontend - Develop Split-Payment UI (Cash, Card, QR) bb8f53d
+    - [x] [TDD] Write tests for multi-payment total validation.
+    - [x] Implement the payment modal with Fonepay QR placeholder.
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Core POS HUD Development' (Protocol in workflow.md) c7f6ee2
+
+## Phase 3: Offline Resilience & Dashboards [checkpoint: b6bba9d]
+Ensure the system remains functional during outages and provides strategic visibility.
+
+- [x] Task: Offline - Implement IndexedDB and Service Worker Sync fb48706
+- [x] Task: Frontend - Implement POS HUD Enhancements (Shortcuts, Lucide Icons, Toasts) 12a793e
+- [x] Task: Analytics - Develop KPI Dashboards (Owner & Chain Owner) 7add7f3
+- [x] Task: Onboarding - Implement Lifecycle Wizards fdf8ba4
+- [x] Task: Compliance - Implement Mock IRD (CBMS) Sync Bridge 386528a
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Offline Resilience & Dashboards' (Protocol in workflow.md) b6bba9d
+
+## Phase 4: Visual Sovereignty & Aesthetic Polish [checkpoint: fb766c7]
+Transform the functional UI into a premium SaaS experience.
+
+- [x] Task: Design - Refine Color Palette & Typography 38a9875
+    - [x] Transition from pure black to Slate-900 depth palette.
+    - [x] Configure Inter/Geist font family and refined scale.
+- [x] Task: UI - Implement Shadcn-inspired Component Polish fb766c7
+    - [x] Update Buttons and Inputs with consistent radius and subtle borders.
+    - [x] Implement Glassmorphism effects for Modals and Sidebars.
+- [x] Task: UX - Add Premium Micro-interactions & Transitions fb766c7
+    - [x] Add Framer Motion for smooth layout transitions.
+    - [x] Enhance POS grid with hover-lift animations and polished feedback.
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Visual Sovereignty & Aesthetic Polish' (Protocol in workflow.md) fb766c7
+
+## Phase 5: Finalization & Documentation
+Wrap up the project with comprehensive documentation and production-ready builds.
+
+- [x] Task: Documentation - Create Comprehensive Repository Wiki & README c83bd3d
+    - [x] Write detailed 'User Guide' for application usage.
+    - [x] Write 'Developer Setup Guide' (Dev vs. Production modes).
+    - [x] Create 'Extensibility Guide' (Adding items, logic, and APIs).
+    - [x] Create 'Testing & QA Guide'.
+- [x] Task: Build - Finalize Production Build & Verification b8a7a7a
+    - [x] Perform full E2E verification of the integrated system.
+    - [x] Generate production-ready assets for frontend and backend.
+- [x] Task: Conductor - User Manual Verification 'Phase 5: Finalization & Documentation' (Protocol in workflow.md) b8a7a7a
