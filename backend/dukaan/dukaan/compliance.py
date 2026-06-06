@@ -174,6 +174,48 @@ def get_vat_annex_14(filters=None):
 
     return frappe.get_all("VAT Annex 14", filters=frappe_filters, fields=["*"])
 
+def ensure_ird_fields():
+    """
+    Ensures that mandatory IRD compliance fields exist on Sales Invoice, 
+    Credit Note, and Purchase Invoice.
+    """
+    doctypes = ["Sales Invoice", "Credit Note", "Purchase Invoice"]
+    
+    fields = [
+        {
+            "fieldname": "ird_sync_token",
+            "label": "IRD Sync Token",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "insert_after": "grand_total"
+        },
+        {
+            "fieldname": "ird_sync_status",
+            "label": "IRD Sync Status",
+            "fieldtype": "Select",
+            "options": "Pending\nSynced\nFailed",
+            "default": "Pending",
+            "insert_after": "ird_sync_token"
+        },
+        {
+            "fieldname": "ird_idempotency_key",
+            "label": "IRD Idempotency Key",
+            "fieldtype": "Data",
+            "read_only": 1,
+            "insert_after": "ird_sync_status"
+        }
+    ]
+    
+    for dt in doctypes:
+        for field in fields:
+            if not frappe.db.exists("Custom Field", {"dt": dt, "fieldname": field["fieldname"]}):
+                custom_field = frappe.get_doc({
+                    "doctype": "Custom Field",
+                    "dt": dt,
+                    **field
+                })
+                custom_field.insert()
+
 def process_offline_queue():
     """
     Finds all invoices marked as offline and unsynced, and pushes them to IRD.
