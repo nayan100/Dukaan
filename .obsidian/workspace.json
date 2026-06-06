@@ -11,14 +11,10 @@
             "id": "63e37be13d607693",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_ProjectAtlas.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "_ProjectAtlas"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -180,11 +176,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "_ProjectAtlas.md"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for _ProjectAtlas"
+              "title": "File properties"
             }
           }
         ],
@@ -209,21 +203,24 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
-    "verify_supplier.py",
+    "conductor/tracks/procurement_init_20260606/Implement_Purchase_Receipt_logic_that_updates_the_materialized_Annex_14_register..md",
+    "backend/dukaan/tests/__pycache__/tmpahz_es9p",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/__pycache__/purchase_receipt.cpython-38.pyc",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/__pycache__/__init__.cpython-38.pyc",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/__pycache__",
+    "backend/dukaan/tests/__pycache__/test_purchase_receipt.cpython-38-PYTEST.pyc",
+    "backend/dukaan/tests/__pycache__/tmpvbd29zcp",
+    "backend/dukaan/tests/test_purchase_receipt.py",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/__init__.py",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/purchase_receipt.py",
+    "backend/dukaan/dukaan/doctype/purchase_receipt/purchase_receipt.json",
+    "conductor/tracks/procurement_init_20260606/Build_the_multi-persona_approval_handshake_(Branch_Owner_->_Accountant_->_Chain_Owner)..md",
+    "conductor/tracks/procurement_init_20260606/Implement_the_Standard_PO_Lifecycle_(Draft_->_Pending_->_Approved_->_Received)..md",
+    "_ProjectAtlas.md",
     "conductor/tracks/procurement_init_20260606/Create_the_Monthly_Budget_check_hook_on_the_Purchase_Order_doctype..md",
-    "backend/dukaan/dukaan/doctype/purchase_order/__pycache__/purchase_order.cpython-38.pyc",
-    "backend/dukaan/dukaan/doctype/purchase_order/__pycache__/__init__.cpython-38.pyc",
-    "backend/dukaan/dukaan/doctype/purchase_order/__pycache__",
-    "backend/dukaan/tests/__pycache__/tmpkyhugc76",
-    "backend/dukaan/dukaan/doctype/purchase_order/__init__.py",
     "Product Command Center.canvas",
-    "backend/dukaan/dukaan/doctype/purchase_order/purchase_order.py",
-    "backend/dukaan/dukaan/doctype/purchase_order/purchase_order.json",
-    "backend/dukaan/dukaan/doctype/purchase_order",
     "conductor/tracks/procurement_init_20260606/Implement_the_Split-Order_Heuristic_engine_to_monitor_procurement_velocity_per_supplier..md",
     "The Data Flow.canvas",
-    "backend/dukaan/tests/__pycache__/tmpnh7cpv1y",
-    "backend/dukaan/tests/__pycache__/test_procurement_logic.cpython-38-PYTEST.pyc",
     "conductor/workflow.md",
     "conductor/tracks/workflow_bulletproof_20260607/Configure_Obsidian_Excluded_files_to_suppress_background_noise..md",
     "conductor/tracks/procurement_init_20260606/Extend_Supplier_doctype_with_validated_Tax_ID_(PAN_VAT)_fields_and_verification_logic..md",
@@ -244,9 +241,6 @@
     "conductor/tracks/workflow_bulletproof_20260607/Implement_Frontmatter_Injection.md",
     "conductor/tracks/workflow_bulletproof_20260607/Implement_update_flag.md",
     "conductor/tracks/workflow_bulletproof_20260607/Implement_Atlas_Lookup.md",
-    "conductor/tracks/workflow_bulletproof_20260607/Implement_Template_Discovery.md",
-    "conductor/tracks/workflow_bulletproof_20260607/Configure_Obsidian_Excluded_files.md",
-    "test_note.md",
     "Untitled.canvas",
     "frontend/coverage/sort-arrow-sprite.png",
     "frontend/coverage/favicon.png",
