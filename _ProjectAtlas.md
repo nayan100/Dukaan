@@ -29,6 +29,10 @@
 - [[conductor/tracks/procurement_init_20260606/index|Procurement & Stock Initialization]]
 
 ### 🏁 Completed & Archived
+- [[conductor/archive/auth_rbac_20260606/index|Authentication & RBAC]]
+- [[conductor/archive/finance_gov_20260606/index|Financial Governance]]
+- [[conductor/archive/inter_branch_20260606/index|Inter-Branch Transfer]]
+- [[conductor/archive/setup_pos_core_20260606/index|POS Core Setup]]
 - [[conductor/archive/obsidian_sync_20260606/index|Obsidian Sync Integration]]
 - [[conductor/archive/ird_sync_20260606/index|Production IRD Sync]]
 
