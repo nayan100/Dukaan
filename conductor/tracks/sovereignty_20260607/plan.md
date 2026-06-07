@@ -11,7 +11,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Global Tenant Enforcement' (Protocol in workflow.md) [f530cd8]
 
 ## Phase 2: SaaS Admin Control Center
-- [ ] Task: Build the `SaaS Admin Dashboard` shell in React (Slate-950 theme).
+- [x] Task: Build the `SaaS Admin Dashboard` shell in React (Slate-950 theme). [a84fcf5]
 - [ ] Task: Implement `Tenant Management` list and detail views (Status toggles: Active, Suspended, Trial).
 - [ ] Task: Create a `Tenant Provisioning Service` in Frappe to automate warehouse and role creation.
 - [ ] Task: Develop the `Monitoring Hub` widgets: Branch Activity (active POS sessions) and Resource Usage (doc counts).
