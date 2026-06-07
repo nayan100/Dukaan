@@ -9,7 +9,7 @@ sys.modules["frappe"] = shared_mock_frappe
 class FrappeException(Exception):
     pass
 
-def mock_throw(msg, title=None):
+def mock_throw(msg, title=None, **kwargs):
     raise FrappeException(msg)
 
 shared_mock_frappe.throw.side_effect = mock_throw
