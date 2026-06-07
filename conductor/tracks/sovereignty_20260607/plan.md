@@ -8,7 +8,7 @@
 - [x] Task: Implement `permission_query_conditions` hook to inject `tenant_id` filters into all reads. [263260b]
 - [x] Task: Implement `before_insert` and `validate` hooks to enforce `tenant_id` on all writes (preventing spoofing). [edb4ff1]
 - [x] Task: **Staged Migration (Step 3)**: Finalize schema by making `tenant_id` mandatory (NOT NULL) and adding database indexes. [4c00ad7]
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Global Tenant Enforcement' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Global Tenant Enforcement' (Protocol in workflow.md) [f530cd8]
 
 ## Phase 2: SaaS Admin Control Center
 - [ ] Task: Build the `SaaS Admin Dashboard` shell in React (Slate-950 theme).
