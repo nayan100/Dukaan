@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TenantManagement from './TenantManagement';
+import MonitoringHub from './MonitoringHub';
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'tenants' | 'provisioning' | 'monitoring'>('overview');
@@ -82,11 +83,7 @@ const AdminDashboard: React.FC = () => {
           </div>
         )}
 
-        {activeTab === 'monitoring' && (
-          <div className="h-96 flex items-center justify-center text-slate-500 border border-dashed border-slate-800 rounded-xl">
-            Monitoring module coming soon...
-          </div>
-        )}
+        {activeTab === 'monitoring' && <MonitoringHub />}
       </main>
     </div>
   );

@@ -35,4 +35,13 @@ describe('AdminDashboard', () => {
     // Should now show Activate Tenant
     expect(screen.getByText('Activate Tenant')).toBeInTheDocument();
   });
+
+  it('switches to monitoring tab when clicked', () => {
+    render(<AdminDashboard />);
+    const monitoringBtn = screen.getByText('Monitoring');
+    fireEvent.click(monitoringBtn);
+    expect(screen.getByText(/Monitoring Hub/i)).toBeInTheDocument();
+    expect(screen.getByText(/Branch Activity/i)).toBeInTheDocument();
+    expect(screen.getByText(/Resource Usage/i)).toBeInTheDocument();
+  });
 });
