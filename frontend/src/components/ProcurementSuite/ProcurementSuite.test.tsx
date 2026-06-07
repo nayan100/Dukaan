@@ -2,15 +2,16 @@ import { render, screen } from '@testing-library/react';
 import ProcurementSuite from './ProcurementSuite';
 
 describe('ProcurementSuite', () => {
-  it('renders the Procurement Suite with PO Tracker, Receipt Entry, and Supplier Portal sections', () => {
+  it('renders the Procurement Suite with PO Tracker, Receipt Entry, and Stock Initialization sections', () => {
     render(<ProcurementSuite />);
     
-    // Check for a main heading
-    expect(screen.getByRole('heading', { name: /Procurement Management Suite/i })).toBeInTheDocument();
-    
-    // Check for key sections/components
+    // Check for sub-navigation items
     expect(screen.getByText(/PO Tracker/i)).toBeInTheDocument();
     expect(screen.getByText(/Receipt Entry/i)).toBeInTheDocument();
-    expect(screen.getByText(/Supplier Portal/i)).toBeInTheDocument();
+    expect(screen.getByText(/Stock Initialization/i)).toBeInTheDocument();
+    expect(screen.getByText(/Procurement Intelligence/i)).toBeInTheDocument();
+    
+    // Check that it defaults to PO Tracker view
+    expect(screen.getByText(/Purchase Order Tracker/i)).toBeInTheDocument();
   });
 });
