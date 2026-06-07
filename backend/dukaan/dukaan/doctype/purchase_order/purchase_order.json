@@ -45,7 +45,8 @@
    "fieldtype": "Link",
    "options": "Tenant",
    "label": "Tenant ID",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
