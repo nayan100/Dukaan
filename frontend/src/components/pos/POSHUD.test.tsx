@@ -1,6 +1,12 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import POSHUD from './POSHUD';
+
+// Mock useAuth
+const mockUseAuth = vi.fn();
+vi.mock('../../context/AuthContext', () => ({
+  useAuth: () => mockUseAuth(),
+}));
 
 // Mock DB
 vi.mock('../../lib/db', () => ({
@@ -21,6 +27,11 @@ const mockItems = [
 ];
 
 describe('POSHUD Component', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockUseAuth.mockReturnValue({ tenantId: 'T1' });
+  });
+
   it('adds an item to the cart when clicked', () => {
     render(<POSHUD availableItems={mockItems} />);
     const appleButton = screen.getByText('Apple');
@@ -106,5 +117,14 @@ describe('POSHUD Component', () => {
     
     expect(screen.getByText('Apple')).toBeInTheDocument();
     expect(screen.queryByText('Banana')).not.toBeInTheDocument();
+  });
+
+  it('disables checkout if tenantId is missing', () => {
+    mockUseAuth.mockReturnValue({ tenantId: null });
+    render(<POSHUD availableItems={mockItems} />);
+    
+    fireEvent.click(screen.getByText('Apple'));
+    const checkoutButton = screen.getByRole('button', { name: /Sovereignty Required/i });
+    expect(checkoutButton).toBeDisabled();
   });
 });

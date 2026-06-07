@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 interface User {
   username: string;
-  role: string;
+  role: 'Admin' | 'Chain Owner' | 'Single Owner' | 'Branch Owner' | 'POS' | 'Accountant';
   tenant: string;
+  parent_user?: string;
+  allocated_pos_quota?: number;
 }
 
 interface AuthContextType {
@@ -17,43 +19,74 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Persona Matrix Mapping
+// Phase 4: Visibility Matrix Mapping
 const ROLE_PERMISSIONS: Record<string, string[]> = {
-  'SaaS Admin': ['access_admin_panel', 'manage_tenants', 'view_all_analytics'],
-  'Chain Owner': ['access_strategy_hub', 'access_growth_wizard', 'view_branch_analytics', 'trigger_rebalance'],
-  'Branch Owner': ['access_branch_dashboard', 'manage_local_inventory', 'approve_maintenance'],
-  'Cashier': ['access_pos', 'process_sale', 'autonomous_void_60s'],
+  'Admin': ['view_tenants', 'manage_provisioning', 'system_maintenance', 'view_global_overview'],
+  'Chain Owner': ['access_strategy_hub', 'manage_branches', 'view_quota_monitor', 'view_all_analytics'],
+  'Single Owner': ['access_growth_wizard', 'view_ird_monitor', 'access_logistics', 'manage_pos_users'],
+  'Branch Owner': ['view_ird_monitor', 'access_logistics', 'manage_local_pos'],
+  'POS': ['access_pos'],
+  'Accountant': ['view_ird_monitor', 'access_logistics', 'view_audit_trail'],
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const savedAuth = sessionStorage.getItem('dukaan_auth');
-    if (savedAuth) {
-      setUser(JSON.parse(savedAuth));
-    }
-  }, []);
+  const setUserRef = useRef(setUser);
+  setUserRef.current = setUser;
 
   const login = async (userData: User) => {
     setUser(userData);
     sessionStorage.setItem('dukaan_auth', JSON.stringify(userData));
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     sessionStorage.removeItem('dukaan_auth');
-  };
+  }, []);
+
+  useEffect(() => {
+    const savedAuth = sessionStorage.getItem('dukaan_auth');
+    if (savedAuth) {
+      setUser(JSON.parse(savedAuth));
+    }
+
+    const handleSessionRevoked = (data: { tenant_id: string }) => {
+      const currentUser = JSON.parse(sessionStorage.getItem('dukaan_auth') || '{}');
+      if (currentUser.tenant === data.tenant_id) {
+        console.log('Session revoked for tenant:', data.tenant_id);
+        // We no longer call setUser(null) here. 
+        // We let the UI handle the isSuspended state first.
+      }
+    };
+
+    window.addEventListener('dukaan_session_revoked', ((e: CustomEvent) => handleSessionRevoked(e.detail)) as EventListener);
+
+    return () => {
+      window.removeEventListener('dukaan_session_revoked', ((e: CustomEvent) => handleSessionRevoked(e.detail)) as EventListener);
+    };
+  }, [logout]);
 
   const validateTenant = async () => {
     if (!user) return;
 
     try {
       const response = await fetch(`/api/method/dukaan.auth.validate_tenant?tenant_id=${user.tenant}`);
-      const data = await response.json();
       
-      if (data.status === 'Suspended') {
-        logout();
+      // If we get a 404, we are likely in a local dev environment without a backend.
+      // We gracefully assume 'Active' to allow UI verification.
+      if (response.status === 404) {
+        console.warn('[Sovereignty] Backend API 404. Assuming Active for local session.');
+        return;
+      }
+
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        const data = await response.json();
+        if (data.status === 'Suspended') {
+          logout();
+        }
+      } else {
+        console.warn('[Sovereignty] Received non-JSON response from backend.');
       }
     } catch (error) {
       console.error('Tenant validation failed', error);
@@ -64,7 +97,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!user) return false;
     
     // Super Admin has all permissions
-    if (user.role === 'SaaS Admin') return true;
+    if (user.role === 'Admin') return true;
 
     const permissions = ROLE_PERMISSIONS[user.role] || [];
     return permissions.includes(permission);

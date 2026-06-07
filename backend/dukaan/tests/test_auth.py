@@ -62,3 +62,22 @@ def test_cross_tenant_isolation():
     
     assert result["status"] == "Failed"
     assert "Access Denied" in result["message"]
+
+
+def test_validate_tenant():
+    from dukaan.auth import validate_tenant
+    
+    # Mock active tenant
+    mock_frappe.db.get_value.return_value = "Active"
+    result = validate_tenant("TenantA")
+    assert result["status"] == "Active"
+    
+    # Mock suspended tenant
+    mock_frappe.db.get_value.return_value = "Suspended"
+    result = validate_tenant("TenantB")
+    assert result["status"] == "Suspended"
+    
+    # Mock error
+    mock_frappe.db.get_value.side_effect = Exception("DB Error")
+    result = validate_tenant("TenantC")
+    assert result["status"] == "Error"

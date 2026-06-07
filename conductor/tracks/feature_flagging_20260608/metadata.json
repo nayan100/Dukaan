@@ -1,0 +1,12 @@
+{
+  "id": "feature_flagging_20260608",
+  "name": "Tenant-Specific Feature Flagging",
+  "status": "planned",
+  "phases": [
+    "Schema Registry",
+    "Logic Implementation",
+    "Frontend Guards",
+    "Admin UI",
+    "Verification"
+  ]
+}

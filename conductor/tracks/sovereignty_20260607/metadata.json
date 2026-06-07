@@ -1,8 +1,0 @@
-{
-  "track_id": "sovereignty_20260607",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-06-07T12:00:00Z",
-  "updated_at": "2026-06-07T12:00:00Z",
-  "description": "SaaS Hardening & Data Isolation (The \"Sovereignty\" Track) Focus: Ensuring Tenant A never sees Tenant B's data at the database level."
-}

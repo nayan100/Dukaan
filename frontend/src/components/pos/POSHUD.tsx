@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';
 import { saveInvoiceOffline } from '../../lib/db';
+import { useAuth } from '../../context/AuthContext';
 
 interface Item {
   id: string;
@@ -22,6 +23,7 @@ interface POSHUDProps {
 }
 
 const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
+  const { tenantId } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -81,6 +83,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
   const handlePaymentComplete = async (details: any) => {
     const invoice = {
       invoice_id: `INV-${Date.now()}`,
+      tenant_id: tenantId,
       items: cart,
       total: details.total,
       payment_details: details,
@@ -234,11 +237,11 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
             variant="primary" 
             size="xl" 
             className="w-full h-16 text-lg uppercase font-black tracking-tight rounded-xl relative overflow-hidden shadow-xl shadow-pos-primary/10 group"
-            onClick={() => cart.length > 0 && setIsPaymentModalOpen(true)}
-            disabled={cart.length === 0}
+            onClick={() => cart.length > 0 && tenantId && setIsPaymentModalOpen(true)}
+            disabled={cart.length === 0 || !tenantId}
           >
             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            <span className="relative z-10">Checkout</span>
+            <span className="relative z-10">{tenantId ? 'Checkout' : 'Sovereignty Required'}</span>
             <span className="absolute bottom-2 right-4 text-[8px] opacity-40 font-black tracking-widest">[ENTER]</span>
           </Button>
         </footer>

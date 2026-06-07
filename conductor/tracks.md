@@ -22,3 +22,13 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: Dashboard Hardening & Sovereignty Integration. Focus: Integrating logical isolation, instant revocation, and tenant-aware UI across POS, Admin, and Strategy hubs.**
 *Link: [./archive/sovereignty_integration_20260607/](./archive/sovereignty_integration_20260607/)*
+
+---
+
+- [x] **Track: Hierarchical Sovereignty & Quota Enforcement. Focus: Implementing the "Line of Command" (Admin -> Owners -> Branches -> POS) and hard resource limits.**
+*Link: [./tracks/hierarchical_sovereignty_20260608/](./tracks/hierarchical_sovereignty_20260608/)*
+
+---
+
+- [ ] **Track: Tenant-Specific Feature Flagging. Focus: Granular control over platform modules based on subscription and add-ons.**
+*Link: [./tracks/feature_flagging_20260608/](./tracks/feature_flagging_20260608/)*

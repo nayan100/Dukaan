@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_import": 0,
+ "autoname": "hash",
+ "creation": "2026-06-08 09:00:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "fields": [
+  {
+   "fieldname": "tenant_id",
+   "fieldtype": "Link",
+   "label": "Tenant",
+   "options": "Tenant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_user",
+   "fieldtype": "Link",
+   "label": "Target User",
+   "options": "User"
+  },
+  {
+   "fieldname": "quota_type",
+   "fieldtype": "Select",
+   "label": "Quota Type",
+   "options": "Max Branches\nMax POS Accounts\nAllocated POS Quota",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_value",
+   "fieldtype": "Int",
+   "label": "Old Value"
+  },
+  {
+   "fieldname": "new_value",
+   "fieldtype": "Int",
+   "label": "New Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "change_reason",
+   "fieldtype": "Small Text",
+   "label": "Change Reason"
+  },
+  {
+   "fieldname": "changed_by",
+   "fieldtype": "Link",
+   "label": "Changed By",
+   "options": "User",
+   "read_only": 1,
+   "default": "Session User"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-08 09:00:00",
+ "modified_by": "Administrator",
+ "module": "Dukaan",
+ "name": "Sovereignty Quota Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 0,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 0
+  },
+  {
+   "create": 0,
+   "delete": 0,
+   "email": 0,
+   "export": 0,
+   "print": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Chain Owner",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -10,7 +10,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [tenantId, setTenantId] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('Cashier');
+  const [role, setRole] = useState('POS');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,10 +62,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                     >
-                        <option value="Cashier">Cashier</option>
+                        <option value="POS">POS (Cashier)</option>
                         <option value="Branch Owner">Branch Owner</option>
                         <option value="Chain Owner">Chain Owner</option>
-                        <option value="SaaS Admin">SaaS Admin</option>
+                        <option value="Single Owner">Single Owner</option>
+                        <option value="Accountant">Accountant</option>
+                        <option value="Admin">Platform Admin</option>
                     </select>
                 </div>
             </div>

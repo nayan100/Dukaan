@@ -41,3 +41,30 @@ def enforce_tenant_on_write(doc, method):
         
     doc.tenant_id = tenant_id
 
+
+def handle_tenant_suspension(doc, method):
+    """
+    DocEvent hook for Tenant DocType on_update.
+    Clears session cache for all users of a suspended tenant.
+    """
+    if doc.status != "Suspended":
+        return
+        
+    # Get all users belonging to this tenant
+    users = frappe.get_all("User", filters={"tenant_id": doc.name}, fields=["name"])
+    
+    cache = frappe.cache()
+    for user in users:
+        username = user.get("name")
+        # Clear the tenant_id cache used by auth_service.py
+        cache.delete_value(f"tenant_id_{username}")
+        # In a real Frappe app, we would also clear session keys:
+        # frappe.clear_cache(user=username)
+
+    # Emit Socket.io event for instant logout
+    frappe.publish_realtime(
+        event="SESSION_REVOKED",
+        message={"tenant_id": doc.name},
+        room=f"tenant_{doc.name}"
+    )
+

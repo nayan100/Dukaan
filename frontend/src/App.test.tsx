@@ -1,23 +1,41 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
+import { vi, describe, it, expect } from 'vitest';
+import React from 'react';
+
+// Mocking internal libs
+vi.mock('./lib/db', () => ({
+  initDB: vi.fn(),
+  getUnsyncedInvoices: vi.fn(() => Promise.resolve([])),
+  saveInvoiceOffline: vi.fn(),
+  markInvoiceSynced: vi.fn(),
+}));
+
+vi.mock('./lib/syncWorker', () => ({
+  startSyncWorker: vi.fn(),
+}));
 
 describe('App', () => {
-  it('renders the Procurement Management Suite, Verify Spot Check UI, and Budget Warning UI', () => {
+  it('renders the main AppLayout and defaults to POS', async () => {
+    // Mock user login
+    sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
+        username: 'testuser', 
+        role: 'Cashier', 
+        tenant: 'T1' 
+    }));
+
     render(
       <AuthProvider>
         <App />
       </AuthProvider>
     );
     
-    // Check for ProcurementSuite content
-    expect(screen.getByRole('heading', { name: /Procurement Management Suite/i })).toBeInTheDocument();
-    expect(screen.getByText(/PO Tracker/i)).toBeInTheDocument();
+    // Check for AppLayout content (Sidebar)
+    expect(screen.getByText(/Dukaan/i)).toBeInTheDocument();
+    expect(screen.getByText(/Point of Sale/i)).toBeInTheDocument();
     
-    // Check for VerifySpotCheckUI content
-    expect(screen.getByRole('button', { name: /Verify Spot Check/i })).toBeInTheDocument();
-    
-    // Check for BudgetWarningUI content (assume it's rendered with isBudgetExceeded=true for testing presence)
-    expect(screen.getByText(/Warning: Budget exceeded for this Purchase Order./i)).toBeInTheDocument();
+    // Check that POSHUD is rendered by default
+    expect(screen.getByText(/Wai Wai Noodles/i)).toBeInTheDocument();
   });
 });

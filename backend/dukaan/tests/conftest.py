@@ -9,8 +9,24 @@ sys.modules["frappe"] = shared_mock_frappe
 class FrappeException(Exception):
     pass
 
+class ValidationError(FrappeException):
+    pass
+
+class PermissionError(FrappeException):
+    pass
+
+shared_mock_frappe.ValidationError = ValidationError
+shared_mock_frappe.PermissionError = PermissionError
+
+def mock_gettext(msg):
+    return msg
+
+shared_mock_frappe._.side_effect = mock_gettext
+
 def mock_throw(msg, title=None):
-    raise FrappeException(msg)
+    if isinstance(msg, Exception):
+        raise msg
+    raise ValidationError(msg)
 
 shared_mock_frappe.throw.side_effect = mock_throw
 
@@ -41,7 +57,7 @@ class MockDocument:
 mock_document.Document = MockDocument
 
 # Make whitelist a transparent decorator
-def whitelist_decorator():
+def whitelist_decorator(*args, **kwargs):
     def decorator(fn):
         return fn
     return decorator

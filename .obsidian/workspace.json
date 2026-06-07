@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_ProjectAtlas.md",
+                "file": "conductor/tracks/hierarchical_sovereignty_20260608/plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_ProjectAtlas"
+              "title": "plan"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "_ProjectAtlas.md"
+                "file": "conductor/tracks/hierarchical_sovereignty_20260608/plan.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for _ProjectAtlas"
+              "title": "File properties for plan"
             }
           }
         ],
@@ -209,43 +209,43 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "_ProjectAtlas.md",
+    "conductor/tracks/feature_flagging_20260608/spec.md",
+    "conductor/tracks/feature_flagging_20260608/plan.md",
+    "conductor/tracks/feature_flagging_20260608/metadata.json",
+    "conductor/tracks/feature_flagging_20260608",
+    "verify_phase_4.py",
+    "frontend/src/components/management/UserManagement.tsx",
+    "frontend/src/components/management/BranchManagement.tsx",
+    "frontend/src/components/management",
+    "backend/dukaan/tests/__pycache__/tmpxb9fi1el",
+    "backend/dukaan/tests/__pycache__/tmpyeq2a6z6",
+    "backend/dukaan/dukaan/__pycache__/quota_management.cpython-38.pyc",
+    "backend/dukaan/tests/__pycache__/test_quota_enforcement.cpython-38-PYTEST.pyc",
+    "conductor/tracks/hierarchical_sovereignty_20260608/spec.md",
+    "conductor/tracks/hierarchical_sovereignty_20260608/plan.md",
+    "conductor/tracks/sovereignty_integration_20260607/plan.md",
+    "conductor/archive/sovereignty_integration_20260607/spec.md",
+    "conductor/archive/sovereignty_integration_20260607/plan.md",
+    "conductor/tracks/sovereignty_integration_20260607/spec.md",
+    "conductor/archive/sovereignty_20260607/spec.md",
+    "conductor/archive/sovereignty_20260607/plan.md",
+    "conductor/archive/sovereignty_20260607/index.md",
+    "conductor/archive/sovereignty_20260607/Staged_Migration_(Step_3)_Finalize_schema_by_making_tenant_id_mandatory_(NOT_NULL)_and_adding_database_indexes..md",
+    "conductor/archive/sovereignty_20260607/Staged_Migration_(Step_2)_Write_and_execute_a_batch_background_script_to_populate_tenant_id_with_default_for_existing_records..md",
+    "conductor/archive/sovereignty_20260607/Staged_Migration_(Step_1)_Add_nullable_tenant_id_field_to_Item,_Warehouse,_Stock_Entry,_Invoice,_Purchase_Order,_and_Supplier..md",
+    "conductor/archive/sovereignty_20260607/Implement_permission_query_conditions_hook_to_inject_tenant_id_filters_into_all_reads..md",
+    "conductor/archive/sovereignty_20260607/Implement_before_insert_and_validate_hooks_to_enforce_tenant_id_on_all_writes_(preventing_spoofing)..md",
+    "conductor/archive/sovereignty_20260607/Implement_AuthService_utility_to_fetch_and_cache_tenant_id_for_the_current_user_session..md",
+    "conductor/archive/sovereignty_20260607/Implement_AuthService_utility.md",
+    "conductor/archive/sovereignty_20260607/Create_Tenant_DocType_in_Frappe.md",
+    "conductor/archive/sovereignty_20260607/Conductor_-_User_Manual_Verification_Phase_1__Global_Tenant_Enforcement_(Protocol_in_workflow.md).md",
+    "conductor/archive/sovereignty_20260607/Build_the_SaaS_Admin_Dashboard_shell_in_React_(Slate-950_theme)..md",
     "conductor/workflow.md",
-    "backend/dukaan/tests/__pycache__/tmp2c0oyjxr",
-    "frontend/src/components/admin/OnboardingWizard.tsx",
-    "frontend/src/components/admin/MonitoringHub.tsx",
     "conductor/tracks/sovereignty_20260607/plan.md",
-    "frontend/src/components/admin/TenantManagement.tsx",
     "conductor/archive/mgmt_opt_20260607/spec.md",
     "conductor/archive/mgmt_opt_20260607/plan.md",
-    "conductor/archive/mgmt_opt_20260607/metadata.json",
-    "conductor/archive/mgmt_opt_20260607/index.md",
-    "conductor/archive/mgmt_opt_20260607",
-    "cold-storage/legacy_concept.md",
-    "conductor/tracks/mgmt_opt_20260607/spec.md",
-    "conductor/tracks/mgmt_opt_20260607/plan.md",
-    "conductor/tracks/mgmt_opt_20260607/metadata.json",
-    "conductor/tracks/mgmt_opt_20260607/index.md",
-    "conductor/tracks/mgmt_opt_20260607",
-    "_ProjectAtlas.md",
-    "Untitled.md",
-    "conductor/tracks/sovereignty_20260607/Build_the_SaaS_Admin_Dashboard_shell_in_React_(Slate-950_theme)..md",
-    "frontend/src/components/admin/AdminDashboard.tsx",
-    "frontend/src/components/admin",
-    "conductor/tracks/sovereignty_20260607/Conductor_-_User_Manual_Verification_Phase_1__Global_Tenant_Enforcement_(Protocol_in_workflow.md).md",
-    "conductor/tracks/sovereignty_20260607/Staged_Migration_(Step_3)_Finalize_schema_by_making_tenant_id_mandatory_(NOT_NULL)_and_adding_database_indexes..md",
-    "conductor/tracks/sovereignty_20260607/Implement_before_insert_and_validate_hooks_to_enforce_tenant_id_on_all_writes_(preventing_spoofing)..md",
-    "conductor/tracks/sovereignty_20260607/Implement_permission_query_conditions_hook_to_inject_tenant_id_filters_into_all_reads..md",
-    "conductor/tracks/sovereignty_20260607/Staged_Migration_(Step_2)_Write_and_execute_a_batch_background_script_to_populate_tenant_id_with_default_for_existing_records..md",
-    "conductor/tracks/sovereignty_20260607/Staged_Migration_(Step_1)_Add_nullable_tenant_id_field_to_Item,_Warehouse,_Stock_Entry,_Invoice,_Purchase_Order,_and_Supplier..md",
-    "conductor/code_styleguides/html-css.md",
-    "conductor/tracks/sovereignty_20260607/Implement_AuthService_utility_to_fetch_and_cache_tenant_id_for_the_current_user_session..md",
-    "conductor/tracks/sovereignty_20260607/Implement_AuthService_utility.md",
-    "conductor/tracks/sovereignty_20260607/Create_Tenant_DocType_in_Frappe.md",
-    "conductor/tracks/sovereignty_20260607/spec.md",
-    "conductor/tracks/sovereignty_20260607/index.md",
-    "GAP_ANALYSIS.md",
     "Product Command Center.canvas",
-    "README.md",
     "The Data Flow.canvas",
     "Untitled.canvas",
     "frontend/coverage/sort-arrow-sprite.png",

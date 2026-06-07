@@ -1,5 +1,22 @@
 import frappe
 
+@frappe.whitelist(allow_guest=True)
+def validate_tenant(tenant_id):
+    """
+    Checks the status of a tenant.
+    Used by the frontend to enforce instant revocation.
+    """
+    try:
+        status = frappe.db.get_value("Tenant", tenant_id, "status")
+        return {
+            "status": status or "Invalid"
+        }
+    except Exception:
+        return {
+            "status": "Error"
+        }
+
+
 def login(tenant_id, username, password):
     """
     Unified multi-tenant authentication logic.

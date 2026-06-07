@@ -16,9 +16,10 @@
   },
   {
    "fieldname": "plan_tier",
-   "fieldtype": "Link",
-   "label": "Subscription Plan",
-   "options": "Subscription",
+   "fieldtype": "Select",
+   "label": "Plan Tier",
+   "options": "Basic\nStandard\nEnterprise",
+   "default": "Basic",
    "reqd": 1
   },
   {
@@ -27,6 +28,23 @@
    "label": "Status",
    "options": "Pending\nActive\nSuspended\nTrial\nDeleted",
    "default": "Pending"
+  },
+  {
+   "fieldname": "section_sovereignty",
+   "fieldtype": "Section Break",
+   "label": "Sovereignty & Quotas"
+  },
+  {
+   "fieldname": "max_branches",
+   "fieldtype": "Int",
+   "label": "Max Branches",
+   "default": 1
+  },
+  {
+   "fieldname": "max_pos_accounts",
+   "fieldtype": "Int",
+   "label": "Max POS Accounts",
+   "default": 3
   },
   {
    "fieldname": "site_url",

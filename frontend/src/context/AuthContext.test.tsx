@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AuthProvider, useAuth } from './AuthContext';
 import React from 'react';
@@ -67,6 +67,31 @@ describe('AuthContext and Permission Shadowing', () => {
     });
 
     expect(result.current.user).toBeNull();
+    expect(sessionStorage.getItem('dukaan_auth')).toBeNull();
+  });
+
+  it('logs out user on SESSION_REVOKED window event', async () => {
+    const { result, rerender } = renderHook(() => useAuth(), { wrapper });
+    
+    await act(async () => {
+      await result.current.login({ username: 'user1', role: 'Cashier', tenant: 'T1' });
+    });
+
+    expect(result.current.user).not.toBeNull();
+
+    // Trigger simulated socket event
+    await act(async () => {
+      const event = new CustomEvent('dukaan_session_revoked', { 
+        detail: { tenant_id: 'T1' } 
+      });
+      window.dispatchEvent(event);
+    });
+
+    rerender();
+
+    await waitFor(() => {
+      expect(result.current.user).toBeNull();
+    }, { timeout: 2000 });
     expect(sessionStorage.getItem('dukaan_auth')).toBeNull();
   });
 });
