@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProcurementSuite from './components/ProcurementSuite/ProcurementSuite';
 import VerifySpotCheckUI from './components/OpeningStockEntry/VerifySpotCheckUI';
 import BudgetWarningUI from './components/PurchaseOrder/BudgetWarningUI';
 import AdminDashboard from './components/admin/AdminDashboard';
+import { useAuth } from './context/AuthContext';
 
 function App() {
   const [view, setView] = useState<'retail' | 'admin'>('retail');
+  const { validateTenant } = useAuth();
+
+  useEffect(() => {
+    validateTenant();
+  }, [view, validateTenant]);
 
   const handleVerifySpotCheck = () => {
     console.log('Verify Spot Check button clicked!');

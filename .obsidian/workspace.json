@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conductor/workflow.md",
+                "file": "_ProjectAtlas.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "workflow"
+              "title": "_ProjectAtlas"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "conductor/workflow.md"
+                "file": "_ProjectAtlas.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for workflow"
+              "title": "File properties for _ProjectAtlas"
             }
           }
         ],
@@ -209,6 +209,7 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "conductor/workflow.md",
     "backend/dukaan/tests/__pycache__/tmp2c0oyjxr",
     "frontend/src/components/admin/OnboardingWizard.tsx",
     "frontend/src/components/admin/MonitoringHub.tsx",
@@ -230,7 +231,6 @@
     "conductor/tracks/sovereignty_20260607/Build_the_SaaS_Admin_Dashboard_shell_in_React_(Slate-950_theme)..md",
     "frontend/src/components/admin/AdminDashboard.tsx",
     "frontend/src/components/admin",
-    "frontend/src/test/AdminDashboard.test.tsx",
     "conductor/tracks/sovereignty_20260607/Conductor_-_User_Manual_Verification_Phase_1__Global_Tenant_Enforcement_(Protocol_in_workflow.md).md",
     "conductor/tracks/sovereignty_20260607/Staged_Migration_(Step_3)_Finalize_schema_by_making_tenant_id_mandatory_(NOT_NULL)_and_adding_database_indexes..md",
     "conductor/tracks/sovereignty_20260607/Implement_before_insert_and_validate_hooks_to_enforce_tenant_id_on_all_writes_(preventing_spoofing)..md",

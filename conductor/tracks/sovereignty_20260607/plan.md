@@ -19,7 +19,7 @@
  - [x] Task: Conductor - User Manual Verification 'Phase 2: SaaS Admin Control Center' [a9b576c] (Protocol in workflow.md)
 
 ## Phase 3: Multi-Tenant Auth Polish & Revocation
-- [ ] Task: Update Frontend `AuthContext` to store and validate `tenant_id` on every route change.
+- [x] Task: Update Frontend `AuthContext` to store and validate `tenant_id` on every route change. [60e139b]
 - [ ] Task: Implement backend logic to clear Redis session cache when a Tenant is "Suspended".
 - [ ] Task: Integrate `Socket.io` to emit a 'SESSION_REVOKED' event to all clients of a suspended tenant for instant logout.
 - [ ] Task: Write E2E Isolation Tests: Verify that Tenant A can NEVER access Tenant B data via API or UI.

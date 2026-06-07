@@ -8,9 +8,11 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  tenantId: string | null;
   login: (user: User) => Promise<void>;
   logout: () => void;
   hasPermission: (permission: string) => boolean;
+  validateTenant: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,6 +45,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     sessionStorage.removeItem('dukaan_auth');
   };
 
+  const validateTenant = async () => {
+    if (!user) return;
+
+    try {
+      const response = await fetch(`/api/method/dukaan.auth.validate_tenant?tenant_id=${user.tenant}`);
+      const data = await response.json();
+      
+      if (data.status === 'Suspended') {
+        logout();
+      }
+    } catch (error) {
+      console.error('Tenant validation failed', error);
+    }
+  };
+
   const hasPermission = (permission: string) => {
     if (!user) return false;
     
@@ -54,7 +71,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, hasPermission }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      tenantId: user?.tenant || null,
+      login, 
+      logout, 
+      hasPermission, 
+      validateTenant 
+    }}>
       {children}
     </AuthContext.Provider>
   );

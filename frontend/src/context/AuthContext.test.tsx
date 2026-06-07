@@ -42,4 +42,31 @@ describe('AuthContext and Permission Shadowing', () => {
     expect(result.current.hasPermission('access_pos')).toBe(true);
     expect(result.current.hasPermission('access_strategy_hub')).toBe(false);
   });
+
+  it('logs out user if tenant validation fails', async () => {
+    // Mock fetch for validation
+    const mockFetch = vi.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ status: 'Suspended' }),
+      })
+    );
+    vi.stubGlobal('fetch', mockFetch);
+
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    
+    await act(async () => {
+      await result.current.login({ username: 'user1', role: 'Cashier', tenant: 'T1' });
+    });
+
+    expect(result.current.user).not.toBeNull();
+
+    // Trigger validation
+    await act(async () => {
+      await result.current.validateTenant();
+    });
+
+    expect(result.current.user).toBeNull();
+    expect(sessionStorage.getItem('dukaan_auth')).toBeNull();
+  });
 });
