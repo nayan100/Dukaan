@@ -18,7 +18,7 @@
 - [x] Task: Develop the Landed Cost Voucher system for retroactive valuation adjustments.
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Initialization' (Protocol in workflow.md)
 
-**Phase 4: Procurement UI & Dashboard (Frontend)**
+**Phase 4: Procurement UI & Dashboard (Frontend)** [checkpoint: 57ac8be]
 - [x] Task: Build the Procurement Management Suite (PO Tracker, Receipt Entry, Supplier Portal). baf6e06
 - [x] Task: Implement 'Verify Spot Check' UI for Opening Stock Entry. 6d0b74c
 - [x] Task: Implement the "Soft Warning" UI for budget-exceeding Purchase Orders. 50a0a5c
