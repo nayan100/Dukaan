@@ -26,7 +26,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 ---
 
 - [x] **Track: Hierarchical Sovereignty & Quota Enforcement. Focus: Implementing the "Line of Command" (Admin -> Owners -> Branches -> POS) and hard resource limits.**
-*Link: [./tracks/hierarchical_sovereignty_20260608/](./tracks/hierarchical_sovereignty_20260608/)*
+*Link: [./archive/hierarchical_sovereignty_20260608/](./archive/hierarchical_sovereignty_20260608/)*
 
 ---
 
