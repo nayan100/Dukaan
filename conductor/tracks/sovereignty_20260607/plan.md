@@ -6,7 +6,7 @@
 - [x] Task: **Staged Migration (Step 1)**: Add nullable `tenant_id` field to `Item`, `Warehouse`, `Stock Entry`, `Invoice`, `Purchase Order`, and `Supplier`. [73c2d66]
 - [x] Task: **Staged Migration (Step 2)**: Write and execute a batch background script to populate `tenant_id` with 'default' for existing records. [bf27179]
 - [x] Task: Implement `permission_query_conditions` hook to inject `tenant_id` filters into all reads. [263260b]
-- [ ] Task: Implement `before_insert` and `validate` hooks to enforce `tenant_id` on all writes (preventing spoofing).
+- [x] Task: Implement `before_insert` and `validate` hooks to enforce `tenant_id` on all writes (preventing spoofing). [edb4ff1]
 - [ ] Task: **Staged Migration (Step 3)**: Finalize schema by making `tenant_id` mandatory (NOT NULL) and adding database indexes.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Global Tenant Enforcement' (Protocol in workflow.md)
 
