@@ -18,6 +18,7 @@ import AdminDashboard from '../admin/AdminDashboard';
 import BranchManagement from '../management/BranchManagement';
 import UserManagement from '../management/UserManagement';
 import Button from '../ui/Button';
+import ProcurementSuite from '../ProcurementSuite/ProcurementSuite';
 import { initDB } from '../../lib/db';
 import { startSyncWorker } from '../../lib/syncWorker';
 
@@ -72,6 +73,7 @@ const AppLayout: React.FC = () => {
     { id: 'audit', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
     { id: 'logistics', label: 'Logistics', icon: Package, permission: 'access_logistics' },
     { id: 'users', label: 'User Management', icon: Users, permission: 'manage_pos_users' },
+    { id: 'procurement', label: 'Stock & Supply', icon: ClipboardList, permission: 'manage_procurement' },
     { id: 'local_users', label: 'POS Staff', icon: Users, permission: 'manage_local_pos' },
     { id: 'pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
   ];
@@ -284,6 +286,11 @@ const AppLayout: React.FC = () => {
                     {activeTab === 'wizard' && (
                         <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Enterprise Group</div>}>
                             <OnboardingWizard />
+                        </PermissionGuard>
+                    )}
+                    {activeTab === 'procurement' && (
+                        <PermissionGuard permission="manage_procurement" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Procurement Group</div>}>
+                            <ProcurementSuite />
                         </PermissionGuard>
                     )}
                     {activeTab === 'audit' && (
