@@ -8,7 +8,7 @@ def create_tenant(details):
     tenant = frappe.get_doc({
         "doctype": "Tenant",
         "company_name": details.get("company_name"),
-        "plan": details.get("plan"),
+        "plan_tier": details.get("plan_tier"),
         "status": "Pending"
     })
     tenant.insert(ignore_permissions=True)
@@ -39,7 +39,7 @@ def format_tenant_metadata(data):
     """
     return {
         "company_name": data.get("name"),
-        "plan": data.get("plan"),
+        "plan_tier": data.get("plan_tier"),
         "status": "Pending",
         "created_at": datetime.datetime.now().isoformat()
     }

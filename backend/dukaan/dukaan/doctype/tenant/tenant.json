@@ -15,7 +15,7 @@
    "unique": 1
   },
   {
-   "fieldname": "plan",
+   "fieldname": "plan_tier",
    "fieldtype": "Link",
    "label": "Subscription Plan",
    "options": "Subscription",
@@ -25,7 +25,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Pending\nActive\nSuspended\nDeleted",
+   "options": "Pending\nActive\nSuspended\nTrial\nDeleted",
    "default": "Pending"
   },
   {
@@ -39,6 +39,12 @@
    "fieldtype": "Data",
    "label": "Database Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "default_warehouse",
+   "fieldtype": "Link",
+   "label": "Default Warehouse",
+   "options": "Warehouse"
   }
  ],
  "index_web_pages_for_search": 1,

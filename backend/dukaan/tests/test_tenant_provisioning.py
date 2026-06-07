@@ -13,7 +13,7 @@ def test_create_tenant_triggers_site_provisioning():
     
     tenant_details = {
         "company_name": "Test Shop",
-        "plan": "Pro"
+        "plan_tier": "Pro"
     }
     
     mock_tenant = MagicMock()
@@ -27,7 +27,7 @@ def test_create_tenant_triggers_site_provisioning():
         mock_frappe.get_doc.assert_called_with({
             "doctype": "Tenant",
             "company_name": "Test Shop",
-            "plan": "Pro",
+            "plan_tier": "Pro",
             "status": "Pending"
         })
         
@@ -67,7 +67,7 @@ def test_tenant_metadata_storage():
     """
     from dukaan.tenant_provisioning import format_tenant_metadata
     
-    raw_data = {"name": "Test", "plan": "Standard"}
+    raw_data = {"name": "Test", "plan_tier": "Standard"}
     metadata = format_tenant_metadata(raw_data)
     
     assert metadata["status"] == "Pending"
