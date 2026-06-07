@@ -39,6 +39,13 @@
    "label": "Status",
    "options": "Draft\nPending\nApproved\nReceived",
    "default": "Draft"
+  },
+  {
+   "fieldname": "tenant_id",
+   "fieldtype": "Link",
+   "options": "Tenant",
+   "label": "Tenant ID",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
