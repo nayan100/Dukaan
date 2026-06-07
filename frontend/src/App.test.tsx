@@ -21,7 +21,7 @@ describe('App', () => {
     // Mock user login
     sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
         username: 'testuser', 
-        role: 'Cashier', 
+        role: 'POS', 
         tenant: 'T1' 
     }));
 
@@ -31,11 +31,11 @@ describe('App', () => {
       </AuthProvider>
     );
     
-    // Check for AppLayout content (Sidebar)
-    expect(screen.getByText(/Dukaan/i)).toBeInTheDocument();
-    expect(screen.getByText(/Point of Sale/i)).toBeInTheDocument();
+    // Check for AppLayout content (Header)
+    expect(screen.getByText(/Authorized User/i)).toBeInTheDocument();
+    expect(screen.getByText(/testuser/i)).toBeInTheDocument();
     
-    // Check that POSHUD is rendered by default
+    // Check that POSHUD is rendered by default (Wai Wai Noodles is an item in POSHUD)
     expect(screen.getByText(/Wai Wai Noodles/i)).toBeInTheDocument();
   });
 });

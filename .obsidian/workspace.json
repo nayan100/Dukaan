@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conductor/tracks/hierarchical_sovereignty_20260608/plan.md",
+                "file": "conductor/archive/setup_pos_core_20260606/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "plan"
+              "title": "index"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "conductor/tracks/hierarchical_sovereignty_20260608/plan.md"
+                "file": "conductor/archive/setup_pos_core_20260606/index.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for plan"
+              "title": "File properties for index"
             }
           }
         ],
@@ -209,21 +209,28 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "frontend/src/components/Procurement/ApprovalHandshake.tsx",
+    "frontend/src/components/Procurement/ApprovalHandshake.test.tsx",
+    "_Systems/Provisioning.md",
+    "frontend/src/components/Procurement/POCreationWizard.tsx",
     "_ProjectAtlas.md",
+    "frontend/src/components/Procurement/POCreationWizard.test.tsx",
+    "frontend/src/components/Procurement/POListView.tsx",
+    "GAP_ANALYSIS.md",
+    "frontend/src/components/Procurement/POListView.test.tsx",
+    "frontend/src/components/Procurement",
+    "conductor/tracks/procurement_realization_20260608/plan.md",
+    "conductor/tracks/procurement_realization_20260608/spec.md",
+    "conductor/tracks/procurement_realization_20260608/metadata.json",
+    "conductor/tracks/procurement_realization_20260608",
     "conductor/tracks/feature_flagging_20260608/spec.md",
     "conductor/tracks/feature_flagging_20260608/plan.md",
-    "conductor/tracks/feature_flagging_20260608/metadata.json",
-    "conductor/tracks/feature_flagging_20260608",
-    "verify_phase_4.py",
-    "frontend/src/components/management/UserManagement.tsx",
-    "frontend/src/components/management/BranchManagement.tsx",
-    "frontend/src/components/management",
-    "backend/dukaan/tests/__pycache__/tmpxb9fi1el",
-    "backend/dukaan/tests/__pycache__/tmpyeq2a6z6",
-    "backend/dukaan/dukaan/__pycache__/quota_management.cpython-38.pyc",
-    "backend/dukaan/tests/__pycache__/test_quota_enforcement.cpython-38-PYTEST.pyc",
-    "conductor/tracks/hierarchical_sovereignty_20260608/spec.md",
     "conductor/tracks/hierarchical_sovereignty_20260608/plan.md",
+    "conductor/archive/hierarchical_sovereignty_20260608/spec.md",
+    "conductor/archive/hierarchical_sovereignty_20260608/plan.md",
+    "conductor/archive/hierarchical_sovereignty_20260608/metadata.json",
+    "conductor/archive/hierarchical_sovereignty_20260608",
+    "conductor/tracks/hierarchical_sovereignty_20260608/spec.md",
     "conductor/tracks/sovereignty_integration_20260607/plan.md",
     "conductor/archive/sovereignty_integration_20260607/spec.md",
     "conductor/archive/sovereignty_integration_20260607/plan.md",
@@ -238,13 +245,6 @@
     "conductor/archive/sovereignty_20260607/Implement_before_insert_and_validate_hooks_to_enforce_tenant_id_on_all_writes_(preventing_spoofing)..md",
     "conductor/archive/sovereignty_20260607/Implement_AuthService_utility_to_fetch_and_cache_tenant_id_for_the_current_user_session..md",
     "conductor/archive/sovereignty_20260607/Implement_AuthService_utility.md",
-    "conductor/archive/sovereignty_20260607/Create_Tenant_DocType_in_Frappe.md",
-    "conductor/archive/sovereignty_20260607/Conductor_-_User_Manual_Verification_Phase_1__Global_Tenant_Enforcement_(Protocol_in_workflow.md).md",
-    "conductor/archive/sovereignty_20260607/Build_the_SaaS_Admin_Dashboard_shell_in_React_(Slate-950_theme)..md",
-    "conductor/workflow.md",
-    "conductor/tracks/sovereignty_20260607/plan.md",
-    "conductor/archive/mgmt_opt_20260607/spec.md",
-    "conductor/archive/mgmt_opt_20260607/plan.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",

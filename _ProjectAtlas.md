@@ -26,7 +26,7 @@
 ## Project Tracks
 
 ### 🚀 Active & Pending
-- [[conductor/tracks/procurement_init_20260606/index|Procurement & Stock Initialization]]
+- [[conductor/tracks/procurement_realization_20260608/index|Procurement & Stock Realization]]
 
 ### 🏁 Completed & Archived
 - [[conductor/archive/mgmt_opt_20260607/index|Conductor Surgical Optimization (CSOP)]]
