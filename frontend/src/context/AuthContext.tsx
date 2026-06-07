@@ -21,12 +21,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Phase 4: Visibility Matrix Mapping
 const ROLE_PERMISSIONS: Record<string, string[]> = {
-  'Admin': ['view_tenants', 'manage_provisioning', 'system_maintenance', 'view_global_overview', 'manage_procurement'],
+  'Admin': ['view_tenants', 'manage_provisioning', 'system_maintenance', 'view_global_overview', 'manage_procurement', 'approve_budget_override', 'view_compliance_reports'],
   'Chain Owner': ['access_strategy_hub', 'manage_branches', 'view_quota_monitor', 'view_all_analytics'],
-  'Single Owner': ['access_growth_wizard', 'view_ird_monitor', 'access_logistics', 'manage_pos_users', 'manage_procurement'],
-  'Branch Owner': ['view_ird_monitor', 'access_logistics', 'manage_local_pos', 'manage_procurement'],
+  'Single Owner': ['access_growth_wizard', 'view_ird_monitor', 'access_logistics', 'manage_pos_users', 'manage_procurement', 'approve_budget_override', 'view_compliance_reports'],
+  'Branch Owner': ['view_ird_monitor', 'access_logistics', 'manage_local_pos', 'manage_procurement', 'approve_budget_override'],
   'POS': ['access_pos'],
-  'Accountant': ['view_ird_monitor', 'access_logistics', 'view_audit_trail'],
+  'Accountant': ['view_ird_monitor', 'access_logistics', 'view_audit_trail', 'view_compliance_reports'],
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
