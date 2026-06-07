@@ -1,6 +1,14 @@
 import { openDB } from 'idb';
 import type { DBSchema, IDBPDatabase } from 'idb';
 
+interface Budget {
+  id: string; // branch_id + month
+  branch_id: string;
+  month: string; // e.g., '2026-06'
+  allocated: number;
+  spent: number;
+}
+
 interface DukaanDB extends DBSchema {
   catalog: {
     key: string;
@@ -27,21 +35,39 @@ interface DukaanDB extends DBSchema {
       ird_receipt_no?: string;
     };
   };
+  budgets: {
+    key: string;
+    value: Budget;
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<DukaanDB>>;
 
 export const initDB = () => {
   if (dbPromise) return; // Prevent multiple initializations
-  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 2, {
+  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 3, {
     upgrade(db, oldVersion) {
       if (oldVersion < 1) {
         db.createObjectStore('catalog', { keyPath: 'id' });
         db.createObjectStore('invoices', { keyPath: 'invoice_id' });
       }
-      // Future migrations can go here
+      if (oldVersion < 3) {
+        if (!db.objectStoreNames.contains('budgets')) {
+            db.createObjectStore('budgets', { keyPath: 'id' });
+        }
+      }
     },
   });
+};
+
+export const getBudget = async (branchId: string, month: string) => {
+  const db = await dbPromise;
+  return db.get('budgets', `${branchId}-${month}`);
+};
+
+export const updateBudget = async (budget: Budget) => {
+  const db = await dbPromise;
+  await db.put('budgets', budget);
 };
 
 export const saveInvoiceOffline = async (invoice: any) => {
