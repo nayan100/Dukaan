@@ -180,6 +180,8 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **POS & Payment Core:** Full-screen HUD, Fonepay QR integration, and split-payment support.
 *   **Inter-Branch Protocol:** Resilient 4-step workflow (Request -> Dispatch -> Approve -> Receipt) with auto-rejection logic.
 *   **Compliance & IRD Sync:** Real-time sync with the IRD Central Billing Monitoring System and immutable audit trails.
+*   **Procurement & Stock Management:** High-integrity Purchase Order (PO) flows with split-order detection, multi-persona approval handshakes, and soft budget enforcement. Includes physical-first opening stock entry with moving average valuation and a blind spot-check protocol.
+*   **Financial Governance Enhancements:** Introduction of Landed Cost Vouchers for accurate stock valuation and direct integration with Annex 14 Purchase Registers for compliance.
 
 ## 9. Operational Guardrails
 *   **Real-time Resilience:** PWA architecture with IndexedDB caching and real-time background sync.
