@@ -19,19 +19,33 @@ def create_tenant(details):
 
 def provision_new_site(tenant_name):
     """
-    Simulation of site creation and database setup.
+    Simulate site creation, database setup, and default resource provisioning.
     """
     tenant = frappe.get_doc("Tenant", tenant_name)
     
-    # Simulate site creation logic
+    # 1. Simulate site creation logic
     site_url = f"https://{tenant_name.lower().replace(' ', '-')}.dukaan.com"
     db_name = f"db_{tenant_name.lower().replace(' ', '_')}"
     
-    tenant.db_set("site_url", site_url)
-    tenant.db_set("db_name", db_name)
-    tenant.db_set("status", "Active")
+    tenant.site_url = site_url
+    tenant.db_name = db_name
     
-    frappe.msgprint(f"Site provisioned for {tenant_name}")
+    # 2. Provision Default Warehouse
+    warehouse_name = f"{tenant_name} - Local"
+    if not frappe.db.exists("Warehouse", warehouse_name):
+        warehouse = frappe.get_doc({
+            "doctype": "Warehouse",
+            "warehouse_name": warehouse_name,
+            "is_group": 0,
+            "tenant_id": tenant.name
+        })
+        warehouse.insert(ignore_permissions=True)
+        tenant.default_warehouse = warehouse.name
+    
+    tenant.status = "Active"
+    tenant.save(ignore_permissions=True)
+    
+    frappe.msgprint(f"Site provisioned and warehouse '{warehouse_name}' created for {tenant_name}")
 
 def format_tenant_metadata(data):
     """
