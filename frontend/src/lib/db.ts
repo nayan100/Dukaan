@@ -15,6 +15,15 @@ interface Supplier {
   tax_id?: string;
 }
 
+interface AuditLogEntry {
+  id: string; // uuid
+  timestamp: number;
+  action: string;
+  user: string;
+  details: any;
+  tenant: string;
+}
+
 interface DukaanDB extends DBSchema {
   catalog: {
     key: string;
@@ -49,13 +58,17 @@ interface DukaanDB extends DBSchema {
     key: string;
     value: Supplier;
   };
+  audit_log: {
+    key: string;
+    value: AuditLogEntry;
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<DukaanDB>>;
 
 export const initDB = () => {
   if (dbPromise) return; // Prevent multiple initializations
-  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 4, {
+  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 5, {
     upgrade(db, oldVersion) {
       if (oldVersion < 1) {
         db.createObjectStore('catalog', { keyPath: 'id' });
@@ -71,8 +84,26 @@ export const initDB = () => {
             db.createObjectStore('suppliers', { keyPath: 'id' });
         }
       }
+      if (oldVersion < 5) {
+        if (!db.objectStoreNames.contains('audit_log')) {
+            db.createObjectStore('audit_log', { keyPath: 'id' });
+        }
+      }
     },
   });
+};
+
+export const logAction = async (action: string, user: string, tenant: string, details: any) => {
+  const db = await dbPromise;
+  const entry: AuditLogEntry = {
+    id: crypto.randomUUID(),
+    timestamp: Date.now(),
+    action,
+    user,
+    tenant,
+    details
+  };
+  await db.put('audit_log', entry);
 };
 
 export const getSupplier = async (id: string) => {
