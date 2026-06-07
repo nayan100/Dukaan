@@ -37,7 +37,7 @@ def enforce_tenant_on_write(doc, method):
     tenant_id = get_current_tenant()
     
     if not tenant_id:
-        frappe.throw("Cannot write document without an active Tenant Session.", exc=frappe.exceptions.ValidationError)
+        frappe.throw("Cannot write document without an active Tenant Session.")
         
     doc.tenant_id = tenant_id
 

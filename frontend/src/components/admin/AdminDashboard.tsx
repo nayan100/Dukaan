@@ -109,8 +109,34 @@ const AdminDashboard: React.FC = () => {
         )}
         
         {activeTab === 'provisioning' && (
-          <div className="h-96 flex items-center justify-center text-slate-500 border border-dashed border-slate-800 rounded-xl">
-            Provisioning module coming soon...
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold text-white">Provisioning Queue</h3>
+            <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-950/50 text-slate-500 uppercase font-medium">
+                  <tr>
+                    <th className="px-6 py-4">Job ID</th>
+                    <th className="px-6 py-4">Tenant</th>
+                    <th className="px-6 py-4">Status</th>
+                    <th className="px-6 py-4">Started At</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800 text-slate-300">
+                  <tr>
+                    <td className="px-6 py-4 font-mono">PRV-2026-001</td>
+                    <td className="px-6 py-4">Metro Retail</td>
+                    <td className="px-6 py-4"><span className="text-emerald-500">Completed</span></td>
+                    <td className="px-6 py-4">2026-06-07 10:24</td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-mono">PRV-2026-002</td>
+                    <td className="px-6 py-4">City Mart</td>
+                    <td className="px-6 py-4"><span className="text-emerald-500">Completed</span></td>
+                    <td className="px-6 py-4">2026-06-07 11:45</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 

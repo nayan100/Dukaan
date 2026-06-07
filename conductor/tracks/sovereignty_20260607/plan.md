@@ -12,11 +12,11 @@
 
 ## Phase 2: SaaS Admin Control Center
 - [x] Task: Build the `SaaS Admin Dashboard` shell in React (Slate-950 theme). [a84fcf5]
-- [ ] Task: Implement `Tenant Management` list and detail views (Status toggles: Active, Suspended, Trial).
-- [ ] Task: Create a `Tenant Provisioning Service` in Frappe to automate warehouse and role creation.
-- [ ] Task: Develop the `Monitoring Hub` widgets: Branch Activity (active POS sessions) and Resource Usage (doc counts).
-- [ ] Task: Implement the "Onboarding Wizard" for new tenants within the Admin Center.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: SaaS Admin Control Center' (Protocol in workflow.md)
+- [x] Task: Implement `Tenant Management` list and detail views (Status toggles: Active, Suspended, Trial). [29481ae]
+- [x] Task: Create a `Tenant Provisioning Service` in Frappe to automate warehouse and role creation. [ddf7cf7]
+- [x] Task: Develop the `Monitoring Hub` widgets: Branch Activity (active POS sessions) and Resource Usage (doc counts). [a485a91]
+- [x] Task: Implement the "Onboarding Wizard" for new tenants within the Admin Center. [f3c9a47]
+ - [x] Task: Conductor - User Manual Verification 'Phase 2: SaaS Admin Control Center' [a9b576c] (Protocol in workflow.md)
 
 ## Phase 3: Multi-Tenant Auth Polish & Revocation
 - [ ] Task: Update Frontend `AuthContext` to store and validate `tenant_id` on every route change.

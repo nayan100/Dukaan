@@ -51,8 +51,9 @@ shared_mock_frappe.whitelist.side_effect = whitelist_decorator
 @pytest.fixture(autouse=True)
 def reset_frappe_mock():
     """Reset the shared mock before each test."""
-    shared_mock_frappe.reset_mock()
+    shared_mock_frappe.reset_mock(side_effect=True, return_value=True)
     shared_mock_frappe.throw.side_effect = mock_throw
     # Also reset nested mocks
     shared_mock_frappe.db.exists.reset_mock()
-    shared_mock_frappe.get_doc.reset_mock()
+    shared_mock_frappe.get_doc.reset_mock(side_effect=True, return_value=True)
+    shared_mock_frappe.get_doc.side_effect = None # Explicitly clear

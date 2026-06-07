@@ -48,7 +48,7 @@ def test_prevent_edit_if_pending_or_synced():
     mock_invoice.ird_sync_status = "Pending"
     mock_invoice.get.side_effect = lambda k: "Pending" if k == "ird_sync_status" else None
     
-    mock_frappe.throw = MagicMock(side_effect=Exception("Document is locked for IRD Sync"))
+    mock_frappe.throw.side_effect = Exception("Document is locked for IRD Sync")
     
     with pytest.raises(Exception, match="Document is locked for IRD Sync"):
         validate_ird_lock(mock_invoice, "on_update")

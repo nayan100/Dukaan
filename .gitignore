@@ -5,3 +5,6 @@ conductor/tracks/**/*.md
 
 # Frontend coverage output
 frontend/coverage/src/
+
+# Conductor Archive Isolation (Token Efficiency)
+conductor/archive/

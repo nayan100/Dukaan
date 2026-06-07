@@ -29,6 +29,7 @@
 - [[conductor/tracks/procurement_init_20260606/index|Procurement & Stock Initialization]]
 
 ### 🏁 Completed & Archived
+- [[conductor/archive/mgmt_opt_20260607/index|Conductor Surgical Optimization (CSOP)]]
 - [[conductor/archive/auth_rbac_20260606/index|Authentication & RBAC]]
 - [[conductor/archive/finance_gov_20260606/index|Financial Governance]]
 - [[conductor/archive/inter_branch_20260606/index|Inter-Branch Transfer]]
