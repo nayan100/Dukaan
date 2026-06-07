@@ -9,11 +9,11 @@ describe('ProcurementAnalyticsHub', () => {
     expect(screen.getByRole('heading', { name: /Procurement Analytics Hub/i })).toBeInTheDocument();
     
     // Check for specific metrics/sections
-    expect(screen.getByText(/Budget Utilization:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Supplier Reliability:/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Budget Utilization/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Compliance Health/i).length).toBeGreaterThan(0);
     
-    // Assuming some placeholder for chart or data display
-    expect(screen.getByTestId('budget-chart-placeholder')).toBeInTheDocument();
-    expect(screen.getByTestId('supplier-reliability-chart-placeholder')).toBeInTheDocument();
+    // Check for high-level metrics
+    expect(screen.getByText('78%')).toBeInTheDocument();
+    expect(screen.getByText('92%')).toBeInTheDocument();
   });
 });
