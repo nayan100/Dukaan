@@ -1,7 +1,7 @@
 # Implementation Plan: SaaS Hardening & Data Isolation (The "Sovereignty" Track)
 
 ## Phase 1: Global Tenant Enforcement & Schema Hardening
-- [ ] Task: Create `Tenant` DocType in Frappe (Fields: name, status, default_warehouse, plan_tier).
+- [x] Task: Create `Tenant` DocType in Frappe (Fields: name, status, default_warehouse, plan_tier). [39ada48]
 - [ ] Task: Implement `AuthService` utility to fetch and cache `tenant_id` for the current user session.
 - [ ] Task: **Staged Migration (Step 1)**: Add nullable `tenant_id` field to `Item`, `Warehouse`, `Stock Entry`, `Invoice`, `Purchase Order`, and `Supplier`.
 - [ ] Task: **Staged Migration (Step 2)**: Write and execute a batch background script to populate `tenant_id` with 'default' for existing records.
