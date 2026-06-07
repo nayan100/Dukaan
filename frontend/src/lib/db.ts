@@ -9,6 +9,12 @@ interface Budget {
   spent: number;
 }
 
+interface Supplier {
+  id: string; // supplier_name or id
+  name: string;
+  tax_id?: string;
+}
+
 interface DukaanDB extends DBSchema {
   catalog: {
     key: string;
@@ -39,13 +45,17 @@ interface DukaanDB extends DBSchema {
     key: string;
     value: Budget;
   };
+  suppliers: {
+    key: string;
+    value: Supplier;
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<DukaanDB>>;
 
 export const initDB = () => {
   if (dbPromise) return; // Prevent multiple initializations
-  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 3, {
+  dbPromise = openDB<DukaanDB>('dukaan-offline-db', 4, {
     upgrade(db, oldVersion) {
       if (oldVersion < 1) {
         db.createObjectStore('catalog', { keyPath: 'id' });
@@ -56,8 +66,23 @@ export const initDB = () => {
             db.createObjectStore('budgets', { keyPath: 'id' });
         }
       }
+      if (oldVersion < 4) {
+        if (!db.objectStoreNames.contains('suppliers')) {
+            db.createObjectStore('suppliers', { keyPath: 'id' });
+        }
+      }
     },
   });
+};
+
+export const getSupplier = async (id: string) => {
+  const db = await dbPromise;
+  return db.get('suppliers', id);
+};
+
+export const updateSupplier = async (supplier: Supplier) => {
+  const db = await dbPromise;
+  await db.put('suppliers', supplier);
 };
 
 export const getBudget = async (branchId: string, month: string) => {
