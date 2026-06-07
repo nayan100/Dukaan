@@ -4,7 +4,7 @@
 - [x] Task: Create `Tenant` DocType in Frappe (Fields: name, status, default_warehouse, plan_tier). [39ada48]
 - [x] Task: Implement `AuthService` utility to fetch and cache `tenant_id` for the current user session. [6cdabb9]
 - [x] Task: **Staged Migration (Step 1)**: Add nullable `tenant_id` field to `Item`, `Warehouse`, `Stock Entry`, `Invoice`, `Purchase Order`, and `Supplier`. [73c2d66]
-- [ ] Task: **Staged Migration (Step 2)**: Write and execute a batch background script to populate `tenant_id` with 'default' for existing records.
+- [x] Task: **Staged Migration (Step 2)**: Write and execute a batch background script to populate `tenant_id` with 'default' for existing records. [bf27179]
 - [ ] Task: Implement `permission_query_conditions` hook to inject `tenant_id` filters into all reads.
 - [ ] Task: Implement `before_insert` and `validate` hooks to enforce `tenant_id` on all writes (preventing spoofing).
 - [ ] Task: **Staged Migration (Step 3)**: Finalize schema by making `tenant_id` mandatory (NOT NULL) and adding database indexes.
