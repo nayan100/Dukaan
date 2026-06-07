@@ -17,3 +17,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: SaaS Hardening & Data Isolation (The "Sovereignty" Track) Focus: Ensuring Tenant A never sees Tenant B's data at the database level.**
 *Link: [./archive/sovereignty_20260607/](./archive/sovereignty_20260607/)*
+
+---
+
+- [x] **Track: Dashboard Hardening & Sovereignty Integration. Focus: Integrating logical isolation, instant revocation, and tenant-aware UI across POS, Admin, and Strategy hubs.**
+*Link: [./archive/sovereignty_integration_20260607/](./archive/sovereignty_integration_20260607/)*
