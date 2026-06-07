@@ -32,7 +32,7 @@ const Annex14Preview: React.FC<Annex14PreviewProps> = ({ entries }) => {
         </div>
         <div className="bg-pos-black px-4 py-2 rounded-lg border border-pos-border flex items-center gap-2">
             <span className="text-[10px] font-black uppercase tracking-widest text-pos-muted">Period:</span>
-            <span className="text-xs font-bold text-pos-white">Ashad 2083</span>
+            <span className="text-xs font-bold text-pos-white">{new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
         </div>
       </div>
 
