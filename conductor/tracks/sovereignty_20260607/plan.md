@@ -2,7 +2,7 @@
 
 ## Phase 1: Global Tenant Enforcement & Schema Hardening
 - [x] Task: Create `Tenant` DocType in Frappe (Fields: name, status, default_warehouse, plan_tier). [39ada48]
-- [ ] Task: Implement `AuthService` utility to fetch and cache `tenant_id` for the current user session.
+- [x] Task: Implement `AuthService` utility to fetch and cache `tenant_id` for the current user session. [6cdabb9]
 - [ ] Task: **Staged Migration (Step 1)**: Add nullable `tenant_id` field to `Item`, `Warehouse`, `Stock Entry`, `Invoice`, `Purchase Order`, and `Supplier`.
 - [ ] Task: **Staged Migration (Step 2)**: Write and execute a batch background script to populate `tenant_id` with 'default' for existing records.
 - [ ] Task: Implement `permission_query_conditions` hook to inject `tenant_id` filters into all reads.
