@@ -44,4 +44,12 @@ describe('AdminDashboard', () => {
     expect(screen.getByText(/Branch Activity/i)).toBeInTheDocument();
     expect(screen.getByText(/Resource Usage/i)).toBeInTheDocument();
   });
+
+  it('opens onboarding wizard when clicking New Tenant', () => {
+    render(<AdminDashboard />);
+    fireEvent.click(screen.getByText('Tenants'));
+    fireEvent.click(screen.getByText('+ New Tenant'));
+    expect(screen.getByText(/Provision New Tenant/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/e.g. Global Logistics Ltd/i)).toBeInTheDocument();
+  });
 });

@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import TenantManagement from './TenantManagement';
 import MonitoringHub from './MonitoringHub';
+import OnboardingWizard from './OnboardingWizard';
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'tenants' | 'provisioning' | 'monitoring'>('overview');
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  const handleOnboardingComplete = (newTenant: any) => {
+    console.log('New Tenant Provisioned:', newTenant);
+    setShowOnboarding(false);
+    setActiveTab('tenants');
+    // In a real app, we would refresh the tenants list here
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 flex">
@@ -14,7 +23,7 @@ const AdminDashboard: React.FC = () => {
           <ul className="space-y-2">
             <li>
               <button 
-                onClick={() => setActiveTab('overview')}
+                onClick={() => { setActiveTab('overview'); setShowOnboarding(false); }}
                 className={`w-full text-left px-4 py-2 rounded-lg transition-colors font-medium ${activeTab === 'overview' ? 'bg-slate-900 text-slate-200' : 'text-slate-400 hover:bg-slate-900/50'}`}
               >
                 Overview
@@ -22,15 +31,15 @@ const AdminDashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('tenants')}
-                className={`w-full text-left px-4 py-2 rounded-lg transition-colors font-medium ${activeTab === 'tenants' ? 'bg-slate-900 text-slate-200' : 'text-slate-400 hover:bg-slate-900/50'}`}
+                onClick={() => { setActiveTab('tenants'); setShowOnboarding(false); }}
+                className={`w-full text-left px-4 py-2 rounded-lg transition-colors font-medium ${activeTab === 'tenants' && !showOnboarding ? 'bg-slate-900 text-slate-200' : 'text-slate-400 hover:bg-slate-900/50'}`}
               >
                 Tenants
               </button>
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('provisioning')}
+                onClick={() => { setActiveTab('provisioning'); setShowOnboarding(false); }}
                 className={`w-full text-left px-4 py-2 rounded-lg transition-colors font-medium ${activeTab === 'provisioning' ? 'bg-slate-900 text-slate-200' : 'text-slate-400 hover:bg-slate-900/50'}`}
               >
                 Provisioning
@@ -38,7 +47,7 @@ const AdminDashboard: React.FC = () => {
             </li>
             <li>
               <button 
-                onClick={() => setActiveTab('monitoring')}
+                onClick={() => { setActiveTab('monitoring'); setShowOnboarding(false); }}
                 className={`w-full text-left px-4 py-2 rounded-lg transition-colors font-medium ${activeTab === 'monitoring' ? 'bg-slate-900 text-slate-200' : 'text-slate-400 hover:bg-slate-900/50'}`}
               >
                 Monitoring
@@ -75,7 +84,29 @@ const AdminDashboard: React.FC = () => {
           </>
         )}
 
-        {activeTab === 'tenants' && <TenantManagement />}
+        {activeTab === 'tenants' && (
+          <div className="space-y-6">
+            {showOnboarding ? (
+              <OnboardingWizard 
+                onComplete={handleOnboardingComplete} 
+                onCancel={() => setShowOnboarding(false)} 
+              />
+            ) : (
+              <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-semibold text-white">Tenant Management</h3>
+                  <button 
+                    onClick={() => setShowOnboarding(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                  >
+                    + New Tenant
+                  </button>
+                </div>
+                <TenantManagement showHeader={false} />
+              </div>
+            )}
+          </div>
+        )}
         
         {activeTab === 'provisioning' && (
           <div className="h-96 flex items-center justify-center text-slate-500 border border-dashed border-slate-800 rounded-xl">

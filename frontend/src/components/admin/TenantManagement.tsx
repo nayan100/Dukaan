@@ -40,7 +40,11 @@ const MOCK_TENANTS: Tenant[] = [
   }
 ];
 
-const TenantManagement: React.FC = () => {
+interface TenantManagementProps {
+  showHeader?: boolean;
+}
+
+const TenantManagement: React.FC<TenantManagementProps> = ({ showHeader = true }) => {
   const [tenants, setTenants] = useState<Tenant[]>(MOCK_TENANTS);
   const [selectedTenant, setSelectedTenant] = useState<Tenant | null>(null);
 
@@ -55,12 +59,14 @@ const TenantManagement: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold text-white">Tenant Management</h3>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-          + New Tenant
-        </button>
-      </div>
+      {showHeader && (
+        <div className="flex justify-between items-center">
+          <h3 className="text-xl font-semibold text-white">Tenant Management</h3>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+            + New Tenant
+          </button>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* List View */}
