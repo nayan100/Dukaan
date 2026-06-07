@@ -9,7 +9,7 @@ sys.modules["frappe"] = shared_mock_frappe
 class FrappeException(Exception):
     pass
 
-def mock_throw(msg, title=None, **kwargs):
+def mock_throw(msg, title=None):
     raise FrappeException(msg)
 
 shared_mock_frappe.throw.side_effect = mock_throw
@@ -52,6 +52,7 @@ shared_mock_frappe.whitelist.side_effect = whitelist_decorator
 def reset_frappe_mock():
     """Reset the shared mock before each test."""
     shared_mock_frappe.reset_mock()
+    shared_mock_frappe.throw.side_effect = mock_throw
     # Also reset nested mocks
     shared_mock_frappe.db.exists.reset_mock()
     shared_mock_frappe.get_doc.reset_mock()
