@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conductor/archive/setup_pos_core_20260606/index.md",
+                "file": "conductor/tracks/procurement_realization_20260608/plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "plan"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "conductor/archive/setup_pos_core_20260606/index.md"
+                "file": "conductor/tracks/procurement_realization_20260608/plan.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for index"
+              "title": "File properties for plan"
             }
           }
         ],
@@ -209,19 +209,20 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "frontend/src/lib/ProcurementLogic.ts",
+    "frontend/src/lib/ProcurementLogic.test.ts",
+    "frontend/src/components/Procurement/Annex14Preview.tsx",
+    "frontend/src/components/Procurement/Annex14Preview.test.tsx",
+    "frontend/src/components/Procurement/PurchaseReceiptGenerator.tsx",
+    "frontend/src/components/Procurement/PurchaseReceiptGenerator.test.tsx",
+    "conductor/archive/setup_pos_core_20260606/index.md",
     "frontend/src/components/Procurement/BlindSpotCheck.tsx",
     "frontend/src/components/Procurement/BlindSpotCheck.test.tsx",
     "frontend/src/lib/ValueWeightedSampler.ts",
     "frontend/src/lib/ValueWeightedSampler.test.ts",
     "frontend/src/components/Procurement/OpeningStockGrid.tsx",
-    "frontend/src/components/Procurement/OpeningStockGrid.test.tsx",
-    "frontend/src/components/Procurement/ApprovalHandshake.tsx",
-    "frontend/src/components/Procurement/ApprovalHandshake.test.tsx",
     "_Systems/Provisioning.md",
-    "frontend/src/components/Procurement/POCreationWizard.tsx",
     "_ProjectAtlas.md",
-    "frontend/src/components/Procurement/POCreationWizard.test.tsx",
-    "frontend/src/components/Procurement/POListView.tsx",
     "GAP_ANALYSIS.md",
     "conductor/tracks/procurement_realization_20260608/plan.md",
     "conductor/tracks/procurement_realization_20260608/spec.md",
@@ -244,7 +245,6 @@
     "conductor/archive/sovereignty_20260607/Implement_permission_query_conditions_hook_to_inject_tenant_id_filters_into_all_reads..md",
     "conductor/archive/sovereignty_20260607/Implement_before_insert_and_validate_hooks_to_enforce_tenant_id_on_all_writes_(preventing_spoofing)..md",
     "conductor/archive/sovereignty_20260607/Implement_AuthService_utility_to_fetch_and_cache_tenant_id_for_the_current_user_session..md",
-    "conductor/archive/sovereignty_20260607/Implement_AuthService_utility.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",
