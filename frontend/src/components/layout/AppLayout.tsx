@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, ShoppingCart, Rocket, 
   Settings, LogOut, Menu, X, Bell, Package, Activity, ShieldCheck, ShieldAlert,
-  Users, Building2, ClipboardList
+  Users, Building2, ClipboardList, Inbox, Box, Truck, ShoppingBag
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import LoginPage from '../auth/LoginPage';
@@ -54,7 +54,10 @@ const AppLayout: React.FC = () => {
     { path: '/hq/rebalancer', label: 'Dead Stock', icon: Building2, permission: 'access_strategy_hub' },
     { path: '/hq/approvals', label: 'Approvals', icon: ClipboardList, permission: 'access_strategy_hub' },
     { path: '/hq/wizards', label: 'Growth Hub', icon: Rocket, permission: 'access_strategy_hub' },
-    { path: '/branch', label: 'Local Intelligence', icon: Package, permission: 'access_logistics' },
+    { path: '/branch/inbox', label: 'Action Inbox', icon: Inbox, permission: 'access_logistics' },
+    { path: '/branch/inventory', label: 'Branch Inventory', icon: Box, permission: 'access_logistics' },
+    { path: '/branch/logistics', label: 'Logistics Hub', icon: Truck, permission: 'access_logistics' },
+    { path: '/branch/procurement', label: 'Procurement', icon: ShoppingBag, permission: 'access_logistics' },
     { path: '/finance', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
     { path: '/pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
   ];
