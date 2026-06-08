@@ -37,7 +37,7 @@ const Annex13Preview: React.FC<Annex13PreviewProps> = ({ entries }) => {
               <th className="px-6 py-4">Transaction Date</th>
               <th className="px-6 py-4">Invoice #</th>
               <th className="px-6 py-4">Customer</th>
-              <th className="px-6 py-4 text-right">Taxable (रु)</th>
+              <th className="px-6 py-4 text-right">Taxable (NPR)</th>
               <th className="px-6 py-4 text-right">VAT (13%)</th>
               <th className="px-6 py-4 text-right">Total</th>
               <th className="px-6 py-4 text-center">IRD Status</th>
@@ -75,7 +75,7 @@ const Annex13Preview: React.FC<Annex13PreviewProps> = ({ entries }) => {
                         {entry.vat_amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                       </td>
                       <td className="px-6 py-4 text-right font-mono font-bold text-pos-secondary">
-                        रु {entry.total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                        NPR {entry.total.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                       </td>
                       <td className="px-6 py-4 text-center">
                         {entry.synced ? (
@@ -101,7 +101,7 @@ const Annex13Preview: React.FC<Annex13PreviewProps> = ({ entries }) => {
         <p>Government Certified Reporting Module</p>
         <div className="flex gap-6">
           <p>Count: {entries.length}</p>
-          <p className="text-pos-secondary font-black">Grand Total: रु {entries.reduce((a, b) => a + b.total, 0).toLocaleString()}</p>
+          <p className="text-pos-secondary font-black">Grand Total: NPR {entries.reduce((a, b) => a + b.total, 0).toLocaleString()}</p>
         </div>
       </div>
     </div>

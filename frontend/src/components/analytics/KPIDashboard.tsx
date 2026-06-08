@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   AreaChart, Area 
 } from 'recharts';
 import { motion } from 'framer-motion';
 import { 
-  Users, AlertCircle, MapPin, 
+  AlertCircle, MapPin, 
   DollarSign, Activity, ArrowUpRight, ShieldCheck 
 } from 'lucide-react';
 import Button from '../ui/Button';
@@ -88,10 +88,10 @@ const KPIDashboard: React.FC = () => {
 
       {/* Executive Scorecard & P&L */}
       <div className="grid grid-cols-4 gap-6">
-        <KPICard title={selectedBranch ? `${selectedBranch} Revenue` : "Total Revenue"} value={`NPR रु ${(plData?.revenue || 0).toLocaleString()}`} trend="+12.4%" icon={DollarSign} />
-        <KPICard title="COGS" value={`NPR रु ${(plData?.cogs || 0).toLocaleString()}`} trend="-2.1%" icon={Activity} />
-        <KPICard title="Operating Expenses" value={`NPR रु ${(plData?.expenses || 0).toLocaleString()}`} trend="+1.5%" icon={AlertCircle} />
-        <KPICard title="Net Profit" value={`NPR रु ${(netProfit || 0).toLocaleString()}`} trend="+8.4%" icon={Activity} />
+        <KPICard title={selectedBranch ? `${selectedBranch} Revenue` : "Total Revenue"} value={`NPR ${(plData?.revenue || 0).toLocaleString()}`} trend="+12.4%" icon={DollarSign} />
+        <KPICard title="COGS" value={`NPR ${(plData?.cogs || 0).toLocaleString()}`} trend="-2.1%" icon={Activity} />
+        <KPICard title="Operating Expenses" value={`NPR ${(plData?.expenses || 0).toLocaleString()}`} trend="+1.5%" icon={AlertCircle} />
+        <KPICard title="Net Profit" value={`NPR ${(netProfit || 0).toLocaleString()}`} trend="+8.4%" icon={Activity} />
       </div>
 
       <div className="grid grid-cols-3 gap-10">
@@ -149,7 +149,7 @@ const KPIDashboard: React.FC = () => {
                   </div>
                   <div>
                     <div className="font-bold text-sm">{branch.name}</div>
-                    <div className="text-[10px] text-pos-muted font-black uppercase tracking-widest mt-0.5">NPR रु {branch.revenue.toLocaleString()}</div>
+                    <div className="text-[10px] text-pos-muted font-black uppercase tracking-widest mt-0.5">NPR {branch.revenue.toLocaleString()}</div>
                   </div>
                 </div>
                 <div className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-tighter ${
