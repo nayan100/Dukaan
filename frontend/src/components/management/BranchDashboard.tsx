@@ -29,17 +29,21 @@ const StatCard = ({ title, value, subtext, icon: Icon, alert = false }: any) => 
   </motion.div>
 );
 
-const BranchDashboard: React.FC = () => {
+interface BranchDashboardProps {
+    inventory: any[];
+}
+
+const BranchDashboard: React.FC<BranchDashboardProps> = ({ inventory }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredInventory = MOCK_INVENTORY.filter(item => 
+  const filteredInventory = inventory.filter(item => 
     item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     item.code.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const lowStockItems = MOCK_INVENTORY.filter(item => item.stock <= item.min_stock).length;
-  const totalItems = MOCK_INVENTORY.length;
-  const totalValue = MOCK_INVENTORY.reduce((acc, item) => acc + (item.stock * item.price), 0);
+  const lowStockItems = inventory.filter(item => item.stock <= item.min_stock).length;
+  const totalItems = inventory.length;
+  const totalValue = inventory.reduce((acc, item) => acc + (item.stock * item.price), 0);
 
   return (
     <div className="p-10 space-y-10 max-w-7xl mx-auto min-h-full">

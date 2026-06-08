@@ -20,9 +20,10 @@ interface CartItem extends Item {
 
 interface POSHUDProps {
   availableItems: Item[];
+  onSaleComplete?: (items: CartItem[]) => void;
 }
 
-const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
+const POSHUD: React.FC<POSHUDProps> = ({ availableItems, onSaleComplete }) => {
   const { tenantId } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -92,6 +93,9 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems }) => {
 
     try {
       await saveInvoiceOffline(invoice);
+      if (onSaleComplete) {
+          onSaleComplete(cart);
+      }
     } catch (err) {
       console.error('Failed to save offline:', err);
     }

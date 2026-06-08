@@ -17,6 +17,7 @@ import SyncWarning from './SyncWarning';
 import IRDSyncDashboard from '../analytics/IRDSyncDashboard';
 import AdminDashboard from '../admin/AdminDashboard';
 import BranchManagement from '../management/BranchManagement';
+import BranchDashboard from '../management/BranchDashboard';
 import UserManagement from '../management/UserManagement';
 import Button from '../ui/Button';
 import ProcurementSuite from '../ProcurementSuite/ProcurementSuite';
@@ -32,7 +33,7 @@ const AppLayout: React.FC = () => {
     if (user?.role === 'Admin') return 'admin';
     if (user?.role === 'Chain Owner') return 'dashboard';
     if (user?.role === 'Single Owner') return 'wizard';
-    if (user?.role === 'Branch Owner') return 'logistics';
+    if (user?.role === 'Branch Owner') return 'branch_dashboard';
     if (user?.role === 'POS') return 'pos';
     if (user?.role === 'Accountant') return 'audit';
     return 'pos';
@@ -42,10 +43,34 @@ const AppLayout: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(user?.role !== 'POS');
   const [isSuspended, setIsSuspended] = useState(false);
 
+  const [sharedInventory, setSharedInventory] = useState([
+    { id: '1', name: 'Wai Wai Noodles', code: 'W-01', stock: 150, min_stock: 50, price: 20 },
+    { id: '2', name: 'Real Juice 1L', code: 'J-02', stock: 20, min_stock: 30, price: 250 },
+    { id: '3', name: 'Amul Butter 500g', code: 'B-03', stock: 5, min_stock: 15, price: 600 },
+    { id: '4', name: 'Dairy Milk Silk', code: 'C-04', stock: 45, min_stock: 20, price: 180 },
+    { id: '5', name: 'Coca Cola 2.25L', code: 'D-05', stock: 100, min_stock: 40, price: 270 },
+    { id: '6', name: 'Lays Chips', code: 'S-06', stock: 12, min_stock: 25, price: 50 },
+    { id: '7', name: 'Current Noodles', code: 'C-07', stock: 80, min_stock: 30, price: 50 },
+    { id: '8', name: 'Aashirvaad Atta 5kg', code: 'A-08', stock: 25, min_stock: 10, price: 550 },
+    { id: '9', name: 'Fortune Oil 1L', code: 'F-09', stock: 40, min_stock: 15, price: 240 },
+  ]);
+
+  const handleSaleComplete = (soldItems: any[]) => {
+    setSharedInventory(prev => prev.map(invItem => {
+      const sold = soldItems.find(s => s.id === invItem.id);
+      if (sold) {
+        return { ...invItem, stock: Math.max(0, invItem.stock - sold.quantity) };
+      }
+      return invItem;
+    }));
+  };
+
   // Locked POS Mode: If POS, keep sidebar closed and force tab
   useEffect(() => {
     if (user?.role === 'POS') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsSidebarOpen(false);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveTab('pos');
     }
   }, [user?.role]);
@@ -73,6 +98,7 @@ const AppLayout: React.FC = () => {
   const navItems = [
     { id: 'admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
     { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { id: 'branch_dashboard', label: 'Local Intelligence', icon: Package, permission: 'access_logistics' },
     { id: 'branches', label: 'Branch Management', icon: Building2, permission: 'manage_branches' },
     { id: 'wizard', label: 'Growth Wizard', icon: Rocket, permission: 'access_growth_wizard' },
     { id: 'audit', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
@@ -250,17 +276,7 @@ const AppLayout: React.FC = () => {
                 >
                     {activeTab === 'pos' && (
                         <PermissionGuard permission="access_pos" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Active Cashiers Only</div>}>
-                            <POSHUD availableItems={[
-                                { id: '1', name: 'Wai Wai Noodles', price: 20 },
-                                { id: '2', name: 'Real Juice 1L', price: 250 },
-                                { id: '3', name: 'Amul Butter 500g', price: 600 },
-                                { id: '4', name: 'Dairy Milk Silk', price: 180 },
-                                { id: '5', name: 'Coca Cola 2.25L', price: 270 },
-                                { id: '6', name: 'Lays Chips', price: 50 },
-                                { id: '7', name: 'Current Noodles', price: 50 },
-                                { id: '8', name: 'Aashirvaad Atta 5kg', price: 550 },
-                                { id: '9', name: 'Fortune Oil 1L', price: 240 },
-                            ]} />
+                            <POSHUD availableItems={sharedInventory} onSaleComplete={handleSaleComplete} />
                         </PermissionGuard>
                     )}
                     {activeTab === 'dashboard' && (
@@ -273,19 +289,14 @@ const AppLayout: React.FC = () => {
                             <BranchManagement />
                         </PermissionGuard>
                     )}
+                    {activeTab === 'branch_dashboard' && (
+                        <PermissionGuard permission="access_logistics" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Branch Managers</div>}>
+                            <BranchDashboard inventory={sharedInventory} />
+                        </PermissionGuard>
+                    )}
                     {activeTab === 'logistics' && (
                         <PermissionGuard permission="access_logistics" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Logistics Group</div>}>
-                            <TransferUI availableItems={[
-                                { id: '1', name: 'Wai Wai Noodles', price: 20 },
-                                { id: '2', name: 'Real Juice 1L', price: 250 },
-                                { id: '3', name: 'Amul Butter 500g', price: 600 },
-                                { id: '4', name: 'Dairy Milk Silk', price: 180 },
-                                { id: '5', name: 'Coca Cola 2.25L', price: 270 },
-                                { id: '6', name: 'Lays Chips', price: 50 },
-                                { id: '7', name: 'Current Noodles', price: 50 },
-                                { id: '8', name: 'Aashirvaad Atta 5kg', price: 550 },
-                                { id: '9', name: 'Fortune Oil 1L', price: 240 },
-                            ]} />
+                            <TransferUI availableItems={sharedInventory} />
                         </PermissionGuard>
                     )}
                     {activeTab === 'wizard' && (
