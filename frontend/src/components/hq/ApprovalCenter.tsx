@@ -10,14 +10,15 @@ const MOCK_APPROVALS = [
 ];
 
 const ApprovalCenter: React.FC = () => {
-  const { approvalQueue, removeApprovalTask } = { 
+  const { approvalQueue, approveTask, rejectTask } = { 
       approvalQueue: useHQStore(s => s.approvalQueue),
-      removeApprovalTask: useHQStore(s => s.removeApprovalTask)
+      approveTask: useHQStore(s => s.approveTask),
+      rejectTask: useHQStore(s => s.rejectTask)
   };
 
   useEffect(() => {
     // Populate mock approvals if empty
-    if (useHQStore.getState().approvalQueue.length === 0) {
+    if (useHQStore.getState().approvalQueue.length === 0 && useHQStore.getState().approvalHistory.length === 0) {
       MOCK_APPROVALS.forEach(a => useHQStore.getState().addApprovalTask({ ...a, status: 'pending' as any }));
     }
   }, []);
@@ -48,7 +49,7 @@ const ApprovalCenter: React.FC = () => {
         <div className="p-8 border-b border-slate-800 flex items-center justify-between bg-slate-950/30">
           <div className="flex gap-8">
             <Tab label="Pending" count={approvalQueue.length} active />
-            <Tab label="Archive" count={0} />
+            <Tab label="Archive" count={useHQStore.getState().approvalHistory.length} />
           </div>
           <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Showing {approvalQueue.length} Active Requests</span>
         </div>
@@ -91,13 +92,13 @@ const ApprovalCenter: React.FC = () => {
                    </button>
                    <div className="w-px h-8 bg-slate-800 mx-2" />
                    <button 
-                    onClick={() => removeApprovalTask(item.id)}
+                    onClick={() => rejectTask(item.id)}
                     className="px-6 py-3 bg-rose-500/10 text-rose-500 border border-rose-500/20 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-rose-500 hover:text-white transition-all"
                    >
                      Reject
                    </button>
                    <button 
-                    onClick={() => removeApprovalTask(item.id)}
+                    onClick={() => approveTask(item.id)}
                     className="px-6 py-3 bg-emerald-500 text-slate-950 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/10"
                    >
                      Approve
