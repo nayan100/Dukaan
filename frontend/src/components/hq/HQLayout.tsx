@@ -10,6 +10,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ComparativeAnalytics from './ComparativeAnalytics';
 import DeadStockMap from './DeadStockMap';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
+import ApprovalCenter from './ApprovalCenter';
 
 const MOCK_BRANCHES = [
   { 
@@ -65,7 +66,7 @@ const HQLayout: React.FC = () => {
           <Route index element={<Navigate to="scorecard" replace />} />
           <Route path="scorecard" element={<ScorecardView onOpenAI={() => setShowAI(true)} />} />
           <Route path="rebalancer" element={<div className="p-10"><DeadStockMap /></div>} />
-          <Route path="approvals" element={<PlaceholderView title="Global Approval Center" description="Phase 3 Implementation" />} />
+          <Route path="approvals" element={<ApprovalCenter />} />
           <Route path="wizards" element={<PlaceholderView title="Growth Wizards Hub" description="Phase 4 Implementation" />} />
         </Routes>
       </div>
