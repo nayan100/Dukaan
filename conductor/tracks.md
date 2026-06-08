@@ -30,3 +30,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
+- [ ] **Track: The Cashier POS HUD ("Zero-Latency Interface")**
+*Link: [./tracks/pos_hud_refinement_20260608/](./tracks/pos_hud_refinement_20260608/)*
+
+---
+

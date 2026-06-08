@@ -1,0 +1,8 @@
+{
+  "track_id": "pos_hud_refinement_20260608",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-06-08T23:24:00Z",
+  "updated_at": "2026-06-08T23:24:00Z",
+  "description": "Track 2: The Cashier POS HUD (\"Zero-Latency Interface\") Focus: Perfecting the high-speed, high-contrast, keyboard-first point of sale. * Route: /pos * Tabs/Views: Speed Grid (Predictive search), Split-Checkout Terminal. * Showcase Elements: \"Autonomous Void\" 60-second visual timer, Live Fonepay QR polling, and the \"Sync Pulse\" offline/online visual indicator."
+}
