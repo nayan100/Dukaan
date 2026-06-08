@@ -41,3 +41,6 @@ Transform the project from a collection of isolated modules into a touchable, en
 - [x] All 94 existing tests must pass.
 - [x] Manual walkthrough completed without errors.
 - [x] Cross-tenant data leak test (Everest cannot see Annapurna).
+
+## Phase: Review Fixes
+- [x] Apply review suggestions 95b4d6a
