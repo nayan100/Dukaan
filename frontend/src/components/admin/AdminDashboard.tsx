@@ -70,15 +70,15 @@ const AdminDashboard: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
                 <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider">Active Tenants</h3>
-                <p className="text-4xl font-light mt-2">12</p>
+                <p className="text-4xl font-light mt-2">2</p>
               </div>
               <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
                 <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider">Total Usage</h3>
-                <p className="text-4xl font-light mt-2">845 GB</p>
+                <p className="text-4xl font-light mt-2">14 GB</p>
               </div>
               <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
                 <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider">Pending Provisioning</h3>
-                <p className="text-4xl font-light mt-2 text-amber-500">3</p>
+                <p className="text-4xl font-light mt-2 text-amber-500">0</p>
               </div>
             </div>
           </>
@@ -97,7 +97,7 @@ const AdminDashboard: React.FC = () => {
                   <h3 className="text-xl font-semibold text-white">Tenant Management</h3>
                   <button 
                     onClick={() => setShowOnboarding(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     + New Tenant
                   </button>
@@ -124,15 +124,15 @@ const AdminDashboard: React.FC = () => {
                 <tbody className="divide-y divide-slate-800 text-slate-300">
                   <tr>
                     <td className="px-6 py-4 font-mono">PRV-2026-001</td>
-                    <td className="px-6 py-4">Metro Retail</td>
+                    <td className="px-6 py-4">Everest Groceries</td>
                     <td className="px-6 py-4"><span className="text-emerald-500">Completed</span></td>
-                    <td className="px-6 py-4">2026-06-07 10:24</td>
+                    <td className="px-6 py-4">2026-06-08 10:24</td>
                   </tr>
                   <tr>
                     <td className="px-6 py-4 font-mono">PRV-2026-002</td>
-                    <td className="px-6 py-4">City Mart</td>
+                    <td className="px-6 py-4">Annapurna Apparel</td>
                     <td className="px-6 py-4"><span className="text-emerald-500">Completed</span></td>
-                    <td className="px-6 py-4">2026-06-07 11:45</td>
+                    <td className="px-6 py-4">2026-06-08 11:45</td>
                   </tr>
                 </tbody>
               </table>

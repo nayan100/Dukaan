@@ -17,43 +17,30 @@ interface Tenant {
 
 const MOCK_TENANTS: Tenant[] = [
   {
-    name: 'T-001',
-    company_name: 'Metro Retail',
+    name: 'EVEREST',
+    company_name: 'Everest Groceries',
     plan_tier: 'Enterprise',
     status: 'Active',
-    site_url: 'metro.dukaan.io',
-    db_name: 'tenant_metro',
-    default_warehouse: 'Metro - Main',
+    site_url: 'everest.dukaan.io',
+    db_name: 'tenant_everest',
+    default_warehouse: 'KTM Main',
     max_branches: 10,
     max_pos_accounts: 50,
-    current_branches: 4,
-    current_pos_accounts: 22
+    current_branches: 3,
+    current_pos_accounts: 15
   },
   {
-    name: 'T-002',
-    company_name: 'City Mart',
-    plan_tier: 'Standard',
-    status: 'Suspended',
-    site_url: 'citymart.dukaan.io',
-    db_name: 'tenant_citymart',
-    default_warehouse: 'City Mart - Central',
-    max_branches: 3,
-    max_pos_accounts: 10,
+    name: 'ANNAPURNA',
+    company_name: 'Annapurna Apparel',
+    plan_tier: 'Business',
+    status: 'Active',
+    site_url: 'annapurna.dukaan.io',
+    db_name: 'tenant_annapurna',
+    default_warehouse: 'Lalitpur Hub',
+    max_branches: 5,
+    max_pos_accounts: 20,
     current_branches: 2,
     current_pos_accounts: 8
-  },
-  {
-    name: 'T-003',
-    company_name: 'Organic Foods',
-    plan_tier: 'Basic',
-    status: 'Trial',
-    site_url: 'organic.dukaan.io',
-    db_name: 'tenant_organic',
-    default_warehouse: 'Organic - Stock',
-    max_branches: 1,
-    max_pos_accounts: 3,
-    current_branches: 1,
-    current_pos_accounts: 1
   }
 ];
 
