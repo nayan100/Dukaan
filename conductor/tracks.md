@@ -29,8 +29,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 *Link: [./archive/hierarchical_sovereignty_20260608/](./archive/hierarchical_sovereignty_20260608/)*
 
 ---
-
-- [x] **Track: The Grand Showcase (Sovereignty & Flow). Focus: End-to-end persona-based flow, demo environment setup, and manual walkthrough.**
-*Link: [./tracks/grand_showcase_20260608/](./tracks/grand_showcase_20260608/)*
-
----
