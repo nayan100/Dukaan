@@ -5,6 +5,8 @@ import KPIDashboard from './components/analytics/KPIDashboard';
 import BranchDashboard from './components/management/BranchDashboard';
 import IRDSyncDashboard from './components/analytics/IRDSyncDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
+import GlobalMetricsDashboard from './components/hq/GlobalMetricsDashboard';
+import ChainOwnerRoute from './components/auth/ChainOwnerRoute';
 import { useAuth } from './context/AuthContext';
 
 const IndexRedirect = () => {
@@ -37,11 +39,6 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
-}
-
-export default App;
->
   );
 }
 
