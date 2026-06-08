@@ -118,6 +118,8 @@ const GlobalMetricsDashboard: React.FC = () => {
       </div>
 
       <ComparativeAnalytics />
+
+      <DeadStockMap />
     </div>
   );
 };
@@ -153,3 +155,4 @@ const ChartCard = ({ title, children }: any) => (
 );
 
 export default GlobalMetricsDashboard;
+lMetricsDashboard;
