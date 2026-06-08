@@ -28,8 +28,8 @@ Transform the project from a collection of isolated modules into a touchable, en
 - [x] Fabricate 6 months of historical Sales/Purchase data for analytics.
 
 ### Phase 2: Persona Portal (Frontend) [ ]
-- [ ] Create `LandingPage.tsx` with persona-switcher cards.
-- [ ] Inject demo credentials into `AuthContext` for "One-Click" entry.
+- [x] Create `LandingPage.tsx` with persona-switcher cards.
+- [x] Inject demo credentials into `AuthContext` for "One-Click" entry.
 
 ### Phase 3: The Manual Walkthrough [ ]
 - [ ] Create `DEMO_WALKTHROUGH.md` with step-by-step instructions.

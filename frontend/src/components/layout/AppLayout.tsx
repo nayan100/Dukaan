@@ -12,6 +12,7 @@ import KPIDashboard from '../analytics/KPIDashboard';
 import OnboardingWizard from '../wizards/OnboardingWizard';
 import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
+import LandingPage from '../auth/LandingPage';
 import SyncWarning from './SyncWarning';
 import IRDSyncDashboard from '../analytics/IRDSyncDashboard';
 import AdminDashboard from '../admin/AdminDashboard';
@@ -24,6 +25,7 @@ import { startSyncWorker } from '../../lib/syncWorker';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout, validateTenant, hasPermission } = useAuth();
+  const [showManualLogin, setShowManualLogin] = useState(false);
   
   // Set default tab based on role
   const getDefaultTab = () => {
@@ -62,7 +64,10 @@ const AppLayout: React.FC = () => {
   }, [user?.tenant]);
 
   if (!user) {
-    return <LoginPage onLogin={login} />;
+    if (showManualLogin) {
+      return <LoginPage onLogin={login} />;
+    }
+    return <LandingPage onLogin={login} onManualLogin={() => setShowManualLogin(true)} />;
   }
 
   const navItems = [
