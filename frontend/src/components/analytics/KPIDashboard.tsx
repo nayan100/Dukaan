@@ -88,10 +88,10 @@ const KPIDashboard: React.FC = () => {
 
       {/* Executive Scorecard & P&L */}
       <div className="grid grid-cols-4 gap-6">
-        <KPICard title={selectedBranch ? `${selectedBranch} Revenue` : "Total Revenue"} value={`NPR रु ${plData?.revenue.toLocaleString()}`} trend="+12.4%" icon={DollarSign} />
-        <KPICard title="COGS" value={`NPR रु ${plData?.cogs.toLocaleString()}`} trend="-2.1%" icon={Activity} />
-        <KPICard title="Operating Expenses" value={`NPR रु ${plData?.expenses.toLocaleString()}`} trend="+1.5%" icon={AlertCircle} />
-        <KPICard title="Net Profit" value={`NPR रु ${netProfit.toLocaleString()}`} trend="+8.4%" icon={Activity} />
+        <KPICard title={selectedBranch ? `${selectedBranch} Revenue` : "Total Revenue"} value={`NPR रु ${(plData?.revenue || 0).toLocaleString()}`} trend="+12.4%" icon={DollarSign} />
+        <KPICard title="COGS" value={`NPR रु ${(plData?.cogs || 0).toLocaleString()}`} trend="-2.1%" icon={Activity} />
+        <KPICard title="Operating Expenses" value={`NPR रु ${(plData?.expenses || 0).toLocaleString()}`} trend="+1.5%" icon={AlertCircle} />
+        <KPICard title="Net Profit" value={`NPR रु ${(netProfit || 0).toLocaleString()}`} trend="+8.4%" icon={Activity} />
       </div>
 
       <div className="grid grid-cols-3 gap-10">
