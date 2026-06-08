@@ -6,6 +6,7 @@ import {
 import { useHQStore } from '../../store/useHQStore';
 import { aggregateGlobalKPIs, getInventoryPerformance } from '../../lib/hqAnalytics';
 import { DollarSign, ShoppingCart, TrendingUp, Package } from 'lucide-react';
+import ComparativeAnalytics from './ComparativeAnalytics';
 
 const MOCK_BRANCHES = [
   { 
@@ -42,8 +43,7 @@ const MOCK_BRANCHES = [
 ];
 
 const GlobalMetricsDashboard: React.FC = () => {
-  const { analytics, hqState = useHQStore.getState() } = { analytics: useHQStore(s => s.analytics), hqState: null };
-  // Accessing actions directly for simulation
+  const analytics = useHQStore(s => s.analytics);
   
   useEffect(() => {
     // Simulate initial data load into store
@@ -116,6 +116,8 @@ const GlobalMetricsDashboard: React.FC = () => {
           </div>
         </ChartCard>
       </div>
+
+      <ComparativeAnalytics />
     </div>
   );
 };
