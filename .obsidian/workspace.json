@@ -11,14 +11,10 @@
             "id": "63e37be13d607693",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "conductor/tracks/pos_hud_refinement_20260608/plan.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "plan"
+              "title": "New tab"
             }
           }
         ]
@@ -180,11 +176,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "conductor/tracks/pos_hud_refinement_20260608/plan.md"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for plan"
+              "title": "File properties"
             }
           }
         ],
@@ -209,6 +203,12 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "conductor/tracks/pos_hud_refinement_20260608/plan.md",
+    "conductor/archive/pos_hud_refinement_20260608/spec.md",
+    "conductor/archive/pos_hud_refinement_20260608/plan.md",
+    "conductor/archive/pos_hud_refinement_20260608/metadata.json",
+    "conductor/archive/pos_hud_refinement_20260608/index.md",
+    "conductor/archive/pos_hud_refinement_20260608",
     "frontend/dist/index.html",
     "frontend/dist/assets/index-iJNt4mwP.css",
     "frontend/dist/assets/index-BR8To1ik.js",
@@ -217,11 +217,7 @@
     "conductor/tracks/pos_hud_refinement_20260608/sedmUTKAu",
     "frontend/dist/assets/index-D1rdpNRh.js",
     "frontend/src/components/pos/ReturnWizard.tsx",
-    "frontend/dist/assets/index-DYDmPud8.js",
-    "frontend/dist/assets/index-3txNCxLm.css",
-    "frontend/dist/assets/index-ByFYMwj-.js",
     "conductor/tracks/pos_hud_refinement_20260608/spec.md",
-    "conductor/tracks/pos_hud_refinement_20260608/plan.md",
     "conductor/showcase_ux_roadmap.md",
     "conductor/tracks/pos_hud_refinement_20260608/index.md",
     "conductor/archive/showcase_arch_foundation_20260608/index.md",
@@ -243,8 +239,6 @@
     "frontend/node_modules/react-router/docs/start/framework/routing.md",
     "frontend/node_modules/react-router/docs/start/framework/route-module.md",
     "frontend/node_modules/react-router/docs/start/framework/rendering.md",
-    "frontend/node_modules/react-router/docs/start/framework/pending-ui.md",
-    "frontend/node_modules/react-router/docs/start/framework/navigating.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",
