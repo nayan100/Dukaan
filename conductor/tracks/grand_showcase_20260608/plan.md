@@ -38,6 +38,6 @@ Transform the project from a collection of isolated modules into a touchable, en
 - [x] Create `scripts/reset_demo.sh` to purge and re-seed the DB.
 
 ## 5. Verification
-- [ ] All 94 existing tests must pass.
-- [ ] Manual walkthrough completed without errors.
-- [ ] Cross-tenant data leak test (Everest cannot see Annapurna).
+- [x] All 94 existing tests must pass.
+- [x] Manual walkthrough completed without errors.
+- [x] Cross-tenant data leak test (Everest cannot see Annapurna).
