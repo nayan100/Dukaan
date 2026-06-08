@@ -27,12 +27,15 @@ const TransferUI: React.FC<TransferUIProps> = ({ mode = 'request', availableItem
   const [searchTerm, setSearchTerm] = useState('');
   const [targetBranch, setTargetBranch] = useState('Pokhara');
   const [transferList, setTransferList] = useState<TransferItem[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const filteredItems = availableItems.filter(item => 
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const addToTransfer = (item: Item) => {
+    if (isSuccess) return;
     setTransferList(prev => {
       const existing = prev.find(i => i.id === item.id);
       if (existing) {
@@ -46,22 +49,57 @@ const TransferUI: React.FC<TransferUIProps> = ({ mode = 'request', availableItem
     setTransferList(prev => prev.filter(i => i.id !== itemId));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
     if (onSubmit) {
       onSubmit({
         target_branch: targetBranch,
         items: transferList
       });
     }
+    
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    
+    // Auto-reset after 3 seconds
+    setTimeout(() => {
+        setIsSuccess(false);
+        setTransferList([]);
+    }, 3000);
   };
 
   const title = mode === 'request' ? 'New Transfer Request' : 'Process Stock Dispatch';
   const subTitle = mode === 'request' ? 'Initiate inter-branch inventory movement' : 'Move stock to Transit Warehouse';
-  const submitLabel = mode === 'request' ? 'Submit Request' : 'Confirm Dispatch';
+  const submitLabel = isSubmitting ? 'Processing...' : (mode === 'request' ? 'Submit Request' : 'Confirm Dispatch');
   const Icon = mode === 'request' ? Package : SendHorizontal;
 
   return (
-    <div className="min-h-screen bg-pos-black p-8 text-pos-white font-sans selection:bg-pos-primary/30">
+    <div className="min-h-screen bg-pos-black p-8 text-pos-white font-sans selection:bg-pos-primary/30 relative">
+      <AnimatePresence>
+        {isSuccess && (
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="absolute inset-0 z-50 flex items-center justify-center bg-pos-black/60 backdrop-blur-md"
+            >
+                <div className="bg-pos-surface border border-pos-primary/30 p-12 rounded-[3rem] text-center shadow-2xl shadow-pos-primary/10">
+                    <div className="w-24 h-24 bg-pos-primary/20 rounded-full flex items-center justify-center mx-auto mb-8 border border-pos-primary/30">
+                        <CheckCircle size={48} className="text-pos-primary" />
+                    </div>
+                    <h2 className="text-3xl font-black uppercase tracking-tighter text-white mb-2">Protocol Dispatched</h2>
+                    <p className="text-pos-muted font-medium">Inventory logically moved to Transit Warehouse.</p>
+                    <div className="mt-8 bg-pos-primary/10 border border-pos-primary/20 px-4 py-2 rounded-full inline-block">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-pos-primary">Status: In Transit</span>
+                    </div>
+                </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
+
       <header className="flex justify-between items-end border-b border-pos-border pb-8 mb-10">
         <div>
             <div className="flex items-center gap-3 mb-2">
