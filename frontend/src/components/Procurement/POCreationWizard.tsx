@@ -33,9 +33,9 @@ const POCreationWizard: React.FC<POCreationWizardProps> = ({ onSave, onCancel })
     return items.reduce((sum, item) => sum + (item.qty * item.rate), 0);
   }, [items]);
 
-  const addItem = () => {
+const addItem = () => {
     const newItem: POItem = {
-      id: crypto.randomUUID(),
+      id: Math.random().toString(36).substring(2, 9),
       item_code: MOCK_CATALOG[0].item_code,
       qty: 1,
       rate: MOCK_CATALOG[0].rate
@@ -69,15 +69,24 @@ const POCreationWizard: React.FC<POCreationWizardProps> = ({ onSave, onCancel })
     const branchId = 'T1';
     const month = new Date().toISOString().slice(0, 7);
 
-    const budget = await getBudget(branchId, month);
+    let budget = await getBudget(branchId, month);
     
-    if (budget) {
-      const remaining = budget.allocated - budget.spent;
-      if (totalAmount > remaining) {
-        setShowViolationModal(true);
-        setIsValidating(false);
-        return;
-      }
+    // Showcase Fallback: If no budget is found, simulate a 50k budget for testing
+    if (!budget) {
+      budget = {
+        id: `${branchId}-${month}`,
+        branch_id: branchId,
+        month: month,
+        allocated: 50000,
+        spent: 12000
+      };
+    }
+    
+    const remaining = budget.allocated - budget.spent;
+    if (totalAmount > remaining) {
+      setShowViolationModal(true);
+      setIsValidating(false);
+      return;
     }
 
     savePO(false);
