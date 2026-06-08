@@ -1,12 +1,14 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   BarChart, Bar 
 } from 'recharts';
 import { useHQStore } from '../../store/useHQStore';
 import { aggregateGlobalKPIs, getInventoryPerformance } from '../../lib/hqAnalytics';
-import { DollarSign, ShoppingCart, TrendingUp, Package } from 'lucide-react';
+import { DollarSign, ShoppingCart, TrendingUp, Package, Sparkles } from 'lucide-react';
 import ComparativeAnalytics from './ComparativeAnalytics';
+import DeadStockMap from './DeadStockMap';
+import AISuggestionsOverlay from './AISuggestionsOverlay';
 
 const MOCK_BRANCHES = [
   { 
@@ -44,6 +46,7 @@ const MOCK_BRANCHES = [
 
 const GlobalMetricsDashboard: React.FC = () => {
   const analytics = useHQStore(s => s.analytics);
+  const [showAI, setShowAI] = useState(false);
   
   useEffect(() => {
     // Simulate initial data load into store
@@ -60,13 +63,21 @@ const GlobalMetricsDashboard: React.FC = () => {
 
   return (
     <div className="space-y-10 p-10 bg-slate-950 text-white min-h-screen font-sans">
-      <header>
-        <div className="flex items-center gap-3 mb-2">
-            <Package className="text-emerald-400" size={24} />
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-emerald-400/80">Chain Intelligence</span>
+      <header className="flex justify-between items-end">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+              <Package className="text-emerald-400" size={24} />
+              <span className="text-xs font-black uppercase tracking-[0.3em] text-emerald-400/80">Chain Intelligence</span>
+          </div>
+          <h1 className="text-4xl font-black tracking-tighter uppercase italic">Executive Scorecard</h1>
+          <p className="text-slate-400 font-medium mt-2">Real-time performance metrics across the retail network</p>
         </div>
-        <h1 className="text-4xl font-black tracking-tighter uppercase italic">Executive Scorecard</h1>
-        <p className="text-slate-400 font-medium mt-2">Real-time performance metrics across the retail network</p>
+        <button 
+          onClick={() => setShowAI(true)}
+          className="flex items-center gap-3 bg-amber-500 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10"
+        >
+          <Sparkles size={18} /> AI Suggestions Hub
+        </button>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -120,6 +131,8 @@ const GlobalMetricsDashboard: React.FC = () => {
       <ComparativeAnalytics />
 
       <DeadStockMap />
+
+      <AISuggestionsOverlay isOpen={showAI} onClose={() => setShowAI(false)} />
     </div>
   );
 };
@@ -155,4 +168,3 @@ const ChartCard = ({ title, children }: any) => (
 );
 
 export default GlobalMetricsDashboard;
-lMetricsDashboard;
