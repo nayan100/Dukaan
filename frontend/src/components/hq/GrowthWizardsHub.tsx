@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Building2, Plus, Rocket, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import { Building2, Rocket, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 import BaseHQWizard from '../wizards/BaseHQWizard';
 import { useHQStore } from '../../store/useHQStore';
 

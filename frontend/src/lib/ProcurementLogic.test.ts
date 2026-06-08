@@ -35,7 +35,7 @@ describe('ProcurementLogic', () => {
       'PO_TO_RECEIPT_CONVERSION',
       'testuser',
       'T1',
-      expect.objectContaining({ po_id: 'PO-001' })
+      expect.stringContaining('"po_id":"PO-001"')
     );
   });
 });

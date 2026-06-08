@@ -11,10 +11,14 @@
             "id": "63e37be13d607693",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "_ProjectAtlas.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "_ProjectAtlas"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 424.5
   },
   "right": {
     "id": "0bf58915d1348ec1",
@@ -176,9 +180,11 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {},
+              "state": {
+                "file": "_ProjectAtlas.md"
+              },
               "icon": "lucide-info",
-              "title": "File properties"
+              "title": "File properties for _ProjectAtlas"
             }
           }
         ],
@@ -201,30 +207,37 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "63e37be13d607693",
+  "active": "1c369ed32aec03f1",
   "lastOpenFiles": [
+    "conductor/tracks/chain_owner_hq_20260609/plan.md",
+    "conductor/archive/chain_owner_hq_20260609/spec.md",
+    "conductor/archive/chain_owner_hq_20260609/plan.md",
+    "conductor/archive/chain_owner_hq_20260609/metadata.json",
+    "conductor/archive/chain_owner_hq_20260609/index.md",
+    "conductor/archive/chain_owner_hq_20260609",
+    "frontend/src/components/hq/GrowthWizardsHub.test.tsx",
+    "frontend/src/components/hq/GrowthWizardsHub.tsx",
+    "frontend/src/components/wizards/BaseHQWizard.tsx",
+    "_ProjectAtlas.md",
+    "frontend/src/components/hq/ApprovalCenter.test.tsx",
+    "frontend/src/components/hq/ApprovalCenter.tsx",
+    "frontend/src/components/hq/HQLayout.test.tsx",
+    "frontend/src/components/hq/HQLayout.tsx",
+    "frontend/src/components/hq/AISuggestionsOverlay.tsx",
+    "conductor/showcase_ux_roadmap.md",
+    "conductor/tracks/chain_owner_hq_20260609/index.md",
+    "conductor/tracks/chain_owner_hq_20260609/spec.md",
+    "conductor/archive/pos_hud_refinement_20260608/plan.md",
+    "conductor/archive/pos_hud_refinement_20260608/index.md",
+    "conductor/archive/sovereignty_integration_20260607/plan.md",
     "conductor/tracks/pos_hud_refinement_20260608/plan.md",
     "conductor/archive/pos_hud_refinement_20260608/spec.md",
-    "conductor/archive/pos_hud_refinement_20260608/plan.md",
-    "conductor/archive/pos_hud_refinement_20260608/metadata.json",
-    "conductor/archive/pos_hud_refinement_20260608/index.md",
-    "conductor/archive/pos_hud_refinement_20260608",
-    "frontend/dist/index.html",
-    "frontend/dist/assets/index-iJNt4mwP.css",
-    "frontend/dist/assets/index-BR8To1ik.js",
-    "frontend/dist/assets",
-    "frontend/dist/assets/index-ShwqTMIG.js",
-    "conductor/tracks/pos_hud_refinement_20260608/sedmUTKAu",
-    "frontend/dist/assets/index-D1rdpNRh.js",
-    "frontend/src/components/pos/ReturnWizard.tsx",
     "conductor/tracks/pos_hud_refinement_20260608/spec.md",
-    "conductor/showcase_ux_roadmap.md",
     "conductor/tracks/pos_hud_refinement_20260608/index.md",
     "conductor/archive/showcase_arch_foundation_20260608/index.md",
     "conductor/archive/showcase_arch_foundation_20260608/plan.md",
     "conductor/archive/sovereignty_20260607/plan.md",
     "conductor/archive/sovereignty_20260607/index.md",
-    "conductor/archive/sovereignty_integration_20260607/plan.md",
     "conductor/archive/hierarchical_sovereignty_20260608/plan.md",
     "conductor/archive/grand_showcase_20260608/plan.md",
     "conductor/archive/grand_showcase_20260608/index.md",
@@ -232,13 +245,6 @@
     "frontend/node_modules/react-router/LICENSE.md",
     "frontend/node_modules/zustand/README.md",
     "frontend/node_modules/react-router-dom/LICENSE.md",
-    "frontend/node_modules/react-router-dom/README.md",
-    "frontend/node_modules/react-router/README.md",
-    "frontend/node_modules/react-router/CHANGELOG.md",
-    "frontend/node_modules/react-router/docs/start/framework/testing.md",
-    "frontend/node_modules/react-router/docs/start/framework/routing.md",
-    "frontend/node_modules/react-router/docs/start/framework/route-module.md",
-    "frontend/node_modules/react-router/docs/start/framework/rendering.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",

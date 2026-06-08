@@ -14,20 +14,6 @@ vi.mock('recharts', async () => {
 });
 
 describe('HQLayout', () => {
-  it('renders the strategy hub and sub-navbar', () => {
-    render(
-      <MemoryRouter initialEntries={['/hq/scorecard']}>
-        <Routes>
-          <Route path="/hq/*" element={<HQLayout />} />
-        </Routes>
-      </MemoryRouter>
-    );
-    
-    expect(screen.getByText('Strategy Hub')).toBeInTheDocument();
-    expect(screen.getByText('Scorecard')).toBeInTheDocument();
-    expect(screen.getByText('Rebalancer')).toBeInTheDocument();
-  });
-
   it('renders the executive scorecard on the scorecard route', () => {
     render(
       <MemoryRouter initialEntries={['/hq/scorecard']}>

@@ -171,21 +171,4 @@ const ChartCard = ({ title, children }: any) => (
   </div>
 );
 
-const PlaceholderView = ({ title, description }: any) => (
-  <div className="h-full flex items-center justify-center p-10">
-    <div className="text-center space-y-4 bg-slate-900/50 border border-slate-800 p-16 rounded-[3rem] max-w-lg w-full">
-      <div className="w-20 h-20 bg-slate-800 rounded-3xl flex items-center justify-center mx-auto border border-slate-700 shadow-2xl">
-        <Zap className="text-slate-600" size={40} />
-      </div>
-      <h2 className="text-3xl font-black uppercase tracking-tighter italic text-slate-100">{title}</h2>
-      <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">{description}</p>
-      <div className="pt-8">
-         <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-            <div className="h-full bg-emerald-500 w-1/3 animate-pulse" />
-         </div>
-      </div>
-    </div>
-  </div>
-);
-
 export default HQLayout;

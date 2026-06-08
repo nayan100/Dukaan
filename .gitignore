@@ -1,7 +1,7 @@
 # Gitignore for conductor notes and frontend coverage
 
 # Conductor track task notes
-conductor/tracks/**/*.md
+# removed: conductor/tracks/**/*.md
 
 # Frontend coverage output
 frontend/coverage/src/

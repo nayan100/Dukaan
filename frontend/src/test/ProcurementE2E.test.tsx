@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ProcurementSuite from '../components/ProcurementSuite/ProcurementSuite';
 import { AuthProvider } from '../context/AuthContext';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React from 'react';
 
 // Mock DB
 vi.mock('../lib/db', () => ({
@@ -9,6 +10,16 @@ vi.mock('../lib/db', () => ({
   getBudget: vi.fn(),
   getSupplier: vi.fn(),
   logAction: vi.fn(),
+}));
+
+// Mock framer-motion
+vi.mock('framer-motion', () => ({
+  motion: {
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+    header: ({ children, ...props }: any) => <header {...props}>{children}</header>,
+  },
+  AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
 import { getBudget, getSupplier } from '../lib/db';
@@ -67,21 +78,23 @@ describe('Procurement E2E Dirty Data Stress Test', () => {
 
     fireEvent.click(screen.getByText(/New Purchase Order/i));
     
-    fireEvent.change(screen.getByPlaceholderText(/Supplier Name/i), { target: { value: 'Test' } });
-    fireEvent.change(screen.getByPlaceholderText(/Amount/i), { target: { value: '500' } });
+    // Add item first to enable button
+    fireEvent.click(screen.getByText(/Add Item/i));
+    
+    fireEvent.change(screen.getByPlaceholderText(/Select or Enter Supplier/i), { target: { value: 'Test' } });
     
     fireEvent.click(screen.getByText(/Create PO/i));
 
     await waitFor(() => {
-      expect(screen.getByText(/Budget Violation Detected/i)).toBeInTheDocument();
+      expect(screen.getByText(/Budget Violation/i)).toBeInTheDocument();
     });
 
     // Try to save without reason (button should be disabled)
-    const saveBtn = screen.getByText(/Confirm & Save/i);
+    const saveBtn = screen.getByText(/Override & Save/i);
     expect(saveBtn).toBeDisabled();
 
     // Add reason
-    fireEvent.change(screen.getByPlaceholderText(/Reason for violation/i), { target: { value: 'Override' } });
+    fireEvent.change(screen.getByPlaceholderText(/Justification for budget override/i), { target: { value: 'Override' } });
     expect(saveBtn).toBeEnabled();
   });
 });

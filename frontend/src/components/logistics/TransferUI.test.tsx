@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import TransferUI from './TransferUI';
 
@@ -40,7 +40,7 @@ describe('TransferUI Component', () => {
     expect(screen.getByTestId('transfer-item-1')).toBeInTheDocument();
   });
 
-  it('submits the transfer request', () => {
+  it('submits the transfer request', async () => {
     const onSubmit = vi.fn();
     render(<TransferUI onSubmit={onSubmit} />);
     
@@ -50,7 +50,9 @@ describe('TransferUI Component', () => {
     // Submit
     fireEvent.click(screen.getByText('Submit Request'));
     
-    expect(onSubmit).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalled();
+    }, { timeout: 3000 });
   });
 
   it('filters items based on search term', () => {

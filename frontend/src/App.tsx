@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import POSHUD from './components/pos/POSHUD';
-import KPIDashboard from './components/analytics/KPIDashboard';
 import BranchDashboard from './components/management/BranchDashboard';
 import IRDSyncDashboard from './components/analytics/IRDSyncDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
-import GlobalMetricsDashboard from './components/hq/GlobalMetricsDashboard';
+import HQLayout from './components/hq/HQLayout';
 import ChainOwnerRoute from './components/auth/ChainOwnerRoute';
 import { useAuth } from './context/AuthContext';
 

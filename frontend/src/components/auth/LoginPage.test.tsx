@@ -11,7 +11,7 @@ describe('LoginPage Component', () => {
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(screen.getByText('Login to Sovereign Hub')).toBeInTheDocument();
     // Role selector exists
-    expect(screen.getByText('Cashier')).toBeInTheDocument();
+    expect(screen.getByText('POS (Cashier)')).toBeInTheDocument();
   });
 
   it('calls onLogin with credentials and role when submitted', () => {
@@ -22,13 +22,13 @@ describe('LoginPage Component', () => {
     fireEvent.change(screen.getByPlaceholderText('Username'), { target: { value: 'user1' } });
     fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'pass1' } });
     
-    // Default role is Cashier
+    // Default role is POS
     fireEvent.click(screen.getByText('Login to Sovereign Hub'));
     
     expect(onLogin).toHaveBeenCalledWith({
       tenant: 'T1',
       username: 'user1',
-      role: 'Cashier'
+      role: 'POS'
     });
   });
 });

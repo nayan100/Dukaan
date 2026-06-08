@@ -19,6 +19,8 @@ vi.mock('framer-motion', () => ({
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
     aside: ({ children, ...props }: any) => <aside {...props}>{children}</aside>,
     span: ({ children, ...props }: any) => <span {...props}>{children}</span>,
+    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+    header: ({ children, ...props }: any) => <header {...props}>{children}</header>,
   },
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
@@ -45,6 +47,8 @@ describe('Sovereignty Integration', () => {
     );
 
     // 1. Perform Login
+    fireEvent.click(screen.getByText(/Or enter manual credentials/i));
+
     fireEvent.change(screen.getByPlaceholderText(/e.g. T1/i), { target: { value: 'T1' } });
     fireEvent.change(screen.getByPlaceholderText(/Username/i), { target: { value: 'cashier_one' } });
     fireEvent.change(screen.getByPlaceholderText(/Password/i), { target: { value: 'password123' } });
@@ -86,6 +90,8 @@ describe('Sovereignty Integration', () => {
     );
 
     // Login as Chain Owner to see Strategy Hub
+    fireEvent.click(screen.getByText(/Or enter manual credentials/i));
+
     fireEvent.change(screen.getByPlaceholderText(/e.g. T1/i), { target: { value: 'T1' } });
     fireEvent.change(screen.getByPlaceholderText(/Username/i), { target: { value: 'owner_one' } });
     fireEvent.change(screen.getByPlaceholderText(/Password/i), { target: { value: 'password123' } });
@@ -93,14 +99,14 @@ describe('Sovereignty Integration', () => {
     fireEvent.click(screen.getByText(/Login to Sovereign Hub/i));
 
     await waitFor(() => {
-      expect(screen.getByText(/Strategy Hub/i)).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: /Scorecard/i })).toBeInTheDocument();
     });
 
     // track fetch calls
     const fetchSpy = vi.spyOn(window, 'fetch');
 
-    // Switch Tab to Strategy Hub
-    fireEvent.click(screen.getByText(/Strategy Hub/i));
+    // Switch Tab to Scorecard (Strategy Hub)
+    fireEvent.click(screen.getByRole('link', { name: /Scorecard/i }));
 
     // Verify validate_tenant was called
     await waitFor(() => {
