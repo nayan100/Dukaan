@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<IndexRedirect />} />
           <Route path="pos" element={<POSHUD />} />
-          <Route path="hq" element={<KPIDashboard />} />
+          <Route path="hq" element={<ChainOwnerRoute><KPIDashboard /></ChainOwnerRoute>} />
           <Route path="branch" element={<BranchDashboard />} />
           <Route path="finance" element={<IRDSyncDashboard />} />
           <Route path="admin" element={<AdminDashboard />} />
@@ -37,6 +37,11 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+  );
+}
+
+export default App;
+>
   );
 }
 
