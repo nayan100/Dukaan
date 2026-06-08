@@ -28,6 +28,16 @@ except ImportError:
     frappe.get_doc.side_effect = lambda d, n=None: MockDoc(d) if isinstance(d, dict) else MockDoc({'name': d, 'doctype': 'LinkedDoc'})
 
 def provision_tenant(name, tier):
+    """
+    Provisions a new tenant with the specified name and plan tier.
+
+    Args:
+        name (str): The name of the company/tenant.
+        tier (str): The plan tier (e.g., 'Enterprise', 'Business').
+
+    Returns:
+        Document: The created or retrieved Tenant document.
+    """
     print(f"Provisioning Tenant: {name} ({tier})...")
     if not frappe.db.exists("Tenant", name):
         tenant = frappe.get_doc({
@@ -41,6 +51,15 @@ def provision_tenant(name, tier):
     return frappe.get_doc("Tenant", name)
 
 def seed_business_data(tenant, items, branches, suppliers):
+    """
+    Seeds core business data (items, branches, suppliers) for a specific tenant.
+
+    Args:
+        tenant (Document): The tenant document to seed data for.
+        items (list): List of item dictionaries with code, name, and rate.
+        branches (list): List of branch names.
+        suppliers (list): List of supplier names.
+    """
     print(f"\n--- Seeding data for {tenant.company_name} ---")
     
     # 1. Suppliers
@@ -88,6 +107,15 @@ def seed_business_data(tenant, items, branches, suppliers):
     seed_history(tenant, items, branches, suppliers)
 
 def seed_history(tenant, items, branches, suppliers):
+    """
+    Generates 6 months of historical sales and purchase data.
+
+    Args:
+        tenant (Document): The tenant document.
+        items (list): List of items.
+        branches (list): List of branch names.
+        suppliers (list): List of supplier names.
+    """
     print(f"Generating 6 months of history for {tenant.company_name}...")
     now = datetime.now()
     
@@ -133,28 +161,35 @@ def seed_history(tenant, items, branches, suppliers):
                 stock[item['item_code']] -= qty
 
 def main():
-    print("🚀 Starting Grand Showcase Seeding...")
-    
-    # 1. Provision Tenants
-    everest = provision_tenant("Everest Groceries", "Enterprise")
-    annapurna = provision_tenant("Annapurna Apparel", "Business")
-    
-    # 2. Seed Everest Groceries
-    seed_business_data(everest, [
-        {"item_code": "G-COFFEE-01", "item_name": "Organic Coffee", "valuation_rate": 450},
-        {"item_code": "G-TEA-02", "item_name": "Green Tea", "valuation_rate": 200},
-        {"item_code": "G-MILK-03", "item_name": "Fresh Milk", "valuation_rate": 100},
-        {"item_code": "G-RICE-04", "item_name": "Basmati Rice", "valuation_rate": 1500}
-    ], ["KTM Main", "PKR Lakeside", "BTP Industrial"], ["Narayani Suppliers", "Himalayan Traders"])
-    
-    # 3. Seed Annapurna Apparel
-    seed_business_data(annapurna, [
-        {"item_code": "A-SHIRT-01", "item_name": "Cotton Shirt", "valuation_rate": 1200},
-        {"item_code": "A-PANTS-02", "item_name": "Denim Jeans", "valuation_rate": 2500},
-        {"item_code": "A-JACKET-03", "item_name": "Winter Jacket", "valuation_rate": 4500}
-    ], ["Lalitpur Hub", "Butwal Outlet"], ["Textile World", "Fashion Fabricators"])
-    
-    print("\n✅ Showcase Seeding Complete!")
+    """Main entry point for the showcase seeding script."""
+    try:
+        print("🚀 Starting Grand Showcase Seeding...")
+        
+        # 1. Provision Tenants
+        everest = provision_tenant("Everest Groceries", "Enterprise")
+        annapurna = provision_tenant("Annapurna Apparel", "Business")
+        
+        # 2. Seed Everest Groceries
+        seed_business_data(everest, [
+            {"item_code": "G-COFFEE-01", "item_name": "Organic Coffee", "valuation_rate": 450},
+            {"item_code": "G-TEA-02", "item_name": "Green Tea", "valuation_rate": 200},
+            {"item_code": "G-MILK-03", "item_name": "Fresh Milk", "valuation_rate": 100},
+            {"item_code": "G-RICE-04", "item_name": "Basmati Rice", "valuation_rate": 1500}
+        ], ["KTM Main", "PKR Lakeside", "BTP Industrial"], ["Narayani Suppliers", "Himalayan Traders"])
+        
+        # 3. Seed Annapurna Apparel
+        seed_business_data(annapurna, [
+            {"item_code": "A-SHIRT-01", "item_name": "Cotton Shirt", "valuation_rate": 1200},
+            {"item_code": "A-PANTS-02", "item_name": "Denim Jeans", "valuation_rate": 2500},
+            {"item_code": "A-JACKET-03", "item_name": "Winter Jacket", "valuation_rate": 4500}
+        ], ["Lalitpur Hub", "Butwal Outlet"], ["Textile World", "Fashion Fabricators"])
+        
+        print("\n✅ Showcase Seeding Complete!")
+    except BrokenPipeError:
+        # Devnull stdout to ignore the broken pipe on exit
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
