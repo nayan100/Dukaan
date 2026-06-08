@@ -30,4 +30,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-
+- [ ] **Track: The Chain Owner HQ ("Strategy & Growth"). Focus: High-level orchestration, comparative analytics, and global workflow approvals.**
+*Link: [./tracks/chain_owner_hq_20260609/](./tracks/chain_owner_hq_20260609/)*
