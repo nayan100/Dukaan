@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../ui/Button';
+import { useInventoryStore } from '../../store/inventoryStore';
 
 interface Item {
   id: string;
@@ -19,11 +20,11 @@ interface TransferItem extends Item {
 
 interface TransferUIProps {
   mode?: 'request' | 'dispatch';
-  availableItems: Item[];
   onSubmit?: (request: any) => void;
 }
 
-const TransferUI: React.FC<TransferUIProps> = ({ mode = 'request', availableItems, onSubmit }) => {
+const TransferUI: React.FC<TransferUIProps> = ({ mode = 'request', onSubmit }) => {
+  const availableItems = useInventoryStore((state) => state.inventory);
   const [searchTerm, setSearchTerm] = useState('');
   const [targetBranch, setTargetBranch] = useState('Pokhara');
   const [transferList, setTransferList] = useState<TransferItem[]>([]);

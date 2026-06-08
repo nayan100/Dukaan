@@ -96,7 +96,7 @@ const ProcurementAnalyticsHub: React.FC = () => {
                   <XAxis dataKey="day" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} />
                   <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `रु ${val}`} />
                   <Tooltip 
-                    formatter={(value: number) => [`रु ${value.toLocaleString()}`, 'Amount']}
+                    formatter={(value: any) => [`रु ${Number(value).toLocaleString()}`, 'Amount']}
                     contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px' }}
                   />
                   <Area type="monotone" dataKey="spent" name="Consumed (रु)" stroke="#10b981" fillOpacity={1} fill="url(#colorSpent)" strokeWidth={3} />

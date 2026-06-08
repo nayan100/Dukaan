@@ -2,37 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap, Laptop, FileText } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { getUnsyncedInvoices, getAllInvoices } from '../../lib/db';
+import { getAllInvoices } from '../../lib/db';
 import Annex13Preview from './Annex13Preview';
+import { useSyncStore } from '../../store/syncStore';
 
 interface SyncStats {
   synced: number;
   pending: number;
   failed: number;
-  local: number;
 }
 
 const IRDSyncDashboard: React.FC = () => {
-  const [stats, setStats] = useState<SyncStats>({ synced: 0, pending: 0, failed: 0, local: 0 });
+  const [backendStats, setBackendStats] = useState<SyncStats>({ synced: 0, pending: 0, failed: 0 });
   const [invoices, setInvoices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Consume sync store
+  const localUnsynced = useSyncStore((state) => state.unsyncedCount);
+  const isSyncing = useSyncStore((state) => state.isSyncing);
+
   const fetchStats = async () => {
-    // 1. Fetch Local Data
+    // 1. Fetch Local Data (mainly for the audit trail grid)
     try {
       const all = await getAllInvoices();
-      const unsynced = all.filter(i => !i.synced);
       
-      setInvoices(all.map(inv => ({
+      const mappedInvoices = all.map(inv => ({
         invoice_id: inv.invoice_id,
         created_at: inv.created_at,
         taxable_amount: inv.total / 1.13,
         vat_amount: inv.total - (inv.total / 1.13),
         total: inv.total,
         synced: inv.synced
-      })));
+      })).sort((a, b) => b.created_at - a.created_at);
 
-      setStats(prev => ({ ...prev, local: unsynced.length }));
+      setInvoices(mappedInvoices);
     } catch (e) {
       console.error('Failed to fetch local stats:', e);
     }
@@ -44,10 +47,7 @@ const IRDSyncDashboard: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.message) {
-          setStats(prev => ({
-            ...data.message,
-            local: prev.local 
-          }));
+          setBackendStats(data.message);
         }
       }
     } catch (error) {
@@ -76,15 +76,15 @@ const IRDSyncDashboard: React.FC = () => {
 
   useEffect(() => {
     fetchStats();
-    const interval = setInterval(fetchStats, 5000);
+    const interval = setInterval(fetchStats, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const cards = [
-    { label: 'Local Offline', value: stats.local, icon: Laptop, color: stats.local > 0 ? 'text-pos-warning' : 'text-pos-primary', bg: stats.local > 0 ? 'bg-pos-warning/20' : 'bg-pos-primary/10' },
-    { label: 'Synced (Backend)', value: stats.synced, icon: CheckCircle2, color: 'text-pos-primary', bg: 'bg-pos-primary/10' },
-    { label: 'Pending Transmit', value: stats.pending, icon: Clock, color: 'text-pos-warning', bg: 'bg-pos-warning/10' },
-    { label: 'Failed Sync', value: stats.failed, icon: AlertCircle, color: 'text-pos-danger', bg: 'bg-pos-danger/10' },
+    { label: 'Local Offline', value: localUnsynced, icon: Laptop, color: localUnsynced > 0 ? 'text-pos-warning' : 'text-pos-primary', bg: localUnsynced > 0 ? 'bg-pos-warning/20' : 'bg-pos-primary/10' },
+    { label: 'Synced (Backend)', value: backendStats.synced, icon: CheckCircle2, color: 'text-pos-primary', bg: 'bg-pos-primary/10' },
+    { label: 'Pending Transmit', value: backendStats.pending, icon: Clock, color: 'text-pos-warning', bg: 'bg-pos-warning/10' },
+    { label: 'Failed Sync', value: backendStats.failed, icon: AlertCircle, color: 'text-pos-danger', bg: 'bg-pos-danger/10' },
   ];
 
   return (
@@ -108,7 +108,7 @@ const IRDSyncDashboard: React.FC = () => {
           </button>
           <button 
             onClick={fetchStats}
-            className={`p-3 rounded-xl border border-pos-border hover:border-pos-primary transition-all ${loading ? 'animate-spin' : ''}`}
+            className={`p-3 rounded-xl border border-pos-border hover:border-pos-primary transition-all ${loading || isSyncing ? 'animate-spin' : ''}`}
           >
             <RefreshCw size={20} className="text-pos-muted" />
           </button>
@@ -136,7 +136,7 @@ const IRDSyncDashboard: React.FC = () => {
             </div>
             
             <div className="text-4xl font-black tracking-tighter">
-              {loading ? '...' : card.value.toLocaleString()}
+              {(loading && card.label !== 'Local Offline') ? '...' : card.value.toLocaleString()}
             </div>
           </motion.div>
         ))}

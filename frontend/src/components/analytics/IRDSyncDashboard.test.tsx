@@ -1,13 +1,26 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import IRDSyncDashboard from './IRDSyncDashboard';
-import React from 'react';
 
 // Mock global fetch
-global.fetch = vi.fn();
+const fetchMock = vi.fn();
+vi.stubGlobal('fetch', fetchMock);
 
 vi.mock('../../lib/db', () => ({
+  getAllInvoices: vi.fn().mockResolvedValue([]),
   getUnsyncedInvoices: vi.fn(),
+}));
+
+vi.mock('../../store/syncStore', () => ({
+  useSyncStore: (selector: any) => selector({
+    unsyncedCount: 1,
+    isSyncing: false,
+  }),
+}));
+
+// Mock Annex13Preview to avoid deep dependencies
+vi.mock('./Annex13Preview', () => ({
+  default: () => <div data-testid="annex13-preview">Annex 13 Preview</div>,
 }));
 
 describe('IRDSyncDashboard Component', () => {
@@ -16,7 +29,7 @@ describe('IRDSyncDashboard Component', () => {
   });
 
   it('renders sync counts from backend and local storage', async () => {
-    (global.fetch as any).mockResolvedValue({
+    fetchMock.mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({
         message: {
@@ -27,17 +40,13 @@ describe('IRDSyncDashboard Component', () => {
       }),
     });
     
-    // Mock local DB
-    const db = await import('../../lib/db');
-    (db.getUnsyncedInvoices as any).mockResolvedValue([{ invoice_id: 'local-1' }]);
-
     render(<IRDSyncDashboard />);
 
     await waitFor(() => {
       expect(screen.getByText('150')).toBeDefined();
       expect(screen.getByText('5')).toBeDefined();
       expect(screen.getByText('2')).toBeDefined();
-      expect(screen.getByText('1')).toBeDefined(); // Local count
+      expect(screen.getByText('1')).toBeDefined(); // Local count from store
     });
 
     expect(screen.getByText(/Synced/i)).toBeDefined();
@@ -47,7 +56,7 @@ describe('IRDSyncDashboard Component', () => {
   });
 
   it('calls force sync API when button clicked', async () => {
-    (global.fetch as any).mockResolvedValue({
+    fetchMock.mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ message: "Success" }),
     });
@@ -57,7 +66,7 @@ describe('IRDSyncDashboard Component', () => {
     const forceSyncBtn = screen.getByText(/Force Sync/i);
     forceSyncBtn.click();
 
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(fetchMock).toHaveBeenCalledWith(
       '/api/method/dukaan.compliance.retry_failed_ird_syncs',
       expect.objectContaining({ method: 'POST' })
     );

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { startSyncWorker, triggerSync } from './syncWorker';
+import { triggerSync } from './syncWorker';
 import * as db from './db';
 
 vi.mock('./db', () => ({
@@ -8,7 +8,20 @@ vi.mock('./db', () => ({
 }));
 
 // Mock global fetch
-global.fetch = vi.fn();
+const fetchMock = vi.fn();
+vi.stubGlobal('fetch', fetchMock);
+
+// Mock useSyncStore
+const mockSetUnsyncedCount = vi.fn();
+const mockSetSyncing = vi.fn();
+vi.mock('../store/syncStore', () => ({
+  useSyncStore: {
+    getState: () => ({
+      setUnsyncedCount: mockSetUnsyncedCount,
+      setSyncing: mockSetSyncing,
+    }),
+  },
+}));
 
 describe('Background Sync Worker', () => {
   beforeEach(() => {
@@ -26,7 +39,7 @@ describe('Background Sync Worker', () => {
       { invoice_id: 'INV-002', total: 200 },
     ];
     (db.getUnsyncedInvoices as any).mockResolvedValue(mockInvoices);
-    (global.fetch as any).mockResolvedValue({
+    fetchMock.mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ status: 'Success' }),
     });
@@ -34,9 +47,11 @@ describe('Background Sync Worker', () => {
     await triggerSync();
 
     expect(db.getUnsyncedInvoices).toHaveBeenCalled();
-    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
     expect(db.markInvoiceSynced).toHaveBeenCalledWith('INV-001');
     expect(db.markInvoiceSynced).toHaveBeenCalledWith('INV-002');
+    expect(mockSetSyncing).toHaveBeenCalledWith(true);
+    expect(mockSetSyncing).toHaveBeenCalledWith(false);
   });
 
   it('does not sync if offline', async () => {
@@ -48,6 +63,6 @@ describe('Background Sync Worker', () => {
     await triggerSync();
 
     expect(db.getUnsyncedInvoices).not.toHaveBeenCalled();
-    expect(global.fetch).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

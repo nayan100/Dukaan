@@ -1,7 +1,7 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AuthProvider, useAuth } from './AuthContext';
-import React from 'react';
+import type { User } from './AuthContext';
 
 // Wrapper for the hook
 const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -21,7 +21,7 @@ describe('AuthContext and Permission Shadowing', () => {
   it('stores user in sessionStorage after successful login', async () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
     
-    const mockUser = { username: 'cashier1', role: 'Cashier', tenant: 'T1' };
+    const mockUser: User = { username: 'cashier1', role: 'POS', tenant: 'T1' };
     
     await act(async () => {
       await result.current.login(mockUser);
@@ -35,7 +35,7 @@ describe('AuthContext and Permission Shadowing', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
     
     await act(async () => {
-      await result.current.login({ username: 'cashier1', role: 'Cashier', tenant: 'T1' });
+      await result.current.login({ username: 'cashier1', role: 'POS', tenant: 'T1' });
     });
 
     // Cashier should have POS access but not Strategy Hub
@@ -56,7 +56,7 @@ describe('AuthContext and Permission Shadowing', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
     
     await act(async () => {
-      await result.current.login({ username: 'user1', role: 'Cashier', tenant: 'T1' });
+      await result.current.login({ username: 'user1', role: 'POS', tenant: 'T1' });
     });
 
     expect(result.current.user).not.toBeNull();
@@ -74,7 +74,7 @@ describe('AuthContext and Permission Shadowing', () => {
     const { result, rerender } = renderHook(() => useAuth(), { wrapper });
     
     await act(async () => {
-      await result.current.login({ username: 'user1', role: 'Cashier', tenant: 'T1' });
+      await result.current.login({ username: 'user1', role: 'POS', tenant: 'T1' });
     });
 
     expect(result.current.user).not.toBeNull();

@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
-interface User {
+export interface User {
   username: string;
   role: 'Admin' | 'Chain Owner' | 'Single Owner' | 'Branch Owner' | 'POS' | 'Accountant';
   tenant: string;

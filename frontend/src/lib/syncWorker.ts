@@ -1,4 +1,5 @@
 import { getUnsyncedInvoices, markInvoiceSynced } from './db';
+import { useSyncStore } from '../store/syncStore';
 
 let isSyncing = false;
 
@@ -6,9 +7,12 @@ export const triggerSync = async () => {
   if (isSyncing || !navigator.onLine) return;
 
   const unsynced = await getUnsyncedInvoices();
+  useSyncStore.getState().setUnsyncedCount(unsynced.length);
+  
   if (unsynced.length === 0) return;
 
   isSyncing = true;
+  useSyncStore.getState().setSyncing(true);
   console.log(`Starting sync for ${unsynced.length} invoices...`);
 
   for (const invoice of unsynced) {
@@ -40,6 +44,9 @@ export const triggerSync = async () => {
   }
 
   isSyncing = false;
+  useSyncStore.getState().setSyncing(false);
+  const remaining = await getUnsyncedInvoices();
+  useSyncStore.getState().setUnsyncedCount(remaining.length);
 };
 
 export const startSyncWorker = (intervalMs = 5000) => {

@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { AlertTriangle } from 'lucide-react';
-import { getUnsyncedInvoices } from '../../lib/db';
+import { useSyncStore } from '../../store/syncStore';
 import { motion, AnimatePresence } from 'framer-motion';
+import { getUnsyncedInvoices } from '../../lib/db';
 
 const SyncWarning: React.FC = () => {
-  const [unsyncedCount, setUnsyncedCount] = useState(0);
+  const unsyncedCount = useSyncStore((state) => state.unsyncedCount);
+  const setUnsyncedCount = useSyncStore((state) => state.setUnsyncedCount);
 
   useEffect(() => {
+    // Initial fetch on mount just to be sure
     const checkSync = async () => {
       const unsynced = await getUnsyncedInvoices();
       setUnsyncedCount(unsynced.length);
     };
-
     checkSync();
-    const interval = setInterval(checkSync, 10000); // Check every 10 seconds
-    return () => clearInterval(interval);
-  }, []);
+  }, [setUnsyncedCount]);
 
   return (
     <AnimatePresence>

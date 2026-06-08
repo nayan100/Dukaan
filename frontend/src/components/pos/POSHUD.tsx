@@ -6,6 +6,7 @@ import Button from '../ui/Button';
 import PaymentModal from './PaymentModal';
 import { saveInvoiceOffline } from '../../lib/db';
 import { useAuth } from '../../context/AuthContext';
+import { useInventoryStore } from '../../store/inventoryStore';
 
 interface Item {
   id: string;
@@ -18,13 +19,11 @@ interface CartItem extends Item {
   addedAt: number;
 }
 
-interface POSHUDProps {
-  availableItems: Item[];
-  onSaleComplete?: (items: CartItem[]) => void;
-}
-
-const POSHUD: React.FC<POSHUDProps> = ({ availableItems, onSaleComplete }) => {
+const POSHUD: React.FC = () => {
   const { tenantId } = useAuth();
+  const availableItems = useInventoryStore((state) => state.inventory);
+  const handleSaleComplete = useInventoryStore((state) => state.handleSaleComplete);
+  
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,9 +92,7 @@ const POSHUD: React.FC<POSHUDProps> = ({ availableItems, onSaleComplete }) => {
 
     try {
       await saveInvoiceOffline(invoice);
-      if (onSaleComplete) {
-          onSaleComplete(cart);
-      }
+      handleSaleComplete(cart);
     } catch (err) {
       console.error('Failed to save offline:', err);
     }

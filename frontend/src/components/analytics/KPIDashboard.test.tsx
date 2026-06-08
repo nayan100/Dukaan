@@ -19,7 +19,7 @@ describe('KPIDashboard Component', () => {
     
     expect(screen.getByText('Chain Strategy Hub')).toBeInTheDocument();
     expect(screen.getByText('Total Revenue')).toBeInTheDocument();
-    expect(screen.getByText('NPR 1,25,000')).toBeInTheDocument();
+    expect(screen.getByText('NPR रु 126,000')).toBeInTheDocument();
     expect(screen.getByText('KTM Main')).toBeInTheDocument();
   });
 });

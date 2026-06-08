@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { convertPOToReceipt } from './ProcurementLogic';
-import { logAction } from './db';
+import { saveAuditLog } from './db';
 
 vi.mock('./db', () => ({
-  logAction: vi.fn(),
+  saveAuditLog: vi.fn(),
 }));
 
 const mockPO = {
@@ -31,7 +31,7 @@ describe('ProcurementLogic', () => {
   it('logs the conversion action for audit', async () => {
     await convertPOToReceipt(mockPO);
     
-    expect(logAction).toHaveBeenCalledWith(
+    expect(saveAuditLog).toHaveBeenCalledWith(
       'PO_TO_RECEIPT_CONVERSION',
       'testuser',
       'T1',

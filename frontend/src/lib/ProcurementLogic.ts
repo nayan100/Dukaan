@@ -1,4 +1,4 @@
-import { logAction } from './db';
+import { saveAuditLog } from './db';
 
 /**
  * Immutable PO-to-Receipt Conversion Logic
@@ -17,16 +17,16 @@ export const convertPOToReceipt = async (po: any) => {
   };
 
   // Immutable Audit Logging
-  await logAction(
+  await saveAuditLog(
     'PO_TO_RECEIPT_CONVERSION',
     po.user || 'system',
     po.tenant || 'default',
-    {
+    JSON.stringify({
       po_id: po.id,
       receipt_id: receipt.id,
       amount: po.amount,
       timestamp: Date.now()
-    }
+    })
   );
 
   return receipt;

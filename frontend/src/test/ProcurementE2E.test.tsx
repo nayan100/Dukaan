@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ProcurementSuite from '../components/ProcurementSuite/ProcurementSuite';
 import { AuthProvider } from '../context/AuthContext';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import React from 'react';
 
 // Mock DB
 vi.mock('../lib/db', () => ({

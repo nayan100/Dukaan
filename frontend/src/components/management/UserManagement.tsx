@@ -170,7 +170,7 @@ const UserManagement: React.FC = () => {
                      <label className="text-[10px] font-black uppercase text-pos-muted tracking-widest pl-1">Initial Password</label>
                      <div className="relative">
                         <Key size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-pos-muted" />
-                        <input type="password" underline="false" className="w-full bg-pos-black border border-pos-border rounded-xl p-4 pl-12 text-pos-white font-bold" placeholder="••••••••" />
+                        <input type="password" className="w-full bg-pos-black border border-pos-border rounded-xl p-4 pl-12 text-pos-white font-bold" placeholder="••••••••" />
                      </div>
                   </div>
                   <div className="flex gap-4 pt-4">

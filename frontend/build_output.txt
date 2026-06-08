@@ -1,0 +1,105 @@
+
+> frontend@0.0.0 build
+> tsc -b && vite build
+
+src/App.test.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(5,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(9,5): error TS2304: Cannot find name 'expect'.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(12,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(13,26): error TS2304: Cannot find name 'vi'.
+src/components/OpeningStockEntry/VerifySpotCheckUI.test.tsx(19,5): error TS2304: Cannot find name 'expect'.
+src/components/Procurement/Annex14Preview.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/ApprovalHandshake.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/BlindSpotCheck.test.tsx(1,37): error TS6133: 'waitFor' is declared but its value is never read.
+src/components/Procurement/BlindSpotCheck.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/LandedCostCalculator.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/LandedCostCalculator.tsx(2,1): error TS6133: 'motion' is declared but its value is never read.
+src/components/Procurement/LandedCostCalculator.tsx(4,32): error TS1484: 'LandedCostItem' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/Procurement/MarginImpactVisualizer.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/OpeningStockGrid.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/OpeningStockGrid.tsx(110,23): error TS2322: Type '(el: HTMLInputElement | null) => HTMLInputElement | null' is not assignable to type 'Ref<HTMLInputElement> | undefined'.
+  Type '(el: HTMLInputElement | null) => HTMLInputElement | null' is not assignable to type '(instance: HTMLInputElement | null) => void | (() => VoidOrUndefinedOnly)'.
+    Type 'HTMLInputElement | null' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+      Type 'null' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+src/components/Procurement/POCreationWizard.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/POListView.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Procurement/PurchaseReceiptGenerator.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(5,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(9,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(12,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(13,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(16,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.test.tsx(17,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.tsx(99,21): error TS2322: Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType> & ((value: ValueType, name: NameType, item: TooltipPayloadEntry, index: number, payload: TooltipPayload) => ReactNode | [...])'.
+  Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType>'.
+    Types of parameters 'value' and 'value' are incompatible.
+      Type 'ValueType | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(5,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(9,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(10,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(11,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(12,5): error TS2304: Cannot find name 'expect'.
+src/components/ProcurementSuite/ProcurementSuite.test.tsx(15,5): error TS2304: Cannot find name 'expect'.
+src/components/PurchaseOrder/BudgetWarningUI.test.tsx(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/PurchaseOrder/BudgetWarningUI.test.tsx(5,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/PurchaseOrder/BudgetWarningUI.test.tsx(9,5): error TS2304: Cannot find name 'expect'.
+src/components/PurchaseOrder/BudgetWarningUI.test.tsx(12,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/components/PurchaseOrder/BudgetWarningUI.test.tsx(16,5): error TS2304: Cannot find name 'expect'.
+src/components/admin/AdminDashboard.tsx(1,27): error TS6133: 'useEffect' is declared but its value is never read.
+src/components/admin/AdminDashboard.tsx(101,9): error TS6133: 'handleOnboardingComplete' is declared but its value is never read.
+src/components/admin/AdminDashboard.tsx(101,37): error TS6133: 'newTenant' is declared but its value is never read.
+src/components/admin/OnboardingWizard.tsx(14,10): error TS6133: 'isProvisioning' is declared but its value is never read.
+src/components/admin/OnboardingWizard.tsx(19,9): error TS6133: 'handleStartProvisioning' is declared but its value is never read.
+src/components/admin/TenantManagement.tsx(18,7): error TS6133: 'MOCK_TENANTS' is declared but its value is never read.
+src/components/analytics/Annex13Preview.tsx(3,27): error TS6133: 'CheckCircle2' is declared but its value is never read.
+src/components/analytics/DeadStockHUD.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/analytics/DeadStockHUD.tsx(4,34): error TS6133: 'Search' is declared but its value is never read.
+src/components/analytics/FinanceAuditHUD.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/components/analytics/FinanceAuditHUD.tsx(4,3): error TS6133: 'History' is declared but its value is never read.
+src/components/analytics/FinanceAuditHUD.tsx(4,18): error TS6133: 'Search' is declared but its value is never read.
+src/components/analytics/FinanceAuditHUD.tsx(4,34): error TS6133: 'ArrowUpRight' is declared but its value is never read.
+src/components/auth/LandingPage.tsx(3,16): error TS6133: 'User' is declared but its value is never read.
+src/components/auth/PermissionGuard.test.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/layout/AppLayout.tsx(4,34): error TS6133: 'Rocket' is declared but its value is never read.
+src/components/layout/AppLayout.tsx(6,3): error TS6133: 'Users' is declared but its value is never read.
+src/components/layout/AppLayout.tsx(6,10): error TS6133: 'Building2' is declared but its value is never read.
+src/components/layout/AppLayout.tsx(6,21): error TS6133: 'ClipboardList' is declared but its value is never read.
+src/components/management/BranchDashboard.tsx(3,42): error TS6133: 'ArrowUpRight' is declared but its value is never read.
+src/components/management/BranchDashboard.tsx(4,1): error TS6133: 'Button' is declared but its value is never read.
+src/components/management/UserManagement.tsx(22,17): error TS6133: 'setStaff' is declared but its value is never read.
+src/components/management/UserManagement.tsx(173,48): error TS2322: Type '{ type: "password"; underline: string; className: string; placeholder: string; }' is not assignable to type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.
+  Property 'underline' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.
+src/components/ui/BudgetWidget.test.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/context/AuthContext.test.tsx(27,34): error TS2345: Argument of type '{ username: string; role: string; tenant: string; }' is not assignable to parameter of type 'User'.
+  Types of property 'role' are incompatible.
+    Type 'string' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(38,58): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(59,55): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(77,55): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/lib/db.ts(70,7): error TS2801: This condition will always return true since this 'Promise<import("/home/gunmetal/nayan/dukaan/frontend/node_modules/idb/build/entry").IDBPDatabase<DukaanDB>>' is always defined.
+src/test/AdminDashboard.test.tsx(3,1): error TS6133: 'React' is declared but its value is never read.
+src/test/AdminDashboard.test.tsx(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(6,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(8,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(9,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(12,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(16,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(17,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(20,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(28,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(29,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(36,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(39,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(43,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(44,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(45,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(48,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/test/AdminDashboard.test.tsx(52,5): error TS2304: Cannot find name 'expect'.
+src/test/AdminDashboard.test.tsx(53,5): error TS2304: Cannot find name 'expect'.
+src/test/IntegrationSovereignty.test.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/test/IntegrationSovereignty.test.tsx(101,31): error TS2304: Cannot find name 'global'.
+src/test/ProcurementE2E.test.tsx(5,1): error TS6133: 'React' is declared but its value is never read.

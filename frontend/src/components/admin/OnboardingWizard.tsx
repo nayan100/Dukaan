@@ -127,16 +127,10 @@ const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete, onCance
           </button>
         ) : (
           <button 
-            onClick={handleStartProvisioning}
-            disabled={isProvisioning}
+            onClick={() => onComplete(formData)}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-2 rounded-lg font-medium transition-all flex items-center gap-2"
           >
-            {isProvisioning ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Provisioning...
-              </>
-            ) : 'Launch Environment'}
+            Submit for Provisioning
           </button>
         )}
       </div>

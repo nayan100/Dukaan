@@ -2,7 +2,6 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import App from '../App';
 import { AuthProvider } from '../context/AuthContext';
-import React from 'react';
 
 // Mock internal libs
 vi.mock('../lib/db', () => ({
@@ -98,7 +97,7 @@ describe('Sovereignty Integration', () => {
     });
 
     // track fetch calls
-    const fetchSpy = vi.spyOn(global, 'fetch');
+    const fetchSpy = vi.spyOn(window, 'fetch');
 
     // Switch Tab to Strategy Hub
     fireEvent.click(screen.getByText(/Strategy Hub/i));

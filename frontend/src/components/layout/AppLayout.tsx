@@ -6,72 +6,25 @@ import {
   Users, Building2, ClipboardList
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import PermissionGuard from '../auth/PermissionGuard';
-import POSHUD from '../pos/POSHUD';
-import KPIDashboard from '../analytics/KPIDashboard';
-import OnboardingWizard from '../wizards/OnboardingWizard';
-import TransferUI from '../logistics/TransferUI';
 import LoginPage from '../auth/LoginPage';
 import LandingPage from '../auth/LandingPage';
 import SyncWarning from './SyncWarning';
-import IRDSyncDashboard from '../analytics/IRDSyncDashboard';
-import AdminDashboard from '../admin/AdminDashboard';
-import BranchManagement from '../management/BranchManagement';
-import BranchDashboard from '../management/BranchDashboard';
-import UserManagement from '../management/UserManagement';
 import Button from '../ui/Button';
-import ProcurementSuite from '../ProcurementSuite/ProcurementSuite';
-import { initDB } from '../../lib/db';
 import { startSyncWorker } from '../../lib/syncWorker';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 const AppLayout: React.FC = () => {
   const { user, login, logout, validateTenant, hasPermission } = useAuth();
   const [showManualLogin, setShowManualLogin] = useState(false);
-  
-  // Set default tab based on role
-  const getDefaultTab = () => {
-    if (user?.role === 'Admin') return 'admin';
-    if (user?.role === 'Chain Owner') return 'dashboard';
-    if (user?.role === 'Single Owner') return 'wizard';
-    if (user?.role === 'Branch Owner') return 'branch_dashboard';
-    if (user?.role === 'POS') return 'pos';
-    if (user?.role === 'Accountant') return 'audit';
-    return 'pos';
-  };
-
-  const [activeTab, setActiveTab] = useState(getDefaultTab());
   const [isSidebarOpen, setIsSidebarOpen] = useState(user?.role !== 'POS');
   const [isSuspended, setIsSuspended] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const [sharedInventory, setSharedInventory] = useState([
-    { id: '1', name: 'Wai Wai Noodles', code: 'W-01', stock: 150, min_stock: 50, price: 20 },
-    { id: '2', name: 'Real Juice 1L', code: 'J-02', stock: 20, min_stock: 30, price: 250 },
-    { id: '3', name: 'Amul Butter 500g', code: 'B-03', stock: 5, min_stock: 15, price: 600 },
-    { id: '4', name: 'Dairy Milk Silk', code: 'C-04', stock: 45, min_stock: 20, price: 180 },
-    { id: '5', name: 'Coca Cola 2.25L', code: 'D-05', stock: 100, min_stock: 40, price: 270 },
-    { id: '6', name: 'Lays Chips', code: 'S-06', stock: 12, min_stock: 25, price: 50 },
-    { id: '7', name: 'Current Noodles', code: 'C-07', stock: 80, min_stock: 30, price: 50 },
-    { id: '8', name: 'Aashirvaad Atta 5kg', code: 'A-08', stock: 25, min_stock: 10, price: 550 },
-    { id: '9', name: 'Fortune Oil 1L', code: 'F-09', stock: 40, min_stock: 15, price: 240 },
-  ]);
-
-  const handleSaleComplete = (soldItems: any[]) => {
-    setSharedInventory(prev => prev.map(invItem => {
-      const sold = soldItems.find(s => s.id === invItem.id);
-      if (sold) {
-        return { ...invItem, stock: Math.max(0, invItem.stock - sold.quantity) };
-      }
-      return invItem;
-    }));
-  };
-
-  // Locked POS Mode: If POS, keep sidebar closed and force tab
+  // Locked POS Mode: If POS, keep sidebar closed
   useEffect(() => {
     if (user?.role === 'POS') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsSidebarOpen(false);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveTab('pos');
     }
   }, [user?.role]);
 
@@ -96,25 +49,19 @@ const AppLayout: React.FC = () => {
   }
 
   const navItems = [
-    { id: 'admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
-    { id: 'dashboard', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
-    { id: 'branch_dashboard', label: 'Local Intelligence', icon: Package, permission: 'access_logistics' },
-    { id: 'branches', label: 'Branch Management', icon: Building2, permission: 'manage_branches' },
-    { id: 'wizard', label: 'Growth Wizard', icon: Rocket, permission: 'access_growth_wizard' },
-    { id: 'audit', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
-    { id: 'logistics', label: 'Logistics', icon: Package, permission: 'access_logistics' },
-    { id: 'users', label: 'User Management', icon: Users, permission: 'manage_pos_users' },
-    { id: 'procurement', label: 'Stock & Supply', icon: ClipboardList, permission: 'manage_procurement' },
-    { id: 'local_users', label: 'POS Staff', icon: Users, permission: 'manage_local_pos' },
-    { id: 'pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
+    { path: '/admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
+    { path: '/hq', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { path: '/branch', label: 'Local Intelligence', icon: Package, permission: 'access_logistics' },
+    { path: '/finance', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
+    { path: '/pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
   ];
 
   const filteredNavItems = navItems.filter(item => hasPermission(item.permission));
 
-  const getIcon = (id: string) => {
-    const item = navItems.find(n => n.id === id);
-    return item ? item.icon : Package;
-  }
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <div className="flex h-screen bg-pos-black text-pos-white overflow-hidden font-sans">
@@ -141,7 +88,7 @@ const AppLayout: React.FC = () => {
                 variant="danger" 
                 size="xl" 
                 className="w-full uppercase font-black tracking-widest"
-                onClick={logout}
+                onClick={handleLogout}
               >
                 Log Out of Session
               </Button>
@@ -173,15 +120,13 @@ const AppLayout: React.FC = () => {
         <nav className="flex-1 px-4 space-y-2">
           {filteredNavItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeTab === item.id;
+            const isActive = location.pathname === item.path;
 
             return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  setActiveTab(item.id as any);
-                  validateTenant();
-                }}
+              <NavLink
+                key={item.path}
+                to={item.path}
+                onClick={validateTenant}
                 className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all relative group ${
                   isActive 
                     ? 'bg-pos-primary/10 text-pos-primary' 
@@ -204,14 +149,14 @@ const AppLayout: React.FC = () => {
                     {item.label}
                   </motion.span>
                 )}
-              </button>
+              </NavLink>
             );
           })}
         </nav>
 
         <div className="p-4 border-t border-pos-border space-y-2">
           <button 
-            onClick={logout}
+            onClick={handleLogout}
             className="w-full flex items-center gap-4 p-4 rounded-xl text-pos-danger hover:bg-pos-danger/10 transition-all group"
           >
             <LogOut size={22} />
@@ -267,63 +212,14 @@ const AppLayout: React.FC = () => {
         <div className="flex-1 relative">
             <AnimatePresence mode="wait">
                 <motion.div
-                    key={activeTab}
+                    key={location.pathname}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="absolute inset-0 overflow-auto"
                 >
-                    {activeTab === 'pos' && (
-                        <PermissionGuard permission="access_pos" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Active Cashiers Only</div>}>
-                            <POSHUD availableItems={sharedInventory} onSaleComplete={handleSaleComplete} />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'dashboard' && (
-                        <PermissionGuard permission="access_strategy_hub" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Strategy Group</div>}>
-                            <KPIDashboard />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'branches' && (
-                        <PermissionGuard permission="manage_branches" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Strategic Expansion Group</div>}>
-                            <BranchManagement />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'branch_dashboard' && (
-                        <PermissionGuard permission="access_logistics" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Branch Managers</div>}>
-                            <BranchDashboard inventory={sharedInventory} />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'logistics' && (
-                        <PermissionGuard permission="access_logistics" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Logistics Group</div>}>
-                            <TransferUI availableItems={sharedInventory} />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'wizard' && (
-                        <PermissionGuard permission="access_growth_wizard" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Enterprise Group</div>}>
-                            <OnboardingWizard />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'procurement' && (
-                        <PermissionGuard permission="manage_procurement" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Procurement Group</div>}>
-                            <ProcurementSuite />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'audit' && (
-                        <PermissionGuard permission="view_ird_monitor" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Audit Group</div>}>
-                            <IRDSyncDashboard />
-                        </PermissionGuard>
-                    )}
-                    {activeTab === 'admin' && (
-                        <PermissionGuard permission="view_tenants" fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to System Admins</div>}>
-                            <AdminDashboard />
-                        </PermissionGuard>
-                    )}
-                    {(activeTab === 'users' || activeTab === 'local_users') && (
-                        <PermissionGuard permission={activeTab === 'users' ? 'manage_pos_users' : 'manage_local_pos'} fallback={<div className="p-20 text-center font-bold text-pos-danger uppercase tracking-tighter italic">Access Restricted to Personnel Management</div>}>
-                            <UserManagement />
-                        </PermissionGuard>
-                    )}
+                    <Outlet />
                 </motion.div>
             </AnimatePresence>
         </div>

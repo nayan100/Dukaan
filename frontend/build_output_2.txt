@@ -1,0 +1,25 @@
+
+> frontend@0.0.0 build
+> tsc -b && vite build
+
+src/components/Procurement/LandedCostCalculator.tsx(4,32): error TS1484: 'LandedCostItem' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/Procurement/OpeningStockGrid.tsx(110,23): error TS2322: Type '(el: HTMLInputElement | null) => HTMLInputElement | null' is not assignable to type 'Ref<HTMLInputElement> | undefined'.
+  Type '(el: HTMLInputElement | null) => HTMLInputElement | null' is not assignable to type '(instance: HTMLInputElement | null) => void | (() => VoidOrUndefinedOnly)'.
+    Type 'HTMLInputElement | null' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+      Type 'null' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+src/components/ProcurementAnalytics/ProcurementAnalyticsHub.tsx(99,21): error TS2322: Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType> & ((value: ValueType, name: NameType, item: TooltipPayloadEntry, index: number, payload: TooltipPayload) => ReactNode | [...])'.
+  Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType>'.
+    Types of parameters 'value' and 'value' are incompatible.
+      Type 'ValueType | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+src/components/admin/AdminDashboard.tsx(101,37): error TS6133: 'newTenant' is declared but its value is never read.
+src/components/management/UserManagement.tsx(173,48): error TS2322: Type '{ type: "password"; underline: string; className: string; placeholder: string; }' is not assignable to type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.
+  Property 'underline' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.
+src/context/AuthContext.test.tsx(26,34): error TS2345: Argument of type '{ username: string; role: string; tenant: string; }' is not assignable to parameter of type 'User'.
+  Types of property 'role' are incompatible.
+    Type 'string' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(37,58): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(58,55): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/context/AuthContext.test.tsx(76,55): error TS2322: Type '"Cashier"' is not assignable to type '"Admin" | "Chain Owner" | "Single Owner" | "Branch Owner" | "POS" | "Accountant"'.
+src/lib/db.ts(70,7): error TS2801: This condition will always return true since this 'Promise<import("/home/gunmetal/nayan/dukaan/frontend/node_modules/idb/build/entry").IDBPDatabase<DukaanDB>>' is always defined.
+src/test/IntegrationSovereignty.test.tsx(100,31): error TS2304: Cannot find name 'global'.

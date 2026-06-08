@@ -71,5 +71,7 @@ def reset_frappe_mock():
     shared_mock_frappe.throw.side_effect = mock_throw
     # Also reset nested mocks
     shared_mock_frappe.db.exists.reset_mock()
+    shared_mock_frappe.db.get_value.reset_mock(side_effect=True, return_value=True)
+    shared_mock_frappe.db.get_value.side_effect = None
     shared_mock_frappe.get_doc.reset_mock(side_effect=True, return_value=True)
     shared_mock_frappe.get_doc.side_effect = None # Explicitly clear

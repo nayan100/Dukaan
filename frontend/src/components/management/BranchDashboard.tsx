@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Package, Search, AlertTriangle, ArrowUpRight, TrendingUp, Box } from 'lucide-react';
 import Button from '../ui/Button';
-
-const MOCK_INVENTORY = [
-  { id: '1', name: 'Wai Wai Noodles', code: 'W-01', stock: 150, min_stock: 50, price: 20 },
-  { id: '2', name: 'Real Juice 1L', code: 'J-02', stock: 20, min_stock: 30, price: 250 },
-  { id: '3', name: 'Amul Butter 500g', code: 'B-03', stock: 5, min_stock: 15, price: 600 },
-  { id: '4', name: 'Dairy Milk Silk', code: 'C-04', stock: 45, min_stock: 20, price: 180 },
-  { id: '5', name: 'Coca Cola 2.25L', code: 'D-05', stock: 100, min_stock: 40, price: 270 },
-  { id: '6', name: 'Lays Chips', code: 'S-06', stock: 12, min_stock: 25, price: 50 },
-];
+import { useInventoryStore } from '../../store/inventoryStore';
 
 const StatCard = ({ title, value, subtext, icon: Icon, alert = false }: any) => (
   <motion.div 
@@ -29,11 +21,8 @@ const StatCard = ({ title, value, subtext, icon: Icon, alert = false }: any) => 
   </motion.div>
 );
 
-interface BranchDashboardProps {
-    inventory: any[];
-}
-
-const BranchDashboard: React.FC<BranchDashboardProps> = ({ inventory }) => {
+const BranchDashboard: React.FC = () => {
+  const inventory = useInventoryStore((state) => state.inventory);
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredInventory = inventory.filter(item => 

@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import AdminDashboard from '../components/admin/AdminDashboard';
-import React from 'react';
 
 describe('AdminDashboard', () => {
   it('renders the admin dashboard shell', () => {

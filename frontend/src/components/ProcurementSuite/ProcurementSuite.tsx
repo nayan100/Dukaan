@@ -10,21 +10,26 @@ import OpeningStockGrid from '../Procurement/OpeningStockGrid';
 import PurchaseReceiptGenerator from '../Procurement/PurchaseReceiptGenerator';
 import Annex14Preview from '../Procurement/Annex14Preview';
 import ProcurementAnalyticsHub from '../ProcurementAnalytics/ProcurementAnalyticsHub';
+import { useInventoryStore } from '../../store/inventoryStore';
 
 const ProcurementSuite: React.FC = () => {
   const [view, setView] = useState<'overview' | 'pos' | 'receipts' | 'stock' | 'analytics'>('overview');
   const [showWizard, setShowWizard] = useState(false);
+  const inventory = useInventoryStore((state) => state.inventory);
 
-  // Mock Data
+  // Mock Data for POs
   const mockPOs = [
     { id: 'PO-001', supplier: 'Nepal Trading', amount: 5000, status: 'Draft', budgetViolation: false, date: '2026-06-08' },
     { id: 'PO-002', supplier: 'Global Imports', amount: 15000, status: 'Pending Approval', budgetViolation: true, date: '2026-06-07' },
   ];
 
-  const mockItems = [
-    { id: '1', name: 'Wai Wai Noodles', current_stock: 10, price: 20 },
-    { id: '2', name: 'Real Juice 1L', current_stock: 5, price: 250 },
-  ];
+  // Map inventory to what OpeningStockGrid expects
+  const mappedItems = inventory.map(item => ({
+    id: item.id,
+    name: item.name,
+    current_stock: item.stock,
+    price: item.price
+  }));
 
   const subNav = [
     { id: 'overview', label: 'PO Tracker', icon: ClipboardList },
@@ -92,7 +97,7 @@ const ProcurementSuite: React.FC = () => {
 
           {view === 'stock' && (
             <motion.div key="stock" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="h-full">
-               <OpeningStockGrid items={mockItems} onSave={() => {}} />
+               <OpeningStockGrid items={mappedItems} onSave={() => {}} />
             </motion.div>
           )}
 

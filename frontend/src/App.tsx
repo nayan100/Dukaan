@@ -1,8 +1,43 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
+import POSHUD from './components/pos/POSHUD';
+import KPIDashboard from './components/analytics/KPIDashboard';
+import BranchDashboard from './components/management/BranchDashboard';
+import IRDSyncDashboard from './components/analytics/IRDSyncDashboard';
+import AdminDashboard from './components/admin/AdminDashboard';
+import { useAuth } from './context/AuthContext';
+
+const IndexRedirect = () => {
+  const { user } = useAuth();
+  
+  if (!user) return null; // AppLayout handles login if no user
+
+  switch (user.role) {
+    case 'Admin': return <Navigate to="/admin" replace />;
+    case 'Chain Owner': return <Navigate to="/hq" replace />;
+    case 'Branch Owner': return <Navigate to="/branch" replace />;
+    case 'POS': return <Navigate to="/pos" replace />;
+    case 'Accountant': return <Navigate to="/finance" replace />;
+    default: return <Navigate to="/pos" replace />;
+  }
+};
 
 function App() {
-  return <AppLayout />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<IndexRedirect />} />
+          <Route path="pos" element={<POSHUD />} />
+          <Route path="hq" element={<KPIDashboard />} />
+          <Route path="branch" element={<BranchDashboard />} />
+          <Route path="finance" element={<IRDSyncDashboard />} />
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="*" element={<IndexRedirect />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

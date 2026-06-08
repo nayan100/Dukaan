@@ -1,7 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import TransferUI from './TransferUI';
-import React from 'react';
+
+// Mock useInventoryStore
+const mockInventory = [
+  { id: '1', name: 'Wai Wai Noodles', price: 20, stock: 100, min_stock: 10, code: 'W1' },
+  { id: '2', name: 'Real Juice 1L', price: 250, stock: 50, min_stock: 5, code: 'R2' },
+];
+
+vi.mock('../../store/inventoryStore', () => ({
+  useInventoryStore: (selector: any) => selector({
+    inventory: mockInventory,
+  }),
+}));
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -11,14 +22,9 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
-const mockItems = [
-  { id: '1', name: 'Wai Wai Noodles', price: 20 },
-  { id: '2', name: 'Real Juice 1L', price: 250 },
-];
-
 describe('TransferUI Component', () => {
   it('renders the transfer request interface', () => {
-    render(<TransferUI availableItems={mockItems} />);
+    render(<TransferUI />);
     
     expect(screen.getByText('New Transfer Request')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search products...')).toBeInTheDocument();
@@ -26,7 +32,7 @@ describe('TransferUI Component', () => {
   });
 
   it('adds an item to the transfer list when selected', () => {
-    render(<TransferUI availableItems={mockItems} />);
+    render(<TransferUI />);
     
     const addButton = screen.getByTestId('add-item-1');
     fireEvent.click(addButton);
@@ -36,7 +42,7 @@ describe('TransferUI Component', () => {
 
   it('submits the transfer request', () => {
     const onSubmit = vi.fn();
-    render(<TransferUI availableItems={mockItems} onSubmit={onSubmit} />);
+    render(<TransferUI onSubmit={onSubmit} />);
     
     // Add item
     fireEvent.click(screen.getByTestId('add-item-1'));
@@ -48,7 +54,7 @@ describe('TransferUI Component', () => {
   });
 
   it('filters items based on search term', () => {
-    render(<TransferUI availableItems={mockItems} />);
+    render(<TransferUI />);
     
     const searchInput = screen.getByPlaceholderText('Search products...');
     fireEvent.change(searchInput, { target: { value: 'Wai Wai' } });
@@ -58,15 +64,13 @@ describe('TransferUI Component', () => {
   });
 
   it('removes an item from the transfer list', () => {
-    render(<TransferUI availableItems={mockItems} />);
+    render(<TransferUI />);
     
     // Add item
     fireEvent.click(screen.getByTestId('add-item-1'));
     expect(screen.getByTestId('transfer-item-1')).toBeInTheDocument();
     
-    // Remove item - button is only visible on hover in real UI, but in JSDOM we can click it
-    // The button has Trash2 icon and variant="danger"
-    // Since it's inside the transfer-item-1, we can find it there
+    // Remove item
     const removeButton = screen.getByTestId('transfer-item-1').querySelector('button');
     if (removeButton) fireEvent.click(removeButton);
     

@@ -107,7 +107,7 @@ const OpeningStockGrid: React.FC<OpeningStockGridProps> = ({ items, onSave }) =>
                   </td>
                   <td className="px-6 py-4">
                     <input
-                      ref={el => inputRefs.current[item.id] = el}
+                      ref={el => { if (el) inputRefs.current[item.id] = el; }}
                       type="number"
                       placeholder="0"
                       value={stock[item.id] || ''}

@@ -46,10 +46,11 @@ const MOCK_TENANTS: Tenant[] = [
 
 interface TenantManagementProps {
   showHeader?: boolean;
+  tenants: Tenant[];
+  setTenants: React.Dispatch<React.SetStateAction<Tenant[]>>;
 }
 
-const TenantManagement: React.FC<TenantManagementProps> = ({ showHeader = true }) => {
-  const [tenants, setTenants] = useState<Tenant[]>(MOCK_TENANTS);
+const TenantManagement: React.FC<TenantManagementProps> = ({ showHeader = true, tenants, setTenants }) => {
   const [selectedTenant, setSelectedTenant] = useState<Tenant | null>(null);
 
   const handleStatusChange = (tenantName: string, newStatus: Tenant['status']) => {

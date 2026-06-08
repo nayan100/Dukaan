@@ -8,6 +8,20 @@ vi.mock('../../context/AuthContext', () => ({
   useAuth: () => mockUseAuth(),
 }));
 
+// Mock useInventoryStore
+const mockInventory = [
+  { id: '1', name: 'Apple', price: 100, stock: 10, min_stock: 5, code: 'A1' },
+  { id: '2', name: 'Banana', price: 50, stock: 20, min_stock: 5, code: 'B2' },
+];
+const mockHandleSaleComplete = vi.fn();
+
+vi.mock('../../store/inventoryStore', () => ({
+  useInventoryStore: (selector: any) => selector({
+    inventory: mockInventory,
+    handleSaleComplete: mockHandleSaleComplete,
+  }),
+}));
+
 // Mock DB
 vi.mock('../../lib/db', () => ({
   saveInvoiceOffline: vi.fn().mockResolvedValue(undefined),
@@ -21,11 +35,6 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
-const mockItems = [
-  { id: '1', name: 'Apple', price: 100 },
-  { id: '2', name: 'Banana', price: 50 },
-];
-
 describe('POSHUD Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -33,7 +42,7 @@ describe('POSHUD Component', () => {
   });
 
   it('adds an item to the cart when clicked', () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     const appleButton = screen.getByText('Apple');
     fireEvent.click(appleButton);
     
@@ -43,7 +52,7 @@ describe('POSHUD Component', () => {
   });
 
   it('increments quantity when the same item is clicked again', () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     const appleButton = screen.getByText('Apple');
     fireEvent.click(appleButton);
     fireEvent.click(appleButton);
@@ -54,7 +63,7 @@ describe('POSHUD Component', () => {
   });
 
   it('calculates the total correctly for multiple items', () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     fireEvent.click(screen.getByText('Apple'));
     fireEvent.click(screen.getByText('Banana'));
     
@@ -65,7 +74,7 @@ describe('POSHUD Component', () => {
     const now = Date.now();
     const dateSpy = vi.spyOn(Date, 'now').mockReturnValue(now);
     
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     fireEvent.click(screen.getByText('Apple'));
     
     expect(screen.getByTestId('cart-item-1')).toBeInTheDocument();
@@ -81,7 +90,7 @@ describe('POSHUD Component', () => {
   });
 
   it('opens the payment modal when checkout is clicked', () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     fireEvent.click(screen.getByText('Apple'));
     fireEvent.click(screen.getByText('Checkout'));
     
@@ -89,7 +98,7 @@ describe('POSHUD Component', () => {
   });
 
   it('completes the sale and clears the cart', async () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     
     // Add item
     fireEvent.click(screen.getByText('Apple'));
@@ -107,10 +116,11 @@ describe('POSHUD Component', () => {
     await waitFor(() => {
       expect(screen.getByTestId('cart-total')).toHaveTextContent('0');
     });
+    expect(mockHandleSaleComplete).toHaveBeenCalled();
   });
 
   it('filters items based on search term', () => {
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     
     const searchInput = screen.getByPlaceholderText('Search products... (F1)');
     fireEvent.change(searchInput, { target: { value: 'Apple' } });
@@ -121,7 +131,7 @@ describe('POSHUD Component', () => {
 
   it('disables checkout if tenantId is missing', () => {
     mockUseAuth.mockReturnValue({ tenantId: null });
-    render(<POSHUD availableItems={mockItems} />);
+    render(<POSHUD />);
     
     fireEvent.click(screen.getByText('Apple'));
     const checkoutButton = screen.getByRole('button', { name: /Sovereignty Required/i });

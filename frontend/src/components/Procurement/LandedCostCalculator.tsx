@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Scale, Ruler, DollarSign, Check, X, Info } from 'lucide-react';
-import { distributeLandedCost, LandedCostItem } from '../../lib/LandedCostLogic';
+import { distributeLandedCost } from '../../lib/LandedCostLogic';
+import type { LandedCostItem } from '../../lib/LandedCostLogic';
 
 interface LandedCostCalculatorProps {
   items: LandedCostItem[];
