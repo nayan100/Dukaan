@@ -153,6 +153,11 @@ export const getUnsyncedInvoices = async () => {
   return allInvoices.filter(inv => !inv.synced);
 };
 
+export const getAllInvoices = async () => {
+  const db = await dbPromise;
+  return db.getAll('invoices');
+};
+
 export const markInvoiceSynced = async (invoiceId: string) => {
   const db = await dbPromise;
   const inv = await db.get('invoices', invoiceId);

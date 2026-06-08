@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap, Laptop } from 'lucide-react';
+import { Activity, CheckCircle2, Clock, AlertCircle, RefreshCw, Zap, Laptop, FileText } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { getUnsyncedInvoices } from '../../lib/db';
+import { getUnsyncedInvoices, getAllInvoices } from '../../lib/db';
+import Annex13Preview from './Annex13Preview';
 
 interface SyncStats {
   synced: number;
@@ -13,18 +14,25 @@ interface SyncStats {
 
 const IRDSyncDashboard: React.FC = () => {
   const [stats, setStats] = useState<SyncStats>({ synced: 0, pending: 0, failed: 0, local: 0 });
+  const [invoices, setInvoices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchStats = async () => {
-    // 1. Fetch Local Stats First (Always works)
-    let localCount = 0;
+    // 1. Fetch Local Data
     try {
-      const localInvoices = await getUnsyncedInvoices();
-      localCount = localInvoices.length;
-      console.log(`[Dashboard] Local sync queue: ${localCount}`);
+      const all = await getAllInvoices();
+      const unsynced = all.filter(i => !i.synced);
       
-      // UPDATE STATE IMMEDIATELY for local count
-      setStats(prev => ({ ...prev, local: localCount }));
+      setInvoices(all.map(inv => ({
+        invoice_id: inv.invoice_id,
+        created_at: inv.created_at,
+        taxable_amount: inv.total / 1.13,
+        vat_amount: inv.total - (inv.total / 1.13),
+        total: inv.total,
+        synced: inv.synced
+      })));
+
+      setStats(prev => ({ ...prev, local: unsynced.length }));
     } catch (e) {
       console.error('Failed to fetch local stats:', e);
     }
@@ -36,13 +44,11 @@ const IRDSyncDashboard: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.message) {
-          setStats({
+          setStats(prev => ({
             ...data.message,
-            local: localCount // Ensure we keep the latest local count
-          });
+            local: prev.local 
+          }));
         }
-      } else {
-        console.warn(`Backend responded with ${response.status}. Keeping local counts.`);
       }
     } catch (error) {
       console.warn('Backend unreachable. Using local data only.');
@@ -70,7 +76,7 @@ const IRDSyncDashboard: React.FC = () => {
 
   useEffect(() => {
     fetchStats();
-    const interval = setInterval(fetchStats, 5000); // Refresh every 5 seconds for responsive monitoring
+    const interval = setInterval(fetchStats, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -134,6 +140,14 @@ const IRDSyncDashboard: React.FC = () => {
             </div>
           </motion.div>
         ))}
+      </div>
+
+      <div className="mt-12">
+          <div className="flex items-center gap-3 mb-6">
+              <FileText className="text-pos-muted" size={20} />
+              <h3 className="text-sm font-black uppercase tracking-[0.3em] text-pos-muted">Detailed Audit Trail (Sales Register)</h3>
+          </div>
+          <Annex13Preview entries={invoices} />
       </div>
     </div>
   );
