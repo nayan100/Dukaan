@@ -5,8 +5,8 @@ import {
 } from 'recharts';
 import { useHQStore } from '../../store/useHQStore';
 import { aggregateGlobalKPIs, getInventoryPerformance } from '../../lib/hqAnalytics';
-import { DollarSign, ShoppingCart, TrendingUp, Package, Sparkles, LayoutDashboard, Map as MapIcon, CheckSquare, Zap } from 'lucide-react';
-import { Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom';
+import { DollarSign, ShoppingCart, TrendingUp, Package, Sparkles, Zap } from 'lucide-react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ComparativeAnalytics from './ComparativeAnalytics';
 import DeadStockMap from './DeadStockMap';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
@@ -59,33 +59,11 @@ const HQLayout: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full bg-slate-950 text-white font-sans">
-      {/* HQ Sub-Navbar */}
-      <nav className="bg-slate-900/50 border-b border-slate-800 px-10 py-4 flex justify-between items-center backdrop-blur-xl sticky top-0 z-30">
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-3 pr-8 border-r border-slate-800">
-            <Zap className="text-emerald-400" size={20} />
-            <span className="text-sm font-black uppercase tracking-[0.2em] italic">Strategy Hub</span>
-          </div>
-          <div className="flex gap-6">
-            <HQNavLink to="/hq/scorecard" icon={LayoutDashboard} label="Scorecard" />
-            <HQNavLink to="/hq/rebalancer" icon={MapIcon} label="Rebalancer" />
-            <HQNavLink to="/hq/approvals" icon={CheckSquare} label="Approvals" />
-            <HQNavLink to="/hq/wizards" icon={Sparkles} label="Growth" />
-          </div>
-        </div>
-        <button 
-          onClick={() => setShowAI(true)}
-          className="flex items-center gap-2 bg-amber-500/10 text-amber-400 border border-amber-500/20 px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-amber-500 hover:text-slate-950 transition-all shadow-xl shadow-amber-500/5"
-        >
-          <Sparkles size={14} /> AI Suggestions
-        </button>
-      </nav>
-
+    <div className="flex flex-col h-full bg-slate-950 text-white font-sans overflow-hidden">
       <div className="flex-1 overflow-auto">
         <Routes>
           <Route index element={<Navigate to="scorecard" replace />} />
-          <Route path="scorecard" element={<ScorecardView />} />
+          <Route path="scorecard" element={<ScorecardView onOpenAI={() => setShowAI(true)} />} />
           <Route path="rebalancer" element={<div className="p-10"><DeadStockMap /></div>} />
           <Route path="approvals" element={<PlaceholderView title="Global Approval Center" description="Phase 3 Implementation" />} />
           <Route path="wizards" element={<PlaceholderView title="Growth Wizards Hub" description="Phase 4 Implementation" />} />
@@ -97,29 +75,28 @@ const HQLayout: React.FC = () => {
   );
 };
 
-const HQNavLink = ({ to, icon: Icon, label }: any) => (
-  <NavLink 
-    to={to} 
-    className={({ isActive }) => `
-      flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all
-      ${isActive ? 'bg-slate-800 text-emerald-400 shadow-lg' : 'text-slate-500 hover:text-slate-300'}
-    `}
-  >
-    <Icon size={14} />
-    {label}
-  </NavLink>
-);
-
-const ScorecardView = () => {
+const ScorecardView = ({ onOpenAI }: { onOpenAI: () => void }) => {
   const analytics = useHQStore(s => s.analytics);
   const kpis = useMemo(() => aggregateGlobalKPIs(analytics.branchPerformance), [analytics.branchPerformance]);
   const inventory = useMemo(() => getInventoryPerformance(analytics.branchPerformance), [analytics.branchPerformance]);
 
   return (
     <div className="p-10 space-y-10">
-      <header>
-        <h1 className="text-4xl font-black tracking-tighter uppercase italic">Executive Scorecard</h1>
-        <p className="text-slate-400 font-medium mt-2">Real-time performance metrics across the retail network</p>
+      <header className="flex justify-between items-end">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+              <Package className="text-emerald-400" size={24} />
+              <span className="text-xs font-black uppercase tracking-[0.3em] text-emerald-400/80">Chain Intelligence</span>
+          </div>
+          <h1 className="text-4xl font-black tracking-tighter uppercase italic text-slate-100">Executive Scorecard</h1>
+          <p className="text-slate-400 font-medium mt-2">Real-time performance metrics across the retail network</p>
+        </div>
+        <button 
+          onClick={onOpenAI}
+          className="flex items-center gap-3 bg-amber-500 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10"
+        >
+          <Sparkles size={18} /> AI Suggestions Hub
+        </button>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

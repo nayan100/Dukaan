@@ -50,7 +50,10 @@ const AppLayout: React.FC = () => {
 
   const navItems = [
     { path: '/admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
-    { path: '/hq', label: 'Strategy Hub', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { path: '/hq/scorecard', label: 'Scorecard', icon: LayoutDashboard, permission: 'access_strategy_hub' },
+    { path: '/hq/rebalancer', label: 'Dead Stock', icon: Building2, permission: 'access_strategy_hub' },
+    { path: '/hq/approvals', label: 'Approvals', icon: ClipboardList, permission: 'access_strategy_hub' },
+    { path: '/hq/wizards', label: 'Growth Hub', icon: Rocket, permission: 'access_strategy_hub' },
     { path: '/branch', label: 'Local Intelligence', icon: Package, permission: 'access_logistics' },
     { path: '/finance', label: 'IRD Monitor', icon: Activity, permission: 'view_ird_monitor' },
     { path: '/pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
