@@ -32,7 +32,10 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const setUserRef = useRef(setUser);
-  setUserRef.current = setUser;
+
+  useEffect(() => {
+    setUserRef.current = setUser;
+  }, [setUser]);
 
   const login = async (userData: User) => {
     setUser(userData);
@@ -47,6 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const savedAuth = sessionStorage.getItem('dukaan_auth');
     if (savedAuth) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUser(JSON.parse(savedAuth));
     }
 
