@@ -11,7 +11,7 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 
 ## 3. Frontend (POS & Dashboards)
 *   **Framework:** React (TypeScript).
-*   **Routing:** React Router (v6+) for persona-driven navigation and deep-linking.
+*   **Routing:** React Router (v6+) for persona-driven navigation, deep-linking, and nested route architectures.
 *   **State Management:** Zustand for lightweight, reactive global state; TanStack Query for data fetching.
 *   **UI Components:** Custom design system built with Tailwind CSS, optimized for Visual Sovereignty (Slate-950 palette).
 *   **Animations:** `framer-motion` for premium micro-interactions and layout transitions.

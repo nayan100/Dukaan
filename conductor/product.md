@@ -6,7 +6,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 ## 2. Target Personas
 *   **SaaS Platform Admin:** Manages the entire platform via the **SaaS Control Center**.
 *   **Chain Owner:** Strategic orchestration via the AI-augmented **Growth & KPI Hub**.
-*   **Branch Owner:** Local operational autonomy via the **Branch Management Suite**.
+*   **Branch Owner:** Local operational autonomy via the **Branch Management Suite** featuring the persona-driven **Action Inbox**.
 *   **Cashier:** Billing speed through an AI-co-piloted, high-contrast POS HUD.
 *   **Accountant:** Compliance and reconciliation through dense data grids.
 
@@ -31,18 +31,24 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Human-in-the-Loop:** All AI-driven suggestions (transfers, high discounts) require human approval within set guardrails.
 *   **Aggregated Intelligence:** Privacy-preserving, anonymized data aggregation to improve cross-chain predictive accuracy.
 
-## 6. Execution & Documentation Strategy
+## 6. Branch Management Suite (Branch Manager)
+*   **Action Inbox:** Task-oriented dashboard for daily logistics, low-stock alerts, and 72-hour transit warnings.
+*   **Local Quota Governance:** Real-time visual tracking of resource consumption against sovereign limits via burn-down charts.
+*   **Integrated Logistics Hub:** Consolidated view for initiating and processing inter-branch stock movements and procurement receipts.
+*   **Inventory Intelligence:** Branch-scoped stock tracking with threshold-based alerting and local valuation.
+
+## 7. Execution & Documentation Strategy
 *   **Interactive Documentation:** Maintain a high-quality README and Wiki featuring Mermaid diagrams, interactive walkthroughs, and deep links to technical specs.
 *   **Agile Feature Sprints:** Iterative 2-week sprints delivering functional vertical slices.
 *   **E2E Quality Gates:** Automated critical path testing (Cypress/Playwright) for POS billing and IRD sync.
 *   **Zero-Downtime CD:** Automated CI/CD with staging environments and Blue-Green deployments.
 
-## 7. Design & Engineering Principles
+## 8. Design & Engineering Principles
 *   **Visual Sovereignty (High-Speed UX):** Zero-latency feel with a premium Slate-950 depth palette, optimized for professional retail environments.
 *   **Type-Safe Modular Code:** Strict TypeScript and 'Screaming Architecture' for long-term maintainability.
 *   **TDD-First Approach:** Mandatory test coverage for all financial, sync, and compliance logic.
 
-## 8. Core MVP Modules
+## 9. Core MVP Modules
 *   **POS & Payment Core:** Full-screen HUD with keyboard-first navigation, 60-second "Autonomous Void" locking, Fonepay QR integration with manual bypass, and a cross-branch Item Return Wizard.
 *   **Inter-Branch Protocol:** Resilient 4-step workflow (Request -> Dispatch -> Approve -> Receipt) with auto-rejection logic.
 *   **Compliance & IRD Sync:** Real-time sync with the IRD Central Billing Monitoring System and immutable audit trails.
@@ -50,7 +56,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Financial Governance Enhancements:** Introduction of Landed Cost Vouchers for accurate stock valuation and direct integration with Annex 14 Purchase Registers for compliance.
 *   **Showcase & Demo Utility:** Environment seeding scripts and "Phoenix Reset" protocol for rapid deployment of test/demo scenarios.
 
-## 9. Operational Guardrails
+## 10. Operational Guardrails
 *   **Real-time Resilience:** PWA architecture with IndexedDB caching and real-time background sync.
 *   **Financial Governance:** Cross-branch returns with auto-generated adjustments and budget enforcement.
 *   **Permission Shadowing:** Client-side UI updates backed by server-side Frappe/ERPNext validation.
