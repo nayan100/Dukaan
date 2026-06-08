@@ -22,6 +22,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Global Pricing Control:** Centralized price list management with hash-based versioning.
 *   **Hierarchical Access Hub:** Unified management of permission trees and role shadowing.
 *   **Multi-View Dashboards:** Executive Scorecards, Operational Heatmaps, and Comparative Analytics.
+*   **Persona Showcase Portal:** Interactive, "One-Click" demo environment with predefined personas (Admin, Owner, Manager, Cashier, Accountant) for end-to-end flow validation.
 
 ## 5. Native AI Orchestration Layer
 *   **Cashier Co-pilot (Edge-AI):** Real-time predictive item search and suggestions using lightweight browser-based models for offline-resilience.
@@ -47,6 +48,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Compliance & IRD Sync:** Real-time sync with the IRD Central Billing Monitoring System and immutable audit trails.
 *   **Procurement & Stock Management:** High-integrity Purchase Order (PO) flows with split-order detection, multi-persona approval handshakes, and soft budget enforcement. Includes physical-first opening stock entry with moving average valuation and a blind spot-check protocol.
 *   **Financial Governance Enhancements:** Introduction of Landed Cost Vouchers for accurate stock valuation and direct integration with Annex 14 Purchase Registers for compliance.
+*   **Showcase & Demo Utility:** Environment seeding scripts and "Phoenix Reset" protocol for rapid deployment of test/demo scenarios.
 
 ## 9. Operational Guardrails
 *   **Real-time Resilience:** PWA architecture with IndexedDB caching and real-time background sync.
