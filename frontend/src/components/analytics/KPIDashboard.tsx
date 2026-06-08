@@ -20,10 +20,10 @@ const mockData = [
 ];
 
 const branchPerformance = [
-  { name: 'KTM Main', revenue: 45000, health: 'Good' },
-  { name: 'Pokhara', revenue: 32000, health: 'Stable' },
-  { name: 'Lalitpur', revenue: 28000, health: 'Warning' },
-  { name: 'Butwal', revenue: 21000, health: 'Good' },
+  { name: 'KTM Main', revenue: 45000, cogs: 22000, expenses: 5000, health: 'Good' },
+  { name: 'Pokhara', revenue: 32000, cogs: 18000, expenses: 4000, health: 'Stable' },
+  { name: 'Lalitpur', revenue: 28000, cogs: 15000, expenses: 3000, health: 'Warning' },
+  { name: 'Butwal', revenue: 21000, cogs: 12000, expenses: 2500, health: 'Good' },
 ];
 
 const KPICard = ({ title, value, trend, icon: Icon }: any) => (
@@ -46,6 +46,18 @@ const KPICard = ({ title, value, trend, icon: Icon }: any) => (
 );
 
 const KPIDashboard: React.FC = () => {
+  const [selectedBranch, setSelectedBranch] = useState<string | null>(null);
+
+  const plData = selectedBranch 
+    ? (branchPerformance.find(b => b.name === selectedBranch) || { revenue: 0, cogs: 0, expenses: 0 })
+    : {
+        revenue: branchPerformance.reduce((sum, b) => sum + b.revenue, 0),
+        cogs: branchPerformance.reduce((sum, b) => sum + b.cogs, 0),
+        expenses: branchPerformance.reduce((sum, b) => sum + b.expenses, 0),
+      };
+
+  const netProfit = (plData.revenue || 0) - (plData.cogs || 0) - (plData.expenses || 0);
+
   return (
     <div className="min-h-screen bg-pos-black p-10 text-pos-white space-y-10 font-sans selection:bg-pos-primary/30">
       <header className="flex justify-between items-end border-b border-pos-border pb-10">
@@ -74,12 +86,12 @@ const KPIDashboard: React.FC = () => {
         </div>
       </header>
 
-      {/* Executive Scorecard */}
+      {/* Executive Scorecard & P&L */}
       <div className="grid grid-cols-4 gap-6">
-        <KPICard title="Total Revenue" value="NPR 1,25,000" trend="+12.4%" icon={DollarSign} />
-        <KPICard title="Active Sessions" value="1,452" trend="+5.2%" icon={Users} />
-        <KPICard title="Net Margin" value="22.5%" trend="+2.1%" icon={Activity} />
-        <KPICard title="Audit Flags" value="03 High" trend="Stable" icon={AlertCircle} />
+        <KPICard title={selectedBranch ? `${selectedBranch} Revenue` : "Total Revenue"} value={`NPR रु ${plData?.revenue.toLocaleString()}`} trend="+12.4%" icon={DollarSign} />
+        <KPICard title="COGS" value={`NPR रु ${plData?.cogs.toLocaleString()}`} trend="-2.1%" icon={Activity} />
+        <KPICard title="Operating Expenses" value={`NPR रु ${plData?.expenses.toLocaleString()}`} trend="+1.5%" icon={AlertCircle} />
+        <KPICard title="Net Profit" value={`NPR रु ${netProfit.toLocaleString()}`} trend="+8.4%" icon={Activity} />
       </div>
 
       <div className="grid grid-cols-3 gap-10">
@@ -117,18 +129,27 @@ const KPIDashboard: React.FC = () => {
         </div>
 
         {/* Branch Rankings */}
-        <div className="bg-pos-surface/30 border border-pos-border p-8 rounded-2xl backdrop-blur-xl">
-          <h3 className="text-xl font-black uppercase tracking-tight mb-8">Branch Health</h3>
-          <div className="space-y-5">
+        <div className="bg-pos-surface/30 border border-pos-border p-8 rounded-2xl backdrop-blur-xl flex flex-col">
+          <div className="flex justify-between items-center mb-8">
+             <h3 className="text-xl font-black uppercase tracking-tight">Branch Health</h3>
+             {selectedBranch && (
+                 <button onClick={() => setSelectedBranch(null)} className="text-[10px] font-bold text-pos-primary uppercase hover:underline">Clear Filter</button>
+             )}
+          </div>
+          <div className="space-y-4 flex-1 overflow-auto pr-2 custom-scrollbar">
             {branchPerformance.map((branch) => (
-              <div key={branch.name} className="flex items-center justify-between p-4 border border-pos-border rounded-xl bg-pos-black/40 hover:border-pos-primary/30 transition-all group">
+              <div 
+                key={branch.name} 
+                onClick={() => setSelectedBranch(branch.name)}
+                className={`flex items-center justify-between p-4 border rounded-xl transition-all cursor-pointer group ${selectedBranch === branch.name ? 'border-pos-primary bg-pos-primary/10' : 'border-pos-border bg-pos-black/40 hover:border-pos-primary/30'}`}
+              >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-pos-black border border-pos-border flex items-center justify-center group-hover:text-pos-primary transition-colors">
+                  <div className={`w-10 h-10 rounded-lg bg-pos-black border border-pos-border flex items-center justify-center transition-colors ${selectedBranch === branch.name ? 'text-pos-primary' : 'group-hover:text-pos-primary'}`}>
                     <MapPin size={20} />
                   </div>
                   <div>
                     <div className="font-bold text-sm">{branch.name}</div>
-                    <div className="text-[10px] text-pos-muted font-black uppercase tracking-widest mt-0.5">NPR {branch.revenue.toLocaleString()}</div>
+                    <div className="text-[10px] text-pos-muted font-black uppercase tracking-widest mt-0.5">NPR रु {branch.revenue.toLocaleString()}</div>
                   </div>
                 </div>
                 <div className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-tighter ${
@@ -140,7 +161,7 @@ const KPIDashboard: React.FC = () => {
               </div>
             ))}
           </div>
-          <Button variant="outline" className="w-full mt-8 h-12 rounded-xl text-xs uppercase font-black tracking-widest">
+          <Button variant="outline" className="w-full mt-4 h-12 rounded-xl text-xs uppercase font-black tracking-widest flex-shrink-0">
             View All Branches
           </Button>
         </div>
