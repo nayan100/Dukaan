@@ -17,6 +17,7 @@ interface SoldItem {
 interface InventoryState {
   inventory: InventoryItem[];
   handleSaleComplete: (soldItems: SoldItem[]) => void;
+  handleReturnComplete: (returnedItems: SoldItem[]) => void;
 }
 
 const defaultInventory: InventoryItem[] = [
@@ -39,6 +40,16 @@ export const useInventoryStore = create<InventoryState>((set) => ({
         const sold = soldItems.find((s) => s.id === invItem.id);
         if (sold) {
           return { ...invItem, stock: Math.max(0, invItem.stock - sold.quantity) };
+        }
+        return invItem;
+      }),
+    })),
+  handleReturnComplete: (returnedItems: SoldItem[]) =>
+    set((state) => ({
+      inventory: state.inventory.map((invItem) => {
+        const returned = returnedItems.find((s) => s.id === invItem.id);
+        if (returned) {
+          return { ...invItem, stock: invItem.stock + returned.quantity };
         }
         return invItem;
       }),

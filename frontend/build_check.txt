@@ -1,0 +1,15 @@
+
+> frontend@0.0.0 build
+> tsc -b && vite build
+
+src/components/pos/POSHUD.tsx(264,25): error TS1005: ',' expected.
+src/components/pos/POSHUD.tsx(264,43): error TS1005: ';' expected.
+src/components/pos/POSHUD.tsx(265,13): error TS1109: Expression expected.
+src/components/pos/POSHUD.tsx(266,11): error TS1109: Expression expected.
+src/components/pos/POSHUD.tsx(279,9): error TS1128: Declaration or statement expected.
+src/components/pos/POSHUD.tsx(280,7): error TS1109: Expression expected.
+src/components/pos/POSHUD.tsx(282,27): error TS1005: ',' expected.
+src/components/pos/POSHUD.tsx(288,8): error TS1128: Declaration or statement expected.
+src/components/pos/POSHUD.tsx(289,5): error TS1128: Declaration or statement expected.
+src/components/pos/POSHUD.tsx(290,3): error TS1109: Expression expected.
+src/components/pos/POSHUD.tsx(291,1): error TS1128: Declaration or statement expected.

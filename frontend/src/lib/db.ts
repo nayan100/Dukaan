@@ -81,6 +81,12 @@ export const initDB = () => {
             db.createObjectStore('audit_log', { keyPath: 'timestamp' });
         }
       }
+      if (oldVersion < 6) {
+        if (db.objectStoreNames.contains('audit_log')) {
+            db.deleteObjectStore('audit_log');
+        }
+        db.createObjectStore('audit_log', { keyPath: 'timestamp' });
+      }
     },
   });
   return dbPromise;

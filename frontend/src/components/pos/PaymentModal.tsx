@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Banknote, QrCode } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Banknote, QrCode, AlertTriangle } from 'lucide-react';
 import Button from '../ui/Button';
 
 interface PaymentModalProps {
@@ -11,11 +11,32 @@ interface PaymentModalProps {
 const PaymentModal: React.FC<PaymentModalProps> = ({ total, onComplete, onClose }) => {
   const [cashAmount, setCashAmount] = useState<number>(0);
   const [digitalAmount, setDigitalAmount] = useState<number>(0);
+  const [pollingTime, setPollingTime] = useState<number>(0);
+  const [showManualBypass, setShowManualBypass] = useState(false);
 
   const totalPaid = cashAmount + digitalAmount;
   const balance = total - totalPaid;
 
-  const handleComplete = () => {
+  useEffect(() => {
+    let interval: ReturnType<typeof setTimeout>;
+    if (digitalAmount > 0) {
+      interval = setInterval(() => {
+        setPollingTime((prev) => prev + 3);
+      }, 3000);
+    } else {
+      setPollingTime(0);
+      setShowManualBypass(false);
+    }
+    return () => clearInterval(interval);
+  }, [digitalAmount]);
+
+  useEffect(() => {
+    if (pollingTime >= 30) {
+      setShowManualBypass(true);
+    }
+  }, [pollingTime]);
+
+  const handleComplete = (isManualOverride = false) => {
     if (totalPaid < total) {
       alert('Insufficient payment. Please collect full amount.');
       return;
@@ -24,7 +45,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ total, onComplete, onClose 
       cash: cashAmount,
       digital: digitalAmount,
       total: totalPaid,
-      change: totalPaid - total
+      change: totalPaid - total,
+      manual_intervention: isManualOverride
     });
   };
 
@@ -105,9 +127,22 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ total, onComplete, onClose 
                 QR<br/>SCAN
               </div>
             </div>
-            <div className="flex-1">
-              <div className="font-bold text-pos-secondary uppercase tracking-tight text-lg leading-tight">Waiting for Digital verification...</div>
-              <p className="text-sm text-pos-muted mt-1 italic">Customer should scan the dynamic QR code above.</p>
+            <div className="flex-1 flex justify-between items-center">
+              <div>
+                <div className="font-bold text-pos-secondary uppercase tracking-tight text-lg leading-tight">Waiting for Digital verification...</div>
+                <p className="text-sm text-pos-muted mt-1 italic">Customer should scan the dynamic QR code above. ({pollingTime}s)</p>
+              </div>
+              {showManualBypass && (
+                <Button 
+                  variant="danger" 
+                  size="sm" 
+                  onClick={() => handleComplete(true)}
+                  className="animate-pulse"
+                >
+                  <AlertTriangle size={16} className="mr-2" />
+                  Manual Verify
+                </Button>
+              )}
             </div>
           </div>
         )}
@@ -125,7 +160,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ total, onComplete, onClose 
             variant="primary" 
             size="xl" 
             className="flex-[2] h-20 text-xl tracking-tight"
-            onClick={handleComplete}
+            onClick={() => handleComplete(false)}
             disabled={totalPaid < total}
             >
             Finalize Transaction

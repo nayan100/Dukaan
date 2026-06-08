@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conductor/showcase_ux_roadmap.md",
+                "file": "conductor/tracks/pos_hud_refinement_20260608/plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "showcase_ux_roadmap"
+              "title": "plan"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "conductor/showcase_ux_roadmap.md"
+                "file": "conductor/tracks/pos_hud_refinement_20260608/plan.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for showcase_ux_roadmap"
+              "title": "File properties for plan"
             }
           }
         ],
@@ -209,11 +209,21 @@
   },
   "active": "63e37be13d607693",
   "lastOpenFiles": [
-    "conductor/tracks/pos_hud_refinement_20260608/plan.md",
-    "conductor/tracks/pos_hud_refinement_20260608/index.md",
+    "frontend/dist/index.html",
+    "frontend/dist/assets/index-iJNt4mwP.css",
+    "frontend/dist/assets/index-BR8To1ik.js",
+    "frontend/dist/assets",
+    "frontend/dist/assets/index-ShwqTMIG.js",
+    "conductor/tracks/pos_hud_refinement_20260608/sedmUTKAu",
+    "frontend/dist/assets/index-D1rdpNRh.js",
+    "frontend/src/components/pos/ReturnWizard.tsx",
+    "frontend/dist/assets/index-DYDmPud8.js",
+    "frontend/dist/assets/index-3txNCxLm.css",
+    "frontend/dist/assets/index-ByFYMwj-.js",
     "conductor/tracks/pos_hud_refinement_20260608/spec.md",
-    "conductor/tracks/pos_hud_refinement_20260608/metadata.json",
-    "conductor/tracks/pos_hud_refinement_20260608",
+    "conductor/tracks/pos_hud_refinement_20260608/plan.md",
+    "conductor/showcase_ux_roadmap.md",
+    "conductor/tracks/pos_hud_refinement_20260608/index.md",
     "conductor/archive/showcase_arch_foundation_20260608/index.md",
     "conductor/archive/showcase_arch_foundation_20260608/plan.md",
     "conductor/archive/sovereignty_20260607/plan.md",
@@ -222,16 +232,7 @@
     "conductor/archive/hierarchical_sovereignty_20260608/plan.md",
     "conductor/archive/grand_showcase_20260608/plan.md",
     "conductor/archive/grand_showcase_20260608/index.md",
-    "conductor/showcase_ux_roadmap.md",
     "conductor/archive/showcase_arch_foundation_20260608/spec.md",
-    "conductor/archive/showcase_arch_foundation_20260608",
-    "frontend/dist/index.html",
-    "frontend/dist/assets/index-DOdJsTuj.js",
-    "frontend/dist/assets/index-BNEq8J6M.css",
-    "frontend/dist/assets",
-    "frontend/build_output_2.txt",
-    "frontend/build_output.txt",
-    "frontend/src/store/syncStore.ts",
     "frontend/node_modules/react-router/LICENSE.md",
     "frontend/node_modules/zustand/README.md",
     "frontend/node_modules/react-router-dom/LICENSE.md",
@@ -244,7 +245,6 @@
     "frontend/node_modules/react-router/docs/start/framework/rendering.md",
     "frontend/node_modules/react-router/docs/start/framework/pending-ui.md",
     "frontend/node_modules/react-router/docs/start/framework/navigating.md",
-    "frontend/node_modules/react-router/docs/start/framework/installation.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",
