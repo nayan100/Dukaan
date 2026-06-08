@@ -32,7 +32,7 @@ Transform the project from a collection of isolated modules into a touchable, en
 - [x] Inject demo credentials into `AuthContext` for "One-Click" entry.
 
 ### Phase 3: The Manual Walkthrough [ ]
-- [ ] Create `DEMO_WALKTHROUGH.md` with step-by-step instructions.
+- [x] Create `DEMO_WALKTHROUGH.md` with step-by-step instructions.
 
 ### Phase 4: Phoenix Reset Protocol [ ]
 - [ ] Create `scripts/reset_demo.sh` to purge and re-seed the DB.
