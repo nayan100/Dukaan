@@ -11,6 +11,7 @@ import ComparativeAnalytics from './ComparativeAnalytics';
 import DeadStockMap from './DeadStockMap';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
 import ApprovalCenter from './ApprovalCenter';
+import GrowthWizardsHub from './GrowthWizardsHub';
 
 const MOCK_BRANCHES = [
   { 
@@ -67,7 +68,7 @@ const HQLayout: React.FC = () => {
           <Route path="scorecard" element={<ScorecardView onOpenAI={() => setShowAI(true)} />} />
           <Route path="rebalancer" element={<div className="p-10"><DeadStockMap /></div>} />
           <Route path="approvals" element={<ApprovalCenter />} />
-          <Route path="wizards" element={<PlaceholderView title="Growth Wizards Hub" description="Phase 4 Implementation" />} />
+          <Route path="wizards" element={<GrowthWizardsHub />} />
         </Routes>
       </div>
 
