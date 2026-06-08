@@ -30,7 +30,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [x] **Track: Showcase Architectural Foundation (Track 1). Focus: Frontend routing, state management decoupling, and base layout scaffolding.**
-*Link: [./tracks/showcase_arch_foundation_20260608/](./tracks/showcase_arch_foundation_20260608/)*
-
----
