@@ -35,7 +35,7 @@ Transform the project from a collection of isolated modules into a touchable, en
 - [x] Create `DEMO_WALKTHROUGH.md` with step-by-step instructions.
 
 ### Phase 4: Phoenix Reset Protocol [ ]
-- [ ] Create `scripts/reset_demo.sh` to purge and re-seed the DB.
+- [x] Create `scripts/reset_demo.sh` to purge and re-seed the DB.
 
 ## 5. Verification
 - [ ] All 94 existing tests must pass.
