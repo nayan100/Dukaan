@@ -6,12 +6,10 @@ import {
 import { useHQStore } from '../../store/useHQStore';
 import { aggregateGlobalKPIs, getInventoryPerformance } from '../../lib/hqAnalytics';
 import { DollarSign, ShoppingCart, TrendingUp, Package, Sparkles, Zap } from 'lucide-react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import ComparativeAnalytics from './ComparativeAnalytics';
-import DeadStockMap from './DeadStockMap';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
-import ApprovalCenter from './ApprovalCenter';
-import GrowthWizardsHub from './GrowthWizardsHub';
 
 const MOCK_BRANCHES = [
   { 
@@ -49,6 +47,7 @@ const MOCK_BRANCHES = [
 
 const HQLayout: React.FC = () => {
   const [showAI, setShowAI] = useState(false);
+  const location = useLocation();
   
   useEffect(() => {
     // Populate store with mock data
@@ -60,17 +59,28 @@ const HQLayout: React.FC = () => {
     });
   }, []);
 
+  // If we are exactly at /hq/scorecard, we render the scorecard here.
+  // Otherwise, we render the Outlet.
+  const isScorecard = location.pathname.endsWith('/scorecard') || location.pathname.endsWith('/hq');
+
   return (
     <div className="flex flex-col h-full bg-slate-950 text-white font-sans overflow-hidden">
-      <div className="flex-1 overflow-auto">
-        <Routes>
-          <Route index element={<Navigate to="scorecard" replace />} />
-          <Route path="scorecard" element={<ScorecardView onOpenAI={() => setShowAI(true)} />} />
-          <Route path="rebalancer" element={<div className="p-10"><DeadStockMap /></div>} />
-          <Route path="approvals" element={<ApprovalCenter />} />
-          <Route path="wizards" element={<GrowthWizardsHub />} />
-        </Routes>
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1 overflow-auto"
+        >
+            {isScorecard ? (
+                <ScorecardView onOpenAI={() => setShowAI(true)} />
+            ) : (
+                <Outlet />
+            )}
+        </motion.div>
+      </AnimatePresence>
 
       <AISuggestionsOverlay isOpen={showAI} onClose={() => setShowAI(false)} />
     </div>

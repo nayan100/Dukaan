@@ -24,12 +24,12 @@
 - [x] Task: Build the "Financial Health Radar" chart using `recharts`.
 - [x] Task: Implement "Anomaly Sentinel" flags for Voids and Discount Velocity.
 - [x] Task: Integrate digital "Compliance Seals" into the Sales Register views.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Financial Governance' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Financial Governance' (Protocol in workflow.md)
 
 ## Phase 4: HQ Legacy Integration & Refinement
 **Goal:** Consolidate all legacy modules into the refined HQ Layout.
 
-- [ ] Task: Add sub-routes for `/hq/branches`, `/hq/users`, and `/hq/analytics`.
+- [x] Task: Add sub-routes for `/hq/branches`, `/hq/users`, and `/hq/analytics`.
 - [ ] Task: Integrate `BranchManagement`, `UserManagement`, and `ProcurementAnalyticsHub`.
 - [ ] Task: Move `ComparativeAnalytics` to its dedicated route and update sidebar.
 - [ ] Task: Implement the "Pricing Wizard" with impact simulation logic.

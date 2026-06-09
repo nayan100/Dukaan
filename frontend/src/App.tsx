@@ -12,6 +12,14 @@ import FinanceLayout from './components/layout/FinanceLayout';
 import Annex14Grid from './components/Procurement/Annex14Grid';
 import FinanceAuditHUD from './components/analytics/FinanceAuditHUD';
 
+import BranchManagement from './components/management/BranchManagement';
+import UserManagement from './components/management/UserManagement';
+import ProcurementAnalyticsHub from './components/ProcurementAnalytics/ProcurementAnalyticsHub';
+import ComparativeAnalytics from './components/hq/ComparativeAnalytics';
+import ApprovalCenter from './components/hq/ApprovalCenter';
+import DeadStockMap from './components/hq/DeadStockMap';
+import GrowthWizardsHub from './components/hq/GrowthWizardsHub';
+
 const IndexRedirect = () => {
   const { user } = useAuth();
   
@@ -34,7 +42,16 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<IndexRedirect />} />
           <Route path="pos" element={<POSHUD />} />
-          <Route path="hq/*" element={<ChainOwnerRoute><HQLayout /></ChainOwnerRoute>} />
+          <Route path="hq/*" element={<ChainOwnerRoute><HQLayout /></ChainOwnerRoute>}>
+            <Route index element={<Navigate to="scorecard" replace />} />
+            <Route path="scorecard" element={<div className="h-full overflow-auto"><HQLayout /></div>} />
+            <Route path="branches" element={<BranchManagement />} />
+            <Route path="users" element={<UserManagement />} />
+            <Route path="analytics" element={<ComparativeAnalytics />} />
+            <Route path="rebalancer" element={<DeadStockMap />} />
+            <Route path="approvals" element={<ApprovalCenter />} />
+            <Route path="wizards" element={<GrowthWizardsHub />} />
+          </Route>
           <Route path="branch/*" element={<BranchLayout />} />
           <Route path="finance/*" element={<FinanceLayout />}>
             <Route index element={<Navigate to="sync" replace />} />

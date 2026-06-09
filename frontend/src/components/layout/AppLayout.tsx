@@ -52,7 +52,10 @@ const AppLayout: React.FC = () => {
   const navItems = [
     { path: '/admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
     { path: '/hq/scorecard', label: 'Scorecard', icon: LayoutDashboard, permission: 'access_strategy_hub' },
-    { path: '/hq/rebalancer', label: 'Dead Stock', icon: Building2, permission: 'access_strategy_hub' },
+    { path: '/hq/branches', label: 'Branches', icon: Building2, permission: 'manage_branches' },
+    { path: '/hq/users', label: 'Access Control', icon: Users, permission: 'manage_branches' },
+    { path: '/hq/rebalancer', label: 'Dead Stock', icon: Box, permission: 'access_strategy_hub' },
+    { path: '/hq/analytics', label: 'Advanced Analytics', icon: PieChart, permission: 'view_all_analytics' },
     { path: '/hq/approvals', label: 'Approvals', icon: ClipboardList, permission: 'access_strategy_hub' },
     { path: '/hq/wizards', label: 'Growth Hub', icon: Rocket, permission: 'access_strategy_hub' },
     { path: '/branch/inbox', label: 'Action Inbox', icon: Inbox, permission: 'access_logistics' },
