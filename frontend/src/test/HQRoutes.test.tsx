@@ -50,8 +50,42 @@ describe('HQ Routes', () => {
       </AuthProvider>
     );
     
-    // Check if sidebar has HQ items (Wait, HQLayout has its own internal nav in some versions)
-    // Actually, we'll check if the components render on their paths
     expect(screen.getByText(/Executive Scorecard/i)).toBeInTheDocument();
+  });
+
+  it('renders Branch Management on /hq/branches', async () => {
+    sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
+        username: 'owner1', 
+        role: 'Chain Owner', 
+        tenant: 'T1' 
+    }));
+
+    window.history.pushState({}, 'Branches', '/hq/branches');
+
+    render(
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
+    
+    expect(screen.getByText(/Branch Architecture/i)).toBeInTheDocument();
+  });
+
+  it('renders User Management on /hq/users', async () => {
+    sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
+        username: 'owner1', 
+        role: 'Chain Owner', 
+        tenant: 'T1' 
+    }));
+
+    window.history.pushState({}, 'Users', '/hq/users');
+
+    render(
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
+    
+    expect(screen.getByText(/Personnel Command/i)).toBeInTheDocument();
   });
 });

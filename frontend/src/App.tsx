@@ -3,7 +3,7 @@ import AppLayout from './components/layout/AppLayout';
 import POSHUD from './components/pos/POSHUD';
 import IRDSyncDashboard from './components/analytics/IRDSyncDashboard';
 import AdminDashboard from './components/admin/AdminDashboard';
-import HQLayout from './components/hq/HQLayout';
+import HQLayout, { ScorecardView } from './components/hq/HQLayout';
 import ChainOwnerRoute from './components/auth/ChainOwnerRoute';
 import { useAuth } from './context/AuthContext';
 
@@ -44,7 +44,7 @@ function App() {
           <Route path="pos" element={<POSHUD />} />
           <Route path="hq/*" element={<ChainOwnerRoute><HQLayout /></ChainOwnerRoute>}>
             <Route index element={<Navigate to="scorecard" replace />} />
-            <Route path="scorecard" element={<div className="h-full overflow-auto"><HQLayout /></div>} />
+            <Route path="scorecard" element={<ScorecardView />} />
             <Route path="branches" element={<BranchManagement />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="analytics" element={<ComparativeAnalytics />} />

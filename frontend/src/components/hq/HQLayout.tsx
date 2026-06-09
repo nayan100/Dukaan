@@ -59,26 +59,18 @@ const HQLayout: React.FC = () => {
     });
   }, []);
 
-  // If we are exactly at /hq/scorecard, we render the scorecard here.
-  // Otherwise, we render the Outlet.
-  const isScorecard = location.pathname.endsWith('/scorecard') || location.pathname.endsWith('/hq');
-
   return (
     <div className="flex flex-col h-full bg-slate-950 text-white font-sans overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
             className="flex-1 overflow-auto"
         >
-            {isScorecard ? (
-                <ScorecardView onOpenAI={() => setShowAI(true)} />
-            ) : (
-                <Outlet />
-            )}
+            <Outlet context={{ onOpenAI: () => setShowAI(true) }} />
         </motion.div>
       </AnimatePresence>
 
@@ -87,7 +79,7 @@ const HQLayout: React.FC = () => {
   );
 };
 
-const ScorecardView = ({ onOpenAI }: { onOpenAI: () => void }) => {
+export const ScorecardView: React.FC<{ onOpenAI?: () => void }> = ({ onOpenAI }) => {
   const analytics = useHQStore(s => s.analytics);
   const kpis = useMemo(() => aggregateGlobalKPIs(analytics.branchPerformance), [analytics.branchPerformance]);
   const inventory = useMemo(() => getInventoryPerformance(analytics.branchPerformance), [analytics.branchPerformance]);
