@@ -41,5 +41,5 @@
 - [x] Task: Add "Revenue Heatmap Overlay" to the Nepal SVG map in `DeadStockMap`.
 - [x] Task: Implement the "Branch Leaderboard" gamification component.
 - [x] Task: Add the "Executive AI Summary" text block to the HQ Scorecard.
-- [ ] Task: Perform E2E validation of all 10+ new sub-routes.
+- [x] Task: Perform E2E validation of all 10+ new sub-routes.
 - [ ] Task: Conductor - User Manual Verification 'Phase 5: Final Showcase' (Protocol in workflow.md)
