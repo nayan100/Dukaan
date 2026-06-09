@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ComparativeAnalytics from './ComparativeAnalytics';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
 import BranchLeaderboard from './BranchLeaderboard';
+import ExecutiveAISummary from './ExecutiveAISummary';
 
 const MOCK_BRANCHES = [
   { 
@@ -103,6 +104,8 @@ export const ScorecardView: React.FC<{ onOpenAI?: () => void }> = ({ onOpenAI })
           <Sparkles size={18} /> AI Suggestions Hub
         </button>
       </header>
+
+      <ExecutiveAISummary />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <KPICard title="Total Revenue" value={`रु ${kpis.totalRevenue.toLocaleString()}`} icon={DollarSign} color="text-emerald-400" trend="+12.5%" />

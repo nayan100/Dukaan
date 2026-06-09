@@ -52,6 +52,7 @@ describe('HQ Routes', () => {
     
     expect(screen.getByText(/Executive Scorecard/i)).toBeInTheDocument();
     expect(screen.getByText(/Branch Leaderboard/i)).toBeInTheDocument();
+    expect(screen.getByText(/Executive AI Summary/i)).toBeInTheDocument();
   });
 
   it('renders Branch Management on /hq/branches', async () => {
