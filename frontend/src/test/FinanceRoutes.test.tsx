@@ -48,12 +48,14 @@ describe('Finance Routes', () => {
       </AuthProvider>
     );
     
-    // Should render AppLayout sidebar with main Compliance Hub entry
-    expect(screen.getByText(/Compliance Hub/i)).toBeInTheDocument();
-
-    // Should render FinanceLayout with internal tabs
+    // Should render AppLayout sidebar with exact Finance items
     expect(screen.getAllByText(/Sync Monitor/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Purchase Register/i)).toBeInTheDocument();
     expect(screen.getByText(/Audit Hub/i)).toBeInTheDocument();
+    expect(screen.getByText(/Analytics/i)).toBeInTheDocument();
+
+    // Should NOT render Branch items for Accountant
+    expect(screen.queryByText(/Action Inbox/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Branch Inventory/i)).not.toBeInTheDocument();
   });
 });

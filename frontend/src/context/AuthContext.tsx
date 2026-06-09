@@ -26,7 +26,7 @@ const ROLE_PERMISSIONS: Record<string, string[]> = {
   'Single Owner': ['access_growth_wizard', 'view_ird_monitor', 'access_logistics', 'manage_pos_users', 'manage_procurement', 'approve_budget_override', 'view_compliance_reports'],
   'Branch Owner': ['view_ird_monitor', 'access_logistics', 'manage_local_pos', 'manage_procurement', 'approve_budget_override'],
   'POS': ['access_pos'],
-  'Accountant': ['view_ird_monitor', 'access_logistics', 'view_audit_trail', 'view_compliance_reports'],
+  'Accountant': ['view_ird_monitor', 'view_audit_trail', 'view_compliance_reports'],
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
