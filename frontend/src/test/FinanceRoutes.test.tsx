@@ -48,8 +48,9 @@ describe('Finance Routes', () => {
       </AuthProvider>
     );
     
-    // Should render FinanceLayout sidebar content
-    expect(screen.getByText(/Compliance Hub/i)).toBeInTheDocument();
-    expect(screen.getByText(/IRD Sync Monitor/i)).toBeInTheDocument();
+    // Should render AppLayout sidebar with Finance items
+    expect(screen.getAllByText(/IRD Sync Monitor/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Purchase Register/i)).toBeInTheDocument();
+    expect(screen.getByText(/Finance Audit/i)).toBeInTheDocument();
   });
 });
