@@ -5,7 +5,7 @@
 
 - [x] Task: Create FinanceLayout component with sidebar navigation.
 - [x] Task: Configure `/finance` sub-routes in `App.tsx` (Sync, Purchase, Audit).
-- [ ] Task: Implement `useFinanceStore` for managing audit state and flags.
+- [x] Task: Implement `useFinanceStore` for managing audit state and flags.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Finance Architecture' (Protocol in workflow.md)
 
 ## Phase 2: The Compliance Grid (Annex 14)
