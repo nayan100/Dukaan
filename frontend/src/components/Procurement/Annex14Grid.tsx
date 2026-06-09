@@ -18,10 +18,8 @@ interface Annex14Entry {
   taxable_amount: number;
   vat_amount: number;
   total_amount: number;
-  status: 'verified' | 'flagged';
 }
 
-// Generate large mock dataset for virtualization testing
 const generateMockData = (count: number): Annex14Entry[] => {
   return Array.from({ length: count }, (_, i) => ({
     id: `row-${i}`,
@@ -31,12 +29,16 @@ const generateMockData = (count: number): Annex14Entry[] => {
     supplier_pan: i % 5 === 0 ? '304567890' : '601234567',
     taxable_amount: 5000 + i,
     vat_amount: (5000 + i) * 0.13,
-    total_amount: (5000 + i) * 1.13 + (i % 7 === 0 ? 1 : 0), // Occasional rounding error
-    status: i % 7 === 0 ? 'flagged' : 'verified',
+    total_amount: (5000 + i) * 1.13 + (i % 7 === 0 ? 1 : 0), // Intentional mismatch every 7 rows
   }));
 };
 
 const columnHelper = createColumnHelper<Annex14Entry>();
+
+const detectRoundingError = (row: Annex14Entry) => {
+  const expectedTotal = row.taxable_amount + row.vat_amount;
+  return Math.abs(row.total_amount - expectedTotal) > 0.01;
+};
 
 const columns = [
   columnHelper.accessor('date', {
@@ -71,28 +73,35 @@ const columns = [
   }),
   columnHelper.accessor('total_amount', {
     header: () => <div className="text-right">Total</div>,
-    cell: info => (
-      <div className={`text-right font-mono font-black ${info.row.original.status === 'flagged' ? 'text-rose-500' : 'text-amber-500'}`}>
-        रु {info.getValue().toLocaleString(undefined, { minimumFractionDigits: 2 })}
-      </div>
-    ),
+    cell: info => {
+      const hasError = detectRoundingError(info.row.original);
+      return (
+        <div className={`text-right font-mono font-black ${hasError ? 'text-rose-500' : 'text-amber-500'}`}>
+          रु {info.getValue().toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        </div>
+      );
+    },
     size: 150,
   }),
-  columnHelper.accessor('status', {
+  columnHelper.display({
+    id: 'compliance',
     header: () => <div className="text-center">Compliance</div>,
-    cell: info => (
-      <div className="flex justify-center">
-        {info.getValue() === 'verified' ? (
-          <div className="flex items-center gap-1 bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-full text-[10px] font-black uppercase">
-            <CheckCircle2 size={12} /> Verified
-          </div>
-        ) : (
-          <div className="flex items-center gap-1 bg-rose-500/10 text-rose-500 px-2 py-1 rounded-full text-[10px] font-black uppercase">
-            <AlertTriangle size={12} /> Error
-          </div>
-        )}
-      </div>
-    ),
+    cell: info => {
+      const hasError = detectRoundingError(info.row.original);
+      return (
+        <div className="flex justify-center">
+          {!hasError ? (
+            <div className="flex items-center gap-1 bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded-full text-[10px] font-black uppercase">
+              <CheckCircle2 size={12} /> Verified
+            </div>
+          ) : (
+            <div className="flex items-center gap-1 bg-rose-500/10 text-rose-500 px-2 py-1 rounded-full text-[10px] font-black uppercase shadow-lg shadow-rose-500/20">
+              <AlertTriangle size={12} /> Error
+            </div>
+          )}
+        </div>
+      );
+    },
     size: 120,
   }),
 ];
@@ -112,7 +121,7 @@ const Annex14Grid: React.FC = () => {
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 72, // row height
+    estimateSize: () => 72,
     overscan: 10,
   });
 
