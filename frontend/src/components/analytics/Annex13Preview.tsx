@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileSpreadsheet, CheckCircle2, Clock, ShieldCheck } from 'lucide-react';
+import { FileSpreadsheet, CheckCircle2, Clock, ShieldCheck, Award, AlertCircle } from 'lucide-react';
 
 interface Annex13Entry {
   invoice_id: string;
@@ -79,14 +79,25 @@ const Annex13Preview: React.FC<Annex13PreviewProps> = ({ entries }) => {
                       </td>
                       <td className="px-6 py-4 text-center">
                         {entry.synced ? (
-                          <div className="flex items-center justify-center gap-1 text-pos-primary bg-pos-primary/10 px-3 py-1 rounded-full text-[10px] font-black uppercase">
-                            <ShieldCheck className="w-3 h-3" />
-                            Synced
+                          <div className="flex flex-col items-center gap-1 group relative">
+                            <motion.div 
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className="p-1.5 bg-emerald-500/10 rounded-full border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]"
+                            >
+                                <Award size={14} className="text-emerald-500" />
+                            </motion.div>
+                            <span className="text-[8px] font-black uppercase tracking-tighter text-emerald-500/80">Compliance Seal</span>
+                            
+                            {/* Hover Detail */}
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 p-2 bg-slate-900 border border-slate-800 rounded-lg text-[9px] font-bold text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 shadow-2xl">
+                                IRD Verified: {new Date(entry.created_at).toLocaleDateString()}
+                            </div>
                           </div>
                         ) : (
-                          <div className="flex items-center justify-center gap-1 text-pos-secondary bg-pos-secondary/10 px-3 py-1 rounded-full text-[10px] font-black uppercase">
-                            <Clock className="w-3 h-3" />
-                            Local Only
+                          <div className="flex flex-col items-center gap-1 opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all">
+                            <AlertCircle size={14} className="text-amber-500" />
+                            <span className="text-[8px] font-black uppercase tracking-tighter text-amber-500 italic text-center">Pending<br/>Transmission</span>
                           </div>
                         )}
                       </td>
