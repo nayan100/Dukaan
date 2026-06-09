@@ -4,21 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "8078c23d1e6db7bf",
+        "id": "b9c63b7572cdab82",
         "type": "tabs",
         "children": [
           {
-            "id": "63e37be13d607693",
+            "id": "e265af7501b208ee",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "conductor/showcase_ux_roadmap.md",
-                "mode": "source",
-                "source": false
+                "file": "Dukaan Roadmap.canvas",
+                "viewState": {
+                  "x": -238.70767459143596,
+                  "y": 472.33524641275557,
+                  "zoom": -0.6341362161786319
+                }
               },
-              "icon": "lucide-file",
-              "title": "showcase_ux_roadmap"
+              "icon": "lucide-layout-dashboard",
+              "title": "Dukaan Roadmap"
             }
           }
         ]
@@ -181,10 +184,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "conductor/showcase_ux_roadmap.md"
+                "file": "Dukaan Roadmap.canvas"
               },
               "icon": "lucide-info",
-              "title": "File properties for showcase_ux_roadmap"
+              "title": "File properties for Dukaan Roadmap"
             }
           }
         ],
@@ -207,8 +210,26 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "63e37be13d607693",
+  "active": "e265af7501b208ee",
   "lastOpenFiles": [
+    "test.canvas",
+    "Dukaan Roadmap.canvas",
+    "The Data Flow.canvas",
+    "minimal_roadmap.canvas",
+    "Product Command Center.canvas",
+    "ultimate_roadmap.canvas",
+    "ultimate_roadmap.md",
+    "ultimate_roadmap_advanced.canvas",
+    "Untitled 1.md",
+    "Untitled.md",
+    "Untitled.base",
+    "2026-06-09.md",
+    "conductor/showcase_ux_roadmap.md",
+    "conductor/archive/vercel_deploy_20260609/spec.md",
+    "conductor/archive/vercel_deploy_20260609/plan.md",
+    "conductor/archive/vercel_deploy_20260609/metadata.json",
+    "conductor/archive/vercel_deploy_20260609/index.md",
+    "conductor/archive/vercel_deploy_20260609",
     "frontend/dist/index.html",
     "frontend/dist/assets/index-DIJDhmIE.js",
     "frontend/dist/assets/index-Ce2Rhsfx.css",
@@ -221,14 +242,10 @@
     "conductor/tracks/vercel_deploy_20260609",
     "conductor/archive/compliance_grid_20260609/spec.md",
     "conductor/archive/compliance_grid_20260609/plan.md",
-    "conductor/archive/compliance_grid_20260609/metadata.json",
     "conductor/archive/compliance_grid_20260609/index.md",
-    "conductor/archive/compliance_grid_20260609",
     "conductor/product-guidelines.md",
     "conductor/product.md",
     "conductor/tracks/compliance_grid_20260609/plan.md",
-    "frontend/src/components/hq/ExecutiveAISummary.tsx",
-    "frontend/src/components/hq/BranchLeaderboard.tsx",
     "conductor/tracks/compliance_grid_20260609/index.md",
     "frontend/node_modules/@emnapi/core/README.md",
     "frontend/node_modules/@tybys/wasm-util/README.md",
@@ -237,17 +254,6 @@
     "conductor/tracks/compliance_grid_20260609/spec.md",
     "conductor/tracks/branch_manager_inbox_20260609/plan.md",
     "conductor/archive/branch_manager_inbox_20260609/plan.md",
-    "conductor/archive/branch_manager_inbox_20260609/index.md",
-    "conductor/tracks/branch_manager_inbox_20260609/index.md",
-    "conductor/showcase_ux_roadmap.md",
-    "conductor/plan.md",
-    "_ProjectAtlas.md",
-    "conductor/tracks/chain_owner_hq_20260609/plan.md",
-    "conductor/archive/chain_owner_hq_20260609/spec.md",
-    "conductor/archive/chain_owner_hq_20260609/plan.md",
-    "Product Command Center.canvas",
-    "The Data Flow.canvas",
-    "Untitled.canvas",
     "frontend/coverage/sort-arrow-sprite.png",
     "frontend/coverage/favicon.png",
     "frontend/dist/icons.svg",

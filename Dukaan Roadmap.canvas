@@ -1,0 +1,50 @@
+{
+	"nodes":[
+		{"id":"group-p3","type":"group","x":-900,"y":820,"width":1640,"height":920,"color":"1","label":"🚀  PHASE 3 — Enterprise Scale · AKS · 1M Concurrent Users · Production-Ready"},
+		{"id":"group-p1","type":"group","x":-900,"y":-640,"width":1680,"height":560,"color":"4","label":"✅  PHASE 1 — Frontend Complete & Vercel Deployed  •  ACHIEVED"},
+		{"id":"group-p2a","type":"group","x":-900,"y":0,"width":820,"height":720,"color":"3","label":"⚡  PHASE 2a — Core E2E Functionality + Basic Cloud"},
+		{"id":"group-p2b","type":"group","x":0,"y":0,"width":740,"height":720,"color":"2","label":"🎨  PHASE 2b — UX Refinements & Non-Core Features"},
+		{"id":"title-banner","type":"text","text":"# 🏪 DUKAAN PROJECT\n## Ultimate Roadmap → 1 Million Concurrent Users\n> Enterprise-level functionality · Security · Scalability","x":-200,"y":-900,"width":900,"height":160,"color":"6"},
+		{"id":"north-star","type":"text","text":"## 🎯 North Star\n**1,000,000** concurrent users\nEnterprise-grade · Secure · Production-ready","x":800,"y":-900,"width":420,"height":160,"color":"5"},
+		{"id":"p1-status","type":"text","text":"## ✅ ACHIEVED\n**Status:** Complete\n\n🚀 Vercel CI/CD live\n🔗 GitHub Actions (`master`)\n📦 `vercel.json` configured\n🧩 Ready for backend","x":-860,"y":-560,"width":320,"height":200,"color":"4"},
+		{"id":"p1-t1","type":"text","text":"## Track 1\n### 🏗️ Arch Foundation\n*Showcase Engine*\n\n- `react-router-dom`\n- Role-based redirects\n- `Zustand` state mgmt\n- `inventoryStore`\n- `syncStore`\n- `<Outlet/>` layout","x":-500,"y":-560,"width":280,"height":460,"color":"4"},
+		{"id":"p1-t2","type":"text","text":"## Track 2\n### 🖥️ Cashier POS HUD\n*Zero-Latency Interface*\n\n- Keyboard-first ops\n- Global shortcuts\n- 60s Autonomous Void\n- Fonepay polling sim\n- Multi-Branch Return\n  Wizard","x":-180,"y":-560,"width":280,"height":460,"color":"4"},
+		{"id":"p1-t3","type":"text","text":"## Track 3\n### 🏢 Chain Owner HQ\n*Strategy & Growth*\n\n- Executive Scorecard\n- Dead Stock Rebalancer\n- Nepal SVG map\n- Global Approval Ctr\n- Growth Wizards\n- AI Orchestration","x":140,"y":-560,"width":280,"height":460,"color":"4"},
+		{"id":"p1-t4","type":"text","text":"## Track 4\n### 🏬 Branch Manager\n*Action Inbox*\n\n- Command center\n- Sidebar nav\n- Task-card UI\n- Logistics Hub\n- Transaction Audit\n- Local Quota Gov.","x":460,"y":-560,"width":280,"height":460,"color":"4"},
+		{"id":"p1-t5","type":"text","text":"## Track 5\n### 📊 Accountant Grid\n*Compliance Grid*\n\n- IRD compliance\n- Annex 14 (TanStack)\n- Price Variance Audit\n- Anomaly Sentinel\n- Health Radar\n- Revenue Heatmap","x":780,"y":-560,"width":280,"height":460,"color":"4"},
+		{"id":"p2a-goal","type":"text","text":"**Goal:** Connect visual frontend → live Frappe backend + MariaDB on Azure VM. Validate all core workflows & data persistence.","x":-860,"y":80,"width":740,"height":100,"color":"3"},
+		{"id":"p2a-infra","type":"text","text":"## 🖥️ Infrastructure\n### Azure VM Setup\n\n- Frappe bench deploy\n- Python + Gunicorn\n- Nginx reverse proxy\n- Redis configuration\n- Azure DB for MariaDB\n  (managed)\n- Network Security\n  Groups\n- SSH access control\n- Basic logging &\n  monitoring\n- VM + Frappe logs","x":-860,"y":220,"width":340,"height":440,"color":"3"},
+		{"id":"p2a-integration","type":"text","text":"## 🔌 Integration\n### API + Business Logic\n\n- POS → real sales txns\n- Real-time inventory\n- HQ dashboard data\n- Approval processing\n- Compliance auditing\n- Tenant provisioning\n  (5 initial users)\n- Rigorous E2E tests\n- All mocked flows\n  replaced with live\n\n> ⚠️ UI/UX deferred","x":-480,"y":220,"width":340,"height":440,"color":"3"},
+		{"id":"p2b-goal","type":"text","text":"**Goal:** Polish UX, add PWA capabilities. Builds on stable E2E app from Phase 2a.","x":40,"y":80,"width":660,"height":80,"color":"2"},
+		{"id":"p2b-features","type":"text","text":"## 🌓 Themes\n### Thematic Customization\n\n- Light mode\n- Dark mode\n- App-wide theming\n- Consistent tokens\n\n---\n## ✨ Quality of Life\n- Minor UX fixes\n- Phase 2a feedback\n- Small-scale polish","x":40,"y":200,"width":300,"height":460,"color":"2"},
+		{"id":"p2b-pwa","type":"text","text":"## 📱 PWA\n### Hybrid Web App\n\n- Service Workers\n- Offline persistence\n- Installability\n- `IndexedDB` sync\n  (per README spec)\n- Background sync\n- Push notifications\n- App manifest\n- Install prompts","x":380,"y":200,"width":320,"height":460,"color":"2"},
+		{"id":"p3-goal","type":"text","text":"**Goal:** Enterprise-grade scalability (1M concurrent users) · High availability · Robust security · Critical third-party integrations · Production-ready","x":-860,"y":900,"width":1560,"height":80,"color":"1"},
+		{"id":"p3-aks","type":"text","text":"## ☸️ AKS Migration\n### Containerization\n\n- Docker images:\n  Frappe · Nginx\n  Gunicorn · Workers\n- AKS deployment\n- Elastic scaling\n- High availability\n- Auto-orchestration\n\n**Managed Services:**\n- Azure DB MariaDB\n- Azure Cache Redis\n\n**K8s Manifests:**\n- Deployments\n- Services\n- Ingress Controllers\n- HPA (autoscale)\n- PV / PVC","x":-860,"y":1030,"width":360,"height":640,"color":"1"},
+		{"id":"p3-security","type":"text","text":"## 🔒 Security\n### Hardening\n\n**Network:**\n- Azure Firewall/WAF\n- Network segments\n- DDoS protection\n\n**Identity:**\n- IAM policies\n- RBAC\n- Zero-trust\n\n**Data:**\n- Azure Key Vault\n- Encrypt at rest\n- Encrypt in transit\n\n**Vuln Mgmt:**\n- Container scanning\n- Infra scanning\n- Compliance audits","x":-460,"y":1030,"width":340,"height":640,"color":"1"},
+		{"id":"p3-integrations","type":"text","text":"## 🔗 Integrations\n### Third-Party\n\n**💳 Payment Gateway:**\n- Multi-gateway support\n- Transaction processing\n- Error handling\n- Reconciliation\n- Secure auth flows\n\n**🏛️ IRD (Nepal Tax):**\n- Annex 13 / 14\n- Upload / Download\n- Verification APIs\n- Data integrity checks\n- Secure exchange\n- Auto-verification","x":-80,"y":1030,"width":340,"height":640,"color":"1"},
+		{"id":"p3-perf","type":"text","text":"## ⚡ Performance\n### Engineering\n\n**Load Testing:**\n- Simulate 1M users\n- Identify bottlenecks\n  Frontend · Nginx\n  Gunicorn · Frappe\n  Redis · MariaDB\n\n**Optimization:**\n- Continuous tuning\n- Query optimization\n- Cache strategies\n- CDN integration\n\n**Observability:**\n- APM (full-stack)\n- Centralized logs\n- Smart alerting\n- SLA dashboards","x":300,"y":1030,"width":320,"height":640,"color":"1"},
+		{"id":"p3-cicd","type":"text","text":"## 🔄 CI/CD Pipeline\n### Full Automation\n\n**Build:**\n- Container image builds\n- Automated test suite\n- Security scans\n- Lint & type-check\n\n**Deploy:**\n- AKS deployments\n- Blue/Green strategy\n- Canary releases\n- Automated rollback\n\n**Quality Gates:**\n- Coverage thresholds\n- Perf benchmarks\n- Security gate pass\n- Smoke tests","x":660,"y":1030,"width":320,"height":640,"color":"1"},
+		{"id":"deliverable-p1","type":"text","text":"📦 **Deliverable:** Visual frontend live on Vercel · CI/CD active","x":-900,"y":-60,"width":380,"height":60,"color":"4"},
+		{"id":"deliverable-p2a","type":"text","text":"📦 **Deliverable:** Fully operational app · Vercel ↔ Frappe/MariaDB on Azure VM","x":-900,"y":760,"width":380,"height":60,"color":"3"},
+		{"id":"deliverable-p2b","type":"text","text":"📦 **Deliverable:** Polished PWA · Light/dark themes · UX refined","x":0,"y":760,"width":360,"height":60,"color":"2"},
+		{"id":"deliverable-p3","type":"text","text":"📦 **Deliverable:** Production-ready · Highly scalable (1M users) · Secure · Enterprise integrations complete · AKS deployed","x":-900,"y":1780,"width":1640,"height":60,"color":"1"},
+		{"id":"stack-card","type":"text","text":"## 🛠️ Tech Stack\n\n**Frontend**\n`React` · `react-router-dom`\n`Zustand` · `TanStack Table`\n`Vercel` · `GitHub Actions`\n\n**Backend**\n`Frappe Framework`\n`Python` · `Gunicorn`\n`Nginx` · `Redis`\n\n**Database**\n`MariaDB`\nAzure Managed DB\n\n**Infrastructure**\n`Azure VM` → `AKS`\n`Docker` · `Kubernetes`\nAzure Key Vault\nAzure Firewall / WAF\n\n**PWA**\n`IndexedDB`\nService Workers\n\n**Observability**\nAPM · Centralized Logs\nSmart Alerting","x":840,"y":0,"width":380,"height":720,"color":"6"}
+	],
+	"edges":[
+		{"id":"e-title-p1","fromNode":"title-banner","fromSide":"bottom","toNode":"group-p1","toSide":"top","color":"6","label":"Built on"},
+		{"id":"e-p1-del","fromNode":"group-p1","fromSide":"bottom","toNode":"deliverable-p1","toSide":"top","color":"4"},
+		{"id":"e-del-p2a","fromNode":"deliverable-p1","fromSide":"bottom","toNode":"group-p2a","toSide":"top","color":"4","label":"Enables"},
+		{"id":"e-p2a-del","fromNode":"group-p2a","fromSide":"bottom","toNode":"deliverable-p2a","toSide":"top","color":"3"},
+		{"id":"e-p2b-del","fromNode":"group-p2b","fromSide":"bottom","toNode":"deliverable-p2b","toSide":"top","color":"2"},
+		{"id":"e-p2a-p3","fromNode":"deliverable-p2a","fromSide":"bottom","toNode":"group-p3","toSide":"top","color":"3","label":"Migrates to"},
+		{"id":"e-p2b-p3","fromNode":"deliverable-p2b","fromSide":"bottom","toNode":"group-p3","toSide":"top","color":"2","label":"Merges into"},
+		{"id":"e-p3-del","fromNode":"group-p3","fromSide":"bottom","toNode":"deliverable-p3","toSide":"top","color":"1"},
+		{"id":"e-p3-northstar","fromNode":"deliverable-p3","fromSide":"right","toNode":"north-star","toSide":"bottom","color":"5","label":"🏆 Achieved"},
+		{"id":"e-northstar-stack","fromNode":"north-star","fromSide":"bottom","toNode":"stack-card","toSide":"top","color":"6","label":"Powered by"},
+		{"id":"e-del-p2b","fromNode":"deliverable-p1","fromSide":"bottom","toNode":"group-p2b","toSide":"top","color":"3","label":"Unlocks"}
+	],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}
