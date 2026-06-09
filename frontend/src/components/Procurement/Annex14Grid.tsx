@@ -1,14 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { FileSpreadsheet, AlertTriangle, CheckCircle2, Search, Filter, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Annex14Entry {
+  id: string;
   date: string;
   invoice_no: string;
   supplier_name: string;
@@ -19,28 +21,20 @@ interface Annex14Entry {
   status: 'verified' | 'flagged';
 }
 
-const mockData: Annex14Entry[] = [
-  { 
-    date: '2026-06-09', 
-    invoice_no: 'PUR-001', 
-    supplier_name: 'Global Trading Pvt Ltd', 
-    supplier_pan: '601234567', 
-    taxable_amount: 10000, 
-    vat_amount: 1300, 
-    total_amount: 11300, 
-    status: 'verified' 
-  },
-  { 
-    date: '2026-06-09', 
-    invoice_no: 'PUR-002', 
-    supplier_name: 'BhatBhateni Suppliers', 
-    supplier_pan: '304567890', 
-    taxable_amount: 5000, 
-    vat_amount: 650, 
-    total_amount: 5651, // Rounding error
-    status: 'flagged' 
-  },
-];
+// Generate large mock dataset for virtualization testing
+const generateMockData = (count: number): Annex14Entry[] => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: `row-${i}`,
+    date: '2026-06-09',
+    invoice_no: `PUR-${1000 + i}`,
+    supplier_name: i % 5 === 0 ? 'BhatBhateni Suppliers' : 'Global Trading Pvt Ltd',
+    supplier_pan: i % 5 === 0 ? '304567890' : '601234567',
+    taxable_amount: 5000 + i,
+    vat_amount: (5000 + i) * 0.13,
+    total_amount: (5000 + i) * 1.13 + (i % 7 === 0 ? 1 : 0), // Occasional rounding error
+    status: i % 7 === 0 ? 'flagged' : 'verified',
+  }));
+};
 
 const columnHelper = createColumnHelper<Annex14Entry>();
 
@@ -48,10 +42,12 @@ const columns = [
   columnHelper.accessor('date', {
     header: 'Date',
     cell: info => <span className="font-mono text-slate-400">{info.getValue()}</span>,
+    size: 120,
   }),
   columnHelper.accessor('invoice_no', {
     header: 'Invoice #',
     cell: info => <span className="font-bold text-slate-100">{info.getValue()}</span>,
+    size: 150,
   }),
   columnHelper.accessor('supplier_name', {
     header: 'Supplier & PAN',
@@ -61,22 +57,26 @@ const columns = [
         <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">{info.row.original.supplier_pan}</div>
       </div>
     ),
+    size: 250,
   }),
   columnHelper.accessor('taxable_amount', {
     header: () => <div className="text-right">Taxable</div>,
-    cell: info => <div className="text-right font-mono text-slate-200">{info.getValue().toLocaleString()}</div>,
+    cell: info => <div className="text-right font-mono text-slate-200">{info.getValue().toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>,
+    size: 120,
   }),
   columnHelper.accessor('vat_amount', {
     header: () => <div className="text-right">VAT (13%)</div>,
-    cell: info => <div className="text-right font-mono text-slate-200">{info.getValue().toLocaleString()}</div>,
+    cell: info => <div className="text-right font-mono text-slate-200">{info.getValue().toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>,
+    size: 120,
   }),
   columnHelper.accessor('total_amount', {
     header: () => <div className="text-right">Total</div>,
     cell: info => (
       <div className={`text-right font-mono font-black ${info.row.original.status === 'flagged' ? 'text-rose-500' : 'text-amber-500'}`}>
-        रु {info.getValue().toLocaleString()}
+        रु {info.getValue().toLocaleString(undefined, { minimumFractionDigits: 2 })}
       </div>
     ),
+    size: 150,
   }),
   columnHelper.accessor('status', {
     header: () => <div className="text-center">Compliance</div>,
@@ -93,11 +93,13 @@ const columns = [
         )}
       </div>
     ),
+    size: 120,
   }),
 ];
 
 const Annex14Grid: React.FC = () => {
-  const data = useMemo(() => mockData, []);
+  const data = useMemo(() => generateMockData(10000), []);
+  const parentRef = useRef<HTMLDivElement>(null);
   
   const table = useReactTable({
     data,
@@ -105,9 +107,24 @@ const Annex14Grid: React.FC = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 72, // row height
+    overscan: 10,
+  });
+
+  const virtualRows = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+
+  const paddingTop = virtualRows.length > 0 ? virtualRows[0].start : 0;
+  const paddingBottom = virtualRows.length > 0 ? totalSize - virtualRows[virtualRows.length - 1].end : 0;
+
   return (
-    <div className="p-10 space-y-8 min-h-full bg-slate-950">
-      <header className="flex justify-between items-end">
+    <div className="flex flex-col h-full bg-slate-950">
+      <header className="p-10 flex justify-between items-end bg-slate-950/80 backdrop-blur-md z-20 sticky top-0 border-b border-slate-900">
         <div>
           <div className="flex items-center gap-3 mb-2">
             <FileSpreadsheet className="text-amber-500" size={24} />
@@ -134,44 +151,62 @@ const Annex14Grid: React.FC = () => {
         </div>
       </header>
 
-      <div className="bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden backdrop-blur-xl">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id} className="bg-slate-950/50 border-b border-slate-800">
-                {headerGroup.headers.map(header => (
-                  <th key={header.id} className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="divide-y divide-slate-800/50">
-            {table.getRowModel().rows.map(row => (
-              <motion.tr 
-                key={row.id} 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }}
-                className="hover:bg-amber-500/5 transition-colors group"
-              >
-                {row.getVisibleCells().map(cell => (
-                  <td key={cell.id} className="px-6 py-4 text-sm">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
+      <div ref={parentRef} className="flex-1 overflow-auto custom-scrollbar">
+        <div style={{ height: `${totalSize}px`, position: 'relative' }}>
+          <table className="w-full text-left border-collapse table-fixed">
+            <thead className="sticky top-0 bg-slate-950 z-10 border-b border-slate-800 shadow-xl">
+              {table.getHeaderGroups().map(headerGroup => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map(header => (
+                    <th 
+                      key={header.id} 
+                      style={{ width: header.getSize() }}
+                      className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-500"
+                    >
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {paddingTop > 0 && (
+                <tr>
+                  <td style={{ height: `${paddingTop}px` }} />
+                </tr>
+              )}
+              {virtualRows.map(virtualRow => {
+                const row = rows[virtualRow.index];
+                return (
+                  <motion.tr 
+                    key={virtualRow.key} 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }}
+                    className="hover:bg-amber-500/5 transition-colors group h-[72px]"
+                  >
+                    {row.getVisibleCells().map(cell => (
+                      <td key={cell.id} className="px-6 py-4 text-sm border-b border-slate-900/50">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
+                  </motion.tr>
+                );
+              })}
+              {paddingBottom > 0 && (
+                <tr>
+                  <td style={{ height: `${paddingBottom}px` }} />
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <footer className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-600 border-t border-slate-800 pt-6">
-        <div>Nepal IRD Compliant Format (v4.0)</div>
+      <footer className="p-6 bg-slate-950 border-t border-slate-900 flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-600 z-20">
+        <div>Nepal IRD Compliant Format (v4.0) • Virtualizing {data.length.toLocaleString()} rows</div>
         <div className="flex gap-8">
-           <span>Taxable: रु 15,000.00</span>
-           <span>VAT: रु 1,950.00</span>
-           <span className="text-amber-500">Total: रु 16,951.00</span>
+           <span>Total Taxable: रु {(data.reduce((s, d) => s + d.taxable_amount, 0)).toLocaleString()}</span>
+           <span className="text-amber-500">Total VAT: रु {(data.reduce((s, d) => s + d.vat_amount, 0)).toLocaleString()}</span>
         </div>
       </footer>
     </div>
