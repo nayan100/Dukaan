@@ -13,8 +13,10 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 *   **Framework:** React (TypeScript).
 *   **Routing:** React Router (v6+) for persona-driven navigation, deep-linking, and nested route architectures.
 *   **State Management:** Zustand for lightweight, reactive global state; TanStack Query for data fetching.
+*   **Grid Engine:** TanStack Table v8 for high-performance sorting, filtering, and deep-data manipulation.
+*   **Virtualization:** TanStack Virtual for handling 10,000+ records with zero UI lag.
 *   **UI Components:** Custom design system built with Tailwind CSS, optimized for Visual Sovereignty (Slate-950 palette).
-*   **Animations:** `framer-motion` for premium micro-interactions and layout transitions.
+*   **Animations:** `framer-motion` for premium micro-interactions, layout transitions, and geographic intensity overlays.
 *   **Data Visualization:** `recharts` for high-performance KPI dashboards and sales trends.
 *   **Offline Support:** 
     *   **PWA:** Service Workers for application caching and offline access.

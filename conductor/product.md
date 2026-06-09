@@ -21,7 +21,7 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 *   **Inventory Orchestration:** Global stock visibility with AI-driven 'Rebalance' triggers for stagnant inventory.
 *   **Global Pricing Control:** Centralized price list management with hash-based versioning.
 *   **Hierarchical Access Hub:** Unified management of permission trees and role shadowing.
-*   **Multi-View Dashboards:** Executive Scorecards, Operational Heatmaps, and Comparative Analytics.
+*   **Multi-View Dashboards:** Executive Scorecards with AI-generated summaries, Operational Heatmaps, and Gamified Branch Leaderboards.
 *   **Persona Showcase Portal:** Interactive, "One-Click" demo environment with predefined personas (Admin, Owner, Manager, Cashier, Accountant) for end-to-end flow validation.
 
 ## 5. Native AI Orchestration Layer
@@ -51,9 +51,9 @@ Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platfor
 ## 9. Core MVP Modules
 *   **POS & Payment Core:** Full-screen HUD with keyboard-first navigation, 60-second "Autonomous Void" locking, Fonepay QR integration with manual bypass, and a cross-branch Item Return Wizard.
 *   **Inter-Branch Protocol:** Resilient 4-step workflow (Request -> Dispatch -> Approve -> Receipt) with auto-rejection logic.
-*   **Compliance & IRD Sync:** Real-time sync with the IRD Central Billing Monitoring System and immutable audit trails.
+*   **Compliance & IRD Sync:** Real-time sync with the IRD Central Billing Monitoring System and immutable audit trails, featuring digital "Compliance Seals" for verified transactions.
 *   **Procurement & Stock Management:** High-integrity Purchase Order (PO) flows with split-order detection, multi-persona approval handshakes, and soft budget enforcement. Includes physical-first opening stock entry with moving average valuation and a blind spot-check protocol.
-*   **Financial Governance Enhancements:** Introduction of Landed Cost Vouchers for accurate stock valuation and direct integration with Annex 14 Purchase Registers for compliance.
+*   **Financial Governance Enhancements:** Introduction of Landed Cost Vouchers for accurate stock valuation and high-performance Annex 14 grids with dynamic rounding error detection.
 *   **Showcase & Demo Utility:** Environment seeding scripts and "Phoenix Reset" protocol for rapid deployment of test/demo scenarios.
 
 ## 10. Operational Guardrails

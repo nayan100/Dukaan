@@ -31,4 +31,5 @@ The AI layer should feel like a native part of the UI:
 | **SaaS Admin** | Global Platform Control, Tenant Provisioning, All Analytics |
 | **Chain Owner** | Strategy Hub, Growth Wizards, Multi-branch Visibility |
 | **Branch Owner** | Local Dashboard, Scoped Inventory, Local Approvals |
+| **Accountant** | Consolidated Compliance Hub, Audit Trail Analytics, Price Variance Auditing |
 | **Cashier** | POS HUD, Sale Processing, 60s Autonomous Void |
