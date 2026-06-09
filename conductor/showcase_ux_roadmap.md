@@ -42,38 +42,45 @@ This roadmap outlines the sequence of 11 specialized tracks designed to transfor
 
 ---
 
-## Track 6: The Network Pulse (Real-Time Observability)
+## Track 6: Automated Vercel Deployment (CI/CD) - ✅ COMPLETED
+**Focus:** Establishing robust and automated continuous deployment for the frontend.
+*   **Vercel Deployment:** Configured the frontend for Vercel, including `vercel.json` for deep-linking.
+*   **CI/CD Integration:** Implemented a GitHub Actions workflow for automated deployments on `master` branch pushes, with secure handling of Vercel secrets.
+
+---
+
+## Track 7: The Network Pulse (Real-Time Observability)
 **Focus:** Real-time system transparency and global "liveness."
 *   **Global Activity Ticker:** A scrolling, low-latency feed of events across the network (e.g., *"Kathmandu: Sale of $45.00"*, *"Pokhara: Stock Low"*).
 *   **Live Sales Pulse:** Upgrading the Nepal SVG map with "active pulses"—branch pins pulse green when transactions occur in real-time.
 *   **Sovereignty Isolation HUD:** A visual panel in the Admin view showing real-time proof of data sandboxing and "Isolation Shield" status.
 *   **System Vital Signs:** A NOC-style dashboard showing API latency, sync health, and database load for the platform owner.
 
-## Track 7: Industrial Logistics (Tactile Physicality)
+## Track 8: Industrial Logistics (Tactile Physicality)
 **Focus:** Bridging the digital-physical gap with tactile warehouse HUDs and spatial inventory.
 *   **Visual Bin-Tracking:** A 2D grid representation of physical storage space with "heat coloring" to visualize stock density and velocity.
 *   **The "Flight Path" Map:** An interactive logistics map showing inter-branch transfers moving along routes with a "Package Progress" timeline.
 *   **Warehouse "Dead Zone" Auditor:** A tool that highlights physical areas in a warehouse that haven't had stock movement in 30+ days.
 
-## Track 8: Customer Experience & Loyalty (B2C Surface)
+## Track 9: Customer Experience & Loyalty (B2C Surface)
 **Focus:** Growth, retention, and digital-to-physical customer engagement.
 *   **Customer Persona Cards:** High-fidelity "Customer Profiles" showing purchase frequency, "Loyalty Tiers", and a visual "Product Affinity" cloud.
 *   **The Promotion Wizard:** A step-by-step UI for HQ to launch "Flash Sales" or "Holiday Discounts" that propagate to POS units in real-time.
 *   **Digital Receipt Experience:** A mobile-optimized receipt view with dynamic QR codes for loyalty points and personalized feedback loops.
 
-## Track 9: Intelligent Autonomy (The AI Co-Pilot)
+## Track 10: Intelligent Autonomy (The AI Co-Pilot)
 **Focus:** Moving from "reporting" to "predicting" with AI-driven insights.
 *   **Predictive Stock Charting:** Visualizing dotted-line projections of when items will hit zero based on historical sales velocity.
 *   **AI Procurement Drafts:** A "One-Click Restock" button that uses AI to draft purchase orders across the chain, explaining its logic based on seasonality.
 *   **Anomaly Sentinel HUD:** A dedicated view for spotting "Strange Patterns" (e.g., unusual void frequencies or discount velocity) to prevent leakage.
 
-## Track 10: The Developer Surface (Platform API)
+## Track 11: The Developer Surface (Platform API)
 **Focus:** Turning the app into a platform via high-fidelity API Explorers.
 *   **Integrated API Explorer:** A Swagger-style playground where users can test API calls directly in the browser with "Copy to Curl" buttons.
 *   **Webhook Event Simulator:** A visual dashboard to trigger and monitor webhook events (e.g., sale, stock-out) for third-party integrations.
 *   **Third-Party App Cards:** A mock "App Store" showing potential integrations (e.g., Xero, Shopify, Slack notifications).
 
-## Track 11: The "Grand Finale" (Total Polish)
+## Track 12: The "Grand Finale" (Total Polish)
 **Focus:** The "Ultimate Demo" experience and final performance optimization.
 *   **The "Infinite Demo" Toggle:** A master switch that populates the entire system with 12 months of beautiful, simulated data for a 50-branch empire.
 *   **Latency-Zero UI:** A final pass to ensure 60FPS transitions and "instant" feel via optimistic state updates across all complex grids.

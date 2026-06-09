@@ -28,8 +28,9 @@ Dukaan follows a headless, decoupled architecture with a focus on offline resili
 *   **Cloud AI:** Python-based microservices (FastAPI) for heavy lifting, including demand forecasting and inventory rebalancing.
 
 ## 5. DevOps & Infrastructure
+*   **Deployment:** Vercel for frontend hosting and continuous deployment.
 *   **Containerization:** Docker for consistent development and production environments.
-*   **CI/CD:** Automated pipelines for testing (Cypress/Playwright) and zero-downtime deployment (Blue-Green).
+*   **CI/CD:** Automated pipelines for testing (Cypress/Playwright) and zero-downtime deployment (Blue-Green), using GitHub Actions for orchestrating Vercel deployments.
 *   **Monitoring:** Integrated Frappe logging and Prometheus/Grafana for infrastructure health.
 
 ## 6. Tooling & Documentation
