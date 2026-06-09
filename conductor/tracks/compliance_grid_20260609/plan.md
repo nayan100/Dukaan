@@ -33,12 +33,12 @@
 - [x] Task: Integrate `BranchManagement`, `UserManagement`, and `ProcurementAnalyticsHub`.
 - [x] Task: Move `ComparativeAnalytics` to its dedicated route and update sidebar.
 - [x] Task: Implement the "Pricing Wizard" with impact simulation logic.
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: HQ Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: HQ Integration' (Protocol in workflow.md)
 
 ## Phase 5: Final Showcase Polish & Validation
 **Goal:** Add high-fidelity visual elements and perform end-to-end validation.
 
-- [ ] Task: Add "Revenue Heatmap Overlay" to the Nepal SVG map in `DeadStockMap`.
+- [x] Task: Add "Revenue Heatmap Overlay" to the Nepal SVG map in `DeadStockMap`.
 - [ ] Task: Implement the "Branch Leaderboard" gamification component.
 - [ ] Task: Add the "Executive AI Summary" text block to the HQ Scorecard.
 - [ ] Task: Perform E2E validation of all 10+ new sub-routes.
