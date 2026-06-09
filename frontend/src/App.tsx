@@ -19,6 +19,7 @@ import ComparativeAnalytics from './components/hq/ComparativeAnalytics';
 import ApprovalCenter from './components/hq/ApprovalCenter';
 import DeadStockMap from './components/hq/DeadStockMap';
 import GrowthWizardsHub from './components/hq/GrowthWizardsHub';
+import PricingWizard from './components/hq/PricingWizard';
 
 const IndexRedirect = () => {
   const { user } = useAuth();
@@ -48,6 +49,7 @@ function App() {
             <Route path="branches" element={<BranchManagement />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="analytics" element={<ComparativeAnalytics />} />
+            <Route path="pricing" element={<PricingWizard />} />
             <Route path="rebalancer" element={<DeadStockMap />} />
             <Route path="approvals" element={<ApprovalCenter />} />
             <Route path="wizards" element={<GrowthWizardsHub />} />

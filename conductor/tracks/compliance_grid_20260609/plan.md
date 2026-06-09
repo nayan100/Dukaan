@@ -32,7 +32,7 @@
 - [x] Task: Add sub-routes for `/hq/branches`, `/hq/users`, and `/hq/analytics`.
 - [x] Task: Integrate `BranchManagement`, `UserManagement`, and `ProcurementAnalyticsHub`.
 - [x] Task: Move `ComparativeAnalytics` to its dedicated route and update sidebar.
-- [ ] Task: Implement the "Pricing Wizard" with impact simulation logic.
+- [x] Task: Implement the "Pricing Wizard" with impact simulation logic.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: HQ Integration' (Protocol in workflow.md)
 
 ## Phase 5: Final Showcase Polish & Validation

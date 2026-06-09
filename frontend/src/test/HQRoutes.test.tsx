@@ -106,4 +106,22 @@ describe('HQ Routes', () => {
     
     expect(screen.getByText(/Branch Performance Matrix/i)).toBeInTheDocument();
   });
+
+  it('renders Pricing Wizard on /hq/pricing', async () => {
+    sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
+        username: 'owner1', 
+        role: 'Chain Owner', 
+        tenant: 'T1' 
+    }));
+
+    window.history.pushState({}, 'Pricing', '/hq/pricing');
+
+    render(
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
+    
+    expect(screen.getByText(/Global Pricing Wizard/i)).toBeInTheDocument();
+  });
 });

@@ -4,7 +4,7 @@ import {
   LayoutDashboard, ShoppingCart, Rocket, 
   Settings, LogOut, Menu, X, Bell, Package, Activity, ShieldCheck, ShieldAlert,
   Users, Building2, ClipboardList, Inbox, Box, Truck, ShoppingBag, History as HistoryIcon,
-  FileSpreadsheet, PieChart
+  FileSpreadsheet, PieChart, Tag
   } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import LoginPage from '../auth/LoginPage';
@@ -56,6 +56,7 @@ const AppLayout: React.FC = () => {
     { path: '/hq/users', label: 'Access Control', icon: Users, permission: 'manage_branches' },
     { path: '/hq/rebalancer', label: 'Dead Stock', icon: Box, permission: 'access_strategy_hub' },
     { path: '/hq/analytics', label: 'Advanced Analytics', icon: PieChart, permission: 'view_all_analytics' },
+    { path: '/hq/pricing', label: 'Global Pricing', icon: Tag, permission: 'manage_branches' },
     { path: '/hq/approvals', label: 'Approvals', icon: ClipboardList, permission: 'access_strategy_hub' },
     { path: '/hq/wizards', label: 'Growth Hub', icon: Rocket, permission: 'access_strategy_hub' },
     { path: '/branch/inbox', label: 'Action Inbox', icon: Inbox, permission: 'access_logistics' },
