@@ -28,7 +28,3 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: Hierarchical Sovereignty & Quota Enforcement. Focus: Implementing the "Line of Command" (Admin -> Owners -> Branches -> POS) and hard resource limits.**
 *Link: [./archive/hierarchical_sovereignty_20260608/](./archive/hierarchical_sovereignty_20260608/)*
 
----
-
-- [x] **Track: Deploy the Dukaan Grand Showcase frontend to Vercel with automated CI/CD.**
-*Link: [./tracks/vercel_deploy_20260609/](./tracks/vercel_deploy_20260609/)*
