@@ -8,6 +8,9 @@ import ChainOwnerRoute from './components/auth/ChainOwnerRoute';
 import { useAuth } from './context/AuthContext';
 
 import BranchLayout from './components/branch/BranchLayout';
+import FinanceLayout from './components/layout/FinanceLayout';
+import Annex14Grid from './components/Procurement/Annex14Grid';
+import FinanceAuditHUD from './components/analytics/FinanceAuditHUD';
 
 const IndexRedirect = () => {
   const { user } = useAuth();
@@ -33,7 +36,13 @@ function App() {
           <Route path="pos" element={<POSHUD />} />
           <Route path="hq/*" element={<ChainOwnerRoute><HQLayout /></ChainOwnerRoute>} />
           <Route path="branch/*" element={<BranchLayout />} />
-          <Route path="finance" element={<IRDSyncDashboard />} />
+          <Route path="finance/*" element={<FinanceLayout />}>
+            <Route index element={<Navigate to="sync" replace />} />
+            <Route path="sync" element={<IRDSyncDashboard />} />
+            <Route path="purchase" element={<Annex14Grid />} />
+            <Route path="audit" element={<FinanceAuditHUD />} />
+            <Route path="analytics" element={<div className="p-10 text-slate-400 font-bold uppercase tracking-widest">Finance Analytics (Coming Soon)</div>} />
+          </Route>
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="*" element={<IndexRedirect />} />
         </Route>
