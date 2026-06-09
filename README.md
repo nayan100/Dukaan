@@ -1,5 +1,6 @@
 # 🛍️ Dukaan: Multi-Branch POS & Strategy Hub
 
+
 > **The Single Source of Truth for Scalable Retail Operations.**
 
 Dukaan is a high-performance, multi-branch POS and Chain Management SaaS platform designed to bridge the gap between local branch speed and global chain intelligence. It provides real-time visibility into financial health, inventory movement, and regulatory compliance (IRD).

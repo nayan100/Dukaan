@@ -84,7 +84,7 @@ const AppLayout: React.FC = () => {
     const isBranchPath = location.pathname.startsWith('/branch');
     const isFinancePath = location.pathname.startsWith('/finance');
 
-    if (isAdminPath) return item.path.startsWith('/admin') || item.path === '/pos';
+    if (isAdminPath) return item.path.startsWith('/admin');
     if (isHqPath) return item.path.startsWith('/hq') || item.path === '/pos';
     if (isBranchPath) return item.path.startsWith('/branch') || item.path === '/pos';
     if (isFinancePath) return item.path.startsWith('/finance') || item.path === '/pos';
