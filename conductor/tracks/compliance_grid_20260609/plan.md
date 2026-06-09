@@ -15,12 +15,12 @@
 - [x] Task: Implement virtualization for handling 10,000+ entries.
 - [x] Task: Add "Rounding Error" detection logic and visual indicators.
 - [x] Task: Implement IRD-compatible Excel/CSV export functionality.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Compliance Grid' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Compliance Grid' (Protocol in workflow.md)
 
 ## Phase 3: Financial Governance & Auditing
 **Goal:** Build the interactive auditing tools and financial health visualizations.
 
-- [ ] Task: Implement the "Interactive Price Variance Auditor" (Flagging/Correction flow).
+- [x] Task: Implement the "Interactive Price Variance Auditor" (Flagging/Correction flow).
 - [ ] Task: Build the "Financial Health Radar" chart using `recharts`.
 - [ ] Task: Implement "Anomaly Sentinel" flags for Voids and Discount Velocity.
 - [ ] Task: Integrate digital "Compliance Seals" into the Sales Register views.
