@@ -141,6 +141,38 @@ const FinanceAuditHUD: React.FC = () => {
                     </p>
                 </div>
             </div>
+
+            {/* Void Sentinel */}
+            <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-8">
+                    <HistoryIcon className="text-amber-500" />
+                    <h2 className="text-lg font-black tracking-tight uppercase text-slate-200">Void Sentinel</h2>
+                </div>
+                
+                <div className="space-y-5">
+                    <motion.div 
+                        whileHover={{ x: 4 }}
+                        className="p-4 border border-amber-500/20 bg-amber-500/5 rounded-xl flex gap-3"
+                    >
+                        <div className="w-1 bg-amber-500 rounded-full h-auto" />
+                        <div>
+                            <div className="font-black text-amber-500 text-[10px] uppercase tracking-widest mb-1">High Void Frequency</div>
+                            <p className="text-[11px] font-bold text-slate-400 leading-tight">Butwal Branch: 12 voids in last 1H. Exceeds mean (4.2).</p>
+                        </div>
+                    </motion.div>
+                    
+                    <motion.div 
+                        whileHover={{ x: 4 }}
+                        className="p-4 border border-slate-800 bg-slate-950/50 rounded-xl flex gap-3"
+                    >
+                        <div className="w-1 bg-slate-700 rounded-full h-auto" />
+                        <div>
+                            <div className="font-black text-slate-500 text-[10px] uppercase tracking-widest mb-1">Manager Authorization</div>
+                            <p className="text-[11px] font-bold text-slate-500 leading-tight">Lalitpur: 100% of voids authorized by 'Admin-01'.</p>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
         </div>
 
         {/* Price Variance Grid */}

@@ -22,7 +22,7 @@
 
 - [x] Task: Implement the "Interactive Price Variance Auditor" (Flagging/Correction flow).
 - [x] Task: Build the "Financial Health Radar" chart using `recharts`.
-- [ ] Task: Implement "Anomaly Sentinel" flags for Voids and Discount Velocity.
+- [x] Task: Implement "Anomaly Sentinel" flags for Voids and Discount Velocity.
 - [ ] Task: Integrate digital "Compliance Seals" into the Sales Register views.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Financial Governance' (Protocol in workflow.md)
 

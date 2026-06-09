@@ -49,4 +49,11 @@ describe('FinanceAuditHUD Component', () => {
     render(<FinanceAuditHUD />);
     expect(screen.getByText(/Financial Health Radar/i)).toBeInTheDocument();
   });
+
+  it('renders the Anomaly Sentinels (Discount and Void)', () => {
+    render(<FinanceAuditHUD />);
+    expect(screen.getAllByText(/Discount Velocity/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Void Sentinel/i)).toBeInTheDocument();
+    expect(screen.getByText(/High Void Frequency/i)).toBeInTheDocument();
+  });
 });
