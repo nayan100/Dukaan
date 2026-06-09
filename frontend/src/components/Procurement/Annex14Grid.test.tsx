@@ -5,7 +5,7 @@ import React from 'react';
 
 // Mock URL
 if (typeof URL.createObjectURL === 'undefined') {
-  global.URL.createObjectURL = vi.fn();
+  window.URL.createObjectURL = vi.fn();
 }
 
 // Mock TanStack Virtual

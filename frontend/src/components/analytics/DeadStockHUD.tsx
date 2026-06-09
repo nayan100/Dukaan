@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  History, AlertCircle, ArrowRightLeft, 
+  History as HistoryIcon, AlertCircle, ArrowRightLeft, 
   TrendingDown, Package, MapPin, Search
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -126,4 +126,3 @@ const DeadStockHUD: React.FC = () => {
 };
 
 export default DeadStockHUD;
-dStockHUD;
