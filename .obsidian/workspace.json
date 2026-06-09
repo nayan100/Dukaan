@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_ProjectAtlas.md",
+                "file": "conductor/showcase_ux_roadmap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "_ProjectAtlas"
+              "title": "showcase_ux_roadmap"
             }
           }
         ]
@@ -181,10 +181,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "_ProjectAtlas.md"
+                "file": "conductor/showcase_ux_roadmap.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for _ProjectAtlas"
+              "title": "File properties for showcase_ux_roadmap"
             }
           }
         ],
@@ -207,44 +207,44 @@
       "terminal:Open terminal": false
     }
   },
-  "active": "1c369ed32aec03f1",
+  "active": "63e37be13d607693",
   "lastOpenFiles": [
+    "conductor/archive/compliance_grid_20260609/spec.md",
+    "conductor/archive/compliance_grid_20260609/plan.md",
+    "conductor/archive/compliance_grid_20260609/metadata.json",
+    "conductor/archive/compliance_grid_20260609/index.md",
+    "conductor/archive/compliance_grid_20260609",
+    "conductor/product-guidelines.md",
+    "conductor/product.md",
+    "conductor/tracks/compliance_grid_20260609/plan.md",
+    "frontend/src/components/hq/ExecutiveAISummary.tsx",
+    "frontend/src/components/hq/BranchLeaderboard.tsx",
+    "frontend/src/components/hq/DeadStockMap.test.tsx",
+    "frontend/src/components/hq/PricingWizard.tsx",
+    "frontend/src/test/HQRoutes.test.tsx",
+    "frontend/src/components/analytics/Annex13Preview.test.tsx",
+    "conductor/tracks/compliance_grid_20260609/index.md",
+    "frontend/node_modules/@tanstack/virtual-core/LICENSE",
+    "frontend/node_modules/@tanstack/virtual-core/src/utils.ts",
+    "frontend/node_modules/@emnapi/core/README.md",
+    "frontend/node_modules/@tybys/wasm-util/README.md",
+    "frontend/node_modules/@emnapi/runtime/README.md",
+    "frontend/node_modules/@emnapi/wasi-threads/README.md",
+    "conductor/tracks/compliance_grid_20260609/spec.md",
+    "conductor/tracks/branch_manager_inbox_20260609/plan.md",
+    "conductor/archive/branch_manager_inbox_20260609/plan.md",
+    "conductor/archive/branch_manager_inbox_20260609/index.md",
+    "conductor/tracks/branch_manager_inbox_20260609/index.md",
+    "conductor/showcase_ux_roadmap.md",
+    "conductor/plan.md",
+    "_ProjectAtlas.md",
     "conductor/tracks/chain_owner_hq_20260609/plan.md",
     "conductor/archive/chain_owner_hq_20260609/spec.md",
     "conductor/archive/chain_owner_hq_20260609/plan.md",
-    "conductor/archive/chain_owner_hq_20260609/metadata.json",
     "conductor/archive/chain_owner_hq_20260609/index.md",
-    "conductor/archive/chain_owner_hq_20260609",
-    "frontend/src/components/hq/GrowthWizardsHub.test.tsx",
-    "frontend/src/components/hq/GrowthWizardsHub.tsx",
-    "frontend/src/components/wizards/BaseHQWizard.tsx",
-    "_ProjectAtlas.md",
-    "frontend/src/components/hq/ApprovalCenter.test.tsx",
-    "frontend/src/components/hq/ApprovalCenter.tsx",
-    "frontend/src/components/hq/HQLayout.test.tsx",
-    "frontend/src/components/hq/HQLayout.tsx",
-    "frontend/src/components/hq/AISuggestionsOverlay.tsx",
-    "conductor/showcase_ux_roadmap.md",
     "conductor/tracks/chain_owner_hq_20260609/index.md",
     "conductor/tracks/chain_owner_hq_20260609/spec.md",
     "conductor/archive/pos_hud_refinement_20260608/plan.md",
-    "conductor/archive/pos_hud_refinement_20260608/index.md",
-    "conductor/archive/sovereignty_integration_20260607/plan.md",
-    "conductor/tracks/pos_hud_refinement_20260608/plan.md",
-    "conductor/archive/pos_hud_refinement_20260608/spec.md",
-    "conductor/tracks/pos_hud_refinement_20260608/spec.md",
-    "conductor/tracks/pos_hud_refinement_20260608/index.md",
-    "conductor/archive/showcase_arch_foundation_20260608/index.md",
-    "conductor/archive/showcase_arch_foundation_20260608/plan.md",
-    "conductor/archive/sovereignty_20260607/plan.md",
-    "conductor/archive/sovereignty_20260607/index.md",
-    "conductor/archive/hierarchical_sovereignty_20260608/plan.md",
-    "conductor/archive/grand_showcase_20260608/plan.md",
-    "conductor/archive/grand_showcase_20260608/index.md",
-    "conductor/archive/showcase_arch_foundation_20260608/spec.md",
-    "frontend/node_modules/react-router/LICENSE.md",
-    "frontend/node_modules/zustand/README.md",
-    "frontend/node_modules/react-router-dom/LICENSE.md",
     "Product Command Center.canvas",
     "The Data Flow.canvas",
     "Untitled.canvas",

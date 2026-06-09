@@ -62,7 +62,7 @@ function App() {
             <Route path="audit" element={<FinanceAuditHUD />} />
             <Route path="analytics" element={<div className="p-10 text-slate-400 font-bold uppercase tracking-widest">Finance Analytics (Coming Soon)</div>} />
           </Route>
-          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/*" element={<AdminDashboard />} />
           <Route path="*" element={<IndexRedirect />} />
         </Route>
       </Routes>

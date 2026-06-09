@@ -5,6 +5,7 @@ import ActionInbox from './ActionInbox';
 import BranchInventory from './BranchInventory';
 import BranchLogistics from './BranchLogistics';
 import BranchProcurement from './BranchProcurement';
+import SalesHistory from './SalesHistory';
 
 const BranchLayout: React.FC = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const BranchLayout: React.FC = () => {
               <Route path="inventory" element={<BranchInventory />} />
               <Route path="logistics" element={<BranchLogistics />} />
               <Route path="procurement" element={<BranchProcurement />} />
+              <Route path="history" element={<SalesHistory />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

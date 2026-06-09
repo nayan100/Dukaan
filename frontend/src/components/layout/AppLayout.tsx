@@ -50,7 +50,10 @@ const AppLayout: React.FC = () => {
   }
 
   const navItems = [
-    { path: '/admin', label: 'Admin Panel', icon: Settings, permission: 'view_tenants' },
+    { path: '/admin/overview', label: 'Overview', icon: LayoutDashboard, permission: 'view_tenants' },
+    { path: '/admin/tenants', label: 'Tenants', icon: Users, permission: 'view_tenants' },
+    { path: '/admin/provisioning', label: 'Provisioning', icon: Rocket, permission: 'view_tenants' },
+    { path: '/admin/monitoring', label: 'Monitoring', icon: Activity, permission: 'view_tenants' },
     { path: '/hq/scorecard', label: 'Scorecard', icon: LayoutDashboard, permission: 'access_strategy_hub' },
     { path: '/hq/branches', label: 'Branches', icon: Building2, permission: 'manage_branches' },
     { path: '/hq/users', label: 'Access Control', icon: Users, permission: 'manage_branches' },
@@ -76,15 +79,17 @@ const AppLayout: React.FC = () => {
     if (!hasPermission(item.permission)) return false;
 
     // 2. Context Isolation: If on a persona-specific route, only show relevant items
+    const isAdminPath = location.pathname.startsWith('/admin');
     const isHqPath = location.pathname.startsWith('/hq');
     const isBranchPath = location.pathname.startsWith('/branch');
     const isFinancePath = location.pathname.startsWith('/finance');
 
+    if (isAdminPath) return item.path.startsWith('/admin') || item.path === '/pos';
     if (isHqPath) return item.path.startsWith('/hq') || item.path === '/pos';
     if (isBranchPath) return item.path.startsWith('/branch') || item.path === '/pos';
     if (isFinancePath) return item.path.startsWith('/finance') || item.path === '/pos';
 
-    return true; // Default for other pages (like Admin or Root)
+    return true; // Default for other pages (like Root)
   });
 
   const handleLogout = () => {

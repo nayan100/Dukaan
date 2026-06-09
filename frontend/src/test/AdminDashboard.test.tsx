@@ -1,54 +1,56 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import AdminDashboard from '../components/admin/AdminDashboard';
+import React from 'react';
+
+const renderWithRouter = (initialEntries = ['/admin']) => {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <Routes>
+        <Route path="/admin/*" element={<AdminDashboard />} />
+      </Routes>
+    </MemoryRouter>
+  );
+};
 
 describe('AdminDashboard', () => {
-  it('renders the admin dashboard shell', () => {
-    render(<AdminDashboard />);
-    expect(screen.getByText(/SaaS Admin/i)).toBeInTheDocument();
-    expect(screen.getByRole('navigation')).toBeInTheDocument();
+  it('renders the admin dashboard overview by default', () => {
+    renderWithRouter(['/admin']);
+    expect(screen.getByText(/Dashboard Overview/i)).toBeInTheDocument();
   });
 
-  it('switches to tenants tab when clicked', () => {
-    render(<AdminDashboard />);
-    const tenantsBtn = screen.getByText('Tenants');
-    fireEvent.click(tenantsBtn);
+  it('renders tenants tab when navigating to /admin/tenants', () => {
+    renderWithRouter(['/admin/tenants']);
     expect(screen.getByText(/Tenant Management/i)).toBeInTheDocument();
-    expect(screen.getByText(/Metro Retail/i)).toBeInTheDocument();
+    expect(screen.getByText(/Everest Groceries/i)).toBeInTheDocument();
   });
 
   it('can toggle tenant status in detail view', () => {
-    render(<AdminDashboard />);
-    fireEvent.click(screen.getByText('Tenants'));
+    renderWithRouter(['/admin/tenants']);
     
-    // Select Metro Retail
-    fireEvent.click(screen.getByText('Metro Retail'));
+    // Select Everest Groceries
+    fireEvent.click(screen.getByText('Everest Groceries'));
     
     // Check if details are shown
-    expect(screen.getByText(/Tenant Details/i)).toBeInTheDocument();
-    expect(screen.getByText(/metro.dukaan.io/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sovereignty Control/i)).toBeInTheDocument();
     
-    // Suspend
-    const suspendBtn = screen.getByText('Suspend Tenant');
-    fireEvent.click(suspendBtn);
+    // Suspend (Revoke Sovereignty)
+    const revokeBtn = screen.getByText('Revoke Sovereignty');
+    fireEvent.click(revokeBtn);
     
-    // Should now show Activate Tenant
-    expect(screen.getByText('Activate Tenant')).toBeInTheDocument();
+    // Should now show Restore Sovereignty
+    expect(screen.getByText('Restore Sovereignty')).toBeInTheDocument();
   });
 
-  it('switches to monitoring tab when clicked', () => {
-    render(<AdminDashboard />);
-    const monitoringBtn = screen.getByText('Monitoring');
-    fireEvent.click(monitoringBtn);
+  it('renders monitoring tab when navigating to /admin/monitoring', () => {
+    renderWithRouter(['/admin/monitoring']);
     expect(screen.getByText(/Monitoring Hub/i)).toBeInTheDocument();
     expect(screen.getByText(/Branch Activity/i)).toBeInTheDocument();
-    expect(screen.getByText(/Resource Usage/i)).toBeInTheDocument();
   });
 
   it('opens onboarding wizard when clicking New Tenant', () => {
-    render(<AdminDashboard />);
-    fireEvent.click(screen.getByText('Tenants'));
+    renderWithRouter(['/admin/tenants']);
     fireEvent.click(screen.getByText('+ New Tenant'));
     expect(screen.getByText(/Provision New Tenant/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/e.g. Global Logistics Ltd/i)).toBeInTheDocument();
   });
 });

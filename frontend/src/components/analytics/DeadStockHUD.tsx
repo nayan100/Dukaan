@@ -90,7 +90,7 @@ const DeadStockHUD: React.FC = () => {
         <aside className="space-y-6">
             <div className="bg-pos-surface/50 border border-pos-border p-8 rounded-2xl backdrop-blur-xl">
                 <div className="flex items-center gap-3 mb-8">
-                    <History className="text-pos-primary" />
+                    <HistoryIcon className="text-pos-primary" />
                     <h2 className="text-lg font-black tracking-tight uppercase">Recent Optimizations</h2>
                 </div>
                 
@@ -126,3 +126,4 @@ const DeadStockHUD: React.FC = () => {
 };
 
 export default DeadStockHUD;
+dStockHUD;
