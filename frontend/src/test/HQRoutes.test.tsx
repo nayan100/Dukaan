@@ -88,4 +88,22 @@ describe('HQ Routes', () => {
     
     expect(screen.getByText(/Personnel Command/i)).toBeInTheDocument();
   });
+
+  it('renders Comparative Analytics on /hq/analytics', async () => {
+    sessionStorage.setItem('dukaan_auth', JSON.stringify({ 
+        username: 'owner1', 
+        role: 'Chain Owner', 
+        tenant: 'T1' 
+    }));
+
+    window.history.pushState({}, 'Analytics', '/hq/analytics');
+
+    render(
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
+    
+    expect(screen.getByText(/Branch Performance Matrix/i)).toBeInTheDocument();
+  });
 });
