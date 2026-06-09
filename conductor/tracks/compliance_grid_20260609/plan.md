@@ -6,12 +6,12 @@
 - [x] Task: Create FinanceLayout component with sidebar navigation.
 - [x] Task: Configure `/finance` sub-routes in `App.tsx` (Sync, Purchase, Audit).
 - [x] Task: Implement `useFinanceStore` for managing audit state and flags.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Finance Architecture' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Finance Architecture' (Protocol in workflow.md)
 
 ## Phase 2: The Compliance Grid (Annex 14)
 **Goal:** Implement the high-performance Purchase Register with TanStack Table.
 
-- [ ] Task: Scaffold `Annex14Grid` using TanStack Table v8.
+- [x] Task: Scaffold `Annex14Grid` using TanStack Table v8.
 - [ ] Task: Implement virtualization for handling 10,000+ entries.
 - [ ] Task: Add "Rounding Error" detection logic and visual indicators.
 - [ ] Task: Implement IRD-compatible Excel/CSV export functionality.
