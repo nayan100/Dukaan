@@ -10,6 +10,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ComparativeAnalytics from './ComparativeAnalytics';
 import AISuggestionsOverlay from './AISuggestionsOverlay';
+import BranchLeaderboard from './BranchLeaderboard';
 
 const MOCK_BRANCHES = [
   { 
@@ -110,6 +111,8 @@ export const ScorecardView: React.FC<{ onOpenAI?: () => void }> = ({ onOpenAI })
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <BranchLeaderboard />
+        
         <ChartCard title="Revenue Distribution">
           <div className="h-[350px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -129,7 +132,9 @@ export const ScorecardView: React.FC<{ onOpenAI?: () => void }> = ({ onOpenAI })
             </ResponsiveContainer>
           </div>
         </ChartCard>
+      </div>
 
+      <div className="grid grid-cols-1 gap-8">
         <ChartCard title="Inventory Performance">
            <div className="h-[350px]">
             <ResponsiveContainer width="100%" height="100%">
