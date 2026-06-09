@@ -3,7 +3,7 @@
 ## Phase 1: Finance Architecture & Routing
 **Goal:** Establish the multi-page structure for the Accountant persona.
 
-- [ ] Task: Create `FinanceLayout` component with sidebar navigation.
+- [x] Task: Create FinanceLayout component with sidebar navigation.
 - [ ] Task: Configure `/finance` sub-routes in `App.tsx` (Sync, Purchase, Audit).
 - [ ] Task: Implement `useFinanceStore` for managing audit state and flags.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Finance Architecture' (Protocol in workflow.md)
