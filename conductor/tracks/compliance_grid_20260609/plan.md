@@ -21,7 +21,7 @@
 **Goal:** Build the interactive auditing tools and financial health visualizations.
 
 - [x] Task: Implement the "Interactive Price Variance Auditor" (Flagging/Correction flow).
-- [ ] Task: Build the "Financial Health Radar" chart using `recharts`.
+- [x] Task: Build the "Financial Health Radar" chart using `recharts`.
 - [ ] Task: Implement "Anomaly Sentinel" flags for Voids and Discount Velocity.
 - [ ] Task: Integrate digital "Compliance Seals" into the Sales Register views.
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Financial Governance' (Protocol in workflow.md)

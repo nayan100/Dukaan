@@ -44,4 +44,9 @@ describe('FinanceAuditHUD Component', () => {
     // Check if the state changed (visual indicator of flagging)
     expect(screen.getAllByText(/Flagged/i).length).toBeGreaterThan(0);
   });
+
+  it('renders the Financial Health Radar chart', () => {
+    render(<FinanceAuditHUD />);
+    expect(screen.getByText(/Financial Health Radar/i)).toBeInTheDocument();
+  });
 });

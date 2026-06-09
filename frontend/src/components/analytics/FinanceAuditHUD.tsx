@@ -2,9 +2,12 @@ import React from 'react';
 import { 
   AlertTriangle, ShieldAlert, BarChart3, 
   History as HistoryIcon, Hash, Search, Filter, ArrowUpRight,
-  Flag, CheckCircle2, MessageSquare
+  Flag, CheckCircle2, MessageSquare, Radar as RadarIcon
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { 
+  Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer 
+} from 'recharts';
 import Button from '../ui/Button';
 import { useFinanceStore } from '../../store/financeStore';
 
@@ -23,6 +26,15 @@ const mockVariances: PriceVariance[] = [
   { id: 'PV-001', item: 'Real Juice 1L', branch: 'Butwal', expected: 250, actual: 230, variance: -20, version: 'v1.4.2', timestamp: '2026-06-06 10:15' },
   { id: 'PV-002', item: 'Amul Butter 500g', branch: 'Pokhara', expected: 600, actual: 580, variance: -20, version: 'v1.4.2', timestamp: '2026-06-06 11:30' },
   { id: 'PV-003', item: 'Dairy Milk Silk', branch: 'Lalitpur', expected: 180, actual: 180, variance: 0, version: 'v1.4.1', timestamp: '2026-06-06 09:45' },
+];
+
+const radarData = [
+  { subject: 'Inventory', budget: 120, actual: 110, fullMark: 150 },
+  { subject: 'Procurement', budget: 98, actual: 130, fullMark: 150 },
+  { subject: 'Payroll', budget: 86, actual: 130, fullMark: 150 },
+  { subject: 'Operations', budget: 99, actual: 100, fullMark: 150 },
+  { subject: 'VAT/Tax', budget: 85, actual: 90, fullMark: 150 },
+  { subject: 'Marketing', budget: 65, actual: 85, fullMark: 150 },
 ];
 
 const FinanceAuditHUD: React.FC = () => {
@@ -49,8 +61,49 @@ const FinanceAuditHUD: React.FC = () => {
       </header>
 
       <div className="grid grid-cols-4 gap-10">
-        {/* Fraud Dashboard (Discount Velocity) */}
+        {/* Sidebar Analytics */}
         <div className="col-span-1 space-y-6">
+            {/* Financial Health Radar */}
+            <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl backdrop-blur-xl">
+                <div className="flex items-center gap-3 mb-8">
+                    <RadarIcon className="text-amber-500" size={20} />
+                    <h2 className="text-lg font-black tracking-tight uppercase text-slate-200">Financial Health Radar</h2>
+                </div>
+                <div className="h-64 w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+                            <PolarGrid stroke="#1e293b" />
+                            <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 10, fontWeight: 'bold' }} />
+                            <Radar
+                                name="Budget"
+                                dataKey="budget"
+                                stroke="#10b981"
+                                fill="#10b981"
+                                fillOpacity={0.3}
+                            />
+                            <Radar
+                                name="Actual"
+                                dataKey="actual"
+                                stroke="#f59e0b"
+                                fill="#f59e0b"
+                                fillOpacity={0.4}
+                            />
+                        </RadarChart>
+                    </ResponsiveContainer>
+                </div>
+                <div className="mt-6 flex justify-center gap-6">
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                        <span className="text-[10px] font-black text-slate-500 uppercase">Budget</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                        <span className="text-[10px] font-black text-slate-500 uppercase">Actual</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Discount Velocity */}
             <div className="bg-slate-900/50 border border-slate-800 p-8 rounded-2xl backdrop-blur-xl">
                 <div className="flex items-center gap-3 mb-8">
                     <BarChart3 className="text-rose-500" />
