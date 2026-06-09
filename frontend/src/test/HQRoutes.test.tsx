@@ -53,6 +53,10 @@ describe('HQ Routes', () => {
     expect(screen.getByText(/Executive Scorecard/i)).toBeInTheDocument();
     expect(screen.getByText(/Branch Leaderboard/i)).toBeInTheDocument();
     expect(screen.getByText(/Executive AI Summary/i)).toBeInTheDocument();
+
+    // Check Context Isolation: Should NOT show Branch items even if permission exists
+    // (Assuming owner has access_logistics, but let's just query)
+    expect(screen.queryByText(/Action Inbox/i)).not.toBeInTheDocument();
   });
 
   it('renders Branch Management on /hq/branches', async () => {

@@ -71,7 +71,21 @@ const AppLayout: React.FC = () => {
     { path: '/pos', label: 'Point of Sale', icon: ShoppingCart, permission: 'access_pos' },
   ];
 
-  const filteredNavItems = navItems.filter(item => hasPermission(item.permission));
+  const filteredNavItems = navItems.filter(item => {
+    // 1. Permission Check
+    if (!hasPermission(item.permission)) return false;
+
+    // 2. Context Isolation: If on a persona-specific route, only show relevant items
+    const isHqPath = location.pathname.startsWith('/hq');
+    const isBranchPath = location.pathname.startsWith('/branch');
+    const isFinancePath = location.pathname.startsWith('/finance');
+
+    if (isHqPath) return item.path.startsWith('/hq') || item.path === '/pos';
+    if (isBranchPath) return item.path.startsWith('/branch') || item.path === '/pos';
+    if (isFinancePath) return item.path.startsWith('/finance') || item.path === '/pos';
+
+    return true; // Default for other pages (like Admin or Root)
+  });
 
   const handleLogout = () => {
     logout();
