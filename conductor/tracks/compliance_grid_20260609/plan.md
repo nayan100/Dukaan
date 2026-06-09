@@ -14,7 +14,7 @@
 - [x] Task: Scaffold `Annex14Grid` using TanStack Table v8.
 - [x] Task: Implement virtualization for handling 10,000+ entries.
 - [x] Task: Add "Rounding Error" detection logic and visual indicators.
-- [ ] Task: Implement IRD-compatible Excel/CSV export functionality.
+- [x] Task: Implement IRD-compatible Excel/CSV export functionality.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Compliance Grid' (Protocol in workflow.md)
 
 ## Phase 3: Financial Governance & Auditing

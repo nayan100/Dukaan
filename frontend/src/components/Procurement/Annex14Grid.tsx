@@ -8,6 +8,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { FileSpreadsheet, AlertTriangle, CheckCircle2, Search, Filter, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface Annex14Entry {
   id: string;
@@ -109,6 +110,36 @@ const columns = [
 const Annex14Grid: React.FC = () => {
   const data = useMemo(() => generateMockData(10000), []);
   const parentRef = useRef<HTMLDivElement>(null);
+
+  const handleExport = () => {
+    const headers = ['Date', 'Invoice No', 'Supplier Name', 'Supplier PAN', 'Taxable Amount', 'VAT Amount', 'Total Amount'];
+    const csvContent = [
+      headers.join(','),
+      ...data.map(row => [
+        row.date,
+        row.invoice_no,
+        `"${row.supplier_name}"`,
+        row.supplier_pan,
+        row.taxable_amount,
+        row.vat_amount,
+        row.total_amount
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Annex14_Export_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Annex 14 exported successfully!', {
+      style: { background: '#0f172a', color: '#fff', border: '1px solid #1e293b' }
+    });
+  };
   
   const table = useReactTable({
     data,
@@ -154,7 +185,10 @@ const Annex14Grid: React.FC = () => {
           <button className="flex items-center gap-2 bg-slate-900 border border-slate-800 p-3 rounded-xl text-slate-400 hover:text-slate-100 transition-all hover:bg-slate-800">
             <Filter size={18} />
           </button>
-          <button className="flex items-center gap-2 bg-amber-500 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10">
+          <button 
+            onClick={handleExport}
+            className="flex items-center gap-2 bg-amber-500 text-slate-950 px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/10"
+          >
             <Download size={16} /> Export IRD
           </button>
         </div>
